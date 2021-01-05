@@ -25,7 +25,7 @@ A directed acyclic graph(DAG) with probability distribution for each variable
 + 通过图结构化简联合概率分布求解
 
 下图是Hackerman解释BN时用的信用欺诈网络:
-![bn01](https://wx4.sinaimg.cn/mw690/761b7938ly1gm2s0q7nz4j20mk0i4n0b.jpg)
+![bn01](https://wx4.sinaimg.cn/mw690/761b7938ly1gm2s0q7nz4j20mk0i4n0b.jpg "An Example")
 
 
 # 2.Inference Bayesian Network
