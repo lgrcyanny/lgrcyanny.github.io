@@ -150,10 +150,6 @@
                         </li>
                     </ul>
                     
-                        <div class="post-cover">
-                            <img src="http://i59.tinypic.com/1416uzt.jpg">
-                        </div>
-                    
                     <div class="post-content ">
                         <p>MapReduce是Hadoop中处理大数据的方法，是一个处理大数据的简单算法、编程泛型。虽然思想简单，但其实真正用起来还是有很多问题，不是所有的问题都可以像WordCount那样典型和直观, 有很多需要trick的地方。MapReduce的中心思想是分而治之，数据要松耦合，可以划分为小数据集并行处理，如果数据本身在计算上存在很强的依赖关系，就不要赶鸭子上架，用MapReduce了。<br>MapReduce编程中，最重要的是要抓住Map和Reduce的input和output，好的input和output可以降低实现的复杂度。最近，写了很多关于MapReduce的job，有倒排索引，统计，排序等。其中，对排序花费了一番功夫，MapReduce做WordCount很好理解,<br>Map input:[offset, text],  output: [word, 1],</p>
 <p>Reduce input: [word, 1], output: [word, totalcount],还可以设置Combiner进行优化。</p>

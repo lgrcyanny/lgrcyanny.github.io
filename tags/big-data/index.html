@@ -185,10 +185,6 @@
                         </li>
                     </ul>
                     
-                        <div class="post-cover">
-                            <img src="http://i58.tinypic.com/20i77l0.jpg">
-                        </div>
-                    
                     <div class="post-content ">
                         <h2 id="4-Process-Architecture"><a href="#4-Process-Architecture" class="headerlink" title="4. Process Architecture"></a>4. Process Architecture</h2><h3 id="4-1-HBase-Write-Path"><a href="#4-1-HBase-Write-Path" class="headerlink" title="4.1 HBase Write Path"></a>4.1 HBase Write Path</h3><p>The client doesn’t write data directly into HFile on HDFS. Firstly it writes data to WAL(Write Ahead Log), and Secondly, writes to MemStore shared by a HStore in memory.</p>
                             <a href="../../2014/03/13/hbase-architecture-analysis-part2-process-architecture/" class="more-link">Continue reading</a>
@@ -223,10 +219,6 @@
                             Cyanny Liang
                         </li>
                     </ul>
-                    
-                        <div class="post-cover">
-                            <img src="http://i60.tinypic.com/346rmhh.jpg">
-                        </div>
                     
                     <div class="post-content ">
                         <h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h2><p>Apache HBase is an open source column-oriented database. <strong>It is often described as a sparse, consistent, distributed, multi-dimensional sorted map.</strong> HBase is modeled after Google’s “Bigtable: A distributed Storage System for Structured Data”, which can host very large tables with billions of rows, X millions of columns.</p>
