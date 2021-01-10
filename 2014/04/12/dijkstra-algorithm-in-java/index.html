@@ -110,8 +110,8 @@ public int compareTo(Vertex o) &#123;
 @Override
 public String toString() &#123;
     return &amp;quot;Vertex [id=&amp;quot; + id + &amp;quot;, distance=&amp;quot; + distance + &amp;quot;]&amp;quot;;
-&#125;
-</code></pre><p>}<br>[/java]</p>
+&#125;</code></pre>
+<p>}<br>[/java]</p>
 <h3 id="2-定义Edge对象"><a href="#2-定义Edge对象" class="headerlink" title="2. 定义Edge对象"></a>2. 定义Edge对象</h3><p>[java]<br>public class Edge {<br>    public Vertex vertex = null;<br>    public int weight = 0;</p>
 <pre><code>public Edge() &#123;
 
@@ -120,10 +120,10 @@ public String toString() &#123;
 public Edge(Vertex vertex, int weight) &#123;
     this.vertex = vertex;
     this.weight = weight;
-&#125;
-</code></pre><p>}<br>[/java]</p>
+&#125;</code></pre>
+<p>}<br>[/java]</p>
 <h3 id="3-Dijkstra算法实现"><a href="#3-Dijkstra算法实现" class="headerlink" title="3. Dijkstra算法实现"></a>3. Dijkstra算法实现</h3><p>测试的图如下：</p>
-<p><a target="_blank" rel="noopener" href="http://tinypic.com?ref=9ggih1.jpg"><img src="http://i59.tinypic.com/9ggih1.jpg" alt="Image and video hosting by TinyPic"></a><br>[java]<br>public class DijkstraGraph {<br>    public Vertex[] graph = null;</p>
+<p><a target="_blank" rel="noopener" href="http://tinypic.com/?ref=9ggih1.jpg"><img src="http://i59.tinypic.com/9ggih1.jpg" alt="Image and video hosting by TinyPic"></a><br>[java]<br>public class DijkstraGraph {<br>    public Vertex[] graph = null;</p>
 <pre><code>public DijkstraGraph(Vertex[] graph) &#123;
     this.graph = graph;
 &#125;
@@ -184,8 +184,8 @@ public static void main(String[] args) &#123;
     dijkstraGraph.computShortestPath(v0);
     dijkstraGraph.printShortestPath(); // Each path from v0
 
-&#125;
-</code></pre><p>}<br>[/java]</p>
+&#125;</code></pre>
+<p>}<br>[/java]</p>
 <p>源码在<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/tree/master/src/com/algorithm/graph/dijkstra">Cyanny GitHub</a></p>
 
       

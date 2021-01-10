@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Strucutre Learning Algorithm NOTEARS | CyannyLive | AI and Big Data</title>
+  <title>Structure Learning Algorithm NOTEARS | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Strucutre Learning Algorithm NOTEARS"/>
+  <meta property="og:title" content="Structure Learning Algorithm NOTEARS"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,13 +65,13 @@
 
   
     
-    <h3 class="article-title"><span>Strucutre Learning Algorithm NOTEARS</span></h3>
+    <h3 class="article-title"><span>Structure Learning Algorithm NOTEARS</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2020/12/25/strucutre-learning-algorithm-notears/" rel="bookmark">
+      <a href="/2020/12/25/structure-learning-algorithm-notears/" rel="bookmark">
         <time class="entry-date published" datetime="2020-12-25T14:01:59.000Z">
           2020-12-25
         </time>
@@ -89,41 +89,40 @@
 <p>今天静下来, 好好看了在CausalNex库中, 用到的算法NOTEARS, 用于结构学习, 该论文发表在2018的NIPS, 方法神奇, 解决方案简洁, 以下是自己的一些笔记:</p>
 <p>Paper: Zheng, Xun, et al. “DAGs with NO TEARS: Continuous optimization for structure learning.” Advances in Neural Information Processing Systems 31 (2018): 9472-9483.</p>
 <a id="more"></a>
+
 <h1 id="1-主要问题"><a href="#1-主要问题" class="headerlink" title="1.主要问题"></a>1.主要问题</h1><p>Bayesian Network Graph(DAG) Structure Estimating, 这是一个经典的NP-HARD问题</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">维度</th>
-<th style="text-align:left">传统解法</th>
-<th style="text-align:left">NOTEARS</th>
+<th align="left">维度</th>
+<th align="left">传统解法</th>
+<th align="left">NOTEARS</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">思路</td>
-<td style="text-align:left">combinatorial optimization problem, local heuristics for enforcing the acyclicity constraint, 例如 Order search, greedy search, …</td>
-<td style="text-align:left">Score based continuous learning, standard numerical algorithm</td>
+<tbody><tr>
+<td align="left">思路</td>
+<td align="left">combinatorial optimization problem, local heuristics for enforcing the acyclicity constraint, 例如 Order search, greedy search, …</td>
+<td align="left">Score based continuous learning, standard numerical algorithm</td>
 </tr>
 <tr>
-<td style="text-align:left">复杂度</td>
-<td style="text-align:left">O(d!), d is nodes</td>
-<td style="text-align:left">O(d^3), 当图入度很高时, 计算效率很高</td>
+<td align="left">复杂度</td>
+<td align="left">O(d!), d is nodes</td>
+<td align="left">O(d^3), 当图入度很高时, 计算效率很高</td>
 </tr>
 <tr>
-<td style="text-align:left">优势</td>
-<td style="text-align:left">–</td>
-<td style="text-align:left">支持有向和无向图, 代码简洁不超过60lines, 与Global Optimization算法结果接近</td>
+<td align="left">优势</td>
+<td align="left">–</td>
+<td align="left">支持有向和无向图, 代码简洁不超过60lines, 与Global Optimization算法结果接近</td>
 </tr>
 <tr>
-<td style="text-align:left">局限</td>
-<td style="text-align:left">困难的组合优化问题</td>
-<td style="text-align:left">建模函数是Smooth function, nonconvex</td>
+<td align="left">局限</td>
+<td align="left">困难的组合优化问题</td>
+<td align="left">建模函数是Smooth function, nonconvex</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h1 id="2-NOTEARS算法"><a href="#2-NOTEARS算法" class="headerlink" title="2.NOTEARS算法"></a>2.NOTEARS算法</h1><p>其英文缩写是 Non-combinatorial Optimization via Trace Exponential and Augmented lagRangian for Structure learning<br>该算法我个人理解主要的贡献是找到一种数学建模方法, 把DAG的学习问题转化为可以用拉格朗日乘数法可求最优解的问题, 其建模的问题定义如下:</p>
 <p><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7k87gij21hl0kpdm0.jpg" alt="model def"></p>
-<p>基于拉格朗日乘数法进行数值优化, 优势是:一个有n个变量与k个约束条件的最优化问题转换为一个解有n + k个变量的方程组的解的问题, 同时可复用一些优化算法: L-BFGS, quasi-Newton(PQN)</p>
+<p>基于拉格朗日乘数法进行数值优化, 优势是:一个有n个变量与k个约束条件的最优化问题转换为一个解有n + k个变量的方程组的解的问题, 同时可复用一些优化算法: L-BFGS, quasi-Newton(PQN)</p>
 <ul>
 <li>例如: 求f(x, y)在g(x, y)=c约数下的最大值, 可以转化为求下面函数的极值的问题:</li>
 <li>\(L(x, y, \gamma) = f(x, y) + \gamma * (g(x, y) - c)\)</li>

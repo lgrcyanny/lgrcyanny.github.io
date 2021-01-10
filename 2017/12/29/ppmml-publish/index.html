@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ppmml publish today | CyannyLive | AI and Big Data</title>
+  <title>Ppmml Publish Today | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="ppmml publish today"/>
+  <meta property="og:title" content="Ppmml Publish Today"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>ppmml publish today</span></h3>
+    <h3 class="article-title"><span>Ppmml Publish Today</span></h3>
     
   
 
@@ -89,6 +89,7 @@
 <h1 id="What-is-pmml-file"><a href="#What-is-pmml-file" class="headerlink" title="What is pmml file?"></a>What is pmml file?</h1><p>PMML - “Predictive Model Markup Language”, which is a standard for XML documents which express trained instances of analytic models.<br>Various platforms adopt pmml as machine learning model standard, including IBM, SAS, Microsoft, Spark, KNIME etd.<a target="_blank" rel="noopener" href="http://dmg.org/pmml/products.html">pmml-platforms</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/jpmml">jpmml</a> has developed pmml model library and supported models of spark, xgboost, tensorflow, sklearn, lightgbm and R. All of these libraries are separated and written in java.<br>ppmml wraps jpmml libraries and proved a simple and easy-to-use API for pmml files transformation.<br>0.0.1 version supports sklearn, tensorflow, spark, lightgbm, xgboost and R models. All models supported by jpmml are supported by ppmml. Common machine learning algorithms are supported, such as Decision Tree, Logistic Regression, GBDT, Random Forest, KMeans. However, Deep Learning support is not ready.</p>
 <a id="more"></a>
+
 <h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --default-timeout=10000 -i https://pypi.anaconda.org/lgrcyanny/simple ppmml</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://anaconda.org/lgrcyanny/ppmml">ppmml conda package</a></p>
 <h1 id="Geting-Started"><a href="#Geting-Started" class="headerlink" title="Geting Started"></a>Geting Started</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.externals <span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> ppmml</span><br><span class="line"><span class="comment"># load data and train iris datasets</span></span><br><span class="line">(X, y) = load_iris(<span class="literal">True</span>)</span><br><span class="line">lr = LogisticRegression(tol=<span class="number">1e-5</span>)</span><br><span class="line">lr.fit(X, y)</span><br><span class="line">joblib.dump(lr, <span class="string">&quot;lr.pkl.z&quot;</span>, compress = <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># to pmml file</span></span><br><span class="line">ppmml.to_pmml(<span class="string">&quot;lr.pkl.z&quot;</span>, <span class="string">&quot;lr.pmml&quot;</span>, model_type=<span class="string">&#x27;sklearn&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># prepare test data</span></span><br><span class="line">df = pd.DataFrame(X)</span><br><span class="line">df.columns = [<span class="string">&#x27;x1&#x27;</span>, <span class="string">&#x27;x2&#x27;</span>, <span class="string">&#x27;x3&#x27;</span>, <span class="string">&#x27;x4&#x27;</span>]</span><br><span class="line">df.to_csv(<span class="string">&#x27;test.csv&#x27;</span>, header=<span class="literal">True</span>, index=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># predit with pmml file, a simple predict API based on jpmml-evaluator</span></span><br><span class="line">ppmml.predict(<span class="string">&#x27;lr.pmml&#x27;</span>, <span class="string">&#x27;test.csv&#x27;</span>, <span class="string">&#x27;predict.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>

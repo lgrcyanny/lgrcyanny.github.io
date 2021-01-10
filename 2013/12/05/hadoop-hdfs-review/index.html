@@ -112,9 +112,9 @@
 <p>The Secondary NameNode keeps a copy of the merged namespace image in case of the NameNode fails. But the time lags will result in data loss certainly. And during the NameNode recovery, the reconstruction of the Blockmap will cost too much time. So Hadoop works out the problem with Hadoop High Availability solution.</p>
 <h3 id="DataNodes"><a href="#DataNodes" class="headerlink" title="DataNodes"></a>DataNodes</h3><p>The DataNodes holds all the actual data blocks. In sum up, it has three functions: </p>
 <ul>
-<li>Serves read and requests from the file system clients.</li>
-<li>Provides block operations, like creation, deletion and replication upon instruction from the NameNode.</li>
-<li>Make data Blockreport to NameNode periodically with lists of blocks that they are storing.</li>
+<li>  Serves read and requests from the file system clients.</li>
+<li>  Provides block operations, like creation, deletion and replication upon instruction from the NameNode.</li>
+<li>  Make data Blockreport to NameNode periodically with lists of blocks that they are storing.</li>
 </ul>
 <p>In enterprise Hadoop deployment, each DataNode is a java program run on a separate JVM, and one instance of DataNode on one machine. </p>
 <p>In addition, NameNode is a java program run on a single machine. Written in java provides Hadoop good portability.</p>
@@ -122,11 +122,11 @@
 <h3 id="HDFS-Files-Organization"><a href="#HDFS-Files-Organization" class="headerlink" title="HDFS Files Organization"></a>HDFS Files Organization</h3><p>In traditional concepts, a disk has a block size, which is the minimum amount of data that it can read or write. Disk blocks are normally 512 bytes. While HDFS has the concept of block as well, which is a much larger unit – 64MB by default.</p>
 <p>HDFS large files are chopped up into 64MB or 128MB blocks. This brings several benefits:</p>
 <ul>
-<li>It can take advantage of any of the disks in the cluster, when the file is larger than any single disk.</li>
-<li>Making the unit of abstraction of a block simplifies the storage subsystem. HDFS will deal with blocks, rather than a file. Since blocks are a fixed size, it’s easy to calculate how many can be stored on a give disk and eliminate metadata concerns.</li>
-<li>Normally, a map task will operate on one local block at a time. Bocks spare the complexity of dealing with files.</li>
-<li>It’s easy to do data replication with blocks for providing fault tolerance and availability. Each block is replicated multiple times. Default is to replicate each block 3 times. Replicas are stored on different nodes.</li>
-<li>Block data fits well for streaming data. Files are written once and read many times. Blocks minimize the cost of seeking files.</li>
+<li>  It can take advantage of any of the disks in the cluster, when the file is larger than any single disk.</li>
+<li>  Making the unit of abstraction of a block simplifies the storage subsystem. HDFS will deal with blocks, rather than a file. Since blocks are a fixed size, it’s easy to calculate how many can be stored on a give disk and eliminate metadata concerns.</li>
+<li>  Normally, a map task will operate on one local block at a time. Bocks spare the complexity of dealing with files.</li>
+<li>  It’s easy to do data replication with blocks for providing fault tolerance and availability. Each block is replicated multiple times. Default is to replicate each block 3 times. Replicas are stored on different nodes.</li>
+<li>  Block data fits well for streaming data. Files are written once and read many times. Blocks minimize the cost of seeking files.</li>
 </ul>
 <p>Although files are split into 64MB or 128MB blocks ， if a file is smaller than this full 64MB/128MB will not be split.</p>
 <h3 id="HDFS-Data-Replication"><a href="#HDFS-Data-Replication" class="headerlink" title="HDFS Data Replication"></a>HDFS Data Replication</h3><p>HDFS each data block has a replica factor, which indicates how many times it should be replicated. Normally, the replica factor is three. Each block is replicated three times and spread on three different machines across the cluster. This provides efficient MapReduce processing because of good data locality.<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd3.2.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd3.2.png" alt="hd3.2">Figure2 Block Replication</a><br>As shown in Figure2, the NameNode holds the metadata for each map of file and blocks, including filename, replica factor and block-id etc. Block data are spread on different DataNodes.</p>

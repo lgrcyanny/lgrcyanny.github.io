@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>分布式系统总结part3 | CyannyLive | AI and Big Data</title>
+  <title>分布式系统总结Part3 | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="分布式系统总结part3"/>
+  <meta property="og:title" content="分布式系统总结Part3"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>分布式系统总结part3</span></h3>
+    <h3 class="article-title"><span>分布式系统总结Part3</span></h3>
     
   
 
@@ -110,9 +110,9 @@
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System06.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System06-580x347.png" alt="Distributed System06"></a></p>
 <h4 id="6-释放一致性"><a href="#6-释放一致性" class="headerlink" title="6.释放一致性"></a>6.释放一致性</h4><p>条件：退出临界区时，让共享数据保持一致，提供两种类型的同步变量。获取(acquire) 操作是用于通知数据存储进程进入临界区的操作，而释放(release)操作是表明进程刚刚离开临界区的操作。</p>
 <ul>
-<li>对共享数据执行读操作或写操作之前，所有进程先前执行的获取操作都必须已经成功完成；</li>
-<li>在释放操作被允许执行前，所有进程先前执行的读操作和写操作都必须已经完成；</li>
-<li>对同步变量的访问是FIFO一致的(不需要顺序一致)</li>
+<li>  对共享数据执行读操作或写操作之前，所有进程先前执行的获取操作都必须已经成功完成；</li>
+<li>  在释放操作被允许执行前，所有进程先前执行的读操作和写操作都必须已经完成；</li>
+<li>  对同步变量的访问是FIFO一致的(不需要顺序一致)</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System07.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System07.png" alt="Distributed System07"></a></p>
 <h4 id="7-入口一致性"><a href="#7-入口一致性" class="headerlink" title="7.入口一致性"></a>7.入口一致性</h4><p>条件：它需要程序员(或编译器)在每个临界区的开始和结束处分别使用获取和释放操作，入口一致性要求每个普通的共享数据项都要与某种同步变量(如锁或障碍)关联。即让进程在进入临界区时，让属于同一临界区的共享数据保持一致。</p>
@@ -146,8 +146,8 @@
 <p>三阶段：vote-commit, prepare-commit, global-commit</p>
 <p>引入了PRECOMMIT状态。</p>
 <ul>
-<li>2PC：崩溃的参与者可能恢复到了Commit状态而所有参与者还处于Ready状态。在这种情况下，其余的可能操作进程不能做出最后的决定，不得不在崩溃的进程恢复之前阻塞。</li>
-<li>在3PC中，只要有可操作的进程处于Ready状态，就没有崩溃的进程可以恢复到Init、Abort或Precommit之外的状态。因此存活进程总是可以做出的最后决定。当协调者崩溃，达到了预备提交阶段，在2PC中其他进程就会阻塞，但在3PC中，在预备提交阶段，即使没有协调者，也可以做出决定。</li>
+<li>  2PC：崩溃的参与者可能恢复到了Commit状态而所有参与者还处于Ready状态。在这种情况下，其余的可能操作进程不能做出最后的决定，不得不在崩溃的进程恢复之前阻塞。</li>
+<li>  在3PC中，只要有可操作的进程处于Ready状态，就没有崩溃的进程可以恢复到Init、Abort或Precommit之外的状态。因此存活进程总是可以做出的最后决定。当协调者崩溃，达到了预备提交阶段，在2PC中其他进程就会阻塞，但在3PC中，在预备提交阶段，即使没有协调者，也可以做出决定。</li>
 </ul>
 <h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/24/distributed-system-review-part1/" title="分布式系统总结part1">分布式系统总结part1 中间件，进程迁移，移动通信失效，名称解析，移动实体定位</a></p>
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/24/distributed-system-review-part2/" title="分布式系统总结part2">分布式系统总结part2 Lamport同步与向量时间戳，两大选举算法，三大互斥算法</a></p>

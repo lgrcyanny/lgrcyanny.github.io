@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Eight Queens Problem In Scala | CyannyLive | AI and Big Data</title>
+  <title>Eight Queens Problem in Scala | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Eight Queens Problem In Scala"/>
+  <meta property="og:title" content="Eight Queens Problem in Scala"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>Eight Queens Problem In Scala</span></h3>
+    <h3 class="article-title"><span>Eight Queens Problem in Scala</span></h3>
     
   
 
@@ -85,21 +85,25 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>I have dedicated in <strong>Programming in Scala</strong> for about 4 months. My work is busy, but I can’t give up reading more books.<br>Scala is a fabulous language, both object oriented and functional.<br>Eight qeens problem can be expressed in scala easily and concise.<br><a id="more"></a></p>
+        <p>I have dedicated in <strong>Programming in Scala</strong> for about 4 months. My work is busy, but I can’t give up reading more books.<br>Scala is a fabulous language, both object oriented and functional.<br>Eight qeens problem can be expressed in scala easily and concise.</p>
+<a id="more"></a>
+
 <h2 id="Eight-Queens-Problem"><a href="#Eight-Queens-Problem" class="headerlink" title="Eight Queens Problem"></a>Eight Queens Problem</h2><p>Given a standard chess-board, place eight queens such that no queen is in check from any other (a queen can check another piece if they are on the same column, row, or diagonal)</p>
 <h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>The problem in scala is recursively.</p>
 <ol>
 <li><p>First each solution is a List[(Row, Column)]</p>
-<pre><code>- Each element is a coordinated, the queen position in each row
-- The coordicate for row k comes first, followed by row `k-1`, `k-2`, ... 0
-</code></pre></li>
+<pre><code> - Each element is a coordinated, the queen position in each row
+ - The coordicate for row k comes first, followed by row `k-1`, `k-2`, ... 0</code></pre>
+</li>
 <li><p>Use a Set[List[Row, Column]], represent all solutions</p>
 </li>
-<li>To place next <code>k+1</code> qeen, we iterate all solutions, if match the condition, yield another list</li>
+<li><p>To place next <code>k+1</code> qeen, we iterate all solutions, if match the condition, yield another list</p>
+</li>
 </ol>
 <h2 id="Lets-run-the-code"><a href="#Lets-run-the-code" class="headerlink" title="Lets run the code"></a>Lets run the code</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * the coordinates of the queen in row k comes first in each List[(ROW, Column)], followed</span></span><br><span class="line"><span class="comment">    * by k -1, k - 2, ..., 0 and so on</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * @param n</span></span><br><span class="line"><span class="comment">    * @return</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">queens</span></span>(n: <span class="type">Int</span>): <span class="type">Set</span>[<span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]] = &#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">placeQueen</span></span>(k: <span class="type">Int</span>): <span class="type">Set</span>[<span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]] = &#123;</span><br><span class="line">      <span class="keyword">if</span> (k &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">Set</span>(<span class="type">List</span>())</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">          queens &lt;- placeQueen(k - <span class="number">1</span>)</span><br><span class="line">          column &lt;- <span class="number">0</span> until n</span><br><span class="line">          queen = (k, column)</span><br><span class="line">          <span class="keyword">if</span> isSafe(queen, queens)</span><br><span class="line">        &#125; <span class="keyword">yield</span> queen :: queens</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSafe</span></span>(queen: (<span class="type">Row</span>, <span class="type">Column</span>), queens: <span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]): <span class="type">Boolean</span> = &#123;</span><br><span class="line">      queens.forall &#123; placedQueen =&gt;</span><br><span class="line">        placedQueen._1 != queen._1 &amp;&amp;</span><br><span class="line">          placedQueen._2 != queen._2 &amp;&amp;</span><br><span class="line">          (<span class="type">Math</span>.abs(placedQueen._1 - queen._1) !=</span><br><span class="line">            <span class="type">Math</span>.abs(placedQueen._2 - queen._2))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    placeQueen(n - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Github-Link"><a href="#Github-Link" class="headerlink" title="Github Link"></a>Github Link</h2><p><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/ScalaPractice/blob/master/ProgrammingInScala/src/main/scala/com/chapter23/EightQueens.scala">Eight Queens</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/lgrcyanny/ScalaPractice.git</span><br><span class="line"></span><br><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">cd ProgrammingInScala</span><br><span class="line"></span><br><span class="line">scala -cp target/programming-in-scala-1.0-SNAPSHOT.jar com.chapter23.EightQueens</span><br></pre></td></tr></table></figure>
+
 
       
     </div>

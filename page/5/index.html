@@ -110,9 +110,9 @@
 <p>The Secondary NameNode keeps a copy of the merged namespace image in case of the NameNode fails. But the time lags will result in data loss certainly. And during the NameNode recovery, the reconstruction of the Blockmap will cost too much time. So Hadoop works out the problem with Hadoop High Availability solution.</p>
 <h3 id="DataNodes"><a href="#DataNodes" class="headerlink" title="DataNodes"></a>DataNodes</h3><p>The DataNodes holds all the actual data blocks. In sum up, it has three functions: </p>
 <ul>
-<li>Serves read and requests from the file system clients.</li>
-<li>Provides block operations, like creation, deletion and replication upon instruction from the NameNode.</li>
-<li>Make data Blockreport to NameNode periodically with lists of blocks that they are storing.</li>
+<li>  Serves read and requests from the file system clients.</li>
+<li>  Provides block operations, like creation, deletion and replication upon instruction from the NameNode.</li>
+<li>  Make data Blockreport to NameNode periodically with lists of blocks that they are storing.</li>
 </ul>
 <p>In enterprise Hadoop deployment, each DataNode is a java program run on a separate JVM, and one instance of DataNode on one machine. </p>
 <p>In addition, NameNode is a java program run on a single machine. Written in java provides Hadoop good portability.</p>
@@ -120,11 +120,11 @@
 <h3 id="HDFS-Files-Organization"><a href="#HDFS-Files-Organization" class="headerlink" title="HDFS Files Organization"></a>HDFS Files Organization</h3><p>In traditional concepts, a disk has a block size, which is the minimum amount of data that it can read or write. Disk blocks are normally 512 bytes. While HDFS has the concept of block as well, which is a much larger unit – 64MB by default.</p>
 <p>HDFS large files are chopped up into 64MB or 128MB blocks. This brings several benefits:</p>
 <ul>
-<li>It can take advantage of any of the disks in the cluster, when the file is larger than any single disk.</li>
-<li>Making the unit of abstraction of a block simplifies the storage subsystem. HDFS will deal with blocks, rather than a file. Since blocks are a fixed size, it’s easy to calculate how many can be stored on a give disk and eliminate metadata concerns.</li>
-<li>Normally, a map task will operate on one local block at a time. Bocks spare the complexity of dealing with files.</li>
-<li>It’s easy to do data replication with blocks for providing fault tolerance and availability. Each block is replicated multiple times. Default is to replicate each block 3 times. Replicas are stored on different nodes.</li>
-<li>Block data fits well for streaming data. Files are written once and read many times. Blocks minimize the cost of seeking files.</li>
+<li>  It can take advantage of any of the disks in the cluster, when the file is larger than any single disk.</li>
+<li>  Making the unit of abstraction of a block simplifies the storage subsystem. HDFS will deal with blocks, rather than a file. Since blocks are a fixed size, it’s easy to calculate how many can be stored on a give disk and eliminate metadata concerns.</li>
+<li>  Normally, a map task will operate on one local block at a time. Bocks spare the complexity of dealing with files.</li>
+<li>  It’s easy to do data replication with blocks for providing fault tolerance and availability. Each block is replicated multiple times. Default is to replicate each block 3 times. Replicas are stored on different nodes.</li>
+<li>  Block data fits well for streaming data. Files are written once and read many times. Blocks minimize the cost of seeking files.</li>
 </ul>
 <p>Although files are split into 64MB or 128MB blocks ， if a file is smaller than this full 64MB/128MB will not be split.</p>
 <h3 id="HDFS-Data-Replication"><a href="#HDFS-Data-Replication" class="headerlink" title="HDFS Data Replication"></a>HDFS Data Replication</h3><p>HDFS each data block has a replica factor, which indicates how many times it should be replicated. Normally, the replica factor is three. Each block is replicated three times and spread on three different machines across the cluster. This provides efficient MapReduce processing because of good data locality.<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd3.2.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd3.2.png" alt="hd3.2">Figure2 Block Replication</a><br>As shown in Figure2, the NameNode holds the metadata for each map of file and blocks, including filename, replica factor and block-id etc. Block data are spread on different DataNodes.</p>
@@ -205,24 +205,24 @@
 <h3 id="The-problems-for-traditional-big-data-processing"><a href="#The-problems-for-traditional-big-data-processing" class="headerlink" title="The problems for traditional big data processing"></a>The problems for traditional big data processing</h3><p>Why these companies adopt Hadoop? The reason is simple, that we live in a big data age. We are flooded with big data every day on the Internet. Consider that: Facebook hosts approximately 10 billion photos, taken up on PB storage. Every second on eBay, a total merchandise value of 1400 dollars is traded and 10 million new items are listed on eBay every day. Ancestry.com, the genealogy site, store around 2.5 PB of Data.</p>
 <p>How to make use of these big data to make analysis? For traditional methods, use only one machine to process computation, which needs faster processor and RAM. Even though the CPU power doubles every 18 months according to Moores’s Law, it hasn’t meet the big data analysis needs. Yet distributed system evolved to allow developers to use multiple machines for a single job, like MPI, PVM and Condor. However, programing for these traditional distributed systems is complex, you have to deal with these problems:</p>
 <ul>
-<li>It’s difficult to deal with partial failures of the system. Developers spend more time designing for failure than they do actually working on the problem itself.</li>
-<li>Finite and precious bandwidth must be available to combine data from different disks and transfer time is very slow for big data volume.</li>
-<li>Data exchange requires synchronization.</li>
-<li>Temporal dependencies are complicated.</li>
+<li>  It’s difficult to deal with partial failures of the system. Developers spend more time designing for failure than they do actually working on the problem itself.</li>
+<li>  Finite and precious bandwidth must be available to combine data from different disks and transfer time is very slow for big data volume.</li>
+<li>  Data exchange requires synchronization.</li>
+<li>  Temporal dependencies are complicated.</li>
 </ul>
 <h3 id="How-can-Hadoop-save-big-data-analysis"><a href="#How-can-Hadoop-save-big-data-analysis" class="headerlink" title="How can Hadoop save big data analysis"></a>How can Hadoop save big data analysis</h3><p>What really counts is big data. Traditional distributed computing can’t handle big data in a decent way, but Hadoop can. Lets see what Hadoop brings to us: </p>
 <ul>
-<li>Hadoop provide partial failure support. Hadoop Distributed File System (HDFS) can store large data sets with high reliability and scalability.</li>
-<li>HDFS provide great fault tolerance. Partial Failure will not result in the failure of the entire system. And HDFS provide data recoverability for partial failure.</li>
-<li>Hadoop introduce MapReduce, which spares programmers from low-level details, like partial failure. The MapReduce framework will detect failed tasks and reschedule them automatically.</li>
-<li>Hadoop provide data locality. The MapReduce framework tries to collocate data with the compute nodes. Data is local, and tasks are separated with no dependence on each other. So the shared-nothing and data locality architecture can save more bandwidth and solve the complicated dependence problem</li>
+<li>  Hadoop provide partial failure support. Hadoop Distributed File System (HDFS) can store large data sets with high reliability and scalability.</li>
+<li>  HDFS provide great fault tolerance. Partial Failure will not result in the failure of the entire system. And HDFS provide data recoverability for partial failure.</li>
+<li>  Hadoop introduce MapReduce, which spares programmers from low-level details, like partial failure. The MapReduce framework will detect failed tasks and reschedule them automatically.</li>
+<li>  Hadoop provide data locality. The MapReduce framework tries to collocate data with the compute nodes. Data is local, and tasks are separated with no dependence on each other. So the shared-nothing and data locality architecture can save more bandwidth and solve the complicated dependence problem</li>
 </ul>
 <p>In summary, Hadoop is a great big data processing tool.</p>
 <h3 id="Hadoop-Basic-Concepts-and-Core-Concepts"><a href="#Hadoop-Basic-Concepts-and-Core-Concepts" class="headerlink" title="Hadoop Basic Concepts and Core Concepts"></a>Hadoop Basic Concepts and Core Concepts</h3><p>The core concepts for Hadoop are to distribute the data as it is initially stored in the system. That is data locality, individual nodes can work on data local to these nodes, and no data transfer over the network is required for initial processing.<br>Here are the basic concepts for Hadoop:</p>
 <ul>
-<li>Applications are written in high-level code. Developers don’t worry about network programming, temporal dependencies etc.</li>
-<li>Nodes talk to each other as little as possible. Developers should not write code which communicates between nodes, that is ‘Shared-Nothing’ architecture.</li>
-<li>Data is spread among machines in advance. Computation happens where the data is stored, wherever possible, just as near the node as possible. Data is replicated multiple times on the system for increased availability and reliability.</li>
+<li>  Applications are written in high-level code. Developers don’t worry about network programming, temporal dependencies etc.</li>
+<li>  Nodes talk to each other as little as possible. Developers should not write code which communicates between nodes, that is ‘Shared-Nothing’ architecture.</li>
+<li>  Data is spread among machines in advance. Computation happens where the data is stored, wherever possible, just as near the node as possible. Data is replicated multiple times on the system for increased availability and reliability.</li>
 </ul>
 <h3 id="Hadoop-High-Level-Overview"><a href="#Hadoop-High-Level-Overview" class="headerlink" title="Hadoop High-Level Overview"></a>Hadoop High-Level Overview</h3><p>Hadoop consists of two important components: HDFS and MapReduce.<br>HDFS is Hadoop Distributed File System, which is a distributed file system designed to store large data sets and streaming data sets on commodity hardware with high scalability, reliability and availability.</p>
 <p>MapReduce is a distributed processing framework designed to operate on large data stored on HDFS, which provides a clean interface for developers.</p>
@@ -231,25 +231,25 @@
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd2.1.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd2.1.png" alt="hd2.1">Figure1 Hadoop High-Level Architecture</a></p>
 <p>As shown in Figure, Hadoop is comprised of 5 separate daemons:</p>
 <ul>
-<li>NameNode, which holds the metadata for HDFS.</li>
-<li>Secondary NameNode, which performs housekeeping functions for NameNode, and isn’t a backup or hot standby for the NameNode.</li>
-<li>DataNode, which stores actual HDFS data blocks. In Hadoop, a large file is split into 64M or 128M blocks.</li>
-<li>JobTracker, which manages MapReduce jobs, distributes individual tasks to machines running.</li>
-<li>TaskTracker, which initiates and monitors each individual Map and Reduce tasks.</li>
+<li>  NameNode, which holds the metadata for HDFS.</li>
+<li>  Secondary NameNode, which performs housekeeping functions for NameNode, and isn’t a backup or hot standby for the NameNode.</li>
+<li>  DataNode, which stores actual HDFS data blocks. In Hadoop, a large file is split into 64M or 128M blocks.</li>
+<li>  JobTracker, which manages MapReduce jobs, distributes individual tasks to machines running.</li>
+<li>  TaskTracker, which initiates and monitors each individual Map and Reduce tasks.</li>
 </ul>
 <p>Each daemon runs on its own Java Virtual Machine (JVM), no Nodes can run 5 daemons at the same time.  </p>
 <p>Master Nodes runs the NameNode, Secondary NameNode, JobTracker daemons. And only one of each of these daemons runs on the cluster.<br>Slave Nodes run the DataNode and TaskTracker daemons. A slave node will run both of these daemons. All of these Slave Nodes run in parallel, each on their own part of the overall dataset locally.</p>
 <p>Just for very small clusters, the NameNode, JobTracker and the Secondary NameNode run on a single machine. However, when there are beyond 20-30 nodes. It’s better to run each of them on individual nodes. </p>
 <h3 id="Hadoop-Ecosystem"><a href="#Hadoop-Ecosystem" class="headerlink" title="Hadoop Ecosystem"></a>Hadoop Ecosystem</h3><p>Hadoop has a family of related projects based on the infrastructure for distributed computing and large-scale data processing. The core projects are apache open source projects. Except for HDFS and MapReduce, some hadoop related projects are:</p>
 <ul>
-<li>Ambari, a Hadoop management and cluster monitoring system.</li>
-<li>Avro, a serialization system for efficient, cross-language RPC and persistent data storage.</li>
-<li>Pig, a data flow language and execution environment for exploring very large datasets, which runs on HDFS and MapReduce clusters.</li>
-<li>HBase, provide random, realtime read/write access to BigData. The project built a column-oriented database, host very large tables —- billions of rows X millions of columns. The project is based on Google’s paper BigTable: A Distributed Storage System for Structured Data.</li>
-<li>Hive, which is distributed data warehouse. Hive manages data stored in HDFS and provides a query language based on SQL, which is translated by runtime engine to MapReduce Job.</li>
-<li>Zookeeper, a distributed, highly available coordination service. It provides centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services, which make build distributed applications more efficient.</li>
-<li>Oozie, a service for running and scheduling workflows of Hadoop jobs, which includes MapReduce, Pig, Hive and sqoop jobs.</li>
-<li>Mahout, a scalable machine learning libraries based on Hadoop HDFS and MapReduce.</li>
+<li>  Ambari, a Hadoop management and cluster monitoring system.</li>
+<li>  Avro, a serialization system for efficient, cross-language RPC and persistent data storage.</li>
+<li>  Pig, a data flow language and execution environment for exploring very large datasets, which runs on HDFS and MapReduce clusters.</li>
+<li>  HBase, provide random, realtime read/write access to BigData. The project built a column-oriented database, host very large tables —- billions of rows X millions of columns. The project is based on Google’s paper BigTable: A Distributed Storage System for Structured Data.</li>
+<li>  Hive, which is distributed data warehouse. Hive manages data stored in HDFS and provides a query language based on SQL, which is translated by runtime engine to MapReduce Job.</li>
+<li>  Zookeeper, a distributed, highly available coordination service. It provides centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services, which make build distributed applications more efficient.</li>
+<li>  Oozie, a service for running and scheduling workflows of Hadoop jobs, which includes MapReduce, Pig, Hive and sqoop jobs.</li>
+<li>  Mahout, a scalable machine learning libraries based on Hadoop HDFS and MapReduce.</li>
 </ul>
 <p>Resources:<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-overview/" title="Hadoop Overview">Part 0 Hadoop Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-review/" title="Hadoop HDFS Review">Part 1 Hadoop HDFS Review</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-federation/" title="Hadoop HDFS Federation">Part 2 Hadoop HDFS Federation</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-high-availability/" title="Hadoop HDFS High Availability(HA)">Part 3 Hadoop HDFS High Availability(HA)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-overview/" title="Hadoop MapReduce Overview">Part 4 Hadoop MapReduce Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-1-framework/" title="Hadoop MapReduce 1 Framework">Part 5 Hadoop MapReduce 1 Framework</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-2-yarn/" title="Hadoop MapReduce 2 (YARN)">Part 6 Hadoop MapReduce 2 (YARN)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-isnt-silver-bullet/" title="Hadoop isn’t Silver Bullet">Part 7 Hadoop isn’t Silver Bullet</a></p>
 
@@ -342,8 +342,8 @@ while (!queue.isEmpty()) &#123;
     &#125;
         u.color = Color.BLACK;
     res.add(u);
-&#125;
-</code></pre><p>}<br>[/java]<br><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphBFS.java" title="BFS Source">BFS Source Code</a></p>
+&#125;</code></pre>
+<p>}<br>[/java]<br><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphBFS.java" title="BFS Source">BFS Source Code</a></p>
 <h3 id="深度优先搜索DFS"><a href="#深度优先搜索DFS" class="headerlink" title="深度优先搜索DFS"></a>深度优先搜索DFS</h3><p>广度优先搜索DFS，基本算法思想<br>1. 采用递归，或stack来实现<br>2. 每一个Vertex引入四个变量<br>color：WHITE 表示没有访问过，GREY 表示发现，BLACK 表示完成访问<br>parent: 父亲<br>timestamp1: 表示第一次访问该顶点的时间戳<br>timestamp2:表示访问结束时的时间戳<br>3. 为了实现方便，我采用int来标识每一个顶点，采用邻接表来表示graph</p>
 <p>DFS采用邻接表表示Graph来实现，复杂度O(V+E), 矩阵复杂度依然不好，为O（n^2）<br>DFS是从多个源开始，最终会生成由多个源作为root的森林，即深度优先树（深度优先森林）。<br>同时引入时间戳，是为了获得DFS的进展情况，如果不需要时间戳，只是想简单地打印每一个顶点，可以不用。</p>
 <p>以下是递归的实现方法：<br>[java]<br>    public void DFS() {<br>        int i = 0;<br>        for (i = 0; i &lt; n; i++) {<br>            vertexes[i] = new Vertex(i);<br>        }<br>        for (i = 0; i &lt; n; i++) {<br>            Vertex u = vertexes[i];<br>            if (u.color == Color.WHITE) {<br>                visitDFS(u);<br>            }<br>        }<br>    }</p>
@@ -363,42 +363,9 @@ while (!queue.isEmpty()) &#123;
     u.color = Color.BLACK;
     timer++;
     u.timestamp2 = timer;
-&#125;
-</code></pre><p>[/java]</p>
-<p>以下是采用栈的实现方法改写 “visitDFS”：<br>[java]<br>    /**</p>
-<pre><code> * DFS with iterative method 
- * Make use of stack
- * @param u
- */
-private void visitDFSIterative(Vertex u) &#123;
-    res.add(u);
-    u.color = Color.GREY;
-    timer++;
-    u.timestamp1 = timer;
-    stack.add(u);
-    while(!stack.isEmpty()) &#123;
-        Vertex v = stack.remove(stack.size() - 1);
-        ArrayList&amp;lt;Integer&amp;gt; adjList = graph.get(v.vertex);
-        for (int i = 0; i &amp;lt; adjList.size(); i++) &#123;
-            Vertex temp = vertexes[adjList.get(i)];
-            if (temp.color == Color.WHITE) &#123;
-                temp.parent = v;
-                temp.color = Color.GREY;
-                timer++;
-                temp.timestamp1 = timer;
-                res.add(temp);
-                stack.add(temp);
-            &#125;
-        &#125;
-        v.color = Color.BLACK;
-        timer++;
-        v.timestamp2 = timer;
-    &#125;
-    u.color = Color.BLACK;
-    timer++;
-    u.timestamp2 = timer;
-&#125;
-</code></pre><p>[/java]</p>
+&#125;</code></pre>
+<p>[/java]</p>
+<p>以下是采用栈的实现方法改写 “visitDFS”：<br>[java]<br>    /**<br>     * DFS with iterative method<br>     * Make use of stack<br>     * @param u<br>     */<br>    private void visitDFSIterative(Vertex u) {<br>        res.add(u);<br>        u.color = Color.GREY;<br>        timer++;<br>        u.timestamp1 = timer;<br>        stack.add(u);<br>        while(!stack.isEmpty()) {<br>            Vertex v = stack.remove(stack.size() - 1);<br>            ArrayList&lt;Integer&gt; adjList = graph.get(v.vertex);<br>            for (int i = 0; i &lt; adjList.size(); i++) {<br>                Vertex temp = vertexes[adjList.get(i)];<br>                if (temp.color == Color.WHITE) {<br>                    temp.parent = v;<br>                    temp.color = Color.GREY;<br>                    timer++;<br>                    temp.timestamp1 = timer;<br>                    res.add(temp);<br>                    stack.add(temp);<br>                }<br>            }<br>            v.color = Color.BLACK;<br>            timer++;<br>            v.timestamp2 = timer;<br>        }<br>        u.color = Color.BLACK;<br>        timer++;<br>        u.timestamp2 = timer;<br>    }<br>[/java]</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphDFS.java" title="DFS Source">DFS Source Code</a></p>
 <p>最终发现，起始实现起来代码不多，重在想法。</p>
 
@@ -472,7 +439,7 @@ private void visitDFSIterative(Vertex u) &#123;
         <h2 id="9-数据库设计"><a href="#9-数据库设计" class="headerlink" title="9. 数据库设计"></a>9. 数据库设计</h2><h3 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1.基本概念"></a>9.1.基本概念</h3><p>1.数据库与文件系统的区别<br>传统的文件系统：是扁平文件，无结构的文件，存储简单地数据，读取速度快，存储形式单一；存在数据冗余，更新时间长，不一致性，安全性的问题，冗余会带来插入、更新、删除异常。<br>数据库系统：是堆文件，采用数据表存储，数据存放随机且没有特定的顺序，每一个表需要提供主键；数据库提供索引功能；可以通过范式来保证数据的一致性；有事务处理功能,ACID；可以避免插入、更新、和删除异常；提供安全功能。[more…]</p>
 <p>2.数据库设计的目标：<br>a)能向用户提供数据<br>b)准确性，一致性，完整性<br>c)有效的存储数据以及有效的更新和检索<br>d)有目的的检索数据，获取的数据要有利于管理和决策。</p>
 <p>3.有效性目标<br>a)保证数据能被各种应用程序的用户共享。<br>b)维护数据的准确性，一致性，完整性<br>c)确保当前的和未来的应用程序所需的所有数据能立即可用<br>d)允许数据库随用户需求的增加而不断演进。<br>e)允许用户建立自己的数据视图，而不用关心数据的实际存储方式。</p>
-<p>4.ERD图,要会画，可以看书中的例子<br>实体：任何由某人为手机数据而选择的对象或事件叫做实体。包括：一般实体，关联实体，属性实体。<br>关系：1对1，1对多，多对多<br>属性：实体的特征<br><img src="http://i40.tinypic.com/bf2o8n.jpg" alt="" title="ERD图"></p>
+<p>4.ERD图,要会画，可以看书中的例子<br>实体：任何由某人为手机数据而选择的对象或事件叫做实体。包括：一般实体，关联实体，属性实体。<br>关系：1对1，1对多，多对多<br>属性：实体的特征<br><img src="http://i40.tinypic.com/bf2o8n.jpg" title="ERD图"></p>
 <p>5.键的类型：基于模式而不基于实例<br>a)主键：唯一标识一条记录<br>b)候选键：一个或一组可当作主键使用的键<br>c)辅助键：不能唯一标识一条记录，可以唯一，也可以标识多重记录<br>d)链接键(组合键)：可以选择两个或多个数据组成一个键<br>e)外键：一个属性，它是另外一个表的键</p>
 <h3 id="9-2-规范化"><a href="#9-2-规范化" class="headerlink" title="9.2.规范化"></a>9.2.规范化</h3><p>合理规范化的模型可应对需求变更，规范化数据重复降至最少.<br>1.第一范式1NF：数据原子性，每一列只有单值属性</p>
 <p>2.第二范式2NF：没有部分依赖，每一个属性不能依赖主键的部分<br>如  (学号, 课程名称) → (姓名, 年龄, 成绩, 学分) ，不符合2NF<br>因为 (课程名称) –&gt; (学分)，(学号)-&gt;(姓名，年龄)，存在部分依赖<br>此时存在数据冗余，插入异常，删除异常，更新异常</p>
@@ -500,7 +467,7 @@ private void visitDFSIterative(Vertex u) &#123;
 <h3 id="10-1-2-编码的类型"><a href="#10-1-2-编码的类型" class="headerlink" title="10.1.2.编码的类型"></a>10.1.2.编码的类型</h3><p>1.记录某些事物<br>a)简单地顺序码<br>•优点：减少指派重复数字的可能性；让使用者估计出订单合适收到<br>•适用于：作业按顺序处理，需要知道数据项输入系统的顺序，需要知道事件的发生顺序。<br>•缺点：容易泄露商业信息，泄露当前已经指派了多少编码</p>
 <p>b)字母衍生码<br>•例如：名字的编码： 取前2个辅音字母+名字长度+一个随机数<br>•例如编码女装：考虑品牌，类别，产地，生产日期，款号，尺码，颜色，价格<br>•常用于标识一个账号，邮寄地址标签<br>•注意：避免重复，分布要均匀<br>•缺点：如果采用名字的前三个辅音字母，当辅音字母少于3个，就会生成“RXX”这样的类型； 如果一些数据发生变化，如名字或地址变化，就会改变字母衍生码，而改变文件中的主键</p>
 <p>2.分类信息<br>a)分类码<br>•目的：将一组具有特殊信息的数据从其他数据中区分出来，可以由单个字母或数字组成。是描述人物、位置、事物或事件的一种简写形式<br>•例如：计算所得税，分类有支付利息，医药费，税，捐款，应付款，生活用品支出，给每一个分类指派一个字母；<br>•使用单个字母标识分类可能会存在扩展瓶颈，可使用两个以上的字母，如计算机中的快捷键。</p>
-<p>b)块顺序码<br>•是顺序码的扩展，对数据分类，对每一个分类分配一个编码范围，在该类别的项目按顺序编码<br>•例如浏览器分配100~999， 数据库 200~299<br>•优点：根据普通的特征对数据分类，还能简单地为下一个需要标识的项目（在同一块）指派一个可用的数字代码</p>
+<p>b)块顺序码<br>•是顺序码的扩展，对数据分类，对每一个分类分配一个编码范围，在该类别的项目按顺序编码<br>•例如浏览器分配100<del>999， 数据库 200</del>299<br>•优点：根据普通的特征对数据分类，还能简单地为下一个需要标识的项目（在同一块）指派一个可用的数字代码</p>
 <p>3.隐藏信息<br>密码，隐藏信息，如医药处方，凯撒密码对称加密，Hash密码单向加密</p>
 <p>4.展示信息：为用户展示信息，使数据输入更有意义<br>a)有效数字集编码<br>•例如衣服采用有效数字集描述产品信息，“414-219-19-12:表示浅褐色冬季外套，款式219，尺码12”<br>•优点：让员工方便的定位产品类别；查询效率高；有助于销售</p>
 <p>b)助记码<br>•帮助记忆，结合字母和符号，醒目而又清晰的编码产品，例如国家简称<br>c)Unicode：显示我们不能输入和看到的字符， 国际标准组织ISO定义Unicode字符集，包括所有标准语言字符，还有65535个空位</p>
@@ -509,7 +476,11 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>2.让计算机完成数据处理：处理重复的任务，如记录事务时间，根据输入计算新值，随时保存和检索数据</p>
 <p>3.减少瓶颈和减少额外输入步骤：步骤越少，引入错误的机会就越少</p>
 <p>4.选择有效的数据输入方法<br>a)键盘<br>b)扫描仪<br>c)视频，音频<br>d)磁性墨水<br>e)标记识别表单：如答题纸，但缺点是用户可能会一时大意填图出错<br>f)条形码：准确度高<br>g)RFID：射频识别技术</p>
-<div style="color: #EF4808"><br>两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko" title="剪影截图">剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle" title="TSS下载助手">TSS下载助手：让你方便一键批量下载</a><br></div>
+<div style="color: #EF4808">
+两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：
+[剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!](https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko "剪影截图")
+[TSS下载助手：让你方便一键批量下载](https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle "TSS下载助手")
+</div>
 
 <p>资源：<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part1/" title="System Analysis and Design (Kenneth Kendall) Review Part1">系统分析与设计part1</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part2/" title="System Analysis and Design (Kenneth Kendall) Review Part2">系统分析与设计part2</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part3/" title="System Analysis and Design (Kenneth Kendall) Review Part3">系统分析与设计part3</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part4/" title="System Analysis and Design (Kenneth Kendall) Review Part4">系统分析与设计part4</a></p>
 
@@ -587,7 +558,7 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>5.按时提供输出<br>In-Time 按时，及时的展现，考虑输出的时效性<br>如每年南大的主页在高考时很重要<br>如滴滴打车，采用语音输出</p>
 <p>6.选择最有效的输出方式：报表，屏幕输出，音频或视频输出。</p>
 <h3 id="6-2-选择输出技术时需要考虑"><a href="#6-2-选择输出技术时需要考虑" class="headerlink" title="6.2.选择输出技术时需要考虑"></a>6.2.选择输出技术时需要考虑</h3><p>1)谁将使用，看到输出。<br>2)多少人需要输出<br>3)哪里需要输出，如配送部门和后勤部门<br>4)输出的目的<br>5)输出的速度是多少<br>6)访问输出的频率如何<br>7)输出将必须存储多长时间<br>8)产生、存储和分发输出必须遵循的特殊规则是什么<br>9)维护和供应的最初与后续的成本是什么<br>10)输出技术的环境需求是什么：易接近性、噪声吸收、温度控制、设备空间、电缆架设以及WiFi发射机的接近程度。 例如：打印输出噪声很大。</p>
-<h3 id="6-3-常见的输出技术"><a href="#6-3-常见的输出技术" class="headerlink" title="6.3.常见的输出技术"></a>6.3.常见的输出技术</h3><p><img src="http://i44.tinypic.com/2q9cthc.jpg" alt=""><br>补充如下：<br>1. 打印机输出：如报表行程单、化验单、信用卡账单、财务单，具有持久性，需要考虑浪费纸张的成本，噪声，采用合适的表格形式<br>2. 视频输出：<br>补充静态的打印输出。<br>远程协作，将那些不能经常见面的人联系在一起<br>教学，帮助，培训视频<br>记录当前事件，方便以后的输出<br>保存一个重要情节，收藏，存档</p>
+<h3 id="6-3-常见的输出技术"><a href="#6-3-常见的输出技术" class="headerlink" title="6.3.常见的输出技术"></a>6.3.常见的输出技术</h3><p><img src="http://i44.tinypic.com/2q9cthc.jpg"><br>补充如下：<br>1. 打印机输出：如报表行程单、化验单、信用卡账单、财务单，具有持久性，需要考虑浪费纸张的成本，噪声，采用合适的表格形式<br>2. 视频输出：<br>补充静态的打印输出。<br>远程协作，将那些不能经常见面的人联系在一起<br>教学，帮助，培训视频<br>记录当前事件，方便以后的输出<br>保存一个重要情节，收藏，存档</p>
 <p>3. 动画输出：增强web站点的演示效果；比抽象的图像带来更好地决策支持。<br>4.电子邮件输出：可以用于私密信息。<br>5. 输出技术两种分类：<br>推技术：向用户推送信息，如推送流量统计，可以采用短信或电子邮件的方式。<br>拉技术：用户主动发起请求数据，如web上点击链接</p>
 <h3 id="6-4-避免输出的偏差"><a href="#6-4-避免输出的偏差" class="headerlink" title="6.4.避免输出的偏差"></a>6.4.避免输出的偏差</h3><p>1.偏差的来源<br>a)信息排序的方式<br>b)可接受的边界值引入的偏差<br>c)使用图形引入的偏差</p>
 <p>2.如何避免偏差<br>a)明确偏差来源<br>b)在测试Web文档的外观过程中，设计交互式输出，让各种用户参与测试，并使用各种不同的系统配置测试输出。<br>c)让用户参与输出设计，使它们认识到输出信息中可能存在的偏差<br>d)创建灵活的输出，使得用户能修改边界值和范围。<br>e)训练用户依靠多种输出对系统输出执行“逼真测试”</p>
@@ -638,7 +609,11 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>2.在系统设计中包含反馈<br>a)提供各种帮助选项，F1，<br>b)下拉菜单帮助<br>c)鼠标悬停的提示文本<br>d)帮助向导<br>e)帮助热线</p>
 <h3 id="8-5-电子商务网站的设计原则"><a href="#8-5-电子商务网站的设计原则" class="headerlink" title="8.5.电子商务网站的设计原则"></a>8.5.电子商务网站的设计原则</h3><p>1.在网站上采用各种方法从客户处获得反馈<br>在用户启动电子邮件程序的同时，自动把公司的邮件地址放在“收件人”处<br>添加反馈按钮，点击后打开信息模板</p>
 <p>2.采用4种方法提供一次点击的导航，以确保用户容易地在网站中导航，并易于返回原来的网页。<br>1)建立卷滚菜单<br>2)在主页上按分层关系建立网站链接集，显示关键主题框架。<br>3)把网站地图放在主页上，并突出到该地图的链接，提高导航效率。<br>4)在网站内每一个页面上设置导航条，重复首页上的条目。</p>
-<div style="color: #EF4808"><br>两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko" title="剪影截图">剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle" title="TSS下载助手">TSS下载助手：让你方便一键批量下载</a><br></div>
+<div style="color: #EF4808">
+两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：
+[剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!](https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko "剪影截图")
+[TSS下载助手：让你方便一键批量下载](https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle "TSS下载助手")
+</div>
 
 <p>资源：<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part1/" title="System Analysis and Design (Kenneth Kendall) Review Part1">系统分析与设计part1</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part2/" title="System Analysis and Design (Kenneth Kendall) Review Part2">系统分析与设计part2</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part3/" title="System Analysis and Design (Kenneth Kendall) Review Part3">系统分析与设计part3</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part4/" title="System Analysis and Design (Kenneth Kendall) Review Part4">系统分析与设计part4</a></p>
 
@@ -710,19 +685,28 @@ private void visitDFSIterative(Vertex u) &#123;
     <div class="entry">
       
         <h2 id="4-分析：使用数据流图"><a href="#4-分析：使用数据流图" class="headerlink" title="4. 分析：使用数据流图"></a>4. 分析：使用数据流图</h2><h3 id="4-1-数据流图功能和优点"><a href="#4-1-数据流图功能和优点" class="headerlink" title="4.1.数据流图功能和优点"></a>4.1.数据流图功能和优点</h3><p>概念化数据在整个组织是如何流动的，数据经历的过程和变换，以及输出。<br>优点：<br>(1) 不必过早着手系统和技术的实现。<br>(2) 进一步了解系统和子系统的相互关系。<br>(3) 通过数据流图与用户交流当前系统的知识。<br>(4) 更好地了解业务，分析建议的系统以确定是否定义了必要的数据和过程。[more…]</p>
-<h3 id="4-2-数据流图的图例规范"><a href="#4-2-数据流图的图例规范" class="headerlink" title="4.2.数据流图的图例规范"></a>4.2.数据流图的图例规范</h3><p><img src="http://i42.tinypic.com/105a914.jpg" alt=""><br>1. 实体的命名：名词<br>2. 数据流命名：名词<br>3. 过程命名<br>在上下文图中，赋予整个系统的名称， 如“选课系统”<br>命名子系统时，使用诸如“预定子系统”， “Web用户执行系统”<br>具体过程命名：动词+形容词+名词 “计算净工资”，每一个过程要有一个唯一编号，指出它在图中的层次。</p>
+<h3 id="4-2-数据流图的图例规范"><a href="#4-2-数据流图的图例规范" class="headerlink" title="4.2.数据流图的图例规范"></a>4.2.数据流图的图例规范</h3><p><img src="http://i42.tinypic.com/105a914.jpg"><br>1. 实体的命名：名词<br>2. 数据流命名：名词<br>3. 过程命名<br>在上下文图中，赋予整个系统的名称， 如“选课系统”<br>命名子系统时，使用诸如“预定子系统”， “Web用户执行系统”<br>具体过程命名：动词+形容词+名词 “计算净工资”，每一个过程要有一个唯一编号，指出它在图中的层次。</p>
 <h3 id="4-3-开发数据流图步骤"><a href="#4-3-开发数据流图步骤" class="headerlink" title="4.3.开发数据流图步骤"></a>4.3.开发数据流图步骤</h3><p>1. 步骤<br>1)制定一个业务活动列表：实体，数据流，过程，数据存储<br>2)创建上下文图，外部实体+输入+输出+系统，没有过程和数据存储<br>3)0层图：分解系统，展示高层的过程和数据存储，过程一般不超过9个，为避免数据流线交叉，同一个实体和数据存储可以出现多次。<br>4)画0层图中每个过程的子图<br>注意编号与父过程相同<br>纵向平衡——不能有父过程没有的输入和输出。<br>子图中通常不显示实体，显示接口数据流。<br>可以有父过程中没有显示的数据存储。<br>5)检查错误：编号正确，命名正确，输入输出清晰，没有back hole, 没有miracle<br>6)根据逻辑数据流图，开发物理数据流图：通过名字描述真实地文件和报表的物理存储，增加控制以指出合适过程完成或发生错误。<br>7)分割物理数据流图。</p>
-<p>2. 注意点<br>1) 图例和标识的准确性<br>2) 数据流：不能从实体到实体，不能存储到存储，可以从实体到过程，过程到过程，过程到存储<br>3) 数据流图的层次性<br>4) 尽量不要有线性流，即一个输入和输出的过程，出现通常是遗漏了数据流，一个过程输入和输出总数在&gt;=4个以上最好。<br>5) 用户要能理解</p>
+<p>2. 注意点</p>
+<ol>
+<li>图例和标识的准确性</li>
+<li>数据流：不能从实体到实体，不能存储到存储，可以从实体到过程，过程到过程，过程到存储</li>
+<li>数据流图的层次性</li>
+<li>尽量不要有线性流，即一个输入和输出的过程，出现通常是遗漏了数据流，一个过程输入和输出总数在&gt;=4个以上最好。</li>
+<li>用户要能理解</li>
+</ol>
 <h3 id="4-4-如何向用户解释数据流图"><a href="#4-4-如何向用户解释数据流图" class="headerlink" title="4.4 如何向用户解释数据流图"></a>4.4 如何向用户解释数据流图</h3><p>1. 数据流图的标记要具体而有意义、<br>2.可以通过举例，类比和问询，让用户了解DFD的原理<br>3.每个DFD的过程控制在9个以内，太大的图，则要分解，保证在一页纸内<br>4.结合表格和图表向用户解释</p>
-<h3 id="4-5-逻辑数据流图-vs-物理数据流图"><a href="#4-5-逻辑数据流图-vs-物理数据流图" class="headerlink" title="4.5.逻辑数据流图 vs 物理数据流图"></a>4.5.逻辑数据流图 vs 物理数据流图</h3><p>1) 二者的区别<br><img src="http://i44.tinypic.com/11r86lx.jpg" alt=""></p>
+<h3 id="4-5-逻辑数据流图-vs-物理数据流图"><a href="#4-5-逻辑数据流图-vs-物理数据流图" class="headerlink" title="4.5.逻辑数据流图 vs 物理数据流图"></a>4.5.逻辑数据流图 vs 物理数据流图</h3><ol>
+<li>二者的区别<br><img src="http://i44.tinypic.com/11r86lx.jpg"></li>
+</ol>
 <p>2)逻辑数据流图优势<br>a)更好地与用户交流<br>b)系统更稳定<br>c)更好地了解业务<br>d)灵活、更易维护<br>e)消除冗余，更容易创建物理模型</p>
 <p>3)物理数据流图优势<br>a)澄清哪些过程是手工的，哪些是自动的<br>b)更详细的描述过程<br>c)标识临时数据存储<br>d)指定真实地文件名和打印输出名<br>e)增加确保正确地完成过程的控制。<br>物理数据流图创建方法：事件建模法，用例法.</p>
-<p><img src="http://i44.tinypic.com/xnyzbo.jpg" alt=""></p>
+<p><img src="http://i44.tinypic.com/xnyzbo.jpg"></p>
 <h2 id="5-使用数据字典分析系统"><a href="#5-使用数据字典分析系统" class="headerlink" title="5. 使用数据字典分析系统"></a>5. 使用数据字典分析系统</h2><h3 id="5-1-数据字典的基本概念"><a href="#5-1-数据字典的基本概念" class="headerlink" title="5.1.数据字典的基本概念"></a>5.1.数据字典的基本概念</h3><p>1.数据字典定义<br>是一种关于数据的数据参考书，指导系统的分析与设计，包括数据流，数据结构，数据元素和数据存储。</p>
 <p>2.数据字典的必要性<br>a)作为数据的记录文档<br>b)消除冗余，保证数据的一致性<br>c)验证DFD的完备性和准确性<br>d)为开发界面和报表提供切入点<br>e)找出数据流图中过程的逻辑<br>f)创建XML</p>
-<p>3.DFD与数据字典的关系<br><img src="http://i42.tinypic.com/28k6bud.jpg" alt=""></p>
+<p>3.DFD与数据字典的关系<br><img src="http://i42.tinypic.com/28k6bud.jpg"></p>
 <h3 id="5-2-数据流的描述"><a href="#5-2-数据流的描述" class="headerlink" title="5.2 数据流的描述"></a>5.2 数据流的描述</h3><p>通过DFD确定系统的输入和输出，对每个数据流描述如下，具体实例可以看书。<br>1)ID：可选标识符<br>2)数据流名称<br>3)数据流描述<br>4)数据流来源<br>5)数据流目标<br>6)数据流类型：文件、界面、报表、表格或内部数据(中间的临时数据)<br>7)包含的数据结构<br>8)单位时间的流量<br>9)备注</p>
-<h3 id="5-3-数据结构描述"><a href="#5-3-数据结构描述" class="headerlink" title="5.3.数据结构描述"></a>5.3.数据结构描述</h3><p>1.描述<br>1)= 表示组成<br>2)+ 表示“和”<br>3){} 表示重复元素，一定有至少一个 1~n，可以包含固定重复次数，或上限与下限<br>4)[] “非此即彼”，互斥的选择<br>5)() 表示可选元素 0~1<br><img src="http://i42.tinypic.com/256fnuc.jpg" alt=""></p>
+<h3 id="5-3-数据结构描述"><a href="#5-3-数据结构描述" class="headerlink" title="5.3.数据结构描述"></a>5.3.数据结构描述</h3><p>1.描述<br>1)= 表示组成<br>2)+ 表示“和”<br>3){} 表示重复元素，一定有至少一个 1<del>n，可以包含固定重复次数，或上限与下限<br>4)[] “非此即彼”，互斥的选择<br>5)() 表示可选元素 0</del>1<br><img src="http://i42.tinypic.com/256fnuc.jpg"></p>
 <p>2.逻辑数据结构和物理数据结构<br>逻辑数据结构是业务上，用户看到的数据。物理数据结构是软件实现所需要的数据。<br>物理数据结构需要增加：<br>1)键字段，唯一标识一条记录<br>2)标识主记录的状态代码，诸如一个雇员当前被雇佣或否。<br>3)如果一个文件包含不同的记录类型，则可以用交易码标识记录的类型。例如，包含返还项的记录和支付记录的信用文件。<br>4)重复组数据项，包含该组中有多少个数据项的计数。<br>5)重复组中数据项多少的限制<br>6)客户访问一个安全Web站点的密码。</p>
 <h3 id="5-4-数据元素描述"><a href="#5-4-数据元素描述" class="headerlink" title="5.4 数据元素描述"></a>5.4 数据元素描述</h3><p>1)ID, 可选的<br>2)元素名称<br>3)别名<br>4)简短描述<br>5)是基本元素还是派生元素</p>
 <p>6)元素长度：<br>对于数值金额的长度，给出最大数额。<br>名称和地址，给出合适的长度<br>对于其他字段，参照历史数据</p>
@@ -730,12 +714,16 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>9)验证标准，保证数据的精确性，对于离散或连续的数据有以下标准<br>a)某个值范围适合包含连续数据，如GPA 0.00~4.00<br>b)如果数据式离散的，则指出一组值<br>c)如果值的列表是泛指的，则可以采用一个代码表<br>d)对于键或者索引元素，通常包含一个校验位</p>
 <p>10)提供某些元素的默认值<br>11)备注区域</p>
 <h3 id="5-5-数据存储描述"><a href="#5-5-数据存储描述" class="headerlink" title="5.5.数据存储描述"></a>5.5.数据存储描述</h3><p>1)ID，必须有<br>2)数据存储名<br>3)文件的别名<br>4)简短描述<br>5)文件类型：人工文件或计算机文件<br>6)如果是计算机文件，则文件格式指明是数据库文件，还是传统的平面文件<br>7)文件上记录的最大记录数和平均记录数<br>8)文件或数据名指定的文件名(如果已知)<br>9)数据结构应使用数据字典中的名字，提供与此数据存储的元素的连接</p>
-<h3 id="5-6-创建数据字典"><a href="#5-6-创建数据字典" class="headerlink" title="5.6.创建数据字典"></a>5.6.创建数据字典</h3><p>1.先创建DFD，自顶向下开发数据字典和数据流图。可以为每一个层次的DFD创建数据字典。<br><img src="http://i42.tinypic.com/ddp0mh.jpg" alt=""><br>子数据流图上的数据流名称，包含在父过程上的数据流的元素或结构化记录中</p>
+<h3 id="5-6-创建数据字典"><a href="#5-6-创建数据字典" class="headerlink" title="5.6.创建数据字典"></a>5.6.创建数据字典</h3><p>1.先创建DFD，自顶向下开发数据字典和数据流图。可以为每一个层次的DFD创建数据字典。<br><img src="http://i42.tinypic.com/ddp0mh.jpg"><br>子数据流图上的数据流名称，包含在父过程上的数据流的元素或结构化记录中</p>
 <p>2.分析输入输出<br>输入输出分析表包括：<br>1)输入或输出的描述名<br>2)负责进一步澄清细节、设计反馈和最后核准的用户联系信息<br>3)输入数据还是输出数据<br>4)数据流的格式。逻辑DFD，可以处于未确定<br>5)表明报表上或者界面上的数据顺序的元素<br>6)一个元素列表，包括元素的名称、长度，是基本元素还是派生元素，编辑标准。</p>
 <p>3.开发数据存储<br>确定永久信息或临时信息。</p>
 <h3 id="5-7-使用数据字典"><a href="#5-7-使用数据字典" class="headerlink" title="5.7.使用数据字典"></a>5.7.使用数据字典</h3><p>数据字典可以用来创建界面、报表和表单<br>1.使用数据字典产生计算机语言时要考虑<br>1)输出数据流中的基本元素必须出现在产生该输出数据流过程的输入数据流中。基本元素由键盘输入，而不由某一个过程创建<br>2)派生元素必须由过程创建，并且至少应当由一个不是该元素自身为输入的过程输出<br>3)输入或者输出某个数据存储的数据流中的元素，必须包含在该数据存储中</p>
 <p>2.使用数据字典可以创建XML文档<br>XML是一种可用来在企业中交换数据的语言，是一种对数据进行定义、排序、过滤并把它转换成一种每个人都可以使用的统一数据语言的方法。</p>
-<div style="color: #EF4808"><br>两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko" title="剪影截图">剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle" title="TSS下载助手">TSS下载助手：让你方便一键批量下载</a><br></div>
+<div style="color: #EF4808">
+两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：
+[剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!](https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko "剪影截图")
+[TSS下载助手：让你方便一键批量下载](https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle "TSS下载助手")
+</div>
 
 <p>资源：<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part1/" title="System Analysis and Design (Kenneth Kendall) Review Part1">系统分析与设计part1</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part2/" title="System Analysis and Design (Kenneth Kendall) Review Part2">系统分析与设计part2</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part3/" title="System Analysis and Design (Kenneth Kendall) Review Part3">系统分析与设计part3</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part4/" title="System Analysis and Design (Kenneth Kendall) Review Part4">系统分析与设计part4</a></p>
 
@@ -810,15 +798,17 @@ private void visitDFSIterative(Vertex u) &#123;
 <h2 id="1-信息收集交互式方法"><a href="#1-信息收集交互式方法" class="headerlink" title="1.信息收集交互式方法"></a>1.信息收集交互式方法</h2><p>交互式信息收集有：面谈、联合应用程序设计JAD和调查问卷.</p>
 <h3 id="1-1-面谈"><a href="#1-1-面谈" class="headerlink" title="1.1 面谈"></a>1.1 面谈</h3><p><strong>1. 面谈的概念</strong><br>面谈是一种面对面的会谈，目的明确，一般采用问答形式。面谈时，需要获取面谈对象的观点，他们对系统当前状态、组织和个人目标、以及非正规过程的感受。[more…]</p>
 <ul>
-<li>调查面谈对象的观点。</li>
-<li>尽力获取面谈对象的感受。</li>
-<li>目标是尽力收集重要信息，组织的目标。</li>
-<li>面谈也是考察HCI问题的宝贵时机。<br><strong>2.面谈的5各步骤</strong><br>1)阅读背景材料：与面谈对象建立共同词汇<br>2)确定面谈目标：问题中应该有4-6个与HCI、信息处理和决策行为有关。<br>3)决定面谈对象：按层次和影响力选择谈话对象。<br>4)准备面谈对象：打电话或者邮件提前预约<br>5)决定问题的类型和结构：金字塔结构、漏斗结构或者菱形的结构</li>
+<li>  调查面谈对象的观点。</li>
+<li>  尽力获取面谈对象的感受。</li>
+<li>  目标是尽力收集重要信息，组织的目标。</li>
+<li>  面谈也是考察HCI问题的宝贵时机。</li>
+<li>*2.面谈的5各步骤**</li>
 </ul>
+<p>1)阅读背景材料：与面谈对象建立共同词汇<br>2)确定面谈目标：问题中应该有4-6个与HCI、信息处理和决策行为有关。<br>3)决定面谈对象：按层次和影响力选择谈话对象。<br>4)准备面谈对象：打电话或者邮件提前预约<br>5)决定问题的类型和结构：金字塔结构、漏斗结构或者菱形的结构</p>
 <p><strong>3.问题类型</strong><br><strong>1)开放式问题</strong><br><strong>优点：</strong><br>•让用户谈话自在<br>•可以收集面谈对象使用的词汇，这能反映其教育背景、价值标准、态度和信念<br>•提供丰富的细节，广度<br>•对尚未的进一步的提问方法有启迪作用。<br>•让面谈对象更感兴趣<br>•允许更多的自发性<br>•会见者更容易措辞<br>•在会见者没有准备的紧要关头采用这种类型<br><strong>缺点：</strong><br>•容易不切题，产生太多不相干的细节<br>•时间冗长，花费大量时间才能获得有用的信息<br>•可能会让用户觉得你没有准备，不够专业<br>•留下不好的印象，用户会觉得你在做没有实际意义的调查<br>•后期数据分析较难</p>
 <p><strong>2)封闭式问题</strong><br><strong>优点</strong><br>•有针对性，切中要点<br>•能获得准确、贴切的数据<br>•时间上可控，节省时间，可以快速探讨大范围问题。<br>•保持对面谈的控制权<br>•数据分析容易<br><strong>缺点：</strong><br>•让用户厌烦<br>•得不到丰富的细节，失去主要思想<br>•不能建立和面谈对象友好的关系</p>
 <p><strong>4.问题结构</strong><br>1)金字塔：先封闭后开放，先具体后一般化，用于用户需要预热，开始拘谨的情况<br>2)漏斗：先一般后具体，适用用户一开始就有激情的情况<br>3)菱形：具体——一般——具体，缺点是费时，优点是：具体的问题开始为面谈做好铺垫，再问一般化问题可以收集丰富的信息，再用具体的问题收尾，为面谈提供了结束的时机。</p>
-<h3 id="1-2-JAD联合应用程序设计"><a href="#1-2-JAD联合应用程序设计" class="headerlink" title="1.2 JAD联合应用程序设计"></a>1.2 JAD联合应用程序设计</h3><p>由IBM开发，一种一对多的面谈方法，目的是节省个人面谈所需的时间，减少成本；改善信息需求评估结果的质量；通过多方一起参加的过程，获得用户对新信息系统的更多的认可。<br><strong>1.条件</strong><br>•用户时间有限，一对一面谈不行<br>•公司文化允许不同层次的职员间联合问题求解<br>•用户想有点新东西，创新意愿强，而一对一面谈难以得到统一的意见<br>•组织允许关键职员离职2~4天<br><strong>2.涉众：</strong><br>分析员、用户、主管等，<br>一个沟通能力好的主持人<br>8~12位不同阶层的用户<br>需要有两名置身事外的观察员，保证JAD的进行。<br><strong>3.召开会议地点：</strong>一般式2~4天的脱产会议，在远离单位的舒服环境下<br><strong>4.优点</strong><br>•比面谈节省时间<br>•联合协作，可以实现快速软件开发。<br>•改善信息系统所有权的可能性。让用户早日参与系统，获得用户反馈<br>•创造性的开发设计，类似头脑风暴<br><strong>5.缺点</strong><br>•要求所有参与者抽出大块时间，2~4天<br>•任何一方准备不充分，或者后续报告和规范文档没有完成，最终得到的设计会不尽人意<br>•可能还没有充分发展必须得组织技能和组织文化，组织可能还不支持JAD</p>
+<h3 id="1-2-JAD联合应用程序设计"><a href="#1-2-JAD联合应用程序设计" class="headerlink" title="1.2 JAD联合应用程序设计"></a>1.2 JAD联合应用程序设计</h3><p>由IBM开发，一种一对多的面谈方法，目的是节省个人面谈所需的时间，减少成本；改善信息需求评估结果的质量；通过多方一起参加的过程，获得用户对新信息系统的更多的认可。<br><strong>1.条件</strong><br>•用户时间有限，一对一面谈不行<br>•公司文化允许不同层次的职员间联合问题求解<br>•用户想有点新东西，创新意愿强，而一对一面谈难以得到统一的意见<br>•组织允许关键职员离职2<del>4天<br><strong>2.涉众：</strong><br>分析员、用户、主管等，<br>一个沟通能力好的主持人<br>8</del>12位不同阶层的用户<br>需要有两名置身事外的观察员，保证JAD的进行。<br><strong>3.召开会议地点：</strong>一般式2<del>4天的脱产会议，在远离单位的舒服环境下<br><strong>4.优点</strong><br>•比面谈节省时间<br>•联合协作，可以实现快速软件开发。<br>•改善信息系统所有权的可能性。让用户早日参与系统，获得用户反馈<br>•创造性的开发设计，类似头脑风暴<br><strong>5.缺点</strong><br>•要求所有参与者抽出大块时间，2</del>4天<br>•任何一方准备不充分，或者后续报告和规范文档没有完成，最终得到的设计会不尽人意<br>•可能还没有充分发展必须得组织技能和组织文化，组织可能还不支持JAD</p>
 <h3 id="1-3-问卷调查"><a href="#1-3-问卷调查" class="headerlink" title="1.3 问卷调查"></a>1.3 问卷调查</h3><p>问卷调查是一种信息收集技术，它允许系统分析员研究组织中若干关键人物的态度、信念、行为和特征，而这些关键人物可能会受到当前建议系统的影响。<br><strong>1.使用条件</strong><br>•组织成员分布广泛<br>•系统项目涉及许多人<br>•推荐方案之前必须做探索性工作，希望在确定系统项目具体方向之前评估总体意见。<br>•希望在后续的面谈中标识并解决当前系统的所有问题。</p>
 <p><strong>2.问题类型</strong><br><strong>1)开放式问题：</strong><br>要估计开发式问题答复的种类，不能太宽泛<br>开放式问题适合想了解公司成员对系统的产品方面，或对系统的过程方面的看法的情况，如果不能有效的列出所有可能的答复，考虑开发式问题。<br>优点：探索性好，广度和深度广，准备问题容易<br>缺点：完成速度慢，分析数据难<br><strong>2)封闭式问题</strong><br>如果要调查大量人员的样本，采用封闭式，数据好统计。<br>如果能有效的列出问题可能的相互排斥的所有答复，采用封闭式问题。<br>优点：完成速度快，分析数据容易<br>缺点：广度和深度窄，准备问题不容易，探索性低</p>
 <p><strong>3.措辞的选择</strong><br>使用一致的和企业业务相关的术语<br>•保持措辞简练<br>•使用明确字眼，但避免过度明确问题，如收入等敏感信息<br>•保持问题简短<br>•不要选择低水平的语言，不要用高人一等的口气<br>•避免措辞的偏差<br>•向合适的人发放问卷，不要采用太多专业知识<br>•确保问题中涉及的技术的准确<br>•使用软件检验阅读水平是否合适回答者</p>
@@ -828,17 +818,32 @@ private void visitDFSIterative(Vertex u) &#123;
 <h2 id="2-信息收集非干扰性方法"><a href="#2-信息收集非干扰性方法" class="headerlink" title="2. 信息收集非干扰性方法"></a>2. 信息收集非干扰性方法</h2><p>包括：采样、调查、观察决策者行为和物理环境</p>
 <h3 id="2-1-采样"><a href="#2-1-采样" class="headerlink" title="2.1.采样"></a>2.1.采样</h3><p>1. 定义：从某一种群的系统中选择有代表性的个体<br>2. 必要性：节约成本、加快数据搜集过程、提高效率、减少偏差<br>3. 四个步骤</p>
 <ul>
-<li>确定要收集或要描述的数据：考虑数据收集方法（调查、面谈、调查问卷和观察等），考虑研究目标</li>
-<li>确定采样种群：硬数据（两个月或全年的报表），采样的客户</li>
-<li>选择采样类型</li>
-<li><p>决定采样规模<br>4. 采样类型：<br>1) 便利采样：容易安排，五约束的非概率型采样，最不可靠<br>2) 目的采样：选择对系统了解，感兴趣的人，这是非概率型采样，只有适度的可信度<br>3) 简单随机采用：每个个体的机会相同，产生一个随机编号表，在文档和报表采用中不切实际。<br>4) 复杂采样是最好的</p>
-</li>
-<li><p>系统采样：在名单中每个K个人选择一个，缺点是存在周期问题，引入偏差，采样大量不成比例的职员</p>
-</li>
-<li>分层采样：最重要的方式，在不同的层次，如管理层，社会阶层，在不同层次中按比例选择。当想对不同层次用户采用不同数据收集方法时采用分层采样。</li>
-<li>聚类采样：选择一组人或文档进行研究</li>
+<li>  确定要收集或要描述的数据：考虑数据收集方法（调查、面谈、调查问卷和观察等），考虑研究目标</li>
+<li>  确定采样种群：硬数据（两个月或全年的报表），采样的客户</li>
+<li>  选择采样类型</li>
+<li>  决定采样规模<br>4. 采样类型：</li>
 </ul>
-<p>5.  采样规模<br>1)  确定采样属性<br>2)  定位能查找到的属性的数据库或报表<br>3)  分析属性，估计p，一般取0.1或0.5<br>4)  主观是定一个值，i 作为区间估计<br>5)  选择置信度 z，如 95%时 z=1.96<br>6)  计算种群比例的标准差  σ=i/z<br>7)  计算采样规模：n=(p(1-p))/σ^2  + 1<br>置信度越高采样规模越大<br>确定面谈时的采样规模： 至少与组织中每个阶层的3个人进行面谈，3个人种至少有一个来自组织中的不同部门。</p>
+<ol>
+<li>便利采样：容易安排，五约束的非概率型采样，最不可靠</li>
+<li>目的采样：选择对系统了解，感兴趣的人，这是非概率型采样，只有适度的可信度</li>
+<li>简单随机采用：每个个体的机会相同，产生一个随机编号表，在文档和报表采用中不切实际。</li>
+<li>复杂采样是最好的</li>
+</ol>
+<ul>
+<li>  系统采样：在名单中每个K个人选择一个，缺点是存在周期问题，引入偏差，采样大量不成比例的职员</li>
+<li>  分层采样：最重要的方式，在不同的层次，如管理层，社会阶层，在不同层次中按比例选择。当想对不同层次用户采用不同数据收集方法时采用分层采样。</li>
+<li>  聚类采样：选择一组人或文档进行研究</li>
+</ul>
+<p>5.  采样规模</p>
+<ol>
+<li> 确定采样属性</li>
+<li> 定位能查找到的属性的数据库或报表</li>
+<li> 分析属性，估计p，一般取0.1或0.5</li>
+<li> 主观是定一个值，i 作为区间估计</li>
+<li> 选择置信度 z，如 95%时 z=1.96</li>
+<li> 计算种群比例的标准差  σ=i/z</li>
+<li> 计算采样规模：n=(p(1-p))/σ^2  + 1<br>置信度越高采样规模越大<br>确定面谈时的采样规模： 至少与组织中每个阶层的3个人进行面谈，3个人种至少有一个来自组织中的不同部门。</li>
+</ol>
 <h3 id="2-2-调查"><a href="#2-2-调查" class="headerlink" title="2.2 调查"></a>2.2 调查</h3><p>调查法：发现数据并对数据进行分析的行为。需要研究不同的硬数据。</p>
 <h4 id="2-2-1-分析定量文档"><a href="#2-2-1-分析定量文档" class="headerlink" title="2.2.1 分析定量文档"></a>2.2.1 分析定量文档</h4><p>1.用于决策的报表<br>通常是与库存状态、销售量和生产有关的纸质报表<br>生产报表：包括最近价格、当前库存、最近劳动力和设备等信息<br>总结报表：提供公司的背景和战略信息</p>
 <p>2.业绩报表： 估计实际业绩和预期业绩的差距</p>
@@ -856,12 +861,16 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>2.开发准则<br>•引进便于管理的模块：但不用建立完整的工作准则<br>•快速建立原型<br>•用连续迭代来修改原型<br>•强调用户界面：用户可以和原型轻松交互</p>
 <p>3.原型开发流程<br>听取用户意见，修改原型，用户测试，不断循环迭代。</p>
 <h3 id="3-3-RAD快速应用程序开发"><a href="#3-3-RAD快速应用程序开发" class="headerlink" title="3.3 RAD快速应用程序开发"></a>3.3 RAD快速应用程序开发</h3><p>1. 定义：是一种面向对象的系统开发方法，包括开发方法和开发工具。目标是缩短传统SDLC方法中信息系统的设计和实践之间漫长的时间，反映需求的变更，是原型化方法的一种特殊实现。</p>
-<p>2. RAD的阶段<br><img src="http://i39.tinypic.com/zjv0nb.jpg" alt=""><br>1)需求规划阶段：确定系统的业务目标和信息需求<br>2)RAD设计研讨会：RAD的核心，与用户共同合作设计系统，讨论设计的非技术方面，并对构建的工作原型给出反馈<br>3)实现阶段：根据设计，建立、优化、测试新系统</p>
-<p>3. Jame Martin RAD 四个阶段<br><img src="http://i40.tinypic.com/292bkaq.jpg" alt=""><br>1)需求规划：高级用户决定系统的功能<br>2)用户设计：与用户交互讨论系统的非技术方面<br>3)构建阶段：根据设计，用RAD工具构建，并向用户展示新系统，让他们交互、评论和检查。<br>4)转换阶段：新系统取代旧系统，测试新系统，培训用户</p>
+<p>2. RAD的阶段<br><img src="http://i39.tinypic.com/zjv0nb.jpg"><br>1)需求规划阶段：确定系统的业务目标和信息需求<br>2)RAD设计研讨会：RAD的核心，与用户共同合作设计系统，讨论设计的非技术方面，并对构建的工作原型给出反馈<br>3)实现阶段：根据设计，建立、优化、测试新系统</p>
+<p>3. Jame Martin RAD 四个阶段<br><img src="http://i40.tinypic.com/292bkaq.jpg"><br>1)需求规划：高级用户决定系统的功能<br>2)用户设计：与用户交互讨论系统的非技术方面<br>3)构建阶段：根据设计，用RAD工具构建，并向用户展示新系统，让他们交互、评论和检查。<br>4)转换阶段：新系统取代旧系统，测试新系统，培训用户</p>
 <p>4.优势<br>•传统SDLC采用的是有序的、系统的开发方法，保证系统的完整性和精确性，<br>但抵制变更，不能很好地处理需求的变更。<br>•RAD缩短SDLC，更欢迎变更。</p>
 <p>5.使用条件<br>•团队中有用过RAD的程序员和分析员<br>•由于商业压力，要求加快应用程序某部分的开发<br>•从事一项全新的电子商务应用程序，并且开发团队相信，如果应用程序是第一个或第一批出现在web上，则企业作为一个创新者取得竞争优势。<br>•用户经验丰富，对公司的组织目标高度负责。</p>
 <p>6.缺点：缺乏文档</p>
-<div style="color: #EF4808"><br>两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：<br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko" title="剪影截图">剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!</a><br><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle" title="TSS下载助手">TSS下载助手：让你方便一键批量下载</a><br></div>
+<div style="color: #EF4808">
+两个好用的Chrome插件，小伙伴们看完复习资料支持一下吧：
+[剪影截图：好用的网页截图，一键人人分享工具，快捷键ctrl+shift+z, 双击确定!](https://chrome.google.com/webstore/detail/剪影截图/gkloklemhahnoipikedmafefilidffko "剪影截图")
+[TSS下载助手：让你方便一键批量下载](https://chrome.google.com/webstore/detail/tss下载助手/odhkpoplnhfnhhhkgphckabboemiifle "TSS下载助手")
+</div>
 
 <p>资源：<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part1/" title="System Analysis and Design (Kenneth Kendall) Review Part1">系统分析与设计part1</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part2/" title="System Analysis and Design (Kenneth Kendall) Review Part2">系统分析与设计part2</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part3/" title="System Analysis and Design (Kenneth Kendall) Review Part3">系统分析与设计part3</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/27/system-analysis-design-kenneth-kendall-review-part4/" title="System Analysis and Design (Kenneth Kendall) Review Part4">系统分析与设计part4</a></p>
 
@@ -912,7 +921,7 @@ private void visitDFSIterative(Vertex u) &#123;
 
   
     
-    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part4/"><span>分布式系统总结part4</span></a></h3>
+    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part4/"><span>分布式系统总结Part4</span></a></h3>
     
   
 
@@ -943,15 +952,15 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>Well-handled：只有TT和PP，没有PT，TP。 因为PT会有死锁的风险， TP会造出某一个Place内部的Token无限增长</p>
 <h3 id="4-State-Machine和Marked-Graph"><a href="#4-State-Machine和Marked-Graph" class="headerlink" title="4.State Machine和Marked Graph"></a>4.State Machine和Marked Graph</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System17.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System17-580x349.png" alt="Distributed System17"></a></p>
 <ul>
-<li>Marked Graph：库所只有单个输入和单个输出</li>
-<li>State Machine: 每个变迁只有单个输入和单个输出，这是一个有限状态机</li>
-<li>T-component：如果一个大的Petri可以找到一个子网符合marked graph的要求，就是 T-component, 如果所有的T-component的集合可以覆盖整个Petri网，就是T-coverability。</li>
-<li>P-component：是一个大的网络中的一个Petri子网，满足state machine的，如所有的P-component可以覆盖整个Petri网，则称Petri网P-coverability</li>
+<li>  Marked Graph：库所只有单个输入和单个输出</li>
+<li>  State Machine: 每个变迁只有单个输入和单个输出，这是一个有限状态机</li>
+<li>  T-component：如果一个大的Petri可以找到一个子网符合marked graph的要求，就是 T-component, 如果所有的T-component的集合可以覆盖整个Petri网，就是T-coverability。</li>
+<li>  P-component：是一个大的网络中的一个Petri子网，满足state machine的，如所有的P-component可以覆盖整个Petri网，则称Petri网P-coverability</li>
 </ul>
 <h3 id="5-活性和有界性"><a href="#5-活性和有界性" class="headerlink" title="5. 活性和有界性"></a>5. 活性和有界性</h3><ul>
-<li>活性：从M0状态出发，对于任何一个M和t转换后的M’，可以让任何变迁T有可能点火enable.什么是不活呢，就是死锁，但是不死锁，不等价于活性</li>
-<li>有界性：不论状态如何变化，token数量都不会无限增长，保持在一定数量</li>
-<li>Petri是well-formed的：存在M0使这个Petri网有活性并且有界</li>
+<li>  活性：从M0状态出发，对于任何一个M和t转换后的M’，可以让任何变迁T有可能点火enable.什么是不活呢，就是死锁，但是不死锁，不等价于活性</li>
+<li>  有界性：不论状态如何变化，token数量都不会无限增长，保持在一定数量</li>
+<li>  Petri是well-formed的：存在M0使这个Petri网有活性并且有界</li>
 </ul>
 <h3 id="6-Free-choice-structure"><a href="#6-Free-choice-structure" class="headerlink" title="6. Free-choice structure"></a>6. Free-choice structure</h3><p>自由选择结构：如果两个输入库所交集不为空，蕴含两个输入库所相等</p>
 <p>t1和t2是对等的选择关系.</p>
@@ -1011,7 +1020,7 @@ private void visitDFSIterative(Vertex u) &#123;
 
   
     
-    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part3/"><span>分布式系统总结part3</span></a></h3>
+    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part3/"><span>分布式系统总结Part3</span></a></h3>
     
   
 
@@ -1056,9 +1065,9 @@ private void visitDFSIterative(Vertex u) &#123;
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System06.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System06-580x347.png" alt="Distributed System06"></a></p>
 <h4 id="6-释放一致性"><a href="#6-释放一致性" class="headerlink" title="6.释放一致性"></a>6.释放一致性</h4><p>条件：退出临界区时，让共享数据保持一致，提供两种类型的同步变量。获取(acquire) 操作是用于通知数据存储进程进入临界区的操作，而释放(release)操作是表明进程刚刚离开临界区的操作。</p>
 <ul>
-<li>对共享数据执行读操作或写操作之前，所有进程先前执行的获取操作都必须已经成功完成；</li>
-<li>在释放操作被允许执行前，所有进程先前执行的读操作和写操作都必须已经完成；</li>
-<li>对同步变量的访问是FIFO一致的(不需要顺序一致)</li>
+<li>  对共享数据执行读操作或写操作之前，所有进程先前执行的获取操作都必须已经成功完成；</li>
+<li>  在释放操作被允许执行前，所有进程先前执行的读操作和写操作都必须已经完成；</li>
+<li>  对同步变量的访问是FIFO一致的(不需要顺序一致)</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System07.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System07.png" alt="Distributed System07"></a></p>
 <h4 id="7-入口一致性"><a href="#7-入口一致性" class="headerlink" title="7.入口一致性"></a>7.入口一致性</h4><p>条件：它需要程序员(或编译器)在每个临界区的开始和结束处分别使用获取和释放操作，入口一致性要求每个普通的共享数据项都要与某种同步变量(如锁或障碍)关联。即让进程在进入临界区时，让属于同一临界区的共享数据保持一致。</p>
@@ -1092,8 +1101,8 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>三阶段：vote-commit, prepare-commit, global-commit</p>
 <p>引入了PRECOMMIT状态。</p>
 <ul>
-<li>2PC：崩溃的参与者可能恢复到了Commit状态而所有参与者还处于Ready状态。在这种情况下，其余的可能操作进程不能做出最后的决定，不得不在崩溃的进程恢复之前阻塞。</li>
-<li>在3PC中，只要有可操作的进程处于Ready状态，就没有崩溃的进程可以恢复到Init、Abort或Precommit之外的状态。因此存活进程总是可以做出的最后决定。当协调者崩溃，达到了预备提交阶段，在2PC中其他进程就会阻塞，但在3PC中，在预备提交阶段，即使没有协调者，也可以做出决定。</li>
+<li>  2PC：崩溃的参与者可能恢复到了Commit状态而所有参与者还处于Ready状态。在这种情况下，其余的可能操作进程不能做出最后的决定，不得不在崩溃的进程恢复之前阻塞。</li>
+<li>  在3PC中，只要有可操作的进程处于Ready状态，就没有崩溃的进程可以恢复到Init、Abort或Precommit之外的状态。因此存活进程总是可以做出的最后决定。当协调者崩溃，达到了预备提交阶段，在2PC中其他进程就会阻塞，但在3PC中，在预备提交阶段，即使没有协调者，也可以做出决定。</li>
 </ul>
 <h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/24/distributed-system-review-part1/" title="分布式系统总结part1">分布式系统总结part1 中间件，进程迁移，移动通信失效，名称解析，移动实体定位</a></p>
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/11/24/distributed-system-review-part2/" title="分布式系统总结part2">分布式系统总结part2 Lamport同步与向量时间戳，两大选举算法，三大互斥算法</a></p>
@@ -1147,7 +1156,7 @@ private void visitDFSIterative(Vertex u) &#123;
 
   
     
-    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part2/"><span>分布式系统总结part2</span></a></h3>
+    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part2/"><span>分布式系统总结Part2</span></a></h3>
     
   
 
@@ -1172,15 +1181,15 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>先发生的定义： a → b 表示a在b之前发生，此时 C(a) &lt; C(b), a b可以是同一个进程中的两个事件或进程间的消息发送事件。并发事件没有先后关系。</p>
 <p>Lamport算法：[more…]</p>
 <ul>
-<li>遵循事件的先发生关系，每个消息都应携带根据发送者时钟的发送时间，当消息到达并接收时，接收者时钟显示的时间比消息发送者时间早时，接收者就将时钟调到比发送者者的时间大1的值。</li>
-<li>为了满足全局时间的需要：在每两个事件之间，时钟必须至少滴答一次，如果一个进程以相当快的速度发送或者接收两个消息，那么他得时钟必须在这之间至少滴答一次。</li>
-<li>两个事件不会精确地同时发生</li>
+<li>  遵循事件的先发生关系，每个消息都应携带根据发送者时钟的发送时间，当消息到达并接收时，接收者时钟显示的时间比消息发送者时间早时，接收者就将时钟调到比发送者者的时间大1的值。</li>
+<li>  为了满足全局时间的需要：在每两个事件之间，时钟必须至少滴答一次，如果一个进程以相当快的速度发送或者接收两个消息，那么他得时钟必须在这之间至少滴答一次。</li>
+<li>  两个事件不会精确地同时发生</li>
 </ul>
 <p><strong>2.Lamport逻辑时钟的缺陷</strong></p>
 <p>不能捕捉因果关系，而向量时间戳可以。</p>
 <ul>
-<li>Lamport时间戳导致分布式系统中所有事件都要经过排序以具有这样的关系：如果a发生在b之前， 那么C(a) &lt; C(b)</li>
-<li>Lamport时间戳只能捕捉事件发生的先后关系，而不能捕捉因果关系。C(a) &lt; C(b)不能说明a事件发生在b事件之前。 因果关系需要通过向量时间戳来捕获。</li>
+<li>  Lamport时间戳导致分布式系统中所有事件都要经过排序以具有这样的关系：如果a发生在b之前， 那么C(a) &lt; C(b)</li>
+<li>  Lamport时间戳只能捕捉事件发生的先后关系，而不能捕捉因果关系。C(a) &lt; C(b)不能说明a事件发生在b事件之前。 因果关系需要通过向量时间戳来捕获。</li>
 </ul>
 <p><strong>3.向量时间戳</strong></p>
 <p>因果关系：如果VT(a) &lt; VT(b) 则a在因果上处于事件b之前。向量时间戳是让每个进程P都维护一个向量V来完成，该向量的性质如下：</p>
@@ -1216,31 +1225,33 @@ private void visitDFSIterative(Vertex u) &#123;
 <p>如果进程在发出请求之后阻塞，那么请求者就不能区分“拒绝进入”和协调者已经崩溃的两种情况。</p>
 <h4 id="2-分布式算法"><a href="#2-分布式算法" class="headerlink" title="2.分布式算法"></a>2.分布式算法</h4><p>1)Lamport算法</p>
 <ul>
-<li>当进程Si想进入临界区，向其他n-1个进程广播请求REQUEST(tsi, i), 并把请求放入自己请求队列request_queuei。</li>
-<li>其他n-1个进程受到请求REQUEST(tsi, i)后，把该请求放入各自的请求队列request_queuej， 并向进程Si响应一个带时间戳的REPLY消息。</li>
+<li><p>  当进程Si想进入临界区，向其他n-1个进程广播请求REQUEST(tsi, i), 并把请求放入自己请求队列request_queuei。</p>
+</li>
+<li><p>  其他n-1个进程受到请求REQUEST(tsi, i)后，把该请求放入各自的请求队列request_queuej， 并向进程Si响应一个带时间戳的REPLY消息。</p>
+</li>
 <li><p>进程Si进入临界区，当且仅当满足以下两个条件：</p>
-<pre><code>*   Si从其他进程收到的消息的时间戳都大于自己的请求时间戳(tsi, i)
-</code></pre><ul>
-<li>Si的请求是请求队列request_queuei的第一个请求</li>
+<pre><code>  *   Si从其他进程收到的消息的时间戳都大于自己的请求时间戳(tsi, i)</code></pre>
+<ul>
+<li>  Si的请求是请求队列request_queuei的第一个请求</li>
 </ul>
 </li>
-<li><p>当进程Si退出临界区：从请求队列request_queuei中删除该请求，并向其他n-1个进程广播一个带时间戳的释放临界区的消息。其他n-1个进程收到该消息后，从请求队列request_queuej中删除该请求</p>
+<li><p>  当进程Si退出临界区：从请求队列request_queuei中删除该请求，并向其他n-1个进程广播一个带时间戳的释放临界区的消息。其他n-1个进程收到该消息后，从请求队列request_queuej中删除该请求</p>
 </li>
 </ul>
 <p>在Lamport算法中，进程Request, REPLY, RELEASE一共发送了3(n-1)条消息，其实在一个接收者收到消息后，如果不同意Si进入临界区，没有必要再发送确认。<br>可以改进算法在2(n-1)到3(n-1)之间</p>
 <p>2)Ricart和Agrwala算法，改进Lamport算法</p>
 <ul>
-<li>当一个进程想进入一个临界区时，它构造一个消息，其中包含它要进入的临界区的名字、它的进程号和当前时间。然后它将消息发送给所有其他的进程，理论上讲也包括它自己。</li>
-<li>当一个进程接收到来自另一个进程的请求消息时，它根据自己与消息中的临界区相关的状态来决定它要采取的动作。可以分为三种情况：第一，若接收者不在临界区也不想进入临界区，它就向发送者发送一个OK消息。第二，若接收者已经在临界区，它不进行应答，而是将该请求放入队列中。第三，如果接收者想进入临界区但尚未进入时，它将对收到的消息的时间戳和包含在它发送给其余进程的消息中的时间戳进行比较。时间戳最早的那个进程获胜。如果收到的消息的时间戳比较早，那么接收者向发送者发回一个OK消息。如果它自己的消息的时间戳比较早，那么接收者将接收到的请求放入队列中，并且不发送任何消息。</li>
-<li>在发送了请求进入临界区的请求消息后，进程进行等待，直到其他所有进程都发回OK消息为止。一旦得到所有进程的允许，它就可以进入临界区了。当它退出临界区时，它向其他队列中的所有进程发送OK消息，并将请求从队列中删除。（也就是说一个进程进入临界区的条件是收到了n-1个OK消息）</li>
+<li>  当一个进程想进入一个临界区时，它构造一个消息，其中包含它要进入的临界区的名字、它的进程号和当前时间。然后它将消息发送给所有其他的进程，理论上讲也包括它自己。</li>
+<li>  当一个进程接收到来自另一个进程的请求消息时，它根据自己与消息中的临界区相关的状态来决定它要采取的动作。可以分为三种情况：第一，若接收者不在临界区也不想进入临界区，它就向发送者发送一个OK消息。第二，若接收者已经在临界区，它不进行应答，而是将该请求放入队列中。第三，如果接收者想进入临界区但尚未进入时，它将对收到的消息的时间戳和包含在它发送给其余进程的消息中的时间戳进行比较。时间戳最早的那个进程获胜。如果收到的消息的时间戳比较早，那么接收者向发送者发回一个OK消息。如果它自己的消息的时间戳比较早，那么接收者将接收到的请求放入队列中，并且不发送任何消息。</li>
+<li>  在发送了请求进入临界区的请求消息后，进程进行等待，直到其他所有进程都发回OK消息为止。一旦得到所有进程的允许，它就可以进入临界区了。当它退出临界区时，它向其他队列中的所有进程发送OK消息，并将请求从队列中删除。（也就是说一个进程进入临界区的条件是收到了n-1个OK消息）</li>
 </ul>
 <p>算法优点：不会饥饿，死锁；每次进入临界区仅需要2(n-1)条消息；没有单点故障</p>
 <p>算法缺点：第一，单点故障变成了n点故障，如果任何一个进程崩溃，不能应答OK，这种不应答被错误的解释为拒绝请求，阻塞了所有进程进入任何一个临界区。第二，网络通信开销多于集中式算法；第三，要么必须使用组通信原语，要么每个进程必须维护组成员清单；第四，要求所有进程参与做出与进入临界区有关的所有决定，强迫每个进程都承担这样的负载是不可能的，可以在得到大多数进程OK的情况下进入临界区，但实现复杂。</p>
 <h4 id="3-令牌环算法"><a href="#3-令牌环算法" class="headerlink" title="3.令牌环算法"></a>3.令牌环算法</h4><p>(1)算法</p>
 <ul>
-<li>假设：总线式的网络中，进程没有固定的顺序，环中为每个进程分配了一个位置，每个进程都直到谁在它的下一个位置。</li>
-<li>当环初始化时，进程0得到一个令牌token。该令牌绕着环运行，用点对点发送消息的方式把它从进程k传递到进程k+1(以环大小为模)。进程从它邻近的进程得到令牌后，检查自己是否要进入临界区。如果自己要进入临界区，那么它就进入临界区，做它要做的工作，然后离开临界区。在该进程退出临界区后，它沿着环继续传递令牌。不允许使用同一个令牌进入另一个临界区。</li>
-<li>如果一个进程得到了邻近进程传来的令牌，但是它并不想进入临界区，那么它只是将令牌沿环往下传递。因而，当没有进程想进入临界区时，令牌就绕环高速传递。</li>
+<li>  假设：总线式的网络中，进程没有固定的顺序，环中为每个进程分配了一个位置，每个进程都直到谁在它的下一个位置。</li>
+<li>  当环初始化时，进程0得到一个令牌token。该令牌绕着环运行，用点对点发送消息的方式把它从进程k传递到进程k+1(以环大小为模)。进程从它邻近的进程得到令牌后，检查自己是否要进入临界区。如果自己要进入临界区，那么它就进入临界区，做它要做的工作，然后离开临界区。在该进程退出临界区后，它沿着环继续传递令牌。不允许使用同一个令牌进入另一个临界区。</li>
+<li>  如果一个进程得到了邻近进程传来的令牌，但是它并不想进入临界区，那么它只是将令牌沿环往下传递。因而，当没有进程想进入临界区时，令牌就绕环高速传递。</li>
 </ul>
 <p>(2)优点</p>
 <p>没有饥饿现象：任何时候都只有一个进程有令牌，并且令牌以固定的顺序循环传递。</p>

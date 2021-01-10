@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Set Up Apache Storm On Mac In 10min | CyannyLive | AI and Big Data</title>
+  <title>Set Up Apache Storm on Mac in 10min | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Set Up Apache Storm On Mac In 10min"/>
+  <meta property="og:title" content="Set Up Apache Storm on Mac in 10min"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>Set Up Apache Storm On Mac In 10min</span></h3>
+    <h3 class="article-title"><span>Set Up Apache Storm on Mac in 10min</span></h3>
     
   
 
@@ -87,6 +87,7 @@
       
         <p>Storm is a great real time streaming system. Recently, my project is about spark streaming. I want to learn storm either to know more about streaming system. Okay, let’s fire up.<br>Today I tried to install storm cluster on my local mac.<br>It was easy to install. It will cost you about 10min.</p>
 <a id="more"></a>
+
 <h2 id="1-install-zookeeper"><a href="#1-install-zookeeper" class="headerlink" title="1. install zookeeper"></a>1. install zookeeper</h2><ul>
 <li>download <a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/zookeeper/">zookeeper-3.4.9</a></li>
 <li>configure conf/zoo.cfg as follows:</li>
@@ -99,7 +100,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">storm.zookeeper.servers:</span><br><span class="line">    - &quot;localhost&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">storm.zookeeper.port:2181</span></span><br><span class="line"></span><br><span class="line">storm.local.dir: &quot;/Users/lgrcyanny/Codelab/storm/apache-storm-1.1.0/storm-local&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment"># nimbus.seeds: [&quot;host1&quot;, &quot;host2&quot;, &quot;host3&quot;]</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">nimbus.seeds: [<span class="string">&quot;localhost&quot;</span>]</span></span><br><span class="line"></span><br><span class="line">supervisor.slots.ports:</span><br><span class="line">    - 6700</span><br><span class="line">    - 6701</span><br><span class="line">    - 6702</span><br><span class="line">    - 6703</span><br></pre></td></tr></table></figure>
 <p>to understand these config, please refer to: <a target="_blank" rel="noopener" href="http://storm.apache.org/releases/1.1.0/Setting-up-a-Storm-cluster.html">Setting-up-a-Storm-cluster.html</a></p>
 <h2 id="3-start-stom"><a href="#3-start-stom" class="headerlink" title="3. start stom"></a>3. start stom</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> start nimbus</span></span><br><span class="line">./bin/storm nimbus</span><br><span class="line"><span class="meta">#</span><span class="bash"> start supervisor <span class="keyword">for</span> workers</span></span><br><span class="line">./bin/storm supervisor</span><br><span class="line"><span class="meta">#</span><span class="bash"> start ui</span></span><br><span class="line">./bin/storm ui</span><br></pre></td></tr></table></figure>
-<p>open <a target="_blank" rel="noopener" href="http://localhost:8080">http://localhost:8080</a>, you will see storm started:<br><img src="http://wx1.sinaimg.cn/large/761b7938ly1fehv2miunpj21kw0ps0we.jpg" alt="start storm"></p>
+<p>open <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>, you will see storm started:<br><img src="http://wx1.sinaimg.cn/large/761b7938ly1fehv2miunpj21kw0ps0we.jpg" alt="start storm"></p>
 
       
     </div>

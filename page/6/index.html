@@ -63,7 +63,7 @@
 
   
     
-    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part1/"><span>分布式系统总结part1</span></a></h3>
+    <h3 class="article-title"><a href="/2013/11/24/distributed-system-review-part1/"><span>分布式系统总结Part1</span></a></h3>
     
   
 
@@ -89,16 +89,16 @@
 <p>分布式系统的目标：资源链接和共享，透明性，开放性，可伸缩性。[more…]</p>
 <h3 id="分布式系统作为中间件技术"><a href="#分布式系统作为中间件技术" class="headerlink" title="分布式系统作为中间件技术"></a>分布式系统作为中间件技术</h3><ol>
 <li><p>中间件在分布式系统中的位置</p>
-<p>中间件：在应用系统和网络系统之间的附加的软件层，隐藏网络操作系统中低层平台集合的异构性，提供一组完整程度不同的服务集，提高分布的透明性。</p>
-<p>中间件的最高目标是透明性。同时也具有开放性、可扩展性和易用性</p>
+<p> 中间件：在应用系统和网络系统之间的附加的软件层，隐藏网络操作系统中低层平台集合的异构性，提供一组完整程度不同的服务集，提高分布的透明性。</p>
+<p> 中间件的最高目标是透明性。同时也具有开放性、可扩展性和易用性</p>
 </li>
-<li><p>中间件模型</p>
+<li><p> 中间件模型</p>
 </li>
 </ol>
 <ul>
-<li>基于分布式文件系统：任何东西都是作为文件来处理，只对传统文件支持分布的透明性，比网络操作系统前进了一小步，仍然要求进程显式启动分布式机器，有一定的扩展。</li>
-<li>基于RPC：允许进程调用位于远程机器上的过程实现来隐藏网络通信。调用参数透明的传递到远程机器上，看起来就像在调用本地的进程一样，不知道网络通信的发生。</li>
-<li>基于分布式对象: 调用分布在远程机器上的对象的接口，通过消息传递调用</li>
+<li>  基于分布式文件系统：任何东西都是作为文件来处理，只对传统文件支持分布的透明性，比网络操作系统前进了一小步，仍然要求进程显式启动分布式机器，有一定的扩展。</li>
+<li>  基于RPC：允许进程调用位于远程机器上的过程实现来隐藏网络通信。调用参数透明的传递到远程机器上，看起来就像在调用本地的进程一样，不知道网络通信的发生。</li>
+<li>  基于分布式对象: 调用分布在远程机器上的对象的接口，通过消息传递调用</li>
 </ul>
 <p>3.中间件通信技术</p>
 <p>(1) RPC</p>
@@ -122,31 +122,31 @@
 <p>等待传输模式：模式中数据单元必须按时传输，也就是数据传输的端到端延迟时间必须同时受到上限和下限的约束，实时系统。</p>
 <h3 id="进程迁移"><a href="#进程迁移" class="headerlink" title="进程迁移"></a>进程迁移</h3><ol>
 <li><p>弱迁移 vs 弱迁移</p>
-<p>弱迁移：即代码的可移植性，只传输代码段以及某些初始化数据，传输过来的程序总是以初始状态重新开始执行，弱可迁移性只要求在目标机器上能执行该代码段，例如Java Applet小程序，这种方法的好处在于简单性。</p>
-<p>强迁移：迁移执行中的进程，先停止运行中的进程，捕捉运行现场，迁移到另一台机器上，从中断处继续运行，强迁移比弱迁移实现难度大，例如D’Agent是支持强可移动性的一个例子(Dartmouth College)</p>
+<p> 弱迁移：即代码的可移植性，只传输代码段以及某些初始化数据，传输过来的程序总是以初始状态重新开始执行，弱可迁移性只要求在目标机器上能执行该代码段，例如Java Applet小程序，这种方法的好处在于简单性。</p>
+<p> 强迁移：迁移执行中的进程，先停止运行中的进程，捕捉运行现场，迁移到另一台机器上，从中断处继续运行，强迁移比弱迁移实现难度大，例如D’Agent是支持强可移动性的一个例子(Dartmouth College)</p>
 </li>
 <li><p>发送者启动迁移 vs 接收者启动迁移</p>
-<p>发送者启动迁移，代码或正在执行的进程在哪台机器上，就由该机器来启动迁移，例如向Web服务器发送搜索程序运行查询。这种迁移容易实现.</p>
-<p>接收者启动迁移，代码迁移的主动权在目标机器手中，例如Java Applet</p>
-<p>区别：接收者下载代码到客户端，性能好，安全性好，客户端只有少数的资源需要保护，如内存和网络连接等；</p>
-<p>发送者启动迁移，上传代码到服务器端，需要认证用户，需要对服务器资源提供强保护。</p>
+<p> 发送者启动迁移，代码或正在执行的进程在哪台机器上，就由该机器来启动迁移，例如向Web服务器发送搜索程序运行查询。这种迁移容易实现.</p>
+<p> 接收者启动迁移，代码迁移的主动权在目标机器手中，例如Java Applet</p>
+<p> 区别：接收者下载代码到客户端，性能好，安全性好，客户端只有少数的资源需要保护，如内存和网络连接等；</p>
+<p> 发送者启动迁移，上传代码到服务器端，需要认证用户，需要对服务器资源提供强保护。</p>
 </li>
-<li><p>在目标进程内执行迁移代码 vs 在派生进程内执行迁移代码</p>
+<li><p> 在目标进程内执行迁移代码 vs 在派生进程内执行迁移代码</p>
 </li>
 </ol>
 <p>三种方法相互正交，形成了8中进程迁移方法，如图：</p>
 <p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System20.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System20-580x300.png" alt="Distributed System20"></a></p>
 <h3 id="移动Agent的基本概念"><a href="#移动Agent的基本概念" class="headerlink" title="移动Agent的基本概念"></a>移动Agent的基本概念</h3><ol>
-<li><p>定义：是一种分布式的应用，移动Agent是一个运行于开放、动态网络环境中的，封装良好的计算实体，可自主地在异构的网络上寻找合适的计算资源，然后移动到资源所在机器上使用这些资源，它代表用户自主地在网络上移动，完成指定的任务。移动Agent由数据、操作、行为规则 封装而成。</p>
+<li><p> 定义：是一种分布式的应用，移动Agent是一个运行于开放、动态网络环境中的，封装良好的计算实体，可自主地在异构的网络上寻找合适的计算资源，然后移动到资源所在机器上使用这些资源，它代表用户自主地在网络上移动，完成指定的任务。移动Agent由数据、操作、行为规则 封装而成。</p>
 </li>
-<li><p>基本特点：</p>
+<li><p> 基本特点：</p>
 </li>
 </ol>
 <ul>
-<li>自主移动性：不拘泥于初始执行结点，可再网络各主机间自主移动。移动Agent可以将自身的状态和代码从一个环境迁移到另一个环境，并恢复执行。</li>
-<li>协作性：移动Agent可以和其他Agent进行自主通信，协作完成任务。</li>
-<li>安全性</li>
-<li>移动功能而不移动数据，减少网络负担和延迟</li>
+<li>  自主移动性：不拘泥于初始执行结点，可再网络各主机间自主移动。移动Agent可以将自身的状态和代码从一个环境迁移到另一个环境，并恢复执行。</li>
+<li>  协作性：移动Agent可以和其他Agent进行自主通信，协作完成任务。</li>
+<li>  安全性</li>
+<li>  移动功能而不移动数据，减少网络负担和延迟</li>
 </ul>
 <h3 id="Mogent解决移动通信失效"><a href="#Mogent解决移动通信失效" class="headerlink" title="Mogent解决移动通信失效"></a>Mogent解决移动通信失效</h3><p>1.移动通信失效定义</p>
 <p>移动Agent最大的特性是移动性，其通信机制要求位置透明性，可靠性，高效性，异步性，自适应性。但在Agent自主移动过程中，常会导致消息发送到某一网络节点但接收者已经离开无法收到消息的情况，这种因为目标Agent的物理位置变化造成通信不正常的现象称为移动Agent通信失效。通信失效与网络和节点故障无关，完全是由Agent的移动性造成的，这是移动Agent协作的致命缺陷。</p>
@@ -154,8 +154,8 @@
 <p>一个完整的移动Agent通信协议至少包括Agent寻址和消息传送两大部分。Mogent系统采用结构化旅行计划模型。</p>
 <p>Mogent的架构中有两个重要实体：</p>
 <ul>
-<li>Mogent： 即移动Agent，可以协同工作。</li>
-<li>Host：一个物理节点的抽象，由IP地址或域名来标识，每一个Host安装MogentServer，维护管理本地的Mogent，主要由迁移子系统、通信子系统、安全子系统和开发监控子系统构成。</li>
+<li>  Mogent： 即移动Agent，可以协同工作。</li>
+<li>  Host：一个物理节点的抽象，由IP地址或域名来标识，每一个Host安装MogentServer，维护管理本地的Mogent，主要由迁移子系统、通信子系统、安全子系统和开发监控子系统构成。</li>
 </ul>
 <p>3.Mogent系统的寻址</p>
 <p>Mogent-Server中有两个部件Home和Communicator完成Agent的透明寻址。</p>
@@ -165,15 +165,15 @@
 <p><strong>通信失效问题本质上是通信和移动所共享的“位置”信息未同步造成的。</strong><br>Mogent系统中引入了“状态”的概念，每个Agent的状态分为迁移态和静止态。</p>
 <p>同时引入两个信号量进行集中式同步控制策略，通过Home-Communicator集中管理对目标Mogent的地址信息的互斥访问，从根本上避免通信失效的发生，保证通信的可靠性。</p>
 <ul>
-<li>迁移状态：由Home构件记录Agent的状态，当Mogent在一个Host上时状态为静止态，当按旅行计划准备迁移时Mogent要通知Home更新状态为迁移态。</li>
-<li>在途信件数：保存在Host上，记录当前时刻以该Mogent为通信对象的在途信件数，发出信件，在途信件数增加，信件到达，在途信件数减一</li>
+<li>  迁移状态：由Home构件记录Agent的状态，当Mogent在一个Host上时状态为静止态，当按旅行计划准备迁移时Mogent要通知Home更新状态为迁移态。</li>
+<li>  在途信件数：保存在Host上，记录当前时刻以该Mogent为通信对象的在途信件数，发出信件，在途信件数增加，信件到达，在途信件数减一</li>
 </ul>
 <p>消息发送机制：Mogent通过控制“在途信件数”和“迁移状态”这两个信号量，确保消息发送者仅向处于静止状态的Agent发送消息</p>
 <p>Mogent迁移机制：Agent只有在没有消息发送给他的情况下才能移动。</p>
 <p>5.Mogent局限性</p>
 <ul>
-<li>频繁迁移，Home的地址注册开销大，会拥挤</li>
-<li>Agent迁移受到信号量的限制,影响Agent的自主性和移动性</li>
+<li>  频繁迁移，Home的地址注册开销大，会拥挤</li>
+<li>  Agent迁移受到信号量的限制,影响Agent的自主性和移动性</li>
 </ul>
 <h3 id="两种名称解析方法-递归和迭代"><a href="#两种名称解析方法-递归和迭代" class="headerlink" title="两种名称解析方法:递归和迭代"></a>两种名称解析方法:递归和迭代</h3><p>分布式系统中名称用来标识一个实体，有三种类型——名称、标识符、地址，名称解析就是查询名称的过程。</p>
 <p>1.迭代名称解析</p>
@@ -281,9 +281,9 @@
 <p>最近花了一周的时间实验Netkit，是网络的大作业，如果不是作业的机会，也不会有空去看这么古老的Netkit，他是北欧开发的一个开源网络实验环境，相比Packet Tracer美观的图形界面，对于没有图形界面的Netkit来说，Netkit的优势在于提供了用户模式的Linux内核，每一个虚拟机就是一个Linux系统，可以更真实地模拟路由等网络功能，用户通过命令行操作虚拟机，能更好地学习和实验网络，而不是学习一个Cisco设备。如果有朋友以后用到Netkit，希望这个Blog会helpful。</p>
 <p>Netkit主要由三部分构成：</p>
 <ul>
-<li>netkit-core: 包含启动虚拟机和网络实验的脚本文件，如vstart，lstart等。</li>
-<li>netkit-uml-filesystem: 这是一个基于Debian的文件系统，Netkit在该文件系统中安装了软件包，并配置了quagga，ebtables, iptables等服务。Netkit的文件系统是“copy-on-write”的模式，每个虚拟机启动时会生成一个<em>.disk文件，该文件就是该文件系统的拷贝，在虚拟机中作的任何更改都不会影响Netkit的Filesystem，修改写入</em>.disk文件.</li>
-<li>netkit-uml-kernel: 这是一个linux kernel， Netkit通过patch文件对kernel进行了相关配置，Netkit的kernel是用户模式的linux进程，也叫做虚拟机,我们可以在Linux系统如Ubuntu中启动netkit，kernel进程的运行依赖于文件系统。<br>我们发现Netkit的文件系统解压后超过10GB，每次启动一个虚拟机就会产生一个10GB的*.disk文件，占用空间较大，我们主要使用Netkit的Quagga进行路由协议的模拟，而Netkit很强大，提供了apache, FTP, openssl,openvpn, DNS, email等功能，我们不需要这些冗余功能，因此我们着手重新制作一个文件系统，并尽量让文件系统容量小，提高Netkit网络实验的性能。</li>
+<li>  netkit-core: 包含启动虚拟机和网络实验的脚本文件，如vstart，lstart等。</li>
+<li>  netkit-uml-filesystem: 这是一个基于Debian的文件系统，Netkit在该文件系统中安装了软件包，并配置了quagga，ebtables, iptables等服务。Netkit的文件系统是“copy-on-write”的模式，每个虚拟机启动时会生成一个*.disk文件，该文件就是该文件系统的拷贝，在虚拟机中作的任何更改都不会影响Netkit的Filesystem，修改写入*.disk文件.</li>
+<li>  netkit-uml-kernel: 这是一个linux kernel， Netkit通过patch文件对kernel进行了相关配置，Netkit的kernel是用户模式的linux进程，也叫做虚拟机,我们可以在Linux系统如Ubuntu中启动netkit，kernel进程的运行依赖于文件系统。<br>我们发现Netkit的文件系统解压后超过10GB，每次启动一个虚拟机就会产生一个10GB的*.disk文件，占用空间较大，我们主要使用Netkit的Quagga进行路由协议的模拟，而Netkit很强大，提供了apache, FTP, openssl,openvpn, DNS, email等功能，我们不需要这些冗余功能，因此我们着手重新制作一个文件系统，并尽量让文件系统容量小，提高Netkit网络实验的性能。</li>
 </ul>
 <p>Netkit官方提供了Makefile文件让开发者自己Build文件系统，然而实验后发现官方Makefile无法运行通过，并且Netkit官方指南中并不建议自己Build一个文件系统，在Google后也没有发现更多有用的文档，因此希望通过本Blog详细地描述如何制作一个小巧可用的Netkit文件系统以及遇到的问题。 [more…]</p>
 <h2 id="实验成果"><a href="#实验成果" class="headerlink" title="实验成果"></a>实验成果</h2><p>最终定制和裁剪的文件系统只有335M，该文件系统基于Debian Squeeze版本定制，没有采用当前的最新版本Wheezy版，因为并不修改Netkit-Kernel，最新版的Wheezy文件系统和现有的Netkit Kernel不兼容。</p>
@@ -299,8 +299,7 @@
 <p>也可以看<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/NetkitNewFS">NetkitNewFS</a>源码下的README，有安装方法。</p>
 <h2 id="定制流程"><a href="#定制流程" class="headerlink" title="定制流程"></a>定制流程</h2><p>整个定制过程大体可以分为三歩：制作基础的Linux内核文件系统，修改文件系统为可用的Netkit文件系统，为文件系统安装Quagga。下面让我们按照这个顺序来看看整个定制流程。</p>
 <h3 id="step1-制作基础的Linux内核文件系统："><a href="#step1-制作基础的Linux内核文件系统：" class="headerlink" title="step1.制作基础的Linux内核文件系统："></a>step1.制作基础的Linux内核文件系统：</h3><p>我们直接写一个bash脚本来完成第一步制作基础的Linux内核的文件系统的工作，完整的脚本内容如下：</p>
-<p>脚本不长(<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/NetkitNewFS/blob/master/netkit-fs-build.sh">netkit-fs-build.sh</a>)<br>[bash]</p>
-<p>#!/bin/bash<br>echo &quot;====================Installing Base Linux System======================&quot;<br>FS_NAME=netkit-fs-light<br>MOUNT_DIR=/mnt/nkfs2<br>FILESYSTEM_SIZE=320</p>
+<p>脚本不长(<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/NetkitNewFS/blob/master/netkit-fs-build.sh">netkit-fs-build.sh</a>)<br>[bash]<br>#!/bin/bash<br>echo &quot;====================Installing Base Linux System======================&quot;<br>FS_NAME=netkit-fs-light<br>MOUNT_DIR=/mnt/nkfs2<br>FILESYSTEM_SIZE=320</p>
 <h1 id="each-cylinder-has-63-sectors-each-of-which-is-512-bytes"><a href="#each-cylinder-has-63-sectors-each-of-which-is-512-bytes" class="headerlink" title="each cylinder has 63 sectors, each of which is 512 bytes"></a>each cylinder has 63 sectors, each of which is 512 bytes</h1><p>let CYL_COUNT=$FILESYSTEM_SIZE*1048576/32256</p>
 <h1 id="Create-empty-netkit-fs-file"><a href="#Create-empty-netkit-fs-file" class="headerlink" title="Create empty netkit-fs file"></a>Create empty netkit-fs file</h1><p>dd if=/dev/zero of=$FS_NAME bs=1M count=0 seek=$FILESYSTEM_SIZE</p>
 <h1 id="Create-image-partition"><a href="#Create-image-partition" class="headerlink" title="Create image partition"></a>Create image partition</h1><p>echo &quot;,,L,*&quot; | sfdisk -q -H 1 -S 63 -C $CYL_COUNT $FS_NAME</p>
@@ -315,7 +314,7 @@
 <h3 id="BEGIN-INIT-INFO"><a href="#BEGIN-INIT-INFO" class="headerlink" title="BEGIN INIT INFO"></a>BEGIN INIT INFO</h3><h1 id="Provides"><a href="#Provides" class="headerlink" title="Provides:"></a>Provides:</h1><h1 id="Required-Start"><a href="#Required-Start" class="headerlink" title="Required-Start:"></a>Required-Start:</h1><h1 id="Required-Stop-all"><a href="#Required-Stop-all" class="headerlink" title="Required-Stop: $all"></a>Required-Stop: $all</h1><h1 id="Default-Start-2-3-4-5"><a href="#Default-Start-2-3-4-5" class="headerlink" title="Default-Start: 2 3 4 5"></a>Default-Start: 2 3 4 5</h1><h1 id="Default-Stop-0-1-6"><a href="#Default-Stop-0-1-6" class="headerlink" title="Default-Stop: 0 1 6"></a>Default-Stop: 0 1 6</h1><h1 id="Short-Description"><a href="#Short-Description" class="headerlink" title="Short-Description:"></a>Short-Description:</h1><h1 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h1><h3 id="END-INIT-INFO"><a href="#END-INIT-INFO" class="headerlink" title="END INIT INFO"></a>END INIT INFO</h3><p>[/bash]</p>
 <p>修改netkit-phase2中开头部分为：<br>[bash]</p>
 <h3 id="BEGIN-INIT-INFO-1"><a href="#BEGIN-INIT-INFO-1" class="headerlink" title="BEGIN INIT INFO"></a>BEGIN INIT INFO</h3><h1 id="Provides-1"><a href="#Provides-1" class="headerlink" title="Provides:"></a>Provides:</h1><h1 id="Required-Start-all"><a href="#Required-Start-all" class="headerlink" title="Required-Start: $all"></a>Required-Start: $all</h1><h1 id="Required-Stop"><a href="#Required-Stop" class="headerlink" title="Required-Stop:"></a>Required-Stop:</h1><h1 id="Default-Start-2-3-4-5-1"><a href="#Default-Start-2-3-4-5-1" class="headerlink" title="Default-Start: 2 3 4 5"></a>Default-Start: 2 3 4 5</h1><h1 id="Default-Stop-0-1-6-1"><a href="#Default-Stop-0-1-6-1" class="headerlink" title="Default-Stop: 0 1 6"></a>Default-Stop: 0 1 6</h1><h1 id="Short-Description-1"><a href="#Short-Description-1" class="headerlink" title="Short-Description:"></a>Short-Description:</h1><h1 id="Description-1"><a href="#Description-1" class="headerlink" title="Description:"></a>Description:</h1><h3 id="END-INIT-INFO-1"><a href="#END-INIT-INFO-1" class="headerlink" title="END INIT INFO"></a>END INIT INFO</h3><p>[/bash]<br>$all的意思是最后，在netkit-phase1中表示最后停止，在netkit-phase2中表示最后开始，这是启动优先级的配置。<br>同时在netkit-phase2中，并将文件中/bin/sh -c ‘source /hostlab/$HOSTNAME.startup’这种类似的语句修改为”source /hostlab/$HOSTNAME.startup”。<br>因为用/bin/sh启动 startup脚本会会报”/bin/sh: source not found”的错误，默认用bash启动startup脚本就不会报错。<br>至此，所有需要添加进自制文件系统的文件已经全部在netkit-tweaks文件夹中了。</p>
-<h4 id="2-拷贝必要的文件到文件系统中"><a href="#2-拷贝必要的文件到文件系统中" class="headerlink" title="2. 拷贝必要的文件到文件系统中"></a>2. 拷贝必要的文件到文件系统中</h4><p>首先挂载刚刚创建的文件系统netkit-fs-light：<br>[bash]<br>FS_NAME=netkit-fs-light<br>NETKIT_TWEAKS_DIR=netkit-tweaks<br>MOUNT_DIR=/mnt/nkfs2<br>mount -o loop,offset=512 -t ext2 $FS_NAME $MOUNT_DIR<br>[/bash]<br>下面需要把一些必要的文件拷贝到自制的文件系统中，其中<strong>/etc/sysctl.conf</strong>文件很重要，作用是将ipv4.ip_forward设为1，否则虚拟机无法ping通：<br>[bash]<br>cp -Rvf $NETKIT_TWEAKS_DIR/etc $MOUNT_DIR/<br>cp -Rvf $NETKIT_TWEAKS_DIR/sbin $MOUNT_DIR/<br>[/bash]</p>
+<h4 id="2-拷贝必要的文件到文件系统中"><a href="#2-拷贝必要的文件到文件系统中" class="headerlink" title="2. 拷贝必要的文件到文件系统中"></a>2. 拷贝必要的文件到文件系统中</h4><p>首先挂载刚刚创建的文件系统netkit-fs-light：<br>[bash]<br>FS_NAME=netkit-fs-light<br>NETKIT_TWEAKS_DIR=netkit-tweaks<br>MOUNT_DIR=/mnt/nkfs2<br>mount -o loop,offset=512 -t ext2 $FS_NAME $MOUNT_DIR<br>[/bash]<br>下面需要把一些必要的文件拷贝到自制的文件系统中，其中**/etc/sysctl.conf**文件很重要，作用是将ipv4.ip_forward设为1，否则虚拟机无法ping通：<br>[bash]<br>cp -Rvf $NETKIT_TWEAKS_DIR/etc $MOUNT_DIR/<br>cp -Rvf $NETKIT_TWEAKS_DIR/sbin $MOUNT_DIR/<br>[/bash]</p>
 <h4 id="3-改变root根目录位置，准备安装必要的工具和软件"><a href="#3-改变root根目录位置，准备安装必要的工具和软件" class="headerlink" title="3. 改变root根目录位置，准备安装必要的工具和软件"></a>3. 改变root根目录位置，准备安装必要的工具和软件</h4><p>改变root的执行程序参考的根目录位置至挂载文件系统的位置，方便我们直接配置文件系统和使用文件系统中的命令：<br>[bash]<br>chroot $MOUNT_DIR<br>[/bash]<br>挂载proc文件系统，proc文件系统是提供Linux内核数据结构接口的伪文件系统，文件系统并没有挂载proc文件系统，proc文件系统一般挂载在/proc目录下，如果没有挂载，虚拟机启动时会出现mtab无法初始化错误，也就是mtab文件会被损坏，因此我们为了让文件系统更完善，增加挂载proc文件系统的命令。<br>[bash]<br>mount -t proc none /proc<br>[/bash]</p>
 <h4 id="4-安装必要的软件包"><a href="#4-安装必要的软件包" class="headerlink" title="4. 安装必要的软件包"></a>4. 安装必要的软件包</h4><p>紧接着为文件系统更新和安装一些必要的工具和软件：<br>[bash]<br>apt-get update<br>apt-get install less<br>apt-get install vim<br>apt-get install chkconfig #为设置netkit-phase文件的启动优先级<br>[/bash]</p>
 <h4 id="5-设置netkit-phase1和netkit-phase2脚本的启动优先级"><a href="#5-设置netkit-phase1和netkit-phase2脚本的启动优先级" class="headerlink" title="5. 设置netkit-phase1和netkit-phase2脚本的启动优先级"></a>5. 设置netkit-phase1和netkit-phase2脚本的启动优先级</h4><p>在Debian 6.0之后，不能采用update-rc.d命令设置init.d目录下启动文件的优先级，采用insserv命令可以简单设置。我们尝试过将rcX.d文件从原始netkit文件系统中拷贝到新的文件系统中，发现不能使用，rcX.d这些链接文件是需要通过命令来生成的。在原始的netkit Makefile中采用update-rc.d设置是不成功的，采用insserv是我们做出的改进。<br>将netkit-phase1和netkit-phase2链接到rcX.d并设置优先级：<br>[bash]<br>insserv netkit-phase1<br>chkconfig netkit-phase1 on<br>insserv netkit-phase2<br>chkconfig netkit-phase2 on<br>[/bash]</p>
@@ -414,22 +413,22 @@
 <p>Internet Key Exchange, IKE是用于建立和维护SA的协议，在端到端之间进行协商，确认通信端的身份，建立安全的通信关联。</p>
 <p>在1998年RFC2401中第一次在IPsec中引入IKE，8年后RFC4301中更新为IKEv2,RFC4301中采用的是IKEv2。IKEv1和IKEv2的主要区别是：</p>
 <ul>
-<li>IKEv2比IKEv1消耗的带宽更少。</li>
-<li>IKEv2支持扩展认证头协议(Extensible Authentication Protocol, EAP), 而IKEv1不支持，IKEv2对无线的支持更好。</li>
-<li>IKEv2支持MOBIKE，而IKEv1不支持，IKEv2可以提供移动通信支持。</li>
-<li>IKEv2内内嵌支持NAT，而IKEv1不支持。</li>
-<li>IKEv2可以检测隧道是否alive，但IKEv2不支持。</li>
-<li>IKEv2的引入可以在建立安全关联时，提供更好的安全特性。</li>
+<li>  IKEv2比IKEv1消耗的带宽更少。</li>
+<li>  IKEv2支持扩展认证头协议(Extensible Authentication Protocol, EAP), 而IKEv1不支持，IKEv2对无线的支持更好。</li>
+<li>  IKEv2支持MOBIKE，而IKEv1不支持，IKEv2可以提供移动通信支持。</li>
+<li>  IKEv2内内嵌支持NAT，而IKEv1不支持。</li>
+<li>  IKEv2可以检测隧道是否alive，但IKEv2不支持。</li>
+<li>  IKEv2的引入可以在建立安全关联时，提供更好的安全特性。</li>
 </ul>
 <h3 id="IPsec数据处理模型"><a href="#IPsec数据处理模型" class="headerlink" title="IPsec数据处理模型"></a>IPsec数据处理模型</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/1.1Top-Level-IPsec-Processing-Model-.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/1.1Top-Level-IPsec-Processing-Model--580x344.png" alt="1.1Top Level IPsec Processing Model"></a></p>
 <p>Psec在数据处理时,在保护接口(Protected Interface)和非保护接口(Unprotected Interface)之间创建了一个分界(Boundary)。数据从非保护接口进入，IPsec会基于AH或ESP进行访问控制，对数据的处理结果有三种：保护(Protected), 丢弃(Discard), 通过(Bypass)。</p>
 <p>IPsec对IP数据包处理有两种情况：</p>
 <p>Inbound，即IP输入，数据从非保护接口端进入穿过IPsec，从保护接口端输出。</p>
 <p>Outbound, 即IP输出, 数据从保护接口端进入，从非保护接口端输出。</p>
-<h3 id="IPsec两种封装模式和应用场景"><a href="#IPsec两种封装模式和应用场景" class="headerlink" title="IPsec两种封装模式和应用场景"></a>IPsec两种封装模式和应用场景</h3><p>IPsec的一个重要应用场景就是VPN。<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/1.2IPsec-VPN应用场景.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/1.2IPsec-VPN应用场景-580x321.png" alt="1.2IPsec VPN应用场景"></a></p>
+<h3 id="IPsec两种封装模式和应用场景"><a href="#IPsec两种封装模式和应用场景" class="headerlink" title="IPsec两种封装模式和应用场景"></a>IPsec两种封装模式和应用场景</h3><p>IPsec的一个重要应用场景就是VPN。<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/1.2IPsec-VPN%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/1.2IPsec-VPN%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-580x321.png" alt="1.2IPsec VPN应用场景"></a></p>
 <p>如图上图所示，企业的各个内网间通过隧道连接，而隧道模式是IPsec重要的应用模式。</p>
 <p>IPsec提供两种封装模式，传输模式和隧道模式，主要分为四种场景：</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/1.3IPsec四种应用场景.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/1.3IPsec四种应用场景-580x290.png" alt="1.3IPsec四种应用场景"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/1.3IPsec%E5%9B%9B%E7%A7%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/1.3IPsec%E5%9B%9B%E7%A7%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-580x290.png" alt="1.3IPsec四种应用场景"></a></p>
 <p>1. Gateway-to-Gateway网关到网关，如上图的A场景，Alice的PC要访问公司HR的服务器，需要通过隧道模式进行安全连接，该隧道就是建立在两个网关之间。这是通常的VPN的场景。</p>
 <p>2. End-to-Gateway端到网关，如图中的B场景，从Alice的PC端连接到另一个IPsec网关，这也是在隧道模式下。</p>
 <p>3. End-to-End端到端，如图中的C场景，采用隧道模式一个Cisco路由器和PIX防火墙通过隧道模式连接。</p>
@@ -439,24 +438,24 @@
 <p>隧道模式可以用于任何一种场景，多用于网关到网关的场景，但是隧道模式下，AH,ESP会在源IP报文前面添加外网IP头，隧道模式会多一层IP头的开销，在端到端的模式中，建议使用传输模式。</p>
 <h3 id="IPsec重要加密和认证算法"><a href="#IPsec重要加密和认证算法" class="headerlink" title="IPsec重要加密和认证算法"></a>IPsec重要加密和认证算法</h3><p>IPsec为了保证数据的完整性，实现数据的认证和加密，相关算法有：<br>数据加密算法：</p>
 <ul>
-<li>DES，基于共享秘钥进行数据加密和解密，采用56bit的秘钥保证加密的性能。</li>
-<li>3DES，与DES相似，提供数据加密和解密，采用变长的秘钥。</li>
-<li>Diffie-Hellman(D-H): 这是一个公钥加密协议。它可以在通信的两端基于MD5或DES算法建立共享秘钥，实现安全通信。D-H主要用于IKE，建立安全session会话。秘钥一般为768bit或1024bit。</li>
-<li>RSA，基于公钥的加密，来实现数据认证，例如在Cisco的路由上的IPsec采用D-H交换来决定两端的私钥，并生成共享秘钥，采用RSA签名进行公钥认证。</li>
+<li>  DES，基于共享秘钥进行数据加密和解密，采用56bit的秘钥保证加密的性能。</li>
+<li>  3DES，与DES相似，提供数据加密和解密，采用变长的秘钥。</li>
+<li>  Diffie-Hellman(D-H): 这是一个公钥加密协议。它可以在通信的两端基于MD5或DES算法建立共享秘钥，实现安全通信。D-H主要用于IKE，建立安全session会话。秘钥一般为768bit或1024bit。</li>
+<li>  RSA，基于公钥的加密，来实现数据认证，例如在Cisco的路由上的IPsec采用D-H交换来决定两端的私钥，并生成共享秘钥，采用RSA签名进行公钥认证。</li>
 </ul>
 <p>数据认证算法：</p>
 <ul>
-<li>Message Digest 5（MD5）: 是一个Hash算法，用于数据包验证。这是一个单向的加密算法，IKE，AH和ESP中采用MD5进行数据认证，防止重放攻击。</li>
-<li>Secure Hash Algorithm(SHA-1): 是一个Hash算法，用于数据包验证。IKE，AH和ESP中采用MD5进行数据认证，防止重放攻击。</li>
+<li>  Message Digest 5（MD5）: 是一个Hash算法，用于数据包验证。这是一个单向的加密算法，IKE，AH和ESP中采用MD5进行数据认证，防止重放攻击。</li>
+<li>  Secure Hash Algorithm(SHA-1): 是一个Hash算法，用于数据包验证。IKE，AH和ESP中采用MD5进行数据认证，防止重放攻击。</li>
 </ul>
 <h3 id="IPsec安全协议之AH认证头协议"><a href="#IPsec安全协议之AH认证头协议" class="headerlink" title="IPsec安全协议之AH认证头协议"></a>IPsec安全协议之AH认证头协议</h3><p>AH协议主要用于保护传输分组的数据完整性，并可以进行数据源认证。它采用滑动窗口和丢弃旧数据包的技术来防止重放攻击。但是AH不提供数据加密。</p>
 <p>在IPv4和IPv6中，AH试图保护所有的IP头字段，除了TTL，ECN, Flags等可变字段。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.1AH的两种数据封装模式.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.1AH的两种数据封装模式-580x265.png" alt="2.1AH的两种数据封装模式"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.1AH%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E6%A8%A1%E5%BC%8F.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.1AH%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E6%A8%A1%E5%BC%8F-580x265.png" alt="2.1AH的两种数据封装模式"></a></p>
 <p>如图，AH提供两种封装模式，传输模式和隧道模式。</p>
 <p>传输模式下，AH采用单向Hash算法，对IP头和数据载荷进行摘要，形成AH头部，AH头部放在IP头部和数据之间。在AH处理前后IP头部不发生变化。</p>
 <p>隧道模式下，AH对原IP头进行Hash摘要，生成新的IP头。摘要生成的头被放于新的IP头之后，原IP头之前。</p>
 <p>AH不能通过NAT，因为NAT会改变源IP地址，破坏AH头部，造成包被IPsec另一端拒绝。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.2AH头部字段.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.2AH头部字段-580x146.png" alt="2.2AH头部字段"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.2AH%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.2AH%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5-580x146.png" alt="2.2AH头部字段"></a></p>
 <p>如所示是AH的头部字段，包括：</p>
 <p>下一个头(Next Header)：8bit，标识被传输的IP报文采用的是什么协议，如TCP或UDP。</p>
 <p>载荷长度(Payload Len)：8bit认证包头的大小。</p>
@@ -465,12 +464,12 @@
 <p>序列号(Sequence Number):32bit，单调增值的序列号，防止重放攻击。</p>
 <p>完整性检查值(Integrity Check Value, ICV): 变长字段，一般32bit的倍数，包含认证当前包所必须的数据。</p>
 <h3 id="IPsec安全协议之ESP封装安全载荷协议"><a href="#IPsec安全协议之ESP封装安全载荷协议" class="headerlink" title="IPsec安全协议之ESP封装安全载荷协议"></a>IPsec安全协议之ESP封装安全载荷协议</h3><p>ESP协议为IPsec提供数据源认证，数据完整性和数据加密功能。与AH不同的是在传输模式下，ESP不提供对整个IP数据包的数据完整性和认证功能，只对IP数据载荷进行加密和认证。然而在传输模式下，提供对整个IP包的加密和认证，生成新的包头。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.3ESP的两种封装模式.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.3ESP的两种封装模式-580x229.png" alt="2.3ESP的两种封装模式"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.3ESP%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%B0%81%E8%A3%85%E6%A8%A1%E5%BC%8F.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.3ESP%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%B0%81%E8%A3%85%E6%A8%A1%E5%BC%8F-580x229.png" alt="2.3ESP的两种封装模式"></a></p>
 <p>如图是ESP的两种封装模式。</p>
 <p>传输模式下，ESP只对上层协议数据加密，不加密IP头，只对ESP头和加密的上层协议数据进行认证，不认证IP头，生成的新IP报文，IP头不变，ESP头和加密的数据放在IP头之后。</p>
 <p>隧道模式下，ESP对整个IP头和上层协议数据加密，对ESP头和加密数据进行认证，生成新的IP头，包括外部IP源、目的地址。但新的IP头不参与认证。</p>
 <p>在ESP加密和认证中，总是先对数据加密再HASH认证，这样可以让接收端在解密之前，对数据包进行快速检测，防止重放攻击。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.4ESP的头部字段.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.4ESP的头部字段-580x217.png" alt="2.4ESP的头部字段"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/2.4ESP%E7%9A%84%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/2.4ESP%E7%9A%84%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5-580x217.png" alt="2.4ESP的头部字段"></a></p>
 <p>如图2.4，是ESP定义的头部字段：</p>
 <p>安全参数索引(SPI): 32bit与目的IP地址一起来标识与接收方的安全关联。</p>
 <p>序列号(Sequence Number):32bit，单调增值的序列号，防止重放攻击。</p>
@@ -483,50 +482,50 @@
 <p>IPsec为安全通信提供数据加密，数据完整性和认证这三种服务，当服务的类型确立后，通信的两端需要确立采用什么加密(DES或3DES)和认证(MD5或SHA-1)算法, 再决定算法后又需要交换session秘钥。可以对于一个安全通信会话，需要交换很多信息，所以引进SA的概念来管理安全通信参数和算法等信息。</p>
 <p>总之，SA就是IPsec进行安全通信的一簇算法和安全参数，如封装模式，发送方和接收方的IP地址，兴趣流等，这些参数被用于加密和认证。</p>
 <p>SA是单向的，通信的两端如果要双向通信，则需要建立一对SA，这样当任何一方的SA被破解，另一方的SA不会受影响。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.1SA的结构示例.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.1SA的结构示例-580x321.png" alt="3.1SA的结构示例"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.1SA%E7%9A%84%E7%BB%93%E6%9E%84%E7%A4%BA%E4%BE%8B.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.1SA%E7%9A%84%E7%BB%93%E6%9E%84%E7%A4%BA%E4%BE%8B-580x321.png" alt="3.1SA的结构示例"></a></p>
 <p>如图是一个SA的结构示例，包括：</p>
 <p>目的地址</p>
 <p>安全参数索引(SPI): 每一个通信端都有唯一的SPI，IPsec将基于SPI，源地址和目的地址在SAD数据库中搜索安全参数记录。</p>
 <p>IPsec安全协议</p>
 <p>秘钥</p>
 <p>其他的SA属性，如IPsec Lifetime</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.2SA的工作机制.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.2SA的工作机制-580x310.png" alt="3.2SA的工作机制"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.2SA%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.2SA%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6-580x310.png" alt="3.2SA的工作机制"></a></p>
 <p>如图所示，是一个在具体通信中路由器R1和R2的IPsec SA参数，可以看到SA是单向的，从任何一方到另一方都要建立SA。当一个数据包需要IPsec保护，首先它会查询SAD数据库（安全关联数据库），将SA中的SPI插入到IPsec的头部，当接收端收到数据包后，接收端会根据目的地址和SPI在自己的SAD中找到相应的SA, 如果SA匹配，则进一步采用AH或ESP对数据包进行处理。</p>
-<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.3不同通信端的不同SA.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.3不同通信端的不同SA-580x272.png" alt="3.3不同通信端的不同SA"></a></p>
+<p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/3.3%E4%B8%8D%E5%90%8C%E9%80%9A%E4%BF%A1%E7%AB%AF%E7%9A%84%E4%B8%8D%E5%90%8CSA.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/3.3%E4%B8%8D%E5%90%8C%E9%80%9A%E4%BF%A1%E7%AB%AF%E7%9A%84%E4%B8%8D%E5%90%8CSA-580x272.png" alt="3.3不同通信端的不同SA"></a></p>
 <p>如图所示，是在一个网络中，不同的主机间的通信采用了不同IPsec安全参数，从Client到Router A采用传输模式ESP，Router A到Router B采用隧道模式AH，这些安全参数都需要SA来管理。</p>
 <h3 id="SA如何判断网关的安全性—-IKE"><a href="#SA如何判断网关的安全性—-IKE" class="headerlink" title="SA如何判断网关的安全性—-IKE"></a>SA如何判断网关的安全性—-IKE</h3><p>SA是安全连接，而如何建立安全连接呢？如何确定网关的安全信呢？需要因特网秘钥交换(Internet Key Exchange)协议，IKE旨在对IPsec通信的两端进行安全会话秘钥交换，建立和维护SA。</p>
 <p>IKE的具体工作机制在RFC2409中定义，而在RFC2401中使用的IKEv2在RFC4306中有定义。</p>
 <h3 id="IPsec重要数据库"><a href="#IPsec重要数据库" class="headerlink" title="IPsec重要数据库"></a>IPsec重要数据库</h3><ol>
 <li><p>Security Policy Database (SPD)</p>
-<p>SA是管理安全通信的参数，但不管理具体的数据包的处理，对每一个IP数据包采取什么样的安全服务，如何进行访问控制，需要这些访问控制的信息就存储在安全规则数据库SPD中。</p>
-<p>每一个IPsec至少要实现一个SPD，SPD是一个有序数据库，它存储访问控制列表（Access Control List, ACL）,防火墙或路由的包过滤规则等。</p>
-<p>SPD中的记录，对数据的处理有三种选择：丢弃（Discard），通过（Bypass）和保护（Protect）。</p>
-<p>SPD在逻辑上被分为三部分：</p>
-<p>SPD-I：包括对于inbound的数据包，需要采取丢弃和通过的规则。</p>
-<p>SPI-S：包括需要对数据进行保护的规则。</p>
-<p>SPI-O：包括对于outbound的数据包，需要采取丢弃和通过的规则。</p>
+<p> SA是管理安全通信的参数，但不管理具体的数据包的处理，对每一个IP数据包采取什么样的安全服务，如何进行访问控制，需要这些访问控制的信息就存储在安全规则数据库SPD中。</p>
+<p> 每一个IPsec至少要实现一个SPD，SPD是一个有序数据库，它存储访问控制列表（Access Control List, ACL）,防火墙或路由的包过滤规则等。</p>
+<p> SPD中的记录，对数据的处理有三种选择：丢弃（Discard），通过（Bypass）和保护（Protect）。</p>
+<p> SPD在逻辑上被分为三部分：</p>
+<p> SPD-I：包括对于inbound的数据包，需要采取丢弃和通过的规则。</p>
+<p> SPI-S：包括需要对数据进行保护的规则。</p>
+<p> SPI-O：包括对于outbound的数据包，需要采取丢弃和通过的规则。</p>
 </li>
 <li><p>Security Association Database (SAD)</p>
-<p>SA安全管理的相关信息，需要存储在SAD中，SAD是一个概念上的数据库，只是以某种列表的数据结构来存储SA。<br>每一个实体定义了SA的安全参数。对于Outbound的数据包，SAD的实体指向SPD缓存中的SPD-S部分。对于Inbound的数据包，只通过SPI或IPsec协议来查找SA。</p>
-<p>具体的结构SA实体结构参见前面给出的示例.</p>
+<p> SA安全管理的相关信息，需要存储在SAD中，SAD是一个概念上的数据库，只是以某种列表的数据结构来存储SA。<br> 每一个实体定义了SA的安全参数。对于Outbound的数据包，SAD的实体指向SPD缓存中的SPD-S部分。对于Inbound的数据包，只通过SPI或IPsec协议来查找SA。</p>
+<p> 具体的结构SA实体结构参见前面给出的示例.</p>
 </li>
 <li><p>Peer Authorization Database (PAD)</p>
-<p>PAD，端认证数据库，提供SA管理协议，如IKE与SPD的之间的管理。有时候SA发生变化，SPD就地不到及时更新，此时就需要借助PAD对SA和SPD做出调整。</p>
-<p>PAD是一个有序数据库，它建立了IKE ID和SPD实体的关联。PAD支持6种ID类型：</p>
-<p>DNS Name</p>
-<p>Distinguished Name</p>
-<p>Email Address</p>
-<p>IPv4 Address</p>
-<p>IPv6 Address</p>
-<p>Key ID</p>
-<p>PAD的相关工作机制是：</p>
-<p>在IKE SA建立时，发送方和接受方都会通过IKE ID进行身份确认，确认之后向对方发送认证信息。当一个IKE信息收到后，便会通过IKE ID在PAD数据库中找到匹配的实体，每一个PAD实体都记录了进行身份认证的方法，它可以保证对不同的通信端采用正确的身份认证。</p>
+<p> PAD，端认证数据库，提供SA管理协议，如IKE与SPD的之间的管理。有时候SA发生变化，SPD就地不到及时更新，此时就需要借助PAD对SA和SPD做出调整。</p>
+<p> PAD是一个有序数据库，它建立了IKE ID和SPD实体的关联。PAD支持6种ID类型：</p>
+<p> DNS Name</p>
+<p> Distinguished Name</p>
+<p> Email Address</p>
+<p> IPv4 Address</p>
+<p> IPv6 Address</p>
+<p> Key ID</p>
+<p> PAD的相关工作机制是：</p>
+<p> 在IKE SA建立时，发送方和接受方都会通过IKE ID进行身份确认，确认之后向对方发送认证信息。当一个IKE信息收到后，便会通过IKE ID在PAD数据库中找到匹配的实体，每一个PAD实体都记录了进行身份认证的方法，它可以保证对不同的通信端采用正确的身份认证。</p>
 </li>
 </ol>
-<h3 id="IPsec的工作机制"><a href="#IPsec的工作机制" class="headerlink" title="IPsec的工作机制"></a>IPsec的工作机制</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/5.1IPsec工作机制.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/5.1IPsec工作机制-580x422.png" alt="5.1IPsec工作机制"></a></p>
+<h3 id="IPsec的工作机制"><a href="#IPsec的工作机制" class="headerlink" title="IPsec的工作机制"></a>IPsec的工作机制</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/5.1IPsec%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/5.1IPsec%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6-580x422.png" alt="5.1IPsec工作机制"></a></p>
 <p>如图5.1所示，IPsec的工作流程可以分为5个阶段：</p>
 <p>1. 决定兴趣流</p>
-<p>IPsec对IP包的保护是需要消耗资源的，并非所有的流量都需要IPsec保护，那些需要IPsec保护的数据流就叫做兴趣流，IPsec会对兴趣流进行访问控制。<br>如发起方的兴趣流式192.168.1.0/24 -&gt; 10.0.0.0/8，接收方的兴趣流是10.0.0.0/8-&gt;192.168.1.0/30，那么取交集，兴趣流IPsec保护的兴趣流就是192.168.1.0/30 <-> 10.0.0.0/8</p>
+<p>IPsec对IP包的保护是需要消耗资源的，并非所有的流量都需要IPsec保护，那些需要IPsec保护的数据流就叫做兴趣流，IPsec会对兴趣流进行访问控制。<br>如发起方的兴趣流式192.168.1.0/24 -&gt; 10.0.0.0/8，接收方的兴趣流是10.0.0.0/8-&gt;192.168.1.0/30，那么取交集，兴趣流IPsec保护的兴趣流就是192.168.1.0/30 &lt;-&gt; 10.0.0.0/8</p>
 <p>IPsec通信开始时，发送方如图5.1的Router A要将兴趣流发送给接收方Router B。</p>
 <p>2.IKE 第一步</p>
 <p>对IPsec的通信端进行身份认证，协商并建立IKE SA。这一步建立的是IKE安全连接，通过Diffie-Hellman算法交换共享秘钥，为IKE第二步通信建立安全隧道。</p>
@@ -536,7 +535,7 @@
 <p>在IPsec安全隧道建立后，采用IPsec SA确立安全参数，秘钥，进行数据通信。</p>
 <p>5.IPsec会话停止</p>
 <p>IPsec SA通过检测和超时来停止会话，在SA停止IPsec后，如果还需要数据传输，则需要重新进入IKE第一步或IKE第二步重新协商建立新的SA。</p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a target="_blank" rel="noopener" href="http://www.rfc-editor.org/search/rfc_search_detail.php?rfc=4301&amp;pubstatus%5B%5D=Any&amp;pub_date_type=any">RFC4301</a></p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a target="_blank" rel="noopener" href="http://www.rfc-editor.org/search/rfc_search_detail.php?rfc=4301&pubstatus%5B%5D=Any&pub_date_type=any">RFC4301</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.ciscopress.com/articles/article.asp?p=25470" title="Cisco IPsec Overview">Cisco IPsec Overview</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.h3c.com.cn/Service/Channel_Service/Operational_Service/ICG_Technology/201005/675214_30005_0.htm">技术点详解—IPSec VPN基本原理</a></p>
 
@@ -622,15 +621,15 @@
 <p>[bash]<br>init running-level  # 触发运行级别，关机，重启各种方便<br>[/bash]</p>
 <h3 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h3><p>selinux经常捣乱，先把它关了，还要永久关<br>[bash]<br>getenforce                  # 查看selinux的状态<br>sestatus                    # 一样，查看selinux状态<br>vim /etc/sysconfig/selinux  # 将SELINUX 改为disabled状态，然后重启<br>setenforce 0                # 只能暂时改变selinux状态，不能永久更改，只有上面的方法可以<br>init 6                      # 重启<br>[/bash]</p>
 <p>这个在DigitalOcean的镜像中不需要配置.</p>
-<h3 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h3><p>[bash]<br>yum -y install httpd<br>chkconfig –levels 235 httpd on  # 将httpd进程设置为开机启动<br>service httpd start              # 此时可以用ip访问VPS，如<a target="_blank" rel="noopener" href="http://129.29.10.10，如果可以访问便安装成功">http://129.29.10.10，如果可以访问便安装成功</a><br>[/bash]<br>Apache在CentOS的DocumentRoot是“/var/www/html”, 配置文件在”/etc/httpd/config/httpd.conf”</p>
+<h3 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h3><p>[bash]<br>yum -y install httpd<br>chkconfig –levels 235 httpd on  # 将httpd进程设置为开机启动<br>service httpd start              # 此时可以用ip访问VPS，如<a target="_blank" rel="noopener" href="http://129.29.10.10,如果可以访问便安装成功/">http://129.29.10.10，如果可以访问便安装成功</a><br>[/bash]<br>Apache在CentOS的DocumentRoot是“/var/www/html”, 配置文件在”/etc/httpd/config/httpd.conf”</p>
 <p>无奈，第一个问题遇到了，我的Apache访问不了，纠结半天，原来是防火墙iptables的问题。</p>
 <h3 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h3><p>CentOS的iptables默认只让注册过的端口通过，而80端口没有注册过，不能通过防火墙。<br>[bash]<br>vim /etc/sysconfig/iptables</p>
-<h1 id="将-“-A-RH-Firewall-1-INPUT-j-REJECT-–reject-with-icmp-host-prohibited”-这行注释了，保存退出"><a href="#将-“-A-RH-Firewall-1-INPUT-j-REJECT-–reject-with-icmp-host-prohibited”-这行注释了，保存退出" class="headerlink" title="将 “-A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited” 这行注释了，保存退出"></a>将 “-A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited” 这行注释了，保存退出</h1><p>service iptables restart<br>[/bash]<br>BTW,如果采用以下的方法enable 80 端口，我今天成功了, 以前没有成功不知为何，不过上面的方法是肯定好的，下面的方法是一个安全点的办法。<br>[bash]<br>iptables -A INPUT -p tcp –dport 80 -j ACCEPT<br>iptables -A INPUT -p tcp –dport 443 -j ACCEPT  // 添加443 SSL端口未来会用<br>service iptables save                          // /etc/sysconfig/iptables 文件会被重写<br>service iptables restart<br>[/bash]<br>此时再访问<a target="_blank" rel="noopener" href="http://youripaddress就会有apache界面了。">http://youripaddress就会有apache界面了。</a></p>
+<h1 id="将-“-A-RH-Firewall-1-INPUT-j-REJECT-–reject-with-icmp-host-prohibited”-这行注释了，保存退出"><a href="#将-“-A-RH-Firewall-1-INPUT-j-REJECT-–reject-with-icmp-host-prohibited”-这行注释了，保存退出" class="headerlink" title="将 “-A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited” 这行注释了，保存退出"></a>将 “-A RH-Firewall-1-INPUT -j REJECT –reject-with icmp-host-prohibited” 这行注释了，保存退出</h1><p>service iptables restart<br>[/bash]<br>BTW,如果采用以下的方法enable 80 端口，我今天成功了, 以前没有成功不知为何，不过上面的方法是肯定好的，下面的方法是一个安全点的办法。<br>[bash]<br>iptables -A INPUT -p tcp –dport 80 -j ACCEPT<br>iptables -A INPUT -p tcp –dport 443 -j ACCEPT  // 添加443 SSL端口未来会用<br>service iptables save                          // /etc/sysconfig/iptables 文件会被重写<br>service iptables restart<br>[/bash]<br>此时再访问<a target="_blank" rel="noopener" href="http://youripaddress就会有apache界面了./">http://youripaddress就会有apache界面了。</a></p>
 <p>在DigitalOcean中,不需要配置本项.</p>
 <h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><p>[bash]<br>yum install -y mysql mysql-server<br>chkconfig –levels 235 mysqld on<br>service mysqld start<br>mysql_secure_installation         // 设置root密码，我这次谨慎了一下，没有全部选yes，大家看情况，记住自己的root密码<br>mysql -uroot -p                  // 进入MySQL，看看玩玩<br>[/bash]</p>
 <p>在DigitalOcean中安装的是MariaDB, 兼容MySQL, 具体看参考链接.<a target="_blank" rel="noopener" href="http://www.howtoforge.com/apache_php_mysql_on_centos_7_lamp" title="lamp with centos7.0">LAMP with Centos 7.0</a></p>
 <h3 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><p>我被坑过，CentOS 5.9的yum的默认包库中PHP是5.1.6，后来WordPress跑不了(至少5.2.4)，所以需要更新一下yum。</p>
-<p>如果想了解更详细的信息，可以看看这个链接<br><a target="_blank" rel="noopener" href="http://www.tecmint.com/install-apache-mysql-php-on-redhat-centos-fedora/" title="Install Apache, MySQL 5.5.32 &amp; PHP 5.5.0 on RHEL/CentOS 6.4/5.9 &amp; Fedora 19-12">Install Apache, MySQL 5.5.32 &amp; PHP 5.5.0 on RHEL/CentOS 6.4/5.9 &amp; Fedora 19-12</a><br>[bash]<br>yum info name of module  # 查看某个包的信息<br>rpm -Uvh <a target="_blank" rel="noopener" href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a><br>rpm -Uvh <a target="_blank" rel="noopener" href="http://rpms.famillecollet.com/enterprise/remi-release-5.rpm">http://rpms.famillecollet.com/enterprise/remi-release-5.rpm</a><br>yum –enablerepo=remi,remi-test install -y php php-common<br>yum –enablerepo=remi,remi-test install php-mysql php-pgsql php-pecl-mongo php-sqlite php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml php-pecl-apc php-cli php-pear php-pdo  # 安装PHP会用到的module<br>service httpd restart<br>vim /var/www/html/phpinfo.php<br>[/bash]<br>输入：<br>[php]<br>&lt;?php<br>  phpinfo();<br>?&gt;<br>[/php]<br>再访问<a target="_blank" rel="noopener" href="http://ipaddress/phpinfo.php，">http://ipaddress/phpinfo.php，</a> 查看php的状态</p>
+<p>如果想了解更详细的信息，可以看看这个链接<br><a target="_blank" rel="noopener" href="http://www.tecmint.com/install-apache-mysql-php-on-redhat-centos-fedora/" title="Install Apache, MySQL 5.5.32 &amp; PHP 5.5.0 on RHEL/CentOS 6.4/5.9 &amp; Fedora 19-12">Install Apache, MySQL 5.5.32 &amp; PHP 5.5.0 on RHEL/CentOS 6.4/5.9 &amp; Fedora 19-12</a><br>[bash]<br>yum info name of module  # 查看某个包的信息<br>rpm -Uvh <a target="_blank" rel="noopener" href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a><br>rpm -Uvh <a target="_blank" rel="noopener" href="http://rpms.famillecollet.com/enterprise/remi-release-5.rpm">http://rpms.famillecollet.com/enterprise/remi-release-5.rpm</a><br>yum –enablerepo=remi,remi-test install -y php php-common<br>yum –enablerepo=remi,remi-test install php-mysql php-pgsql php-pecl-mongo php-sqlite php-pecl-memcache php-pecl-memcached php-gd php-mbstring php-mcrypt php-xml php-pecl-apc php-cli php-pear php-pdo  # 安装PHP会用到的module<br>service httpd restart<br>vim /var/www/html/phpinfo.php<br>[/bash]<br>输入：<br>[php]<br>&lt;?php<br>  phpinfo();<br>?&gt;<br>[/php]<br>再访问<a target="_blank" rel="noopener" href="http://ipaddress/phpinfo.php%EF%BC%8C">http://ipaddress/phpinfo.php，</a> 查看php的状态</p>
 <h3 id="VPS-DNS解析"><a href="#VPS-DNS解析" class="headerlink" title="VPS DNS解析"></a>VPS DNS解析</h3><p>有了VPS，再买一个域名吧，我在godaddy上买了一个域名，用DNSPod来解析，国内的DNS解析，会快一些。</p>
 <p>需要在godaddy上将NameServer更改为:</p>
 <p>[text]<br>F1G1NS1.DNSPOD.NET<br>F1G1NS2.DNSPOD.NET<br>[/text]<br>再到DNSpod上注册，填写IP，等信息，就能简单完成DNS解析，从此以后就可以用域名访问VPS了。</p>
@@ -707,24 +706,24 @@
 <p>我采取的办法是在本地写博客，然后发布到GitHub,然后VPS端Clone到本地，这样做的原因如下：</p>
 <p>[more…]</p>
 <ul>
-<li>WordPress Blog作为轻量的博客，主要发布文字，图片是用第三方的图床，博客本身的数据量不大。</li>
-<li>FTP传输速度不理想。</li>
-<li>GitHub在VPS端运行很快，VPS毕竟是服务器，网速快，因此部署Blog很快。</li>
-<li>版本控制，本地有数据备份，以后要迁移VPS也可以轻松搞定。</li>
-<li>WordPress的Blog数据是写入MySQL的，因此发布WordPress时的一个大问题就是要处理MySQL的数据，其实基本的mysqldump就可以了。</li>
+<li>  WordPress Blog作为轻量的博客，主要发布文字，图片是用第三方的图床，博客本身的数据量不大。</li>
+<li>  FTP传输速度不理想。</li>
+<li>  GitHub在VPS端运行很快，VPS毕竟是服务器，网速快，因此部署Blog很快。</li>
+<li>  版本控制，本地有数据备份，以后要迁移VPS也可以轻松搞定。</li>
+<li>  WordPress的Blog数据是写入MySQL的，因此发布WordPress时的一个大问题就是要处理MySQL的数据，其实基本的mysqldump就可以了。</li>
 </ul>
 <h3 id="VPS-配置GIT"><a href="#VPS-配置GIT" class="headerlink" title="VPS 配置GIT"></a>VPS 配置GIT</h3><p>[bash]<br>rpm -Uvh <a target="_blank" rel="noopener" href="http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm">http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm</a> // 这个在前面的php安装时输入过了，可以忽略<br>rpm -Uvh <a target="_blank" rel="noopener" href="http://rpms.famillecollet.com/enterprise/remi-release-5.rpm">http://rpms.famillecollet.com/enterprise/remi-release-5.rpm</a> // 这个在前面的php安装时输入过了，可以忽略<br>yum install git-core -y<br>git –version<br>[/bash]<br>一定配置一下SSH，这样不会在git clone时报错，当然建立github repository和使用github都是默认掌握了。<br><a target="_blank" rel="noopener" href="https://help.github.com/articles/set-up-git#platform-linux" title="Set up Git for linux">Set up git</a> </p>
 <p><a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-ssh-keys" title="Generate ssh key">Enable SSH Git</a></p></p>
 <h3 id="VPS-MySQL权限配置"><a href="#VPS-MySQL权限配置" class="headerlink" title="VPS MySQL权限配置"></a>VPS MySQL权限配置</h3><p>刚装MySQL时运行过mysql_secure_installation，如果所有选项都yes了，那么VPS的mysql只能是本地的root可以访问，blog访问不了，这一步很关键，也让我头疼了很久。</p>
-<p>进入MySQL<br>[bash]<br>mysql -u root -p<br>[/bash]<br>[sql]<br>CREATE USER ‘monty‘@’localhost’ IDENTIFIED BY ‘some_password’;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘monty‘@’localhost’;<br>CREATE USER ‘monty‘@’%’ IDENTIFIED BY ‘some_password’;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘monty‘@’%;<br>[/sql]<br><strong>watch out</strong></p>
-<p>我在这一步遇到了问题：当运行<br>[sql]<br>GRANTALL PRIVILEGES ON <em>.</em> TO ‘monty‘@’localhost’;<br>[/sql]<br>报错：Access denied for user ‘root‘@’localhost’。后来在stackoverflow上找到了答案：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8484722/access-denied-for-user-rootlocalhost-while-attempting-to-grant-privileges">access-denied-for-user-rootlocalhost-while-attempting-to-grant-privileges</a></p>
+<p>进入MySQL<br>[bash]<br>mysql -u root -p<br>[/bash]<br>[sql]<br>CREATE USER ‘monty’@’localhost’ IDENTIFIED BY ‘some_password’;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘monty’@’localhost’;<br>CREATE USER ‘monty’@’%’ IDENTIFIED BY ‘some_password’;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘monty’@’%;<br>[/sql]<br><strong>watch out</strong></p>
+<p>我在这一步遇到了问题：当运行<br>[sql]<br>GRANTALL PRIVILEGES ON <em>.</em> TO ‘monty’@’localhost’;<br>[/sql]<br>报错：Access denied for user ‘root’@’localhost’。后来在stackoverflow上找到了答案：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8484722/access-denied-for-user-rootlocalhost-while-attempting-to-grant-privileges">access-denied-for-user-rootlocalhost-while-attempting-to-grant-privileges</a></p>
 <p>我采用了二楼的方法如下就可以了：<br>[bash]<br>$ su - mysql<br>$ rm -rf /var/lib/mysql/*<br>$ mysql_install_db<br>$ /etc/init.d/mysql restart<br>[/bash]<br>然后再重置root密码：<br>[bash]<br>mysqladmin -u root password<br>[/bash]</p>
 <h3 id="VPS-MySQL-CharSet配置"><a href="#VPS-MySQL-CharSet配置" class="headerlink" title="VPS MySQL CharSet配置"></a>VPS MySQL CharSet配置</h3><p>为了防止中文乱码，将VPS的MySQL的CharSet设置为utf8，当然WordPress的mysqldump的SQL文件中的每一个表都强制指定了CharSet为utf8，如果略去这一步也是可以的。<br>[bash]<br>vim /etc/my.cnf<br>[/bash]<br>在文本中的相应位置添加<br>[text]<br>[mysqld]<br>init_connect=’SET collation_connection = utf8_unicode_ci’<br>character-set-server = utf8<br>collation-server = utf8_unicode_ci<br>[client]<br>default-character-set = utf8<br>[mysql]<br>default-character-set = utf8<br>[/text]<br>验证，进入MySQL输入：<br>[sql]<br>SHOW VARIABLES LIKE ‘character%’;<br>SHOW VARIABLES LIKE ‘collation%’;<br>[/sql]</p>
 <h3 id="创建博客数据库"><a href="#创建博客数据库" class="headerlink" title="创建博客数据库"></a>创建博客数据库</h3><p>进入mysql，创建数据库<br>[bash]<br>mysql -u root -p<br>[/bash]<br>[sql]<br>mysql&gt; create database yourblogdatabase;<br>[/sql]</p>
-<h3 id="本地Blog-GitHub-Set-Up"><a href="#本地Blog-GitHub-Set-Up" class="headerlink" title="本地Blog GitHub Set Up"></a>本地Blog GitHub Set Up</h3><p>首先在GitHub网站上创建一个Repository，<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/CyannyLive" title="GitHub of Cyanny Live Blog">GitHub of Cyanny Live Blog</a><br>在本地的Blog中：<br>[bash]<br>cd ~/Sites/Blog //打开文件夹<br>git init<br>git remote add origin <a href="mailto:git@github.com">git@github.com</a>:lgrcyanny/CyannyLive.git  // github的ssh地址<br>git pull origin master<br>[/bash]</p>
+<h3 id="本地Blog-GitHub-Set-Up"><a href="#本地Blog-GitHub-Set-Up" class="headerlink" title="本地Blog GitHub Set Up"></a>本地Blog GitHub Set Up</h3><p>首先在GitHub网站上创建一个Repository，<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/CyannyLive" title="GitHub of Cyanny Live Blog">GitHub of Cyanny Live Blog</a><br>在本地的Blog中：<br>[bash]<br>cd ~/Sites/Blog //打开文件夹<br>git init<br>git remote add origin <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:lgrcyanny/CyannyLive.git  // github的ssh地址<br>git pull origin master<br>[/bash]</p>
 <h3 id="本地Blog-MySQL数据导出备份"><a href="#本地Blog-MySQL数据导出备份" class="headerlink" title="本地Blog MySQL数据导出备份"></a>本地Blog MySQL数据导出备份</h3><p>我直接写了一个脚本，备份MySQL的数据，脚本backup.sh如下:<br>[shell]</p>
 <h1 id="bin-bash"><a href="#bin-bash" class="headerlink" title="!/bin/bash"></a>!/bin/bash</h1><p>export DATABASE_DIR=~/Sites/myblog/wp-content/backup-db<br>cd $DATABASE_DIR<br>mysqldump -u root -pyourpassword dbname &gt; temp-db.sql</p>
-<h1 id="sed-命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，"><a href="#sed-命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，" class="headerlink" title="sed 命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，"></a>sed 命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，</h1><h1 id="原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的"><a href="#原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的" class="headerlink" title="原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的"></a>原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的</h1><p>sed ‘s%<a target="_blank" rel="noopener" href="http://cyanny/myblog%http://www.cyanny.com%g&#39;">http://cyanny/myblog%http://www.cyanny.com%g&#39;</a> temp-db.sql \&gt; db.sql</p>
+<h1 id="sed-命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，"><a href="#sed-命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，" class="headerlink" title="sed 命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，"></a>sed 命令替换在sql文件中Blog的http地址，这一步非常重要，否则在VPS上打不开，</h1><h1 id="原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的"><a href="#原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的" class="headerlink" title="原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的"></a>原因很简单，本地是Localhost访问，VPS是域名访问，WordPress为每一个Post生成的访问地址是写死的</h1><p>sed ‘s%<a target="_blank" rel="noopener" href="http://cyanny/myblog%http://www.cyanny.com%g&#39;">http://cyanny/myblog%http://www.cyanny.com%g&#39;</a> temp-db.sql &amp;gt; db.sql</p>
 <h1 id="数据压缩一下，会从上百KB变成几十个KB"><a href="#数据压缩一下，会从上百KB变成几十个KB" class="headerlink" title="数据压缩一下，会从上百KB变成几十个KB"></a>数据压缩一下，会从上百KB变成几十个KB</h1><p>tar -czvf db.tar.gz db.sql</p>
 <h1 id="删除中间文件"><a href="#删除中间文件" class="headerlink" title="删除中间文件"></a>删除中间文件</h1><p>rm db.sql<br>rm temp-db.sql<br>[/shell]<br>运行backup.sh<br>[bash]<br>sh backup.sh<br>[/bash]</p>
 <h3 id="本地Blog-htaccess配置"><a href="#本地Blog-htaccess配置" class="headerlink" title="本地Blog htaccess配置"></a>本地Blog htaccess配置</h3><p>博客的访问地址，如果设置过Permalinks，这一步就很重要，否则在VPS端地址找不到<br>[bash]<br>cp .htaccess htaccess.prod<br>[/bash]<br>编辑htaccess.prod<br>[text]<br>&lt;IfModule mod_rewrite.c&gt;<br>RewriteEngine On<br>RewriteBase /<br>RewriteRule ^index&amp;#46;php$ - [L]<br>RewriteCond %{REQUEST_FILENAME} !-f<br>RewriteCond %{REQUEST_FILENAME} !-d<br>RewriteRule . /index.php [L]<br>&lt;/IfModule&gt;<br>[/text]</p>
@@ -736,7 +735,7 @@
 <h3 id="VPS端的发布脚本"><a href="#VPS端的发布脚本" class="headerlink" title="VPS端的发布脚本"></a>VPS端的发布脚本</h3><p>为了方便VPS端将WordPress从GitHub Clone到本地, 设置文件权限，DB数据导入，我创建了一个简单地发布脚本</p>
 <p>deploy.sh, 这个脚本放在VPS上<br>[bash]</p>
 <h1 id="bin-bash-1"><a href="#bin-bash-1" class="headerlink" title="!/bin/bash"></a>!/bin/bash</h1><p>export BLOG_ROOT_DIR=/var/www/html/cyannyblog<br>export BLOG_DATABASES_DIR=$BLOG_ROOT_DIR/wp-content/backup-db</p>
-<h1 id="Git-update"><a href="#Git-update" class="headerlink" title="Git update"></a>Git update</h1><p>rm -Rf cyannyblog<br>git clone <a href="mailto:git@github.com">git@github.com</a>:lgrcyanny/CyannyLive.git cyannyblog  # 更换为自己的GitHub的地址</p>
+<h1 id="Git-update"><a href="#Git-update" class="headerlink" title="Git update"></a>Git update</h1><p>rm -Rf cyannyblog<br>git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:lgrcyanny/CyannyLive.git cyannyblog  # 更换为自己的GitHub的地址</p>
 <h1 id="Change-mod-grant-access-right"><a href="#Change-mod-grant-access-right" class="headerlink" title="Change mod, grant access right"></a>Change mod, grant access right</h1><p>chmod -R 755 $BLOG_ROOT_DIR<br>chmod -R 777 $BLOG_ROOT_DIR/wp-content</p>
 <h1 id="Add-config"><a href="#Add-config" class="headerlink" title="Add config"></a>Add config</h1><p>rm -f $BLOG_ROOT_DIR/wp-config.php<br>cp $BLOG_ROOT_DIR/wp-config-prod.php $BLOG_ROOT_DIR/wp-config.php</p>
 <h1 id="Add-htaccess"><a href="#Add-htaccess" class="headerlink" title="Add .htaccess"></a>Add .htaccess</h1><p>cd $BLOG_ROOT_DIR<br>rm -f .htaccess<br>cp htaccess.prod .htaccess</p>
@@ -797,7 +796,7 @@
 
   
     
-    <h3 class="article-title"><a href="/2013/11/10/how-to-start-learning-node-js/"><span>How to start learning Node.js</span></a></h3>
+    <h3 class="article-title"><a href="/2013/11/10/how-to-start-learning-node-js/"><span>How to Start Learning Node.js</span></a></h3>
     
   
 
@@ -817,14 +816,14 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>I have always wanted to do some meaningful projects, not the homework project at college, not the debug working at company. I just wanted to start a meaningful project for interest, or for fun. Maybe it will become a big success. and I believe in that. And recently I am busy with a spark prject based on Node.js.</p>
+        <p>I have always wanted to do some meaningful projects, not the homework project at college, not the debug working at company. I just wanted to start a meaningful project for interest, or for fun. Maybe it will become a big success. and I believe in that. And recently I am busy with a spark prject based on Node.js.</p>
 <p>Node.js is a platform built on Chrome’s JavaScript V8 engine. The event-driven, non-blocking I/O model makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p>
 <p>In short, I think the advantages is:[more…]</p>
 <ul>
-<li>Same language on both server side and front side</li>
-<li>Event-driven and callback feature gains perfect performance</li>
-<li>With WebSocket, you can built great real-time app, like online chat room</li>
-<li>Worth to learn, it’s new, and will give you a new perspective of web development</li>
+<li>  Same language on both server side and front side</li>
+<li>  Event-driven and callback feature gains perfect performance</li>
+<li>  With WebSocket, you can built great real-time app, like online chat room</li>
+<li>  Worth to learn, it’s new, and will give you a new perspective of web development</li>
 </ul>
 <h2 id="Beginner-Guides"><a href="#Beginner-Guides" class="headerlink" title="Beginner Guides"></a>Beginner Guides</h2><p><a target="_blank" rel="noopener" href="http://nodeguide.com/beginner.html">1. Felix’s Node.js Beginners Guide</a></p>
 <p>This a short blog that can help you overview Node.js, learn some basics of Node.js, you can finish it within 30 min.<br>The Module system of node is worth to dig, read the <a target="_blank" rel="noopener" href="http://nodejs.org/api/modules.html">api</a>, especially the concept of <strong>exports</strong> and the <strong>module.exports</strong></p>
@@ -849,7 +848,7 @@
 <h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p><a target="_blank" rel="noopener" href="https://github.com/joyent/node">11. Node github</a></p>
 <p><a target="_blank" rel="noopener" href="http://docs.nodejitsu.com/">12. A guide for api usage</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.nodecloud.org/">13. Node Cloud</a><br>This is a resource directory gathering sites related to Node.js.</p>
-<p><a target="_blank" rel="noopener" href="https://npmjs.org/">14. NPM</a>  Finding and uploading npm package.</p>
+<p><a target="_blank" rel="noopener" href="https://npmjs.org/">14. NPM</a>  Finding and uploading npm package.</p>
 <p>15. Some api worth to read: Modules, Child Processes, Crypto, File System, HTTP, Events, Path, QueryString, URL.</p>
 <h2 id="Good-Luck"><a href="#Good-Luck" class="headerlink" title="Good Luck!"></a>Good Luck!</h2><p>Many tutorials, no matter how to lean, enjoy the learning process and the final sucess! Don’t waiting for finishing every details before starting your project.</p>
 
@@ -1202,15 +1201,15 @@
 <p>如何选择正确的图呢？Edward Tufte定义了图优性：图要能够在最短的时间内用最少的笔墨，在最小的空间里给观众最多的思想。在统计图选择中，我们面临两个矛盾：数据的简化和数据的完整，我们需要在简单化受益和信息的丢失之间权衡。</p>
 <h3 id="分析统计量"><a href="#分析统计量" class="headerlink" title="分析统计量"></a>分析统计量</h3><ul>
 <li><p>平均数</p>
-<p>数据的统计量计算需要正确的方法。平均数包括众数，中位数和均值。众数适用于分类变量，特别是有多个值的分类变量，如宗教、种族的划分。中位数：一组数据中的中间值，不受极值的影响，当数据出现非对称分布时应该用中位数，例如收入、房子价格。但中位数只是中间点的数据，但没有充分利用数据。均值：在对总体进行点估计时常用均值，均值可以充分地利用观测数据，但均值容易受极值的影响。 如果均值和中位数差不多，采用均值，但如果非常不同，采用中为数据，对于非对称数据，采用中位数更好。</p>
+<p>  数据的统计量计算需要正确的方法。平均数包括众数，中位数和均值。众数适用于分类变量，特别是有多个值的分类变量，如宗教、种族的划分。中位数：一组数据中的中间值，不受极值的影响，当数据出现非对称分布时应该用中位数，例如收入、房子价格。但中位数只是中间点的数据，但没有充分利用数据。均值：在对总体进行点估计时常用均值，均值可以充分地利用观测数据，但均值容易受极值的影响。 如果均值和中位数差不多，采用均值，但如果非常不同，采用中为数据，对于非对称数据，采用中位数更好。</p>
 </li>
 <li><p>变差</p>
-<p>极差：很容易受极端值的影响，为了避免这种影响，我们可以采用四分位数极差。</p>
-<p>标准差：度量数据在平均意义上和均值的偏离。</p>
+<p>  极差：很容易受极端值的影响，为了避免这种影响，我们可以采用四分位数极差。</p>
+<p>  标准差：度量数据在平均意义上和均值的偏离。</p>
 </li>
-<li><p>标准误差：多个样本均值的标准差，一般比某一组观察值的标准差小。</p>
+<li><p>  标准误差：多个样本均值的标准差，一般比某一组观察值的标准差小。</p>
 </li>
-<li><p>标准得分=(观察值 - 均值) / 标准差，可以对不同的观察值进行比较。</p>
+<li><p>  标准得分=(观察值 - 均值) / 标准差，可以对不同的观察值进行比较。</p>
 </li>
 </ul>
 <h3 id="重要的概率分布"><a href="#重要的概率分布" class="headerlink" title="重要的概率分布"></a>重要的概率分布</h3><p>统计的样本一般假定是随机样本，对于随机样本的分析，需要计算概率，概率可以从等可能事件，相对频数和主观概率中得到。而了解概率的分布是在进行参数假设检验等分析中重要的一步。</p>

@@ -107,8 +107,8 @@ while (!queue.isEmpty()) &#123;
     &#125;
         u.color = Color.BLACK;
     res.add(u);
-&#125;
-</code></pre><p>}<br>[/java]<br><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphBFS.java" title="BFS Source">BFS Source Code</a></p>
+&#125;</code></pre>
+<p>}<br>[/java]<br><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphBFS.java" title="BFS Source">BFS Source Code</a></p>
 <h3 id="深度优先搜索DFS"><a href="#深度优先搜索DFS" class="headerlink" title="深度优先搜索DFS"></a>深度优先搜索DFS</h3><p>广度优先搜索DFS，基本算法思想<br>1. 采用递归，或stack来实现<br>2. 每一个Vertex引入四个变量<br>color：WHITE 表示没有访问过，GREY 表示发现，BLACK 表示完成访问<br>parent: 父亲<br>timestamp1: 表示第一次访问该顶点的时间戳<br>timestamp2:表示访问结束时的时间戳<br>3. 为了实现方便，我采用int来标识每一个顶点，采用邻接表来表示graph</p>
 <p>DFS采用邻接表表示Graph来实现，复杂度O(V+E), 矩阵复杂度依然不好，为O（n^2）<br>DFS是从多个源开始，最终会生成由多个源作为root的森林，即深度优先树（深度优先森林）。<br>同时引入时间戳，是为了获得DFS的进展情况，如果不需要时间戳，只是想简单地打印每一个顶点，可以不用。</p>
 <p>以下是递归的实现方法：<br>[java]<br>    public void DFS() {<br>        int i = 0;<br>        for (i = 0; i &lt; n; i++) {<br>            vertexes[i] = new Vertex(i);<br>        }<br>        for (i = 0; i &lt; n; i++) {<br>            Vertex u = vertexes[i];<br>            if (u.color == Color.WHITE) {<br>                visitDFS(u);<br>            }<br>        }<br>    }</p>
@@ -128,42 +128,9 @@ while (!queue.isEmpty()) &#123;
     u.color = Color.BLACK;
     timer++;
     u.timestamp2 = timer;
-&#125;
-</code></pre><p>[/java]</p>
-<p>以下是采用栈的实现方法改写 “visitDFS”：<br>[java]<br>    /**</p>
-<pre><code> * DFS with iterative method 
- * Make use of stack
- * @param u
- */
-private void visitDFSIterative(Vertex u) &#123;
-    res.add(u);
-    u.color = Color.GREY;
-    timer++;
-    u.timestamp1 = timer;
-    stack.add(u);
-    while(!stack.isEmpty()) &#123;
-        Vertex v = stack.remove(stack.size() - 1);
-        ArrayList&amp;lt;Integer&amp;gt; adjList = graph.get(v.vertex);
-        for (int i = 0; i &amp;lt; adjList.size(); i++) &#123;
-            Vertex temp = vertexes[adjList.get(i)];
-            if (temp.color == Color.WHITE) &#123;
-                temp.parent = v;
-                temp.color = Color.GREY;
-                timer++;
-                temp.timestamp1 = timer;
-                res.add(temp);
-                stack.add(temp);
-            &#125;
-        &#125;
-        v.color = Color.BLACK;
-        timer++;
-        v.timestamp2 = timer;
-    &#125;
-    u.color = Color.BLACK;
-    timer++;
-    u.timestamp2 = timer;
-&#125;
-</code></pre><p>[/java]</p>
+&#125;</code></pre>
+<p>[/java]</p>
+<p>以下是采用栈的实现方法改写 “visitDFS”：<br>[java]<br>    /**<br>     * DFS with iterative method<br>     * Make use of stack<br>     * @param u<br>     */<br>    private void visitDFSIterative(Vertex u) {<br>        res.add(u);<br>        u.color = Color.GREY;<br>        timer++;<br>        u.timestamp1 = timer;<br>        stack.add(u);<br>        while(!stack.isEmpty()) {<br>            Vertex v = stack.remove(stack.size() - 1);<br>            ArrayList&lt;Integer&gt; adjList = graph.get(v.vertex);<br>            for (int i = 0; i &lt; adjList.size(); i++) {<br>                Vertex temp = vertexes[adjList.get(i)];<br>                if (temp.color == Color.WHITE) {<br>                    temp.parent = v;<br>                    temp.color = Color.GREY;<br>                    timer++;<br>                    temp.timestamp1 = timer;<br>                    res.add(temp);<br>                    stack.add(temp);<br>                }<br>            }<br>            v.color = Color.BLACK;<br>            timer++;<br>            v.timestamp2 = timer;<br>        }<br>        u.color = Color.BLACK;<br>        timer++;<br>        u.timestamp2 = timer;<br>    }<br>[/java]</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/blob/master/src/com/algorithm/graph/GraphDFS.java" title="DFS Source">DFS Source Code</a></p>
 <p>最终发现，起始实现起来代码不多，重在想法。</p>
 

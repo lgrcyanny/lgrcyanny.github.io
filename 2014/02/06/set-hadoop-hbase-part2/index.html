@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Set up Hadoop 2.2 and HBase 0.96 part2 | CyannyLive | AI and Big Data</title>
+  <title>Set Up Hadoop 2.2 and HBase 0.96 Part2 | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Set up Hadoop 2.2 and HBase 0.96 part2"/>
+  <meta property="og:title" content="Set Up Hadoop 2.2 and HBase 0.96 Part2"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>Set up Hadoop 2.2 and HBase 0.96 part2</span></h3>
+    <h3 class="article-title"><span>Set Up Hadoop 2.2 and HBase 0.96 Part2</span></h3>
     
   
 
@@ -88,8 +88,7 @@
         <p>在完成<a target="_blank" rel="noopener" href="http://cyanny/myblog/2014/02/06/set-hadoop-hbase-part1/" title="set-hadoop-hbase-part1">Hadoop配置</a>后，我们可以开始HBase的安装和配置了。<br>对于HBase，我只想说走对了路就成功了一半，选对了版本就省事好多。之前下载的是0.94版，按照官方的配置，连Standalone都跑不通，纠结了半天，放弃治疗，选用0.96版本，一切顺利。</p>
 <h3 id="配置HBase-Standalone模式"><a href="#配置HBase-Standalone模式" class="headerlink" title="配置HBase Standalone模式"></a>配置HBase Standalone模式</h3><p>1. 前提条件<br>MacOS 10.9<br>Java安装好<br>Standalone模式是单机的，基于Local FileSystem，不需要Hadoop，用于开发或测试。<br>[more…]<br>2. 下载HBase<br><a target="_blank" rel="noopener" href="http://apache.fayea.com/apache-mirror/hbase/hbase-0.96.1/">hbase-0.96.1-hadoop2-bin.tar.gz </a></p>
 <p>3. 解压安装<br>[shell]<br>$ tar xzvf hbase-0.96.1-hadoop2-bin.tar.gz<br>$ mv hbase-0.96.1-hadoop2 hbase<br>[/shell]<br>同样需要把hbase安装到Home目录下~/hbase, 对于我是/Users/lgrcyanny/hbase</p>
-<p>4. 配置环境变量<br>[shell]<br>$ vim ~/.bashrc</p>
-<p>#Config HBase<br>export HBASE_HOME=/Users/lgrcyanny/hbase<br>export PATH=$PATH:$HBASE_HOME/bin<br>[/shell]</p>
+<p>4. 配置环境变量<br>[shell]<br>$ vim ~/.bashrc<br>#Config HBase<br>export HBASE_HOME=/Users/lgrcyanny/hbase<br>export PATH=$PATH:$HBASE_HOME/bin<br>[/shell]</p>
 <p>5. 编辑hbase-site.xml<br>[shell]<br>$ cd ~/hbase<br>$ mkdir -p mydata/hbase<br>$ mkdir -p mydata/zookeeper<br>$ vim conf/hbase-site.xml<br>&lt;configuration&gt;<br>  &lt;property&gt;<br>    &lt;name&gt;hbase.rootdir&lt;/name&gt;<br>    &lt;value&gt;file:///Users/lgrcyanny/hbase/mydata/hbase&lt;/value&gt;<br>  &lt;/property&gt;<br>  &lt;property&gt;<br>    &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;<br>    &lt;value&gt;/Users/lgrcyanny/hbase/mydata/zookeeper&lt;/value&gt;<br>  &lt;/property&gt;<br>&lt;/configuration&gt;<br>[/shell]</p>
 <p>6. 编辑hbase-env.sh<br>[shell]<br>$ cd ~/hbase<br>$ vim conf/hbase-env.sh<br>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/<br>export HBASE_OPTS=&quot;-Djava.security.krb5.realm= -Djava.security.krb5.kdc= -Djava.security.krb5.conf=/dev/null&quot;<br>[/shell]</p>
 <p>7. 关于/etc/hosts<br>对于Ubuntu的用户，需要修改/etc/hosts，将127.0.1.1改为127.0.0.1，因为HBase的环回地址默认是127.0.0.1，但官方的quikstart中提到0.96以后的版本不需要修改，MacOS中确实不用修改，之前用0.94的版本，因为环回地址的问题总是报错也无法修复，这是0.94的bug。如果是Ubuntu用户，可以尝试不修改hosts看能不能跑通。</p>

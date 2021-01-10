@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>分布式系统总结part4 | CyannyLive | AI and Big Data</title>
+  <title>分布式系统总结Part4 | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="分布式系统总结part4"/>
+  <meta property="og:title" content="分布式系统总结Part4"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>分布式系统总结part4</span></h3>
+    <h3 class="article-title"><span>分布式系统总结Part4</span></h3>
     
   
 
@@ -96,15 +96,15 @@
 <p>Well-handled：只有TT和PP，没有PT，TP。 因为PT会有死锁的风险， TP会造出某一个Place内部的Token无限增长</p>
 <h3 id="4-State-Machine和Marked-Graph"><a href="#4-State-Machine和Marked-Graph" class="headerlink" title="4.State Machine和Marked Graph"></a>4.State Machine和Marked Graph</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System17.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/Distributed-System17-580x349.png" alt="Distributed System17"></a></p>
 <ul>
-<li>Marked Graph：库所只有单个输入和单个输出</li>
-<li>State Machine: 每个变迁只有单个输入和单个输出，这是一个有限状态机</li>
-<li>T-component：如果一个大的Petri可以找到一个子网符合marked graph的要求，就是 T-component, 如果所有的T-component的集合可以覆盖整个Petri网，就是T-coverability。</li>
-<li>P-component：是一个大的网络中的一个Petri子网，满足state machine的，如所有的P-component可以覆盖整个Petri网，则称Petri网P-coverability</li>
+<li>  Marked Graph：库所只有单个输入和单个输出</li>
+<li>  State Machine: 每个变迁只有单个输入和单个输出，这是一个有限状态机</li>
+<li>  T-component：如果一个大的Petri可以找到一个子网符合marked graph的要求，就是 T-component, 如果所有的T-component的集合可以覆盖整个Petri网，就是T-coverability。</li>
+<li>  P-component：是一个大的网络中的一个Petri子网，满足state machine的，如所有的P-component可以覆盖整个Petri网，则称Petri网P-coverability</li>
 </ul>
 <h3 id="5-活性和有界性"><a href="#5-活性和有界性" class="headerlink" title="5. 活性和有界性"></a>5. 活性和有界性</h3><ul>
-<li>活性：从M0状态出发，对于任何一个M和t转换后的M’，可以让任何变迁T有可能点火enable.什么是不活呢，就是死锁，但是不死锁，不等价于活性</li>
-<li>有界性：不论状态如何变化，token数量都不会无限增长，保持在一定数量</li>
-<li>Petri是well-formed的：存在M0使这个Petri网有活性并且有界</li>
+<li>  活性：从M0状态出发，对于任何一个M和t转换后的M’，可以让任何变迁T有可能点火enable.什么是不活呢，就是死锁，但是不死锁，不等价于活性</li>
+<li>  有界性：不论状态如何变化，token数量都不会无限增长，保持在一定数量</li>
+<li>  Petri是well-formed的：存在M0使这个Petri网有活性并且有界</li>
 </ul>
 <h3 id="6-Free-choice-structure"><a href="#6-Free-choice-structure" class="headerlink" title="6. Free-choice structure"></a>6. Free-choice structure</h3><p>自由选择结构：如果两个输入库所交集不为空，蕴含两个输入库所相等</p>
 <p>t1和t2是对等的选择关系.</p>

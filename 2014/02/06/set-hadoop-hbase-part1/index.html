@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Set up Hadoop 2.2 and HBase 0.96 part1 | CyannyLive | AI and Big Data</title>
+  <title>Set Up Hadoop 2.2 and HBase 0.96 Part1 | CyannyLive | AI and Big Data</title>
 
   
   <meta name="author" content="Cyanny Liang">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="Set up Hadoop 2.2 and HBase 0.96 part1"/>
+  <meta property="og:title" content="Set Up Hadoop 2.2 and HBase 0.96 Part1"/>
 
   <meta property="og:site_name" content="CyannyLive"/>
 
@@ -65,7 +65,7 @@
 
   
     
-    <h3 class="article-title"><span>Set up Hadoop 2.2 and HBase 0.96 part1</span></h3>
+    <h3 class="article-title"><span>Set Up Hadoop 2.2 and HBase 0.96 Part1</span></h3>
     
   
 
@@ -90,8 +90,7 @@
 <p>3. 下载Hadoop 2.X<br>我用的版本是Hadoop2.2.0<br><a target="_blank" rel="noopener" href="http://apache.fayea.com/apache-mirror/hadoop/common/stable2/" title="Download Hadoop 2.2.0">点击下载 hadoop-2.2.0.tar.gz</a></p>
 <p>[shell]<br>$ tar xzvf  hadoop-2.2.0.tar.gz<br>$ mv hadoop-2.2.0 hadoop<br>[/shell]<br>我安装hadoop到路径/Users/lgrcyanny/hadoop，即当前Mac用户的Home目录下，为了方便没有创建新的用户hadoop，在配置时可以自己将“lgrcyanny”替换为自己的用户名。</p>
 <p>4. 配置ssh localhost<br>Hadoop的Master和Slave的通信采用ssh，单机版的Hadoop也需要ssh。<br>Ubuntu用户可以”apt-get install ssh”， mac用户自带ssh<br>[shell]<br>$ ssh-keygen -t rsa # 如果之前配置过GitHub，rsa key是存在的，请不要覆盖即可<br>$ ssh lgrcyanny@localhost mkdir -p .ssh<br>$ cat .ssh/id_rsa.pub | ssh lgrcyanny@localhost ‘cat &gt;&gt; .ssh/authorized_keys’<br>$ ssh lgrcyanny@localhost &quot;chmod 700 .ssh; chmod 640 .ssh/authorized_keys&quot;<br>$ ssh localhost<br>Last login: Thu Feb  6 10:22:40 2014<br>[/shell]</p>
-<p>5. 配置环境变量<br>[shell]<br>$ cd ~<br>$ vim .bashrc</p>
-<p>#Java properties<br>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/<br>export JRE_HOME=$JAVA_HOME/jre<br>export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH<br>export PATH=.:$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</p>
+<p>5. 配置环境变量<br>[shell]<br>$ cd ~<br>$ vim .bashrc<br>#Java properties<br>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/<br>export JRE_HOME=$JAVA_HOME/jre<br>export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH<br>export PATH=.:$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</p>
 <p>#Hadoop variables<br>export HADOOP_INSTALL=/Users/lgrcyanny/hadoop  # Please change to your installation path<br>export PATH=$PATH:$HADOOP_INSTALL/bin<br>export PATH=$PATH:$HADOOP_INSTALL/sbin<br>export HADOOP_MAPRED_HOME=$HADOOP_INSTALL<br>export HADOOP_COMMON_HOME=$HADOOP_INSTALL<br>export HADOOP_HDFS_HOME=$HADOOP_INSTALL<br>export HADOOP_YARN_HOME=$HADOOP_INSTALL<br>$ source .bashrc<br>[/shell]</p>
 <p>6. 编辑hadoop-env.sh<br>[shell]<br>$ cd ~/hadoop/etc/hadoop<br>$vim hadoop-env.sh</p>
 <h1 id="config-JAVA-HOME-and-HADOOP-OPTS"><a href="#config-JAVA-HOME-and-HADOOP-OPTS" class="headerlink" title="config JAVA_HOME and HADOOP_OPTS"></a>config JAVA_HOME and HADOOP_OPTS</h1><p>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/</p>
@@ -107,9 +106,9 @@
 <p>  &lt;property&gt;<br>    &lt;name&gt;mapreduce.cluster.local.dir&lt;/name&gt;<br>    &lt;value&gt;/Users/lgrcyanny/hadoop/mydata/mapred/local&lt;/value&gt;<br>    &lt;description&gt;The local dir for map reduce&lt;/description&gt;<br>    &lt;final&gt;true&lt;/final&gt;<br>  &lt;/property&gt;</p>
 <p>&lt;/configuration&gt;<br>[/shell]</p>
 <p>11. 编辑hdfs-site.xml<br>[shell]<br>$ cd ~/hadoop<br>$ mkdir -p mydata/hdfs/namenode<br>$ mkdir -p mydata/hdfs/datanode<br>$ vim etc/hadoop/hdfs-site.xml<br>&lt;configuration&gt;<br>  &lt;property&gt;<br>     &lt;name&gt;dfs.replication&lt;/name&gt;<br>     &lt;value&gt;1&lt;/value&gt;<br>   &lt;/property&gt;<br>   &lt;property&gt;<br>     &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;<br>     &lt;value&gt;file:/Users/lgrcyanny/hadoop/mydata/hdfs/namenode&lt;/value&gt;<br>   &lt;/property&gt;<br>   &lt;property&gt;<br>     &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;<br>     &lt;value&gt;file:/Users/lgrcyanny/hadoop/mydata/hdfs/datanode&lt;/value&gt;<br>   &lt;/property&gt;<br>&lt;/configuration&gt;<br>[/shell]</p>
-<p>12. Format HDFS<br>[shell]<br>$ hadoop namenode -format<br>……<br>14/02/06 13:22:41 INFO namenode.NameNode: SHUTDOWN_MSG:<br>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>SHUTDOWN_MSG: Shutting down NameNode at Cyanny-MacBook-Air.local/192.168.1.103<br><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>[/shell]</p>
+<p>12. Format HDFS<br>[shell]<br>$ hadoop namenode -format<br>……<br>14/02/06 13:22:41 INFO namenode.NameNode: SHUTDOWN_MSG:<br>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>SHUTDOWN_MSG: Shutting down NameNode at Cyanny-MacBook-Air.local/192.168.1.103<br><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>[/shell]</p>
 <p>13. 启动Hadoop<br>[shell]<br>$ start-dfs.sh<br>$ start-yarn.sh<br>$ jps #  Java Virtual Machine Process Status Tool<br>10377 Jps<br>10224 NodeManager<br>10146 ResourceManager<br>9155 SecondaryNameNode<br>9064 DataNode<br>8990 NameNode<br>[/shell]<br>Hadoop 1.x采用start-all.sh启动，而Hadoop2.x拆分为start-dfs.sh, start-yarn.sh，我想是因为如果使用HBase时，只需要HDFS的服务，而一般不需要YARN的服务，这样就不会占用太多的内存。</p>
-<p>14. Web查看Hadoop<br>查看HDFS的状态：<a target="_blank" rel="noopener" href="http://localhost:50070">http://localhost:50070</a><br>查看YARN的状态: <a target="_blank" rel="noopener" href="http://localhost:8088">http://localhost:8088</a></p>
+<p>14. Web查看Hadoop<br>查看HDFS的状态：<a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070</a><br>查看YARN的状态: <a target="_blank" rel="noopener" href="http://localhost:8088/">http://localhost:8088</a></p>
 <p>15. 测试Hadoop，使用Hadoop的WordCount example<br>[shell]<br>$ cd ~/hadoop<br>$ hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 5<br>Number of Maps  = 2<br>Samples per Map = 5<br>14/02/06 13:28:39 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform… using builtin-java classes where applicable<br>Wrote input for Map #0<br>Wrote input for Map #1<br>Starting Job<br>14/02/06 13:28:40 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032<br>14/02/06 13:28:41 INFO input.FileInputFormat: Total input paths to process : 2<br>14/02/06 13:28:41 INFO mapreduce.JobSubmitter: number of splits:2<br>………<br>[/shell]<br>你可以通过<a target="_blank" rel="noopener" href="http://localhost:8088/cluster">http://localhost:8088/cluster</a> 查看MapReduce的运行状态</p>
 <p>Congratulations, Hadoop 2.2.0安装完毕，接下来我们就要开始安装HBase了。</p>
 <h3 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h3><p>1. 当启动Hadoop，jps查看后没有datanode怎么办？<br>某一天我遇到这个问题，方法是将datanode和namenode, 以及tmp文件夹删除，重新format，再重启Hadoop。<br>[shell]<br>$ cd ~/hadoop<br>$ stop-dfs.sh<br>$ stop-yarn.sh<br>$ rm -r mydata/hdfs/datanode<br>$ rm -r mydata/hdfs/namenode<br>$ rm -r mydata/tmp<br>$ mkdir -p mydata/tmp<br>$ hadoop namenode -format<br>$ start-dfs.sh<br>$ start-yarn.sh<br>[/shell]</p>
