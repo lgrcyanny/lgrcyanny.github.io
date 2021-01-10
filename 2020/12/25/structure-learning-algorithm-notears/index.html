@@ -121,7 +121,7 @@
 </tr>
 </tbody></table>
 <h1 id="2-NOTEARS算法"><a href="#2-NOTEARS算法" class="headerlink" title="2.NOTEARS算法"></a>2.NOTEARS算法</h1><p>其英文缩写是 Non-combinatorial Optimization via Trace Exponential and Augmented lagRangian for Structure learning<br>该算法我个人理解主要的贡献是找到一种数学建模方法, 把DAG的学习问题转化为可以用拉格朗日乘数法可求最优解的问题, 其建模的问题定义如下:</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7k87gij21hl0kpdm0.jpg" alt="model def"></p>
+<p><img src="https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears01.jpg" alt="model def"></p>
 <p>基于拉格朗日乘数法进行数值优化, 优势是:一个有n个变量与k个约束条件的最优化问题转换为一个解有n + k个变量的方程组的解的问题, 同时可复用一些优化算法: L-BFGS, quasi-Newton(PQN)</p>
 <ul>
 <li>例如: 求f(x, y)在g(x, y)=c约数下的最大值, 可以转化为求下面函数的极值的问题:</li>

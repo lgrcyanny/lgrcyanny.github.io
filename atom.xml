@@ -79,7 +79,7 @@
     <link href="http://example.com/2020/12/25/structure-learning-algorithm-notears/"/>
     <id>http://example.com/2020/12/25/structure-learning-algorithm-notears/</id>
     <published>2020-12-25T14:01:59.000Z</published>
-    <updated>2021-01-10T05:34:19.671Z</updated>
+    <updated>2021-01-10T05:50:25.099Z</updated>
     
     <content type="html"><![CDATA[<p>最近三年扎进了AI领域, 学了很多算法, 最近开始真正拉高维度看AI, AI不仅仅是Machine Learning, 还有State Based, Variable Bases, Logic编程等方法. 最近半年看了<strong>The book of Why</strong>, 深受启发, 看世界的角度也发生很大变化, 同时也觉得因果推理将是一个值得研究的好领域, 就算目前落地场景不多, 相信未来也是大有可为.</p>
 <p>今天静下来, 好好看了在CausalNex库中, 用到的算法NOTEARS, 用于结构学习, 该论文发表在2018的NIPS, 方法神奇, 解决方案简洁, 以下是自己的一些笔记:</p>
@@ -117,7 +117,7 @@
 </tr>
 </tbody></table>
 <h1 id="2-NOTEARS算法"><a href="#2-NOTEARS算法" class="headerlink" title="2.NOTEARS算法"></a>2.NOTEARS算法</h1><p>其英文缩写是 Non-combinatorial Optimization via Trace Exponential and Augmented lagRangian for Structure learning<br>该算法我个人理解主要的贡献是找到一种数学建模方法, 把DAG的学习问题转化为可以用拉格朗日乘数法可求最优解的问题, 其建模的问题定义如下:</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7k87gij21hl0kpdm0.jpg" alt="model def"></p>
+<p><img src="https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears01.jpg" alt="model def"></p>
 <p>基于拉格朗日乘数法进行数值优化, 优势是:一个有n个变量与k个约束条件的最优化问题转换为一个解有n + k个变量的方程组的解的问题, 同时可复用一些优化算法: L-BFGS, quasi-Newton(PQN)</p>
 <ul>
 <li>例如: 求f(x, y)在g(x, y)=c约数下的最大值, 可以转化为求下面函数的极值的问题:</li>
@@ -794,7 +794,7 @@
 <li>batch要有唯一的txid</li>
 <li>commit时按顺序提交，类似事务的两阶段提交</li>
 </ul>
-<hr/>
+<hr>
 
 
 
@@ -893,7 +893,7 @@
 &lt;li&gt;hypothesis function is sigmoid function&lt;/li&gt;
 &lt;li&gt;cost function: J(theta)&lt;/li&gt;
 &lt;li&gt;gradient descent and algorithms&lt;/li&gt;
-&lt;li&gt;advantanced optimization with regularization to solve overfitting problem.
+&lt;li&gt;advantanced optimization with regularization to solve overfitting problem.&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -907,7 +907,7 @@
     <link href="http://example.com/2017/02/21/binary-search-algorithm/"/>
     <id>http://example.com/2017/02/21/binary-search-algorithm/</id>
     <published>2017-02-21T01:29:49.000Z</published>
-    <updated>2017-08-28T07:30:05.000Z</updated>
+    <updated>2021-01-10T05:49:08.892Z</updated>
     
     <content type="html"><![CDATA[<p>One day, I wanted to use binary search in one of my feature in my project. My friend said the algorithm was not easy to implement bug free. I did’t believe that. I spent 10min to write it.</p>
 <a id="more"></a>
@@ -997,7 +997,7 @@
     <summary type="html">
     
       &lt;p&gt;一直没有写关于2016的回顾，有很多方面吧。2016年发生很多事儿的一年，对于技术上的发展也有了新的思考，搞技术不再是死磕某种工具、算法或bug，其实本质上是为了解决问题或者做更好的产品。虽然我做的不是具体的产品而是底层的工具和平台，但这些工具的出口也是依赖”pillar application”, 多想想也是好处的。&lt;/p&gt;
-&lt;p&gt;2016工作忙，读的书没有很多，但想想扎克伯克比我们还忙一年能挑战23本书确实很牛，其实自己的时间管理是不太到位的，大部分周末都懒散睡觉或者出去逛街了，回归2016年，读的书们：
+&lt;p&gt;2016工作忙，读的书没有很多，但想想扎克伯克比我们还忙一年能挑战23本书确实很牛，其实自己的时间管理是不太到位的，大部分周末都懒散睡觉或者出去逛街了，回归2016年，读的书们：&lt;/p&gt;
     
     </summary>
     
