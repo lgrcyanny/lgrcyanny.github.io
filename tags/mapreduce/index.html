@@ -1,113 +1,195 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>MapReduce | CyannyLive | AI and Big Data</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        CyannyLive
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="../../css/style.css">
 
-  
-  <meta name="author" content="Cyanny Liang">
-  
 
-  
-  <meta name="description" content="Wisdom comes from inside">
-  
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
 
-  
+    <script>
+        infiniteScroll()
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
 
-  
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
 
-  <meta property="og:site_name" content="CyannyLive"/>
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="CyannyLive" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
 <meta name="generator" content="Hexo 5.3.0"></head>
 
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="../../index.html" class="logo">
+                CyannyLive
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
 
-<body>
-<div class="blog">
-  <div class="content">
+    <button class="ipad-menu menu">menu</button>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">CyannyLive</a>
+    <h1 class="title" id="main-title">
+        <a href="../../index.html" class="logo">
+            CyannyLive
+        </a>
     </h1>
-    <p class="site-description">AI and Big Data</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/about/">About</a></li>
-      
-    </ul>
-  </nav>
+    <h2 class="desc">
+        AI and Big Data
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a href="../../https:/github.com/lgrcyanny">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a href="../../https:/www.linkedin.com/in/cyanny-liang-21222451/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
 </header>
-
-    <main class="site-main posts-loop">
+        <main class="main">
+            
+<section class="posts">
     
+        <article class="post">
+            
+                <h4 class="post-cat">
+                    <a href="../../categories/hadoop/">
+                        Hadoop
+                    </a>
+                </h4>
+                
+                <h4 class="post-cat">
+                    <a href="../../categories/hadoop/hbase/">
+                        HBase
+                    </a>
+                </h4>
+                
+                    <h1 class="post-title">
+                        <a href="../../2014/03/20/hbase-mapreduce-e6-8e-92-e5-ba-8f-secondary-sort/">
+                            HBase MapReduce排序Secondary Sort
+                        </a>
+                    </h1>
 
-<article>
+                    <ul class="post-date">
+                        <li>
+                            March 20, 2014
+                        </li>
+                        <li>
+                            Cyanny Liang
+                        </li>
+                    </ul>
+                    
+                        <div class="post-cover">
+                            <img src="http://i59.tinypic.com/1416uzt.jpg">
+                        </div>
+                    
+                    <div class="post-content ">
+                        <p>MapReduce是Hadoop中处理大数据的方法，是一个处理大数据的简单算法、编程泛型。虽然思想简单，但其实真正用起来还是有很多问题，不是所有的问题都可以像WordCount那样典型和直观, 有很多需要trick的地方。MapReduce的中心思想是分而治之，数据要松耦合，可以划分为小数据集并行处理，如果数据本身在计算上存在很强的依赖关系，就不要赶鸭子上架，用MapReduce了。<br>MapReduce编程中，最重要的是要抓住Map和Reduce的input和output，好的input和output可以降低实现的复杂度。最近，写了很多关于MapReduce的job，有倒排索引，统计，排序等。其中，对排序花费了一番功夫，MapReduce做WordCount很好理解,<br>Map input:[offset, text],  output: [word, 1],</p>
+<p>Reduce input: [word, 1], output: [word, totalcount],还可以设置Combiner进行优化。</p>
+                            <a href="../../2014/03/20/hbase-mapreduce-e6-8e-92-e5-ba-8f-secondary-sort/" class="more-link">Continue reading</a>
+                    </div>
+        </article>
+        
+</section>
 
-  <h2 class="article-title  tag">MapReduce</h2>
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
 
-  <div class="archive">
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2014-03-20T10:51:08.000Z">
-            <a href="/2014/03/20/hbase-mapreduce-e6-8e-92-e5-ba-8f-secondary-sort/">2014-03-20</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/2014/03/20/hbase-mapreduce-e6-8e-92-e5-ba-8f-secondary-sort/"><span>HBase MapReduce排序Secondary Sort</span></a></h3>
-          
-        </div>
-      </div>
-    
-    <nav class="pagination">
-  
-  
-</nav>
-  </div>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../categories/algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/distributed-system/">Distributed System</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../categories/distributed-system/life/">Life</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../categories/hadoop/">Hadoop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../categories/hadoop/hbase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/hadoop/hive/">Hive</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../categories/javascript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/network/">Network</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/system-analysis-and-design/">System Analysis and Design</a></li></ul>
 
-</article>
-    </main>
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Copyright
-    </br>
-    
-    &copy; 2021 Cyanny Liang
-    
-  </p>
-</footer>
-    
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2013/">2013</a></li></ul>
 
-    ga('create', 'UA-40624708-1', 'auto');
-    ga('send', 'pageview');
 
-</script>
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
 
-  </div>
-</div>
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../agile/" rel="tag">Agile</a></li><li class="tag-list-item"><a class="tag-list-link" href="../akka/" rel="tag">Akka</a></li><li class="tag-list-item"><a class="tag-list-link" href="../akka-scala/" rel="tag">Akka, Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../big-data/" rel="tag">Big Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="../causal-inference-ai/" rel="tag">Causal Inference, AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="../hbase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="../hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="../hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="../javascript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="../language/" rel="tag">Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="../learn/" rel="tag">Learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="../learning/" rel="tag">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../machine-learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="" rel="tag">MapReduce</a></li><li class="tag-list-item"><a class="tag-list-link" href="../methodology/" rel="tag">Methodology</a></li><li class="tag-list-item"><a class="tag-list-link" href="../network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="../node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="../research/" rel="tag">Research</a></li><li class="tag-list-item"><a class="tag-list-link" href="../resource/" rel="tag">Resource</a></li><li class="tag-list-item"><a class="tag-list-link" href="../scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../systemanalysis/" rel="tag">SystemAnalysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../vps/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../apache-storm/" rel="tag">apache storm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../java-performance/" rel="tag">java performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="../learning/" rel="tag">learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../life/" rel="tag">life</a></li><li class="tag-list-item"><a class="tag-list-link" href="../machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="../nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="../spark/" rel="tag">spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../spark-streaming/" rel="tag">spark streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="../%E8%AF%97%E8%AF%9D/" rel="tag">诗话</a></li></ul>
+
+            </section>
+        </aside>
+    </div>
 </body>
+
 </html>

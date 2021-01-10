@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        CyannyLive
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="../css/style.css">
+
+
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
+
+    <script>
+        infiniteScroll()
+
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
+
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
+
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
+
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
+
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="../index.html" class="logo">
+                CyannyLive
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
+
+    <button class="ipad-menu menu">menu</button>
+
+    <h1 class="title" id="main-title">
+        <a href="../index.html" class="logo">
+            CyannyLive
+        </a>
+    </h1>
+    <h2 class="desc">
+        AI and Big Data
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a href="../https:/github.com/lgrcyanny">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a href="../https:/www.linkedin.com/in/cyanny-liang-21222451/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</header>
+        <main class="main">
+            <article class="post">
+    
+    <h2 class="post-title">
+        Spark Streaming Exactly-Once Analysis
+    </h2>
+    <ul class="post-date">
+        <li>
+            2017-08-27
+        </li>
+        <li>
+            Cyanny Liang
+        </li>
+    </ul>
+    <div class="post-content">
+        <p>最近对Spark Streaming接触比较多，主要关注的是streaming的准确性方面的需求, 忙了快半年，不禁想总结一下自己遇到的问题和收获。</p>
+<h2 id="什么是Streaming系统？"><a href="#什么是Streaming系统？" class="headerlink" title="什么是Streaming系统？"></a>什么是Streaming系统？</h2><p>按Google xxx的定义:<br>Spark上已经有dataframe和<br>问为什么需要在exactly-once上花费这么多时间呢。streaming和batch的处理逻辑有什么区别呢？我觉得streaming更适合一些简单的过滤，能在100ms以内能算完的逻辑，而这些逻辑用batch也可以算完，为什么要streaming呢？用户们更希望的是更快。如果batch也能满足低延迟的需求，streaming系统就不需要了。而问题是为什么我们需要一个单独的streaming系统？</p>
+<a id="more"></a>
+
+<p> 生产环境中的版本是1.6，spark streaming的API在1.6上是基于RDD的DStream API，相比Structured Streaming，更稳定和成熟些。而我们的用户们，比较关心的是streaming系统</p>
+<p> 开源里广泛使用的Streaming系统是Storm和Flink。Storm早期用record ack的方式保证at-least once，但没有提供exactly-once的保证，后面又有了storm trident.</p>
+<h2 id="Spark-Streaming-Receiver模式没有exactly-once保证"><a href="#Spark-Streaming-Receiver模式没有exactly-once保证" class="headerlink" title="Spark Streaming Receiver模式没有exactly-once保证"></a>Spark Streaming Receiver模式没有exactly-once保证</h2><h2 id="Flink中的Exactly-Once保证"><a href="#Flink中的Exactly-Once保证" class="headerlink" title="Flink中的Exactly-Once保证"></a>Flink中的Exactly-Once保证</h2><h2 id="Storm的Eactly-Once保证"><a href="#Storm的Eactly-Once保证" class="headerlink" title="Storm的Eactly-Once保证"></a>Storm的Eactly-Once保证</h2><h3 id="Storm-Architecture"><a href="#Storm-Architecture" class="headerlink" title="Storm Architecture"></a>Storm Architecture</h3><p><img src="http://wx3.sinaimg.cn/mw690/761b7938ly1fizgwunfr6j21kw0n7e6n.jpg" alt="storm architecture"><br>以Storm on Yarn来说明Storm的架构：</p>
+<ul>
+<li>client将jar包通过yarn上传</li>
+<li>在一台NodeManager上启动Nimbus，这是master节点，负责管理StormTopology, 分发task，心跳等</li>
+<li>其他的NodeManager上启动Supervisor, 相当于slave节点，管理storm worker<ul>
+<li> 在每个supervisor上，可以启动多个worker进程，每个worker进程可以运行多个executor线程，每个executor内可以运行多个task。这些task运行的就是Spout或Bolt定义的操作</li>
+</ul>
+</li>
+<li> Zookeeper, Storm运行时状态的管理</li>
+</ul>
+<p>Storm方面算是简单调研，理解不是很深入，具体的参考<a target="_blank" rel="noopener" href="http://storm.apache.org/releases/1.1.1/Setting-up-a-Storm-cluster.html">官方文档</a></p>
+<h3 id="Storm-exactly-once"><a href="#Storm-exactly-once" class="headerlink" title="Storm exactly-once"></a>Storm exactly-once</h3><p>####1. Storm Transactional Topologies(deprecated)<br>Strom 0.7版本中，实现了<a target="_blank" rel="noopener" href="http://storm.apache.org/releases/1.1.1/Transactional-topologies.html">transctional topologies</a>来保证exactly-once,<br><strong>1.transactional phrases 类似两阶段事务机制</strong></p>
+<ul>
+<li>The processing phase: this is the phase that can be done in parallel for many batches 可以并发执行计算partial result</li>
+<li>The commit phase: The commit phases for batches are strongly ordered. So the commit for batch 2 is not done until the commit for batch 1 has been successful. 保证batch的提交是按顺序的</li>
+</ul>
+<p>来个直观的，用户需要构建的Topology如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MemoryTransactionalSpout spout = <span class="keyword">new</span> MemoryTransactionalSpout(DATA, <span class="keyword">new</span> Fields(<span class="string">&quot;word&quot;</span>), PARTITION_TAKE_PER_BATCH);</span><br><span class="line">TransactionalTopologyBuilder builder = <span class="keyword">new</span> TransactionalTopologyBuilder(<span class="string">&quot;global-count&quot;</span>, <span class="string">&quot;spout&quot;</span>, spout, <span class="number">3</span>);</span><br><span class="line">builder.setBolt(<span class="string">&quot;partial-count&quot;</span>, <span class="keyword">new</span> BatchCount(), <span class="number">5</span>)</span><br><span class="line">        .shuffleGrouping(<span class="string">&quot;spout&quot;</span>);</span><br><span class="line">builder.setBolt(<span class="string">&quot;sum&quot;</span>, <span class="keyword">new</span> UpdateGlobalCount())</span><br><span class="line">        .globalGrouping(<span class="string">&quot;partial-count&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>2.关键点</strong></p>
+<ul>
+<li>一个拓扑里只有一个Transactional Spout，其实现是由一个单线程的Coordinator Spout + 多个Emitter Bolt组成。利用Storm的ACK Framework机制，判断一个batch是否执行完成</li>
+<li>Committer Bolt 可以有多个，需要收到Transactional Spout的commit信息才会执行commit</li>
+</ul>
+<p>####2. Storm Trident Topologies<br>storm 1.1的版本中，引入新的Trident API解决exactly-once，这是transactional topologies的升级版本。API的易用性改善，exactly-once也是采用事务机制</p>
+<p><strong>1.exactly once</strong></p>
+<ul>
+<li>Tuples are processed as small batches 采用micor-batch机制</li>
+<li>Each batch of tuples is given a unique id called the “transaction id” (txid). If the batch is replayed, it is given the exact same txid. 每个batch有唯一的batchid</li>
+<li>State updates are ordered among batches. That is, the state updates for batch 3 won’t be applied until the state updates for batch 2 have succeeded. 按txid顺序提交</li>
+</ul>
+<p><strong>2.trident example</strong><br><a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/LearningStorm/blob/master/src/main/scala/com/learning/storm/TridentTest.scala">github example</a></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> topology = <span class="keyword">new</span> <span class="type">TridentTopology</span>()</span><br><span class="line"><span class="comment">// define spout</span></span><br><span class="line"><span class="keyword">val</span> spout = <span class="keyword">new</span> <span class="type">FixedBatchSpout</span>(<span class="keyword">new</span> <span class="type">Fields</span>(<span class="string">&quot;sentence&quot;</span>), <span class="number">3</span>,</span><br><span class="line">    <span class="keyword">new</span> <span class="type">Values</span>(<span class="string">&quot;the cow jumped over the moon&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> <span class="type">Values</span>(<span class="string">&quot;the man went to the store and bought some candy&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> <span class="type">Values</span>(<span class="string">&quot;four score and seven years ago&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> <span class="type">Values</span>(<span class="string">&quot;how many apples can you eat&quot;</span>))</span><br><span class="line">  spout.setCycle(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> wordsCount: <span class="type">TridentState</span> = topology.newStream(<span class="string">&quot;wordsSpout&quot;</span>, spout)</span><br><span class="line">    .each(<span class="keyword">new</span> <span class="type">Fields</span>(<span class="string">&quot;sentence&quot;</span>), <span class="keyword">new</span> <span class="type">Split</span>(), <span class="keyword">new</span> <span class="type">Fields</span>(<span class="string">&quot;word&quot;</span>))</span><br><span class="line">    .groupBy(<span class="keyword">new</span> <span class="type">Fields</span>(<span class="string">&quot;word&quot;</span>))</span><br><span class="line">    .persistentAggregate(<span class="keyword">new</span> <span class="type">MemoryMapState</span>.<span class="type">Factory</span>(), <span class="keyword">new</span> <span class="type">Count</span>(), <span class="keyword">new</span> <span class="type">Fields</span>(<span class="string">&quot;count&quot;</span>))</span><br><span class="line">    .parallelismHint(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p>###<strong>总结</strong></p>
+<p>Storm里为了exacly once，需要做到：</p>
+<ul>
+<li>源端可重放</li>
+<li>batch要有唯一的txid</li>
+<li>commit时按顺序提交，类似事务的两阶段提交</li>
+</ul>
+<hr>
+
+
+
+
+
+
+
+
+    </div>
+</article>
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
+
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../categories/algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/distributed-system/">Distributed System</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../categories/distributed-system/life/">Life</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../categories/hadoop/">Hadoop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../categories/hadoop/hbase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/hadoop/hive/">Hive</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../categories/javascript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/network/">Network</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="../categories/system-analysis-and-design/">System Analysis and Design</a></li></ul>
+
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
+
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2013/">2013</a></li></ul>
+
+
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
+
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../tags/agile/" rel="tag">Agile</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/akka/" rel="tag">Akka</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/akka-scala/" rel="tag">Akka, Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/big-data/" rel="tag">Big Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/causal-inference-ai/" rel="tag">Causal Inference, AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/hbase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/javascript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/language/" rel="tag">Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/learn/" rel="tag">Learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/learning/" rel="tag">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/machine-learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/mapreduce/" rel="tag">MapReduce</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/methodology/" rel="tag">Methodology</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/research/" rel="tag">Research</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/resource/" rel="tag">Resource</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/systemanalysis/" rel="tag">SystemAnalysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/vps/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/apache-storm/" rel="tag">apache storm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/java-performance/" rel="tag">java performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/learning/" rel="tag">learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/life/" rel="tag">life</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/spark/" rel="tag">spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/spark-streaming/" rel="tag">spark streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="../tags/%E8%AF%97%E8%AF%9D/" rel="tag">诗话</a></li></ul>
+
+            </section>
+        </aside>
+    </div>
+</body>
+
+</html>

@@ -1,90 +1,145 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Revolution——面向对象看黑客帝国 | CyannyLive | AI and Big Data</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        CyannyLive
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="../../../../css/style.css">
 
-  
-  <meta name="author" content="Cyanny Liang">
-  
 
-  
-  <meta name="description" content="Wisdom comes from inside">
-  
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
 
-  
-  
-  <meta name="keywords" content="life">
-  
+    <script>
+        infiniteScroll()
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
 
-  <meta property="og:title" content="Revolution——面向对象看黑客帝国"/>
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
 
-  <meta property="og:site_name" content="CyannyLive"/>
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="CyannyLive" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
 <meta name="generator" content="Hexo 5.3.0"></head>
 
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="../../../../index.html" class="logo">
+                CyannyLive
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
 
-<body>
-<div class="blog">
-  <div class="content">
+    <button class="ipad-menu menu">menu</button>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">CyannyLive</a>
+    <h1 class="title" id="main-title">
+        <a href="../../../../index.html" class="logo">
+            CyannyLive
+        </a>
     </h1>
-    <p class="site-description">AI and Big Data</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/about/">About</a></li>
-      
-    </ul>
-  </nav>
+    <h2 class="desc">
+        AI and Big Data
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a href="../../../../https:/github.com/lgrcyanny">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a href="../../../../https:/www.linkedin.com/in/cyanny-liang-21222451/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
 </header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
+        <main class="main">
+            <article class="post">
     
-    <h3 class="article-title"><span>Revolution——面向对象看黑客帝国</span></h3>
     
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2014/02/27/revolution-e9-9d-a2-e5-90-91-e5-af-b9-e8-b1-a1-e7-9c-8b-e9-bb-91-e5-ae-a2-e5-b8-9d-e5-9b-bd/" rel="bookmark">
-        <time class="entry-date published" datetime="2014-02-27T02:41:52.000Z">
-          2014-02-27
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
+    <h4 class="post-cat">
+        <a href="../../../../categories/life/">
+            Life
+        </a>
+    </h4>
+    
+    
+    <h2 class="post-title">
+        Revolution——面向对象看黑客帝国
+    </h2>
+    <ul class="post-date">
+        <li>
+            2014-02-27
+        </li>
+        <li>
+            Cyanny Liang
+        </li>
+    </ul>
+    <div class="post-content">
         <p>作者: Thomas Zhang</p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>清楚地记得，第一次看《The Matrix》这部电影是在小学六年级，在一个英语班上，同小伙伴们一起，围着一个20英寸的小电视，一知半解地看完了一部完全没有中文字幕的英文版本。虽然那时的自己，对这个繁复庞杂的世界架构必然一知半解，但纵然如此，惊喜与震撼已经随着剧终Neo手中听筒的落地，而深埋内心。我开始像Mopheus一样的问自己。What is real? How to define real? 我开始问自己，这个世界是否真的有可能是一个Matrix中的映像，周遭的生活，是否真的有可能是镜花水月，空中楼台。转眼十几年过去了。这十几年中，《The Matrix》三部曲一直珍藏在我的硬盘中，时不时翻出来重新品味，每次又都有不一样的体验。[more…]<br>十年后的今天，我已经从一个懵懂的少年，成为一个软件工程专业的学生。不得不说，直到接触了软件，接触了计算机体系结构，接触了面向对象的设计思想，对于这部电影，我才有了一个更深刻，更不一样的理解和体会。而经过这一整个学期对面向对象技术的实papapa践与深入了解，对这部经典的理解，似乎又深入了许多。<br>对于这三部曲，《The Matrix》是开创性的，如疾风骤雨办将一个残酷的真相——现实劈头盖脸的丢到你面前，只留下目瞪口呆的你独自回味着扑面而来的震撼和冲击；《The Matrix ——Reload》是颠覆性的，将你冥思苦想，以为理解了的世界一把推翻，告诉你，真相，其实远远没有那么简单；《The Matrix —— Revolution》是整个三部曲的高潮与结尾，却更是一个开端，那一夜雨战之后，一切都恢复了原装，但是一切，又都变得不同了起来。这篇文章当然不是描述对电影艺术表现抑或情节内容的感受与分析，但是我们仍然要找一个切入点，一个面向对象世界中，和那个电影中的波澜壮阔的世界能够微妙的联系在一起的点。我选择了，Revolution——革命。</p>
 <h3 id="Recolution"><a href="#Recolution" class="headerlink" title="Recolution"></a>Recolution</h3><p>在那个雨夜大战之后，Neo和Smith这一对系统中的异常，终于被抹平，Matrix中的世界，似乎又恢复昔日的平静，一切都回到了原点。但，事实真的是这样么？Revolution，革命，究竟又指的是什么呢？<br>其实事实上，这时候的世界已经发生了本质的变化。还记得《Reload》里面的印度小姑娘Sati么？在从前，一个在系统中本应该被删除的，没有既定目标的冗余程序，现在竟然可以在Architecture眼皮底下自由地玩耍，并且可以完成一项似乎并没有“实用”功能性的代码改写——让夕阳变得美丽——来纪念逝去的人类朋友Neo。这意味着看似恢复原样的Matrix系统其实已经在不经意间完成了一次根本上变化，整个Matrix中，开始允许因为“爱”产生的冗余程序的存在。这是一个近乎根本性的有颠覆意义的改变。<br>也就是说，Revolution并不仅仅指的是在人类的角度上，Neo通过自我牺牲完成了对Zion的拯救，改变了脱离Matrix的人类宿命一样的被屠杀的命运；在另一个层面上，也指的是在Oracle的指引与Neo的协助之下，整个Matrix系统进行了一次根本性的“革命”。<br>更确切的对应到软件体系中，我们应该可以说，在电影中Matrix系统进行了一次大规模的系统热升级，在这次升级中，对整个系统的内存回收机制做出了根本上的修改，以使得系统更好的完成承载作为“电池”的人类思维的需求！<br>在影片中，从Merovingian、Architecture和Oracle的口中，直接间接的，我们可以知道，整个Matrix系统已经先后进行过六次这样的“升级”。这种开发模式，细细想来，与面向对象、敏捷开发中经常应用的迭代式的开发方式，有着异曲同工之处。<br>但是，一个系统要应用迭代开发方式，那么这个系统一定要满足特定的条件。在敏捷系统中，迭代开发需要满足<br>1、在项目开发早期需求可能有所变化<br>2、分析设计人员对应用领域很熟悉<br>3、高风险项目<br>4、用户可不同程度地参与整个项目的开发过程<br>5、使用面向对象的语言或统一建模语言<br>6、使用CASE工具<br>7、具有高素质的项目管理者和软件研发团队<br>其中，面向对象是使用迭代开发方式的必要条件之一。接下来，就来分析一下《The Matrix》世界对应到面向对象方式中的设计。</p>
@@ -101,91 +156,35 @@
 <h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>Architecture：You play a dangerous game!<br>Oracle: Change is always dangerous.<br>Architecture：Just how long,  do you think this peace can last.<br>Oracle: As long as  it can.</p>
 <p>May so be the software system!</p>
 
-      
     </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/life/">Life</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/life/">life</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
 </article>
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
 
-  
-	<section id="comments" class="comment">
-	  <div id="disqus_thread">
-	  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	  </div>
-	</section>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/">Distributed System</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/life/">Life</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/">Hadoop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hbase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hive/">Hive</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/javascript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/network/">Network</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/system-analysis-and-design/">System Analysis and Design</a></li></ul>
 
-	<script type="text/javascript">
-	var disqus_shortname = 'lgrcyanny';
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	</script>
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
+
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2013/">2013</a></li></ul>
 
 
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
 
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/agile/" rel="tag">Agile</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka/" rel="tag">Akka</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka-scala/" rel="tag">Akka, Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/big-data/" rel="tag">Big Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/causal-inference-ai/" rel="tag">Causal Inference, AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hbase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/javascript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/language/" rel="tag">Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learn/" rel="tag">Learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/mapreduce/" rel="tag">MapReduce</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/methodology/" rel="tag">Methodology</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/research/" rel="tag">Research</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/resource/" rel="tag">Resource</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/systemanalysis/" rel="tag">SystemAnalysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/vps/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/apache-storm/" rel="tag">apache storm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java-performance/" rel="tag">java performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/life/" rel="tag">life</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark-streaming/" rel="tag">spark streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/%E8%AF%97%E8%AF%9D/" rel="tag">诗话</a></li></ul>
 
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Copyright
-    </br>
-    
-    &copy; 2021 Cyanny Liang
-    
-  </p>
-</footer>
-    
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-40624708-1', 'auto');
-    ga('send', 'pageview');
-
-</script>
-
-  </div>
-</div>
+            </section>
+        </aside>
+    </div>
 </body>
+
 </html>

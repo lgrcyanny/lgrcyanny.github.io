@@ -1,90 +1,139 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Learning Akka | CyannyLive | AI and Big Data</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        CyannyLive
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="../../../../css/style.css">
 
-  
-  <meta name="author" content="Cyanny Liang">
-  
 
-  
-  <meta name="description" content="Wisdom comes from inside">
-  
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
 
-  
-  
-  <meta name="keywords" content="Akka,Scala">
-  
+    <script>
+        infiniteScroll()
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
 
-  <meta property="og:title" content="Learning Akka"/>
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
 
-  <meta property="og:site_name" content="CyannyLive"/>
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="CyannyLive" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
 <meta name="generator" content="Hexo 5.3.0"></head>
 
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="../../../../index.html" class="logo">
+                CyannyLive
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
 
-<body>
-<div class="blog">
-  <div class="content">
+    <button class="ipad-menu menu">menu</button>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">CyannyLive</a>
+    <h1 class="title" id="main-title">
+        <a href="../../../../index.html" class="logo">
+            CyannyLive
+        </a>
     </h1>
-    <p class="site-description">AI and Big Data</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/about/">About</a></li>
-      
-    </ul>
-  </nav>
+    <h2 class="desc">
+        AI and Big Data
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a href="../../../../https:/github.com/lgrcyanny">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a href="../../../../https:/www.linkedin.com/in/cyanny-liang-21222451/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
 </header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
+        <main class="main">
+            <article class="post">
     
-    <h3 class="article-title"><span>Learning Akka</span></h3>
     
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/07/learning-akka/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-07T13:54:48.000Z">
-          2015-10-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
+    
+    <h2 class="post-title">
+        Learning Akka
+    </h2>
+    <ul class="post-date">
+        <li>
+            2015-10-07
+        </li>
+        <li>
+            Cyanny Liang
+        </li>
+    </ul>
+    <div class="post-content">
         <p>最近学习了scala，主要是跟着<strong>Functional Programming in Scala</strong>的课程学习的，scala主要的用处还是在spark上，关于spark也看了一些源码，处于继续探索中。</p>
 <p>并发时的消息通信是处理spark这样的分布式系统的关键。spark主要依赖scala社区的akka进行消息通讯。在spark1.2的代码中可以看到很多actor的影子，然而spark1.4中，都是封装为EndPoint，但Actor的思想和模式还在。</p>
 <p>基于Actor的消息通讯模型是akka的核心。Akka为处理并发、容错和可扩展性的分布式问题提供了一套基于Actor模型的库。并发的消息通讯中，抽象是关键的方面。Actor模型是1973年由Carl Hewitt在论文”Actor Model of Computation- Scalable Robust Information Systems”中提出, 后被应用于爱立信公司研发的Elang语言，爱立信公司应用Actor模型开发了高并发和可靠的通信系统。</p>
@@ -125,84 +174,35 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    akka.<span class="type">Main</span>.main(<span class="type">Array</span>(classOf[<span class="type">HelloWorld</span>].getName))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Akka的主要学习还是看官方的文档，akka的特定用法看api很不错。<br>以上就是akka的入门的一些学习吧，写的仓促，如有不对的地方还请指正。最近很忙，也没能好好写博客。<br>akka的深入篇，会持续更新。</p>
 
-      
     </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/akka/">Akka</a><a href="/tags/scala/">Scala</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
 </article>
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
 
-  
-	<section id="comments" class="comment">
-	  <div id="disqus_thread">
-	  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	  </div>
-	</section>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/">Distributed System</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/life/">Life</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/">Hadoop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hbase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hive/">Hive</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/javascript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/network/">Network</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/system-analysis-and-design/">System Analysis and Design</a></li></ul>
 
-	<script type="text/javascript">
-	var disqus_shortname = 'lgrcyanny';
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	(function(){
-	  var dsq = document.createElement('script');
-	  dsq.type = 'text/javascript';
-	  dsq.async = true;
-	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}());
-	</script>
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
+
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2013/">2013</a></li></ul>
 
 
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
 
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/agile/" rel="tag">Agile</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka/" rel="tag">Akka</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka-scala/" rel="tag">Akka, Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/big-data/" rel="tag">Big Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/causal-inference-ai/" rel="tag">Causal Inference, AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hbase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/javascript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/language/" rel="tag">Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learn/" rel="tag">Learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/mapreduce/" rel="tag">MapReduce</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/methodology/" rel="tag">Methodology</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/research/" rel="tag">Research</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/resource/" rel="tag">Resource</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/systemanalysis/" rel="tag">SystemAnalysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/vps/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/apache-storm/" rel="tag">apache storm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java-performance/" rel="tag">java performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/life/" rel="tag">life</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark-streaming/" rel="tag">spark streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/%E8%AF%97%E8%AF%9D/" rel="tag">诗话</a></li></ul>
 
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Copyright
-    </br>
-    
-    &copy; 2021 Cyanny Liang
-    
-  </p>
-</footer>
-    
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-40624708-1', 'auto');
-    ga('send', 'pageview');
-
-</script>
-
-  </div>
-</div>
+            </section>
+        </aside>
+    </div>
 </body>
+
 </html>

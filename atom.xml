@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-01-10T05:33:17.114Z</updated>
+  <updated>2021-01-10T06:00:33.850Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://example.com/2020/12/27/an-introduction-to-bayesian-networks/"/>
     <id>http://example.com/2020/12/27/an-introduction-to-bayesian-networks/</id>
     <published>2020-12-27T10:54:04.000Z</published>
-    <updated>2021-01-10T05:33:17.114Z</updated>
+    <updated>2021-01-10T06:00:33.850Z</updated>
     
     <content type="html"><![CDATA[<p>冬日晴好, 下午看完了论文, 对Bayesian Network是什么有了系统的了解.论文是causalnex工具里提到的<br>Stephenson, Todd Andrew. An introduction to Bayesian network theory and usage. No. REP_WORK. IDIAP, 2000.</p>
 <p>该论文主要论述了以下几点:</p>
@@ -42,12 +42,12 @@
 <li>可以引入专家经验</li>
 <li>通过图结构化简联合概率分布求解</li>
 </ul>
-<p>下图是Hackerman解释BN时用的信用欺诈网络:<br><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm2s0q7nz4j20mk0i4n0b.jpg" alt="bn01" title="An Example"></p>
-<h1 id="2-Inference-Bayesian-Network"><a href="#2-Inference-Bayesian-Network" class="headerlink" title="2.Inference Bayesian Network"></a>2.Inference Bayesian Network</h1><p>一个示例如下, 对欺诈模型进行条件概率求解时, 可借助BN进行化简, 这是一个离散变量的例子.<br><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm2s0u4vcdj21ek0njn4d.jpg" alt="bn02"></p>
-<p>其他常见的推断方法包括<br><img src="https://wx3.sinaimg.cn/mw690/761b7938ly1gm2s0ye16fj21ch0kf0vd.jpg" alt="bn03"></p>
-<p>作者在论文中, 重点讲述了Junction Tree Method. 该算法通过将图进行Moralize和Triangulate转化为Join Tree进行推断<br><img src="https://wx2.sinaimg.cn/mw690/761b7938ly1gm2s12i6w8j21dh0s6wm4.jpg" alt="bn04"></p>
-<h1 id="3-Learning-Bayesian-Network"><a href="#3-Learning-Bayesian-Network" class="headerlink" title="3.Learning Bayesian Network"></a>3.Learning Bayesian Network</h1><p>需要关心如下四种场景<br><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm2s163l7ej20yf0cujup.jpg" alt="bn05"></p>
-<h1 id="4-Applications"><a href="#4-Applications" class="headerlink" title="4.Applications"></a>4.Applications</h1><p>一个实用案例, 在windows95中, 采用了BN进行printer的异常检测<br><img src="https://wx3.sinaimg.cn/mw690/761b7938ly1gm2s1ii2rmj20x90lc46s.jpg" alt="bn06"></p>
+<p>下图是Hackerman解释BN时用的信用欺诈网络:<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn01.jpg" alt="bn01"></p>
+<h1 id="2-Inference-Bayesian-Network"><a href="#2-Inference-Bayesian-Network" class="headerlink" title="2.Inference Bayesian Network"></a>2.Inference Bayesian Network</h1><p>一个示例如下, 对欺诈模型进行条件概率求解时, 可借助BN进行化简, 这是一个离散变量的例子.<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn02.jpg" alt="bn02"></p>
+<p>其他常见的推断方法包括<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn03.jpg" alt="bn03"></p>
+<p>作者在论文中, 重点讲述了Junction Tree Method. 该算法通过将图进行Moralize和Triangulate转化为Join Tree进行推断<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn04.jpg" alt="bn04"></p>
+<h1 id="3-Learning-Bayesian-Network"><a href="#3-Learning-Bayesian-Network" class="headerlink" title="3.Learning Bayesian Network"></a>3.Learning Bayesian Network</h1><p>需要关心如下四种场景<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn05.jpg" alt="bn05"></p>
+<h1 id="4-Applications"><a href="#4-Applications" class="headerlink" title="4.Applications"></a>4.Applications</h1><p>一个实用案例, 在windows95中, 采用了BN进行printer的异常检测<br><img src="https://www.cyanny.com/2020/12/27/an-introduction-to-bayesian-networks/bn06.jpg" alt="bn06"></p>
 <p>BN在目前的机器学习中, 应该是计算复杂度高, 应用范围不像深度学习这么广, 而因果推理上, 样本量可以不用很大, 会有不错的应用效果.</p>
 ]]></content>
     
@@ -79,7 +79,7 @@
     <link href="http://example.com/2020/12/25/structure-learning-algorithm-notears/"/>
     <id>http://example.com/2020/12/25/structure-learning-algorithm-notears/</id>
     <published>2020-12-25T14:01:59.000Z</published>
-    <updated>2021-01-10T05:50:25.099Z</updated>
+    <updated>2021-01-10T05:54:52.580Z</updated>
     
     <content type="html"><![CDATA[<p>最近三年扎进了AI领域, 学了很多算法, 最近开始真正拉高维度看AI, AI不仅仅是Machine Learning, 还有State Based, Variable Bases, Logic编程等方法. 最近半年看了<strong>The book of Why</strong>, 深受启发, 看世界的角度也发生很大变化, 同时也觉得因果推理将是一个值得研究的好领域, 就算目前落地场景不多, 相信未来也是大有可为.</p>
 <p>今天静下来, 好好看了在CausalNex库中, 用到的算法NOTEARS, 用于结构学习, 该论文发表在2018的NIPS, 方法神奇, 解决方案简洁, 以下是自己的一些笔记:</p>
@@ -124,11 +124,11 @@
 <li>\(L(x, y, \gamma) = f(x, y) + \gamma * (g(x, y) - c)\)</li>
 </ul>
 <p>下图是NOTEARS抽象为拉格朗日乘数的公式</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7pxt34j21e6089abm.jpg" alt="lagrangian equation"></p>
+<p><img src="https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears02.jpg" alt="lagrangian equation"></p>
 <p>下图是NOTEARS的算法流程</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/761b7938ly1gm0h7tsn6lj20yu0bqgno.jpg" alt="notears algorithm"></p>
+<p><img src="https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears03.jpg" alt="notears algorithm"></p>
 <h1 id="3-NOTEARS算法效果"><a href="#3-NOTEARS算法效果" class="headerlink" title="3.NOTEARS算法效果"></a>3.NOTEARS算法效果</h1><p>作者从ERS, SF4中生成了Node数为20, 样本量为1000和20的数据集, 图表示是邻接矩阵, 可看到学习后的效果和true graph很接近, 效果比Fast Greedy Search(FGS)要好, 同时和Global Optimizer的结果很接近, 准确性好</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7xhnenj21et0mwqcw.jpg" alt="notears effect"></p>
+<p><img src="https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears04.jpg" alt="notears effect"></p>
 <p>继续奋战, 下一波是Bayesian Network ^–^</p>
 ]]></content>
     
