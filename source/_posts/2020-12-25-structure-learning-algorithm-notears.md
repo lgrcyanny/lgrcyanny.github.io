@@ -1,4 +1,4 @@
-title: Strucutre Learning Algorithm NOTEARS
+title: Structure Learning Algorithm NOTEARS
 date: 2020-12-25 22:01:59
 tags: Causal Inference, AI
 ---
@@ -26,7 +26,7 @@ Bayesian Network Graph(DAG) Structure Estimating, 这是一个经典的NP-HARD�
 其英文缩写是 Non-combinatorial Optimization via Trace Exponential and Augmented lagRangian for Structure learning
 该算法我个人理解主要的贡献是找到一种数学建模方法, 把DAG的学习问题转化为可以用拉格朗日乘数法可求最优解的问题, 其建模的问题定义如下:
 
-![model def](https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7k87gij21hl0kpdm0.jpg)
+![model def](https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears01.jpg)
 
 基于拉格朗日乘数法进行数值优化, 优势是:一个有n个变量与k个约束条件的最优化问题转换为一个解有n + k个变量的方程组的解的问题, 同时可复用一些优化算法: L-BFGS, quasi-Newton(PQN)
 + 例如: 求f(x, y)在g(x, y)=c约数下的最大值, 可以转化为求下面函数的极值的问题:
@@ -35,17 +35,17 @@ Bayesian Network Graph(DAG) Structure Estimating, 这是一个经典的NP-HARD�
 
 下图是NOTEARS抽象为拉格朗日乘数的公式
 
-![lagrangian equation](https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7pxt34j21e6089abm.jpg)
+![lagrangian equation](https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears02.jpg)
 
 
 下图是NOTEARS的算法流程
 
-![notears algorithm](https://wx2.sinaimg.cn/mw690/761b7938ly1gm0h7tsn6lj20yu0bqgno.jpg)
+![notears algorithm](https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears03.jpg)
 
 # 3.NOTEARS算法效果
 作者从ERS, SF4中生成了Node数为20, 样本量为1000和20的数据集, 图表示是邻接矩阵, 可看到学习后的效果和true graph很接近, 效果比Fast Greedy Search(FGS)要好, 同时和Global Optimizer的结果很接近, 准确性好
 
-![notears effect](https://wx4.sinaimg.cn/mw690/761b7938ly1gm0h7xhnenj21et0mwqcw.jpg)
+![notears effect](https://www.cyanny.com/2020/12/25/structure-learning-algorithm-notears/notears04.jpg)
 
 
 继续奋战, 下一波是Bayesian Network ^--^
