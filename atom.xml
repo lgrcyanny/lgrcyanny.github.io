@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-01-10T06:00:33.850Z</updated>
+  <updated>2021-12-24T03:42:26.902Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,234 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Dynamic Programming Summary</title>
+    <link href="http://example.com/2021/12/23/dynamic-programming-summary/"/>
+    <id>http://example.com/2021/12/23/dynamic-programming-summary/</id>
+    <published>2021-12-23T03:11:31.000Z</published>
+    <updated>2021-12-24T03:42:26.902Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-动态规划之道"><a href="#1-动态规划之道" class="headerlink" title="1. 动态规划之道"></a>1. 动态规划之道</h1><ul>
+<li><strong>DP问题的特征</strong><ul>
+<li>最优子结构: 原问题是一个最优化问题, 可递归地拆分为多个子问题, 通过数学方法组合各个子问题的最优解, 可以求得问题的最优解</li>
+<li>重叠的子问题: 子问题相互重叠, 例如斐波拉契数列问题, 而子问题如果不重叠, 可以用一般的递归</li>
+<li>无后效性: 某一个状态一旦确定, 就不受这个状态以后决策的影响, 例如地下城游戏<a id="more"></a></li>
+</ul>
+</li>
+<li><strong>DP解题思路</strong><ul>
+<li>状态定义, 即定义子问题, 弄清楚原问题和子问题的关系, 例如dp[n], 表示0..n上问题的解, 可以考虑缩减问题规模</li>
+<li>状态转移, 即定义子问题之间的转换关系, 写出状态转移方程, 例如dp[i] = f(dp[i - 1]), i &lt; n</li>
+<li>子问题相互重叠, 自底向上, 利用存储表, 一般是一维或二维数组, 如果数组稀疏, 可以用HashMap</li>
+<li>注意初始化和边界条件</li>
+</ul>
+</li>
+<li><strong>DP与其他算法的区别</strong><ul>
+<li>DP与分治算法: 分治算法不要求子问题相互重叠</li>
+<li>DP与贪心算法<ul>
+<li>贪心要求最优子结构, 每一步的最优解包括上一步的最优解, 每次只求解一个最优子问题</li>
+<li>贪心不保证全局最优, DP保证</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>DP问题类型: 按结果类型分类</strong><ul>
+<li>最值问题: 求最大值, 最小值</li>
+<li>计数问题: 求组合总数, 路径总数等</li>
+</ul>
+</li>
+<li><strong>DP问题类型: 按状态转移方程形式分类</strong><ul>
+<li>线性问题: 问题规模i从小到大, 大规模问题的解依赖小规模问题的最优解, 例如LIS, 最大子数组和</li>
+<li>前缀和问题: 求区间和 sum(i, j) = sums(0, j + 1) - sums(0, j)</li>
+<li>区间问题, 例如: 最长回文字符串, 最长回文子序列</li>
+<li>背包问题, 0-1背包问题, 完全背包问题</li>
+<li>状态压缩: 例如旅行商问题, 求经过所有点的最短路径</li>
+<li>计数问题: 例如卡特兰数</li>
+<li>数位问题</li>
+<li>矩阵快速幂: 对于线性递归式求解, 时间复杂度可以优化到O(logN)</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-动态规划经典实战"><a href="#2-动态规划经典实战" class="headerlink" title="2. 动态规划经典实战"></a>2. 动态规划经典实战</h1><h2 id="2-1-线性动态规划"><a href="#2-1-线性动态规划" class="headerlink" title="2.1 线性动态规划"></a>2.1 线性动态规划</h2><p>线性动态规划是指状态的推导按问题规模的大小从小到大, 较大问题的求解可以划分为小规模问题.<br>状态定义一般是一维数组dp[i], 状态转移会依赖O(n)个子问题或O(1)个子问题. 按问题类型分, 主要有:</p>
+<ul>
+<li>单串问题: 包括最长上升子序列, 最大子数组和, 打家劫舍(不相邻子序列最大和), 需要两个位置的问题, 带维度的单串问题, 股票问题(带状态的单串问题)</li>
+<li>双串问题: 包括最长公共子序列, 字符串匹配(例如最短编辑距离, 通配符匹配), 带维度的双串问题</li>
+<li>矩阵问题: 最小路径和, 最大正方形, 最大矩形, 矩形区域不超过K的最大数值和</li>
+<li>无串线性问题: 没有显示的字符串和数组, 但可以用线性动规, 例如丑数, 完全平方数</li>
+</ul>
+<h3 id="2-1-1-单串问题-最长上升子序列-LIS"><a href="#2-1-1-单串问题-最长上升子序列-LIS" class="headerlink" title="2.1.1 单串问题-最长上升子序列(LIS)"></a>2.1.1 单串问题-最长上升子序列(LIS)</h3><p>状态转移依赖O(n)个子问题</p>
+<ul>
+<li>状态定义<br>dp[i], 表示以nums[i]结尾的最长上升子序列的长度, 最终结果为max(dp[i]), 0 &lt;= i &lt; n</li>
+<li>状态转移方程<br>p[i] = max(dp[j]) + 1,  0&lt;= j &lt; i, nums[j] &lt; nums[i]</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLISLengthDP</span></span>(arr: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> n = arr.size</span><br><span class="line">    <span class="keyword">val</span> memo = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](n) <span class="comment">// memo[i] is LIS from 0 to i</span></span><br><span class="line">    memo(<span class="number">0</span>) = <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> maxLen = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> until n) &#123;</span><br><span class="line">      memo(i) = <span class="number">1</span></span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">0</span> until i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr(j) &lt; arr(i) &amp;&amp; memo(j) + <span class="number">1</span> &gt; memo(i)) &#123;</span><br><span class="line">          memo(i) = memo(j) + <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (memo(i) &gt; maxLen) &#123;</span><br><span class="line">        maxLen = memo(i)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    maxLen</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-2-单串问题-求具有最大和的连续子数组"><a href="#2-1-2-单串问题-求具有最大和的连续子数组" class="headerlink" title="2.1.2 单串问题-求具有最大和的连续子数组"></a>2.1.2 单串问题-求具有最大和的连续子数组</h3><p>给一个整数数组nums, 找一个具有最大和的连续子数组, 输出最大和</p>
+<ul>
+<li>状态定义 <ul>
+<li>dp[i] 表示以nums[i]结尾的最大连续子数组和</li>
+<li>整个数组的最大连续子序和即所有dp[i]的最大值, res = max(dp[i]), 0 &lt;= i &lt; n</li>
+</ul>
+</li>
+<li>状态转移: (Kanade算法)<ul>
+<li>dp[i] = max(dp[i - 1], 0) + nums[i] </li>
+<li>或者 dp[i] = max(nums[i], nums[i] + dp[i - 1])</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getMaxSubArr</span></span>(nums: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">var</span> maxSum = nums(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">var</span> maxEnding = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until nums.size) &#123;</span><br><span class="line">      maxEnding = <span class="type">Math</span>.max(maxEnding, <span class="number">0</span>) + nums(i)</span><br><span class="line">      <span class="keyword">if</span> (maxEnding &gt; maxSum) &#123;</span><br><span class="line">        maxSum = maxEnding</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    maxSum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题变种: 例如求循环子数组的最大和<br>解法巧秒的是, 求子数组的最大和, 最小和, 最终结果为max(max_sub, all_sum - min_sub).</p>
+<ul>
+<li>状态定义: <ul>
+<li>max_dp[i] 表示以nums[i]结尾的最大连续子数组和</li>
+<li>min_dp[i] 表示以nums[i]结尾的最小连续子数组和</li>
+</ul>
+</li>
+<li>状态转移<ul>
+<li>max_dp[i] = max(max_dp[i - 1] + nums(i), nums(i))</li>
+<li>in_dp[i] = min(min_dp[i - 1] + nums(i), nums(i))</li>
+</ul>
+</li>
+<li>最终结果<ul>
+<li>max_dp = max(max_dp[i]),  0 &lt;= i &lt; n</li>
+<li>min_dp = min(min_dp[i]),  0 &lt;= i &lt; n</li>
+<li>max(max_dp, all_sum - min_dp)<br>这里为了优化空间复杂度为O(1), 只需记录max_dp[i]的最大值和min_dp[i]的最小值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArraySumCircular</span></span>(nums: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> n = nums.size</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">      nums(<span class="number">0</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> maxSum = nums.max</span><br><span class="line">      <span class="keyword">var</span> minSum = nums.min</span><br><span class="line">      <span class="keyword">var</span> maxEnding = <span class="number">0</span></span><br><span class="line">      <span class="keyword">var</span> minEnding = <span class="number">0</span></span><br><span class="line">      <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until n) &#123;</span><br><span class="line">        maxEnding = <span class="type">Math</span>.max(maxEnding + nums(i), nums(i))</span><br><span class="line">        minEnding = <span class="type">Math</span>.min(minEnding + nums(i), nums(i))</span><br><span class="line">        maxSum = <span class="type">Math</span>.max(maxSum, maxEnding)</span><br><span class="line">        minSum = <span class="type">Math</span>.min(minSum, minEnding)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">val</span> allSum = nums.sum</span><br><span class="line">      <span class="keyword">if</span> (maxSum &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        maxSum</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="type">Math</span>.max(maxSum, allSum - minSum)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-3-单串问题-打家劫舍-不相邻子序列最大和"><a href="#2-1-3-单串问题-打家劫舍-不相邻子序列最大和" class="headerlink" title="2.1.3 单串问题-打家劫舍(不相邻子序列最大和)"></a>2.1.3 单串问题-打家劫舍(不相邻子序列最大和)</h3><p>问题是一个小偷沿途偷盗房屋, 每个房屋内有现金, 相邻房屋有警报, 不能触发报警, 求能偷到的现金的最大值. 该问题是求不连续子序列的最大值<br>状态定义: dp[i]表示以i结尾的最大非连续子序列的和<br>状态转移:<br>dp[i] = max(dp[i - 1], dp[i - 2] + nums(i))</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rob</span></span>(nums: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> n = nums.size</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">      nums(<span class="number">0</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> maxEnding0 = nums(<span class="number">0</span>)</span><br><span class="line">      <span class="keyword">var</span> maxEnding1 = <span class="type">Math</span>.max(nums(<span class="number">1</span>), maxEnding0)</span><br><span class="line">      <span class="keyword">var</span> maxSum = maxEnding1</span><br><span class="line">      <span class="keyword">for</span> (i &lt;- <span class="number">2</span> until n) &#123;</span><br><span class="line">        <span class="keyword">val</span> t = <span class="type">Math</span>.max(maxEnding1, maxEnding0 + nums(i))</span><br><span class="line">        maxEnding0 = maxEnding1</span><br><span class="line">        maxEnding1 = t</span><br><span class="line">        maxSum = <span class="type">Math</span>.max(maxSum, t)</span><br><span class="line">      &#125;</span><br><span class="line">      maxSum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-4-单串问题-需要两个位置"><a href="#2-1-4-单串问题-需要两个位置" class="headerlink" title="2.1.4 单串问题-需要两个位置"></a>2.1.4 单串问题-需要两个位置</h3><p>求一个数组中最长斐波那契子序列的长度, 这里问题定义需要考虑两个位置</p>
+<ul>
+<li>状态定义 <ul>
+<li>dp[i][j]表示以i, j结尾的最长斐波拉契子序列的长度</li>
+</ul>
+</li>
+<li>状态转移<ul>
+<li>dp[j][k] = dp[i][j] + 1, if A[i] + A[j] == A[k]</li>
+</ul>
+</li>
+<li>实现细节<ul>
+<li>需要用一个HashSet维护一个Arr[k] -&gt; k的索引表</li>
+<li>由于dp是稀疏二维矩阵, 用hashmap替代</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">longestFibSubSeq</span></span>(nums: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> n = nums.size</span><br><span class="line">    <span class="keyword">val</span> index = <span class="keyword">new</span> mutable.<span class="type">HashMap</span>[<span class="type">Int</span>, <span class="type">Int</span>]()</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until n) &#123;</span><br><span class="line">      index.put(nums(i), i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> res = <span class="number">0</span></span><br><span class="line">    <span class="comment">// dp as HashMap because 2-dimension array is sparse</span></span><br><span class="line">    <span class="keyword">val</span> dp = <span class="keyword">new</span> mutable.<span class="type">HashMap</span>[<span class="type">Int</span>, <span class="type">Int</span>]()</span><br><span class="line">    <span class="keyword">for</span> (k &lt;- <span class="number">0</span> until n) &#123;</span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">0</span> until k) &#123;</span><br><span class="line">        <span class="comment">// test if A[k] = A[i] + A[j]</span></span><br><span class="line">        <span class="keyword">val</span> i = index.getOrElse(nums(k) - nums(j), <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span> &amp;&amp; i &lt; j) &#123;</span><br><span class="line">          dp(j * n + k) = dp.getOrElse(i * n + j, <span class="number">2</span>) + <span class="number">1</span></span><br><span class="line">          res = <span class="type">Math</span>.max(res, dp(j * n + k))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (res &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">      res</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-5-单串问题-带维度的问题"><a href="#2-1-5-单串问题-带维度的问题" class="headerlink" title="2.1.5 单串问题-带维度的问题"></a>2.1.5 单串问题-带维度的问题</h3><p>经典的鸡蛋掉落问题, n层楼, k个鸡蛋, 求鸡蛋不碎的最少掉落次数</p>
+<ul>
+<li>状态定义: dp[i][k]表示层数为i,k个鸡蛋的最小操作次数</li>
+<li>状态转移: 假设在第f层抛鸡蛋, 两种情况<ul>
+<li>鸡蛋碎了, 剩余k-1个鸡蛋, 在f层以下下搜索, 问题转换为dp[f - 1][k - 1]</li>
+<li>鸡蛋没有碎, 还是k个鸡蛋, 在f层以上搜索, 问题转换为dp[i - f][k]</li>
+<li>因此, dp[i][k] = 1 + min(max(dp[f - 1][k - 1], dp[i - f][k])), 1&lt;= f &lt;= i</li>
+<li>在搜索时需要用二分查找, 优化时间复杂度</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">superEggDrop</span></span>(<span class="type">K</span>: <span class="type">Int</span>, n: <span class="type">Int</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> dp = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](n + <span class="number">1</span>, <span class="type">K</span> + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> (k &lt;- <span class="number">0</span> to <span class="type">K</span>) &#123;</span><br><span class="line">      dp(<span class="number">0</span>)(k) = <span class="number">0</span></span><br><span class="line">      dp(<span class="number">1</span>)(k) = <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> to n) &#123;</span><br><span class="line">      dp(i)(<span class="number">1</span>) = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">2</span> to n) &#123;</span><br><span class="line">      <span class="keyword">for</span> (k &lt;- <span class="number">2</span> to <span class="type">K</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> left = <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> right = i</span><br><span class="line">        <span class="keyword">while</span> (left + <span class="number">1</span> &lt; right) &#123;</span><br><span class="line">          <span class="keyword">val</span> x = (left + right) / <span class="number">2</span></span><br><span class="line">          <span class="keyword">val</span> t1 = dp(x - <span class="number">1</span>)(k - <span class="number">1</span>)</span><br><span class="line">          <span class="keyword">val</span> t2 = dp(i - x)(k)</span><br><span class="line">          <span class="keyword">if</span> (t1 &lt; t2) &#123;</span><br><span class="line">            left = x</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (t1 &gt; t2) &#123;</span><br><span class="line">            right = x</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = x</span><br><span class="line">            right = x</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dp(i)(k) = <span class="number">1</span> + <span class="type">Math</span>.min(</span><br><span class="line">          <span class="type">Math</span>.max(dp(left - <span class="number">1</span>)(k - <span class="number">1</span>), dp(i - left)(k)),</span><br><span class="line">          <span class="type">Math</span>.max(dp(right - <span class="number">1</span>)(k - <span class="number">1</span>), dp(i - right)(k))</span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dp(n)(<span class="type">K</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-6-单串问题-股票买卖-考虑状态"><a href="#2-1-6-单串问题-股票买卖-考虑状态" class="headerlink" title="2.1.6 单串问题-股票买卖, 考虑状态"></a>2.1.6 单串问题-股票买卖, 考虑状态</h3><p>给定一个数组, price[i]表示第i天的股票价格, 假设可以完成多笔交易, 最终获得股票的最大利润</p>
+<ul>
+<li>状态定义: dp[i][0] 表示第i天结束, 手里没有股票的最大收益, dp[i][1]表示第i天结束, 手里有股票的最大收益</li>
+<li>状态转移<ul>
+<li>dp[i][0] = max{dp[i - 1][0], dp[i - 1][1] + prices[i]}</li>
+<li>dp[i][1] = max{dp[i - 1][1], dp[i - 1][0] - prices[i]}</li>
+</ul>
+</li>
+<li>边界条件<ul>
+<li>dp[0][0] = 0, dp[0][1] = -prices[0]</li>
+</ul>
+</li>
+<li>计算优化<ul>
+<li>由于只依赖前一个值dp[i-1], 因此只需要保存两个变量dp0, dp1</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span></span>(prices: <span class="type">Array</span>[<span class="type">Int</span>]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> n = prices.size</span><br><span class="line">    <span class="keyword">var</span> dp0 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> dp1 = -prices(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> until n) &#123;</span><br><span class="line">      dp0 = <span class="type">Math</span>.max(dp0, dp1 + prices(i))</span><br><span class="line">      dp1 = <span class="type">Math</span>.max(dp1, dp0 - prices(i))</span><br><span class="line">    &#125;</span><br><span class="line">    dp0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-7-双串问题-最长公共子序列-LCS"><a href="#2-1-7-双串问题-最长公共子序列-LCS" class="headerlink" title="2.1.7 双串问题-最长公共子序列(LCS)"></a>2.1.7 双串问题-最长公共子序列(LCS)</h3><ul>
+<li>状态定义: dp[i][j]表示字符串text1 = 0..i和字符串text2=0..j的最大公共子序列长度</li>
+<li>状态转移<pre><code>  ○ dp[i][j] = max(dp[i-1][j], dp[i][j-1]), if text1[i] != text2[j]
+  ○ dp[i][j] = dp[i-1][j-1] + 1, if text1[i] == text2[j]</code></pre>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">longestCommonSubsequence</span></span>(text1: <span class="type">String</span>, text2: <span class="type">String</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> m = text1.size</span><br><span class="line">    <span class="keyword">val</span> n = text2.size</span><br><span class="line">    <span class="keyword">val</span> dp = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](m + <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> to m) &#123;</span><br><span class="line">      dp(i)(<span class="number">0</span>) = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j &lt;- <span class="number">0</span> to n) &#123;</span><br><span class="line">      dp(<span class="number">0</span>)(j) = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> to m) &#123;</span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">1</span> to n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (text1(i - <span class="number">1</span>) == text2(j - <span class="number">1</span>)) &#123;</span><br><span class="line">          dp(i)(j) = dp(i - <span class="number">1</span>)(j - <span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          dp(i)(j) = <span class="type">Math</span>.max(dp(i - <span class="number">1</span>)(j), dp(i)(j - <span class="number">1</span>))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    println(printLCS(text1, text2, dp))</span><br><span class="line">    dp(m)(n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-8-双串问题-字符串匹配"><a href="#2-1-8-双串问题-字符串匹配" class="headerlink" title="2.1.8 双串问题-字符串匹配"></a>2.1.8 双串问题-字符串匹配</h3><p>编辑距离: 求把字符串word1通过插入, 删除, 替换为word2的最短操作次数</p>
+<ul>
+<li>状态定义: dp[i][j]表示从word1[0..i]变为word2[0..j]的最少操作步骤</li>
+<li>状态转移:<ul>
+<li>if word1[i] == word2[j]<ul>
+<li>dp[i][j] = dp[i - 1][j - 1]</li>
+</ul>
+</li>
+<li>if word1[i] != word2[j]<ul>
+<li>deleteCost = dp[i-1][j] + 1</li>
+<li>insertCost = dp[i][j - 1] + 1</li>
+<li>updateCost = dp[i -1][j - 1] + 1</li>
+<li>dp[i][j] = min(deleteCost, insertCost, updateCost)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minDistance</span></span>(word1: <span class="type">String</span>, word2: <span class="type">String</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> m = word1.size</span><br><span class="line">    <span class="keyword">val</span> n = word2.size</span><br><span class="line">    <span class="keyword">val</span> dp = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](m + <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> to m) &#123;</span><br><span class="line">      dp(i)(<span class="number">0</span>) = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j &lt;- <span class="number">0</span> to n) &#123;</span><br><span class="line">      dp(<span class="number">0</span>)(j) = j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> to m) &#123;</span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">1</span> to n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (word1(i - <span class="number">1</span>) == word2(j - <span class="number">1</span>)) &#123;</span><br><span class="line">          dp(i)(j) = dp(i - <span class="number">1</span>)(j - <span class="number">1</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          dp(i)(j) = <span class="type">Array</span>(dp(i - <span class="number">1</span>)(j), dp(i)(j - <span class="number">1</span>), dp(i - <span class="number">1</span>)(j - <span class="number">1</span>)).min + <span class="number">1</span> <span class="comment">// delete, insert, update cost</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dp(m)(n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题变种: 通配符匹配问题</strong></p>
+<ul>
+<li>给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 ‘?’ 和 ‘*’ 的通配符匹配, 输入s和p, 输出s是否和p匹配</li>
+<li>状态定义: dp[i][j]表示字符串s[0..i], p[0..j]是否匹配</li>
+<li>状态转移:<ul>
+<li>dp[i][j] = (dp[i - 1][j - 1])  if (s[i] == p[j]) or p[j] == ‘?’</li>
+<li>dp[i][j] = or(dp[i-1][j], dp[i][j - 1]) , if p[j] == ‘*’, 匹配时使用或不使用星号</li>
+<li>dp[i][j] = false, 其他情况</li>
+</ul>
+</li>
+<li>边界条件<ul>
+<li>dp[0][0] = true</li>
+<li>dp[i][0] = false</li>
+<li>dp[0][j] = true, if p[0..j]都是星号<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minDistance</span></span>(word1: <span class="type">String</span>, word2: <span class="type">String</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> m = word1.size</span><br><span class="line">    <span class="keyword">val</span> n = word2.size</span><br><span class="line">    <span class="keyword">val</span> dp = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](m + <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> to m) &#123;</span><br><span class="line">      dp(i)(<span class="number">0</span>) = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (j &lt;- <span class="number">0</span> to n) &#123;</span><br><span class="line">      dp(<span class="number">0</span>)(j) = j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">1</span> to m) &#123;</span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">1</span> to n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (word1(i - <span class="number">1</span>) == word2(j - <span class="number">1</span>)) &#123;</span><br><span class="line">          dp(i)(j) = dp(i - <span class="number">1</span>)(j - <span class="number">1</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          dp(i)(j) = <span class="type">Array</span>(dp(i - <span class="number">1</span>)(j), dp(i)(j - <span class="number">1</span>), dp(i - <span class="number">1</span>)(j - <span class="number">1</span>)).min + <span class="number">1</span> <span class="comment">// delete, insert, update cost</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dp(m)(n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-9-矩阵问题-最大正方形"><a href="#2-1-9-矩阵问题-最大正方形" class="headerlink" title="2.1.9 矩阵问题-最大正方形"></a>2.1.9 矩阵问题-最大正方形</h3><p>在由’0’和’1’组成的二维矩阵内, 找到只包含’1’的最大正方形, 并返回面积<br>例如如下矩阵, 最大正方形面积为4</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> matrix = <span class="type">Array</span>(</span><br><span class="line">      <span class="type">Array</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;0&quot;</span>),</span><br><span class="line">      <span class="type">Array</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>),</span><br><span class="line">      <span class="type">Array</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;1&quot;</span>),</span><br><span class="line">      <span class="type">Array</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;0&quot;</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<ul>
+<li>状态定义: dp[i][j]表示以(i,j)为右下角的只包含1的最大正方形的边长</li>
+<li>状态转移<ul>
+<li>dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1, if matrix[i][j] == 1</li>
+<li>dp[i][j] = 0, if matrix[i][j] == 0</li>
+</ul>
+</li>
+<li>边界条件<ul>
+<li>dp[0][j] = 1, if matrix[0][j] == 1 </li>
+<li>dp[i][0] = 1, if matrix[i][0] == 1<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximalSquare</span></span>(matrix: <span class="type">Array</span>[<span class="type">Array</span>[<span class="type">Char</span>]]): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> m = matrix.size</span><br><span class="line">    <span class="keyword">val</span> n = matrix(<span class="number">0</span>).size</span><br><span class="line">    <span class="keyword">val</span> dp = <span class="type">Array</span>.ofDim[<span class="type">Int</span>](m, n)</span><br><span class="line">    <span class="keyword">var</span> res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until m) &#123;</span><br><span class="line">      <span class="keyword">for</span> (j &lt;- <span class="number">0</span> until n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix(i)(j) == &#x27;<span class="number">1</span>&#x27;) &#123;</span><br><span class="line">          <span class="keyword">if</span> (i == <span class="number">0</span> || j == <span class="number">0</span>) &#123;</span><br><span class="line">            dp(i)(j) = <span class="number">1</span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dp(i)(j) = <span class="type">Array</span>(dp(i - <span class="number">1</span>)(j), dp(i)(j - <span class="number">1</span>), dp(i - <span class="number">1</span>)(j - <span class="number">1</span>)).min + <span class="number">1</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          dp(i)(j) = <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        res = <span class="type">Math</span>.max(res, dp(i)(j))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    res * res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-10-矩阵问题-最大子矩阵"><a href="#2-1-10-矩阵问题-最大子矩阵" class="headerlink" title="2.1.10 矩阵问题-最大子矩阵"></a>2.1.10 矩阵问题-最大子矩阵</h3>给定一个正整数、负整数和 0 组成的 N × M矩阵，编写代码找出元素总和最大的子矩阵。<br>返回一个数组 [r1, c1, r2, c2]，其中 r1, c1 分别代表子矩阵左上角的行号和列号，r2, c2 分别代表右下角的行号和列号。若有多个满足条件的子矩阵，返回任意一个均可</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-动态规划之道&quot;&gt;&lt;a href=&quot;#1-动态规划之道&quot; class=&quot;headerlink&quot; title=&quot;1. 动态规划之道&quot;&gt;&lt;/a&gt;1. 动态规划之道&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DP问题的特征&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;最优子结构: 原问题是一个最优化问题, 可递归地拆分为多个子问题, 通过数学方法组合各个子问题的最优解, 可以求得问题的最优解&lt;/li&gt;
+&lt;li&gt;重叠的子问题: 子问题相互重叠, 例如斐波拉契数列问题, 而子问题如果不重叠, 可以用一般的递归&lt;/li&gt;
+&lt;li&gt;无后效性: 某一个状态一旦确定, 就不受这个状态以后决策的影响, 例如地下城游戏&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://example.com/tags/algorithm/"/>
+    
+      <category term="Dynamic Programming" scheme="http://example.com/tags/dynamic-programming/"/>
+    
+  </entry>
   
   <entry>
     <title>An Introduction to Bayesian Networks</title>
@@ -1342,108 +1570,6 @@
     
     
       <category term="Machine Learning" scheme="http://example.com/tags/machine-learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Programming in Scala Overview Key Note</title>
-    <link href="http://example.com/2016/03/06/programming-in-scala-overview-key-note/"/>
-    <id>http://example.com/2016/03/06/programming-in-scala-overview-key-note/</id>
-    <published>2016-03-06T10:01:42.000Z</published>
-    <updated>2017-03-05T02:27:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>过去半年里，都在忙着spark相关的项目，主要的编程语言是scala，前些年主要用的是c++，刚转到scala上时，有点不适应函数式编程语言的思想，现在已经半年多过去了，觉得scala真的是awesome，简洁有力的表达，整合了functional programming和object programming，并且设计良好。<br>去年上了Martin Odersky的编程课<i>Functional Programming In Scala</i>, 觉得挺感兴趣，学习了很多，想在scala语言上看得更多，更深入些，我选择了Scala的权威著作<a href="http://www.artima.com/shop/programming_in_scala_2ed">Programming In Scala</a>, 虽然这书有快900页，但我想挑战下，与其每天泡在各种新闻资讯里，还不如看看书泡在书里。每天都看看书，觉得挺好，有些笔记和心得就写在博客里，毕竟工作忙，写博客的时间很少，但我想还是应该多总结和留下写想法。之后阅读Spark的源码，我也会坚持写下些东西，看过了和写下来总还是不一样嘛。</p>
-<a id="more"></a>
-
-<h1 id="Scala-Overview"><a href="#Scala-Overview" class="headerlink" title="Scala Overview"></a>Scala Overview</h1><h2 id="1-Scala-is-a-Scalable-Language"><a href="#1-Scala-is-a-Scalable-Language" class="headerlink" title="1. Scala is a Scalable Language"></a>1. Scala is a Scalable Language</h2><ul>
-<li>Scala is a blend of object-oriented and functional programing language</li>
-<li>Grow new types, such as BigInt</li>
-<li>Grow new control structures, such as actor based api</li>
-</ul>
-<h2 id="2-What-makes-scala-scalable"><a href="#2-What-makes-scala-scalable" class="headerlink" title="2. What makes scala scalable"></a>2. What makes scala scalable</h2><p>fusion object-oriented and functional programming</p>
-<ul>
-<li><strong>Object-Oriented</strong><ul>
-<li>it combines data with operations under a formalized interface. So objects have a lot to do with language scalability: the same techniques apply to the construction of small as well as large program</li>
-<li>Scala is an object-oriented language in pure form: every value is an object and every operation is a method call.</li>
-<li> An example is Scala’s traits. Traits are like interfaces in Java, but they can also have method implementations and even fields</li>
-</ul>
-</li>
-<li><strong>Functional</strong><ul>
-<li>Functional programming fundation was raid in lonzo Church’s lambda calculus, in the 1930. The first functional programming language is Lisp, created in the late 1950s, other functional programming languages are Scheme, SML, Erlang, Haskell, OCaml, and F#.</li>
-<li>Functional programming two main ideas:<ul>
-<li>Firstly, <strong>functional are first class values</strong><ul>
-<li>You can pass functions as arguments to other functions, return them as results from functions, or store them in variables. You can also define a function inside another function, just as you can define an integer value inside a function</li>
-<li>Functions that are first-class values provide a convenient means for abstracting over operations and creating new control structures.</li>
-</ul>
-</li>
-<li>Secondly, <strong>operations of a program should map input values to output values rather than change data in place.</strong><ul>
-<li>methods should not have any side effects<ul>
-<li> <strong>Referentially transparent</strong>, which means that for any given input the method call could be replaced by its result without affecting the program’s semantics</li>
-</ul>
-</li>
-<li>encourage immutable data structures and referentially transparent methods</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-Why-chooose-scala"><a href="#3-Why-chooose-scala" class="headerlink" title="3. Why chooose scala?"></a>3. Why chooose scala?</h2><ul>
-<li><strong>Compatibility</strong><ul>
-<li>compile to JVM bytecode, run on jvm</li>
-<li>compatible with java types, reuse java types</li>
-<li>implicity conversions : support string.toInt,</li>
-<li>java can call scala code</li>
-</ul>
-</li>
-<li><strong>Brevity, scala is concise</strong><ul>
-<li>reduction on list</li>
-<li>Avoid biolerplate in java, such as avoid class getter and setter, default constructor</li>
-<li>Type inference</li>
-<li>tools in library, can be used as trait</li>
-</ul>
-</li>
-<li><strong>High-level abstractions</strong><ul>
-<li>Scala helps you manage complexity by letting you raise the level of abstraction in the interfaces you design and use.<br>For example, The Scala code treats the same strings as higher-level sequences of characters that can be queried with predicates<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> tr = str.exists(_.isUpper)</span><br></pre></td></tr></table></figure></li>
-<li>Functional literals are lightweight</li>
-</ul>
-</li>
-<li><strong>Advanced static type system</strong><ul>
-<li>it allows you to parameterize types with generics, to combine types using intersections, and to hide details of types using abstract types.</li>
-<li>Although some argues that static typed language is verbose and not flexible, In scala  <strong>verbosity</strong> is avoided through type inference and <strong>flexibility</strong> is gained through pattern matching and several new ways to write and compose types.</li>
-<li>Advantages of static typing system:<ul>
-<li>Verifiable properties: Static type systems can prove the absence of certain run-time errors. Reduce the number of unit tests.</li>
-<li>Safe refactoring : make changes to a codebase with a high degree of confidence</li>
-<li>Documentation: Static types are program documentation that is checked by the compiler for correctness.<ul>
-<li>Scala has a very sophisticated type inference system that lets you omit almost all type information that’s usually considered annoying</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-Scala-roots"><a href="#4-Scala-roots" class="headerlink" title="4.Scala roots"></a>4.Scala roots</h2><p>Although only a few features of Scala are genuinely new; most have been already applied in some form in other languages. Its design models many languages, such as SmallTalk, Ruby, Algol, Simula, OCaml, Haskell etc.<br>Scala’s innovations come primarily from how its constructs are put together<br>Scala is also not the first language to integrate functional and object-oriented programming, although it probably goes furthest in this direction</p>
-<p>Given Scala’s innovations:</p>
-<ul>
-<li>  its abstract types provide a more object-oriented alternative to generic types,</li>
-<li>  its traits allow for flexible component assembly,</li>
-<li>  its extractors provide a representation-independent way to do pattern matching.</li>
-</ul>
-<h2 id="5-Starting-Programming"><a href="#5-Starting-Programming" class="headerlink" title="5. Starting Programming"></a>5. Starting Programming</h2><p><a href="https://github.com/lgrcyanny/ScalaPractice/tree/master/ProgrammingInScala">Programming In Scala</a><br>读书的时候写写代码，都是书里的例子，用maven构建的scala progject。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;过去半年里，都在忙着spark相关的项目，主要的编程语言是scala，前些年主要用的是c++，刚转到scala上时，有点不适应函数式编程语言的思想，现在已经半年多过去了，觉得scala真的是awesome，简洁有力的表达，整合了functional programming和object programming，并且设计良好。&lt;br&gt;去年上了Martin Odersky的编程课&lt;i&gt;Functional Programming In Scala&lt;/i&gt;, 觉得挺感兴趣，学习了很多，想在scala语言上看得更多，更深入些，我选择了Scala的权威著作&lt;a href=&quot;http://www.artima.com/shop/programming_in_scala_2ed&quot;&gt;Programming In Scala&lt;/a&gt;, 虽然这书有快900页，但我想挑战下，与其每天泡在各种新闻资讯里，还不如看看书泡在书里。每天都看看书，觉得挺好，有些笔记和心得就写在博客里，毕竟工作忙，写博客的时间很少，但我想还是应该多总结和留下写想法。之后阅读Spark的源码，我也会坚持写下些东西，看过了和写下来总还是不一样嘛。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Scala" scheme="http://example.com/tags/scala/"/>
-    
-      <category term="Language" scheme="http://example.com/tags/language/"/>
     
   </entry>
   

@@ -1,145 +1,90 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <meta name="keywords" content="hexo, autumn" />
-    <title>
-        CyannyLive
-    </title>
-    <!-- favicon -->
-    
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
-     
-<link rel="stylesheet" href="../../../../css/style.css">
+  <meta charset="utf-8">
+  
+  <title>Dijkstra Algorithm | CyannyLive | AI and Big Data</title>
 
+  
+  <meta name="author" content="Cyanny Liang">
+  
 
-    <!-- highlight -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad()
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
+  
+  <meta name="description" content="Wisdom comes from inside">
+  
 
-    <script>
-        infiniteScroll()
+  
+  
+  <meta name="keywords" content="algorithm">
+  
 
-        window.addEventListener('DOMContentLoaded', function () {
-            const [
-                mainTitle,
-                mobileMenu,
-                mobileMainTitle,
-                mobileMenuBtn,
-                ipadMenuBtn,
-                aside,
-                closeBtn,
-            ] = getEle(
-                '#main-title',
-                '.mobile-menu',
-                '.mobile-menu h3',
-                '.mobile-menu button',
-                '.ipad-menu',
-                'aside',
-                'aside .close',
-            )
-            const io = new IntersectionObserver(entries => {
-                if (entries[0].intersectionRatio <= 0) {
-                    mobileMainTitle.classList.remove('invisibile')
-                } else {
-                    mobileMainTitle.classList.add('invisibile')
-                }
-            })
-            io.observe(mainTitle)
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-            clickToggleAside(mobileMenuBtn)
-            clickToggleAside(ipadMenuBtn)
-            clickToggleAside(closeBtn, false)
+  <meta property="og:title" content="Dijkstra Algorithm"/>
 
-            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
-            if (isMenuVisible) document.body.style.background = 'none'
+  <meta property="og:site_name" content="CyannyLive"/>
 
-            function getEle(...args) {
-                return args.map(arg => document.querySelector(arg))
-            }
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
 
-            function clickToggleAside(btn, show = true) {
-                btn.addEventListener('click', function () {
-                    if (show) {
-                        aside.style.display = 'block'
-                    } else {
-                        aside.style.display = 'none'
-                    }
-                })
-            }
-        })
-    </script>
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="CyannyLive" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 5.3.0"></head>
 
-<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
-    <div class="container">
-        <header class="header">
-    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
-        <h3 class="invisibile">
-            <a href="../../../../index.html" class="logo">
-                CyannyLive
-            </a>
-        </h3>
-        <button class="menu">menu</button>
-    </nav>
 
-    <button class="ipad-menu menu">menu</button>
+<body>
+<div class="blog">
+  <div class="content">
 
-    <h1 class="title" id="main-title">
-        <a href="../../../../index.html" class="logo">
-            CyannyLive
-        </a>
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">CyannyLive</a>
     </h1>
-    <h2 class="desc">
-        AI and Big Data
-    </h2>
-
-    <div class="links">
-        <ul>
-            
-            <li>
-                <a href="../../../../https:/github.com/lgrcyanny">
-                    Github
-                </a>
-            </li>
-            
-            <li>
-                <a href="../../../../https:/www.linkedin.com/in/cyanny-liang-21222451/">
-                    LinkedIn
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-</header>
-        <main class="main">
-            <article class="post">
-    
-    
-    <h4 class="post-cat">
-        <a href="../../../../categories/algorithm/">
-            Algorithm
-        </a>
-    </h4>
-    
-    
-    <h2 class="post-title">
-        Dijkstra Algorithm
-    </h2>
-    <ul class="post-date">
-        <li>
-            2014-04-12
-        </li>
-        <li>
-            Cyanny Liang
-        </li>
+    <p class="site-description">AI and Big Data</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="../../../../index.html">Home</a></li>
+      
+        <li><a href="../../../../archives">Archives</a></li>
+      
+        <li><a href="../../../../about/">About</a></li>
+      
     </ul>
-    <div class="post-content">
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Dijkstra Algorithm</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/04/12/dijkstra-algorithm-in-java/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-04-12T03:55:04.000Z">
+          2014-04-12
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
         <p>计算单源最短路径的算法有Bellman-Ford算法，主要是计算带负权有向图的单源最短路径。第二种算法：对于DAG图（Directed Acyclic Graph, 有向无环图）可以通过拓扑排序后再计算单源最短路径。第三，可以使用BFS(广度优先搜索)计算单源最短路径。第四，就是著名的Dijkstra算法，要求有向图的所有边的权值非负，当然图可以不是DAG图。</p>
 <a id="more"></a>
 <p>Dijkstra的实现思想主要是采用最小优先级队列，队列排序的标准是source节点到当前节点的距离，每次从堆顶取出一个节点，遍历该节点的邻接表，进行松弛(Relax)操作，松弛操作的伪代码如下：<br>[java]<br>relax(u, v) {<br>  if (v.distance &gt; u.distance + weight[u, v]) {<br>    v.distance = u.distance + weight[u, v];<br>    v.parent = u;<br>  }<br>}<br>[/java]</p>
@@ -243,35 +188,91 @@ public static void main(String[] args) &#123;
 <p>}<br>[/java]</p>
 <p>源码在<a target="_blank" rel="noopener" href="https://github.com/lgrcyanny/Algorithm/tree/master/src/com/algorithm/graph/dijkstra">Cyanny GitHub</a></p>
 
+      
     </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/algorithm/">Algorithm</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/algorithm/">algorithm</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
 </article>
-        </main>
-        <aside class="aside">
-            <div class="close"></div>
-            <section class="aside-section">
-                
-    <h1>Categories</h1>
 
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/">Distributed System</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/life/">Life</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/">Hadoop</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hbase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hive/">Hive</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/javascript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/network/">Network</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/system-analysis-and-design/">System Analysis and Design</a></li></ul>
+  
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
 
-            </section>
-            <section class="aside-section">
-                
-    <h1>Archives</h1>
+	<script type="text/javascript">
+	var disqus_shortname = 'lgrcyanny';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
 
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2013/">2013</a></li></ul>
 
 
-            </section>
-            <section class="aside-section tag">
-                
-    <h1>Tags</h1>
 
-    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/agile/" rel="tag">Agile</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka/" rel="tag">Akka</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/akka-scala/" rel="tag">Akka, Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/big-data/" rel="tag">Big Data</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/causal-inference-ai/" rel="tag">Causal Inference, AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hbase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/javascript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/language/" rel="tag">Language</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learn/" rel="tag">Learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/mapreduce/" rel="tag">MapReduce</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/methodology/" rel="tag">Methodology</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/research/" rel="tag">Research</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/resource/" rel="tag">Resource</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/systemanalysis/" rel="tag">SystemAnalysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/vps/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/apache-storm/" rel="tag">apache storm</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/java-performance/" rel="tag">java performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/learning/" rel="tag">learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/life/" rel="tag">life</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/machine-learning/" rel="tag">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/math/" rel="tag">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark/" rel="tag">spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/spark-streaming/" rel="tag">spark streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../../../tags/%E8%AF%97%E8%AF%9D/" rel="tag">诗话</a></li></ul>
 
-            </section>
-        </aside>
-    </div>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Copyright
+    </br>
+    
+    &copy; 2021 Cyanny Liang
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40624708-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
 </body>
-
 </html>
