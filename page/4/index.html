@@ -63,6 +63,74 @@
 
   
     
+    <h3 class="article-title"><a href="/2014/03/13/hbase-architecture-analysis-part1-logical-architecture/"><span>HBase Architecture Analysis Part1(Logical Architecture)</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/03/13/hbase-architecture-analysis-part1-logical-architecture/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-03-13T13:18:32.000Z">
+          2014-03-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a>1. Overview</h2><p>Apache HBase is an open source column-oriented database. <strong>It is often described as a sparse, consistent, distributed, multi-dimensional sorted map.</strong> HBase is modeled after Google’s “Bigtable: A distributed Storage System for Structured Data”, which can host very large tables with billions of rows, X millions of columns.</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/hadoop/">Hadoop</a>, <a href="/categories/hadoop/hbase/">HBase</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/hadoop/">Hadoop</a><a href="/tags/big-data/">Big Data</a><a href="/tags/hbase/">HBase</a>
+    </span>
+    
+
+    </div>
+
+    
+    <div class="article-meta pull-right">
+      <span>
+        <i class="icon-comments"></i>
+        <span>
+          <a href="/2014/03/13/hbase-architecture-analysis-part1-logical-architecture/#comment">Comments</a>
+        </span>
+      </span>
+    </div>
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2014/02/27/nodejs-hbase-hadoop2-thrift2-e9-85-8d-e7-bd-ae-e4-b8-8e-e4-bd-bf-e7-94-a8/"><span>Nodejs HBase0.96 Hadoop2.2.0 Thrift2配置与使用</span></a></h3>
     
   
@@ -870,85 +938,6 @@
 
 
 
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2013/12/05/hadoop-hdfs-high-availability/"><span>Hadoop HDFS High Availability(HA)</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2013/12/05/hadoop-hdfs-high-availability/" rel="bookmark">
-        <time class="entry-date published" datetime="2013-12-05T06:54:59.000Z">
-          2013-12-05
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>Reliability, Scalability and Availability are the most important three features for a distributed file system. In HDFS, persistent metadata, using the Secondary NameNode to create checkpoint against data loss, using block replication across the cluster against DataNode failure, all of these brings HDFS high reliability. And the master slave architecture wins HDFS great scalability. [more…]<br>However, HDFS has always had a well-known Single Point of Failure (SPOF) which impacts HDFS’s availability. HDFS fits well for ETL or batch-processing workflows, but in the past few years HDFS begin to be used for real time job, such as HBase. To recover a single NameNode, an administrator starts a new primary NameNode with FsImage and replays its EditLog, waits for Blockreport from DataNodes to leave safe mode. On large clusters with many files and blocks, it will take 30 minutes or more time to recovery. Long time recovery will impact the productivity of internal users and perhaps results in downtime visible to external users.<br>For these reasons, Hadoop community began a new feature for HDFS called High Availability Name Node (HA Name Node) in 2011. The HA makes use of an active and a standby NameNode. When the active NameNode fails, the hot standby NameNode will take over serving the role of an active NameNode without a significant interruption. </p>
-<h3 id="HA-Architecture"><a href="#HA-Architecture" class="headerlink" title="HA Architecture"></a>HA Architecture</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd5.1.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd5.1.png" alt="hd5.1">Figure1 HDFS High Availability Architecture</a><br>As shown in Figure 1, HA architecture has several changes</p>
-<ul>
-<li>The NameNodes must use highly available shared storage to share EditLog, such as Network File System (NFS), or BookKeeper. The active NameNode will write its EditLog on the Shared dir, and the Standby NameNode polls the shared log frequently and then applies to its in-memory so as to has the most complete and up-to-date file system state in memory.</li>
-<li>DataNodes must send Blockreports with block locations to both active and standy NameNodes. Because the block mappings are stored in a NameNode’s memory and not on a disk to increase data access performance.</li>
-<li>Clients must be configured to handle NameNode failover, using a mechanism that is transparent to users.<br>The HA guarantees if the active NameNode fails, the standby one will take over quickly in tens of seconds, since it has the latest state available in memory: the latest EditLog entries and an up-to-date block mapping.</li>
-</ul>
-<h3 id="Failover"><a href="#Failover" class="headerlink" title="Failover"></a>Failover</h3><p>The transition from the active NameNode to the standby NameNode is controlled by the failover controller. Each NameNode runs a failover controller to monitor its namenode failure, which is a heartbeating mechanism. Failover is triggered when a NameNode fails.  </p>
-<p>After NameNode failover, the Client must be informed which is active NameNode now. Client Failover is handled transparently by the client library. The HDFS client supports the configuration for multiple network addresses, one for each NameNode. The NameNode is identified by a single logical URI which is mapped the two network addresses of the HA Name Nodes via client-side configuration. The client will retry the two addresses until the active NameNode is found. </p>
-<h3 id="Fencing"><a href="#Fencing" class="headerlink" title="Fencing"></a>Fencing</h3><p>After Failover, HDFS makes use of the fencing technique to make sure that the previous died active NameNode is prevented from doing any damage and causing corruption. These mechanisms includes killing the NameNode’s process, revoking its access to the shared storage directory and disabling its network port via a remote management command. If these techniques fail, HDFS will use STONITH, that is “shoot the other node in the head”, which uses a specialized power distribution unit to forcibly power down the host machine. </p>
-<p>Resources:<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-overview/" title="Hadoop Overview">Part 0 Hadoop Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-review/" title="Hadoop HDFS Review">Part 1 Hadoop HDFS Review</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-federation/" title="Hadoop HDFS Federation">Part 2 Hadoop HDFS Federation</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-high-availability/" title="Hadoop HDFS High Availability(HA)">Part 3 Hadoop HDFS High Availability(HA)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-overview/" title="Hadoop MapReduce Overview">Part 4 Hadoop MapReduce Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-1-framework/" title="Hadoop MapReduce 1 Framework">Part 5 Hadoop MapReduce 1 Framework</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-2-yarn/" title="Hadoop MapReduce 2 (YARN)">Part 6 Hadoop MapReduce 2 (YARN)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-isnt-silver-bullet/" title="Hadoop isn’t Silver Bullet">Part 7 Hadoop isn’t Silver Bullet</a></p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/hadoop/">Hadoop</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/learning/">Learning</a><a href="/tags/hadoop/">Hadoop</a><a href="/tags/research/">Research</a>
-    </span>
-    
-
-    </div>
-
-    
-    <div class="article-meta pull-right">
-      <span>
-        <i class="icon-comments"></i>
-        <span>
-          <a href="/2013/12/05/hadoop-hdfs-high-availability/#comment">Comments</a>
-        </span>
-      </span>
-    </div>
-    
-  </div>
-</article>
-
-
-
 
 <nav class="pagination">
   
@@ -965,7 +954,7 @@
     Copyright
     </br>
     
-    &copy; 2021 Cyanny Liang
+    &copy; 2022 Cyanny Liang
     
   </p>
 </footer>
