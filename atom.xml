@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-10T04:16:52.863Z</updated>
+  <updated>2025-06-05T03:32:39.248Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,251 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读《人工智能现代方法》--基础篇笔记</title>
+    <link href="http://example.com/2025/06/05/ai-reading-notes/"/>
+    <id>http://example.com/2025/06/05/ai-reading-notes/</id>
+    <published>2025-06-05T03:20:43.000Z</published>
+    <updated>2025-06-05T03:32:39.248Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-人工智能定义"><a href="#1-人工智能定义" class="headerlink" title="1. 人工智能定义"></a>1. 人工智能定义</h2><ul>
+<li><strong>人是有理性的动物，会思考目标和行动</strong></li>
+<li><strong>人工智能公式化定义</strong>：<ul>
+<li>人工智能 = (类人 + 理性) × (行为 + 思考)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-类人行为：图灵测试"><a href="#1-1-类人行为：图灵测试" class="headerlink" title="1.1 类人行为：图灵测试"></a>1.1 类人行为：图灵测试</h3><ul>
+<li>计算机需要具备以下能力：<ul>
+<li>自然语言处理</li>
+<li>知识表示</li>
+<li>自动推理</li>
+<li>机器学习</li>
+<li>计算机视觉</li>
+<li>机器人学</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="1-2-类人思考：认知建模"><a href="#1-2-类人思考：认知建模" class="headerlink" title="1.2 类人思考：认知建模"></a>1.2 类人思考：认知建模</h3><ul>
+<li><strong>认知科学方法</strong>：<ul>
+<li>内省法</li>
+<li>心理实验</li>
+<li>大脑成像研究</li>
+</ul>
+</li>
+<li><strong>著名人物</strong>：<ul>
+<li>艾伦·纽厄尔 (Alan Newell)</li>
+<li>赫伯特·西蒙 (Herbert Simon)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-理性思考：思维法则建模"><a href="#1-3-理性思考：思维法则建模" class="headerlink" title="1.3 理性思考：思维法则建模"></a>1.3 理性思考：思维法则建模</h3><ul>
+<li><strong>逻辑主义</strong>：<ul>
+<li>用符号逻辑描述可解的问题，理论上可以编程解决。</li>
+</ul>
+</li>
+<li><strong>概率</strong>：<ul>
+<li>用概率弥补逻辑在不确定性中的不足。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-理性行为：理性智能体方法"><a href="#1-4-理性行为：理性智能体方法" class="headerlink" title="1.4 理性行为：理性智能体方法"></a>1.4 理性行为：理性智能体方法</h3><ul>
+<li><strong>定义</strong>：<ul>
+<li>能正确判断、做出正确行为并完成理性目标。</li>
+</ul>
+</li>
+<li><strong>人工智能的研究重点</strong>：<ul>
+<li>构建能做正确事情的智能体，这是通用的标准模型。</li>
+</ul>
+</li>
+<li><strong>缺陷</strong>：<ul>
+<li>人类并非总能给出正确目标。</li>
+<li>太聪明的智能体可能会因目标对人类造成伤害，因此需要价值对齐机制。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-人工智能基础"><a href="#2-人工智能基础" class="headerlink" title="2. 人工智能基础"></a>2. 人工智能基础</h2><h3 id="2-1-哲学"><a href="#2-1-哲学" class="headerlink" title="2.1 哲学"></a>2.1 哲学</h3><ul>
+<li><p><strong>思维：我是如何知道的？</strong></p>
+<ul>
+<li>理性主义：笛卡尔——“我思故我在”，思想源于自由意志。</li>
+<li>经验主义：思想被外在物理世界决定（自然主义、唯物主义）。</li>
+<li>整合：康德——《纯粹理性批判》，探讨“先天综合判断如何可能”。</li>
+</ul>
+</li>
+<li><p><strong>知识：我能知道什么？</strong></p>
+<ul>
+<li>演绎：<ul>
+<li>形式化演绎（亚里士多德，三段论）。</li>
+<li>形式逻辑演绎（罗素、维特根斯坦、鲁道夫·卡纳普）。</li>
+</ul>
+</li>
+<li>归纳：<ul>
+<li>经验主义（培根，《新工具》）。</li>
+</ul>
+</li>
+<li>类比（书中未提及）。</li>
+</ul>
+</li>
+<li><p><strong>行为：我能做什么？</strong></p>
+<ul>
+<li>功利主义：边沁、约翰·穆勒，基于效用最大化的理性决策。</li>
+<li>义务伦理学：康德的绝对律令。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-数学"><a href="#2-2-数学" class="headerlink" title="2.2 数学"></a>2.2 数学</h3><ul>
+<li>推理的形式化规则：<ul>
+<li>形式化逻辑：布尔逻辑。</li>
+<li>概率推导、统计学。</li>
+</ul>
+</li>
+<li><strong>可计算性</strong>：<ul>
+<li>“算法”一词源于 9 世纪数学家穆罕默德·本·穆萨·阿尔·花剌子模。</li>
+<li><strong>计算边界</strong>：<ul>
+<li>哥德尔不完全性定理：任何强形式化理论中都存在未被证明的真实陈述。</li>
+<li>图灵机：定义可计算函数的通用概念。</li>
+</ul>
+</li>
+<li><strong>易处理性</strong>：<ul>
+<li>P 问题：多项式时间内可解。</li>
+<li>NP 问题：多项式时间内可验证。</li>
+<li>NP 难问题：如停机问题、SAT 布尔可满足性问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-经济学"><a href="#2-3-经济学" class="headerlink" title="2.3 经济学"></a>2.3 经济学</h3><ul>
+<li>如何基于偏好决策：<ul>
+<li>博弈论与经济学（冯·诺伊曼与摩根斯特恩）。</li>
+</ul>
+</li>
+<li>如何在不确定性下决策：<ul>
+<li>决策论结合概率论与效用理论。</li>
+<li>多智能体系统。</li>
+</ul>
+</li>
+<li>如何平衡远期收益：<ul>
+<li>运筹学、马尔可夫决策过程，与强化学习相关。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-神经科学"><a href="#2-4-神经科学" class="headerlink" title="2.4 神经科学"></a>2.4 神经科学</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>神经网络</li>
+<li>脑机接口</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-心理学"><a href="#2-5-心理学" class="headerlink" title="2.5 心理学"></a>2.5 心理学</h3><ul>
+<li><strong>研究内容</strong>：<ul>
+<li>人类与动物如何思考和行动。</li>
+<li>视觉研究（赫尔曼·冯·赫尔姆霍茨）。</li>
+<li>行为心理学、认知心理学、人机交互（IA）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-6-计算机工程"><a href="#2-6-计算机工程" class="headerlink" title="2.6 计算机工程"></a>2.6 计算机工程</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>图灵机</li>
+<li>摩尔定律与芯片发展</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-控制理论"><a href="#2-7-控制理论" class="headerlink" title="2.7 控制理论"></a>2.7 控制理论</h3><ul>
+<li><strong>研究目标</strong>：<ul>
+<li>设计最优控制系统以最小化代价函数。</li>
+<li>与人工智能的区别：<ul>
+<li>控制理论强调连续变量和微积分。</li>
+<li>人工智能更注重逻辑推理和计算工具。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-8-语言学"><a href="#2-8-语言学" class="headerlink" title="2.8 语言学"></a>2.8 语言学</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>语言与思维的联系（乔姆斯基）。</li>
+<li>自然语言处理（NLP）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-人工智能的历史"><a href="#3-人工智能的历史" class="headerlink" title="3. 人工智能的历史"></a>3. 人工智能的历史</h2><h3 id="3-1-诞生（1943-1956，符号主义）"><a href="#3-1-诞生（1943-1956，符号主义）" class="headerlink" title="3.1 诞生（1943~1956，符号主义）"></a>3.1 诞生（1943~1956，符号主义）</h3><ul>
+<li>人工神经元模型（沃伦·麦卡洛克、沃尔特·皮茨）。</li>
+<li>修改神经元连接强度（唐纳德·赫布）。</li>
+<li>第一台神经网络计算机 SNARC（马文·明斯基、迪安·埃德蒙兹）。</li>
+<li>图灵测试、机器学习、遗传算法、强化学习（图灵，1947）。</li>
+<li>达特茅斯会议提出人工智能研究框架（1956）。</li>
+</ul>
+<h3 id="3-2-高涨（1952-1969）"><a href="#3-2-高涨（1952-1969）" class="headerlink" title="3.2 高涨（1952~1969）"></a>3.2 高涨（1952~1969）</h3><ul>
+<li>通用问题求解器（纽厄尔、西蒙）。</li>
+<li>Lisp 语言（约翰·麦卡锡）。</li>
+<li>积木世界（1970）。</li>
+</ul>
+<h3 id="3-3-寒冬（1966-1973）"><a href="#3-3-寒冬（1966-1973）" class="headerlink" title="3.3 寒冬（1966~1973）"></a>3.3 寒冬（1966~1973）</h3><ul>
+<li>过于乐观：高估了人工智能的短期能力。</li>
+<li>忽视任务含义与算法复杂度。</li>
+<li>线性感知机能力不足（明斯基，1969）。</li>
+</ul>
+<h3 id="3-4-专家系统（1969-1986）"><a href="#3-4-专家系统（1969-1986）" class="headerlink" title="3.4 专家系统（1969~1986）"></a>3.4 专家系统（1969~1986）</h3><ul>
+<li>医学诊断、分子结构推断。</li>
+<li>商用专家系统（杜邦公司）。</li>
+<li>日本政府的第五代计算机计划。</li>
+</ul>
+<h3 id="3-5-神经网络与深度学习（1986-至今）"><a href="#3-5-神经网络与深度学习（1986-至今）" class="headerlink" title="3.5 神经网络与深度学习（1986~至今）"></a>3.5 神经网络与深度学习（1986~至今）</h3><ul>
+<li><strong>关键技术</strong>：<ul>
+<li>概率推理、机器学习。</li>
+<li>贝叶斯网络与因果推理。</li>
+<li>强化学习与马尔可夫决策过程。</li>
+</ul>
+</li>
+<li><strong>深度学习（2011~至今）</strong>：<ul>
+<li>卷积神经网络（CNN）。</li>
+<li>序列神经网络（RNN）。</li>
+</ul>
+</li>
+<li><strong>应用领域</strong>：<ul>
+<li>自动驾驶（Waymo、Tesla）。</li>
+<li>机器人、机器翻译、语音识别、推荐系统。</li>
+<li>博弈（AlphaGo、Dota AI）。</li>
+<li>图像理解、医学诊断、气象科学。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-人工智能定义&quot;&gt;&lt;a href=&quot;#1-人工智能定义&quot; class=&quot;headerlink&quot; title=&quot;1. 人工智能定义&quot;&gt;&lt;/a&gt;1. 人工智能定义&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;人是有理性的动物，会思考目标和行动&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;人工智能公式化定义&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;人工智能 = (类人 + 理性) × (行为 + 思考)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;1-1-类人行为：图灵测试&quot;&gt;&lt;a href=&quot;#1-1-类人行为：图灵测试&quot; class=&quot;headerlink&quot; title=&quot;1.1 类人行为：图灵测试&quot;&gt;&lt;/a&gt;1.1 类人行为：图灵测试&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;计算机需要具备以下能力：&lt;ul&gt;
+&lt;li&gt;自然语言处理&lt;/li&gt;
+&lt;li&gt;知识表示&lt;/li&gt;
+&lt;li&gt;自动推理&lt;/li&gt;
+&lt;li&gt;机器学习&lt;/li&gt;
+&lt;li&gt;计算机视觉&lt;/li&gt;
+&lt;li&gt;机器人学&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="artificial intelligence" scheme="http://example.com/tags/artificial-intelligence/"/>
+    
+  </entry>
   
   <entry>
     <title>读书有哪些方法? 2021都读了哪些书</title>
@@ -1710,33 +1955,6 @@
     
     
       <category term="Scala" scheme="http://example.com/tags/scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>春江花月夜</title>
-    <link href="http://example.com/2016/09/27/%E6%98%A5%E6%B1%9F%E8%8A%B1%E6%9C%88%E5%A4%9C/"/>
-    <id>http://example.com/2016/09/27/春江花月夜/</id>
-    <published>2016-09-27T01:35:59.000Z</published>
-    <updated>2017-03-05T02:27:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>有人说张若虚的这首诗很值得背诵下来</p>
-<a id="more"></a>
-<h2 id="春江花月夜"><a href="#春江花月夜" class="headerlink" title="春江花月夜"></a>春江花月夜</h2><hr>
-<blockquote>
-<p>春江潮水连海平，海上明月共潮生。<br>滟滟随波千万里，何处春江无月明！<br>江流宛转绕芳甸，月照花林皆似霰;<br>空里流霜不觉飞，汀上白沙看不见。<br>江天一色无纤尘，皎皎空中孤月轮。<br>江畔何人初见月？江月何年初照人？<br>人生代代无穷已，江月年年只相似。<br>不知江月待何人，但见长江送流水。<br>白云一片去悠悠，青枫浦上不胜愁。<br>谁家今夜扁舟子？何处相思明月楼？<br>可怜楼上月徘徊，应照离人妆镜台。<br>玉户帘中卷不去，捣衣砧上拂还来。<br>此时相望不相闻，愿逐月华流照君。<br>鸿雁长飞光不度，鱼龙潜跃水成文。<br>昨夜闲潭梦落花，可怜春半不还家。<br>江水流春去欲尽，江潭落月复西斜。<br>斜月沉沉藏海雾，碣石潇湘无限路。<br>不知乘月几人归，落月摇情满江树。</p>
-</blockquote>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有人说张若虚的这首诗很值得背诵下来&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="诗话" scheme="http://example.com/tags/%E8%AF%97%E8%AF%9D/"/>
     
   </entry>
   

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>读《人工智能现代方法》--基础篇笔记 | CyannyLive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 人工智能定义 人是有理性的动物，会思考目标和行动 人工智能公式化定义： 人工智能 &#x3D; (类人 + 理性) × (行为 + 思考)    1.1 类人行为：图灵测试 计算机需要具备以下能力： 自然语言处理 知识表示 自动推理 机器学习 计算机视觉 机器人学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《人工智能现代方法》--基础篇笔记">
+<meta property="og:url" content="http://example.com/2025/06/05/ai-reading-notes/index.html">
+<meta property="og:site_name" content="CyannyLive">
+<meta property="og:description" content="1. 人工智能定义 人是有理性的动物，会思考目标和行动 人工智能公式化定义： 人工智能 &#x3D; (类人 + 理性) × (行为 + 思考)    1.1 类人行为：图灵测试 计算机需要具备以下能力： 自然语言处理 知识表示 自动推理 机器学习 计算机视觉 机器人学">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-05T03:20:43.000Z">
+<meta property="article:modified_time" content="2025-06-05T03:32:39.248Z">
+<meta property="article:author" content="Cyanny Liang">
+<meta property="article:tag" content="artificial intelligence">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@lgrcyanny">
+<link rel="publisher" href="lgrcyanny">
+<meta property="fb:admins" content="lgrcyanny">
+<meta property="fb:app_id" content="lgrcyanny">
+  
+  
+    <link rel="icon" href="favicon.ico">
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+<link rel="stylesheet" href="../../../../font-awesome/css/font-awesome.min.css">
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-40624708-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="../../../../." id="logo"><i class="logo"></i><span class="site-title">CyannyLive</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="../../../../.">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../categories">Categories</a>
+        
+          <a class="main-nav-link" href="../../../../tags">Tags</a>
+        
+      </nav>
+      
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="../../../../css/images/avatar.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="../../../../.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="../../../../archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="../../../../categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="../../../../tags">Tags</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="../../../../css/images/avatar.png">
+      <h2 id="name">Cyanny Liang</h2>
+      <h3 id="title">AI System Architecture</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" target="_blank" rel="noopener" href="https://github.com/lgrcyanny/">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        66
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        39
+        <span>tags</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="../../../../http:/github.com/lgrcyanny" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="../../../../https:/twitter.com/lgrcyanny" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="../../../../https:/www.facebook.com/CyannyLIANG" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+          <td><a href="../../../../atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      
+      <section id="main"><article id="post-ai-reading-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      读《人工智能现代方法》--基础篇笔记
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="">
+    <time datetime="2025-06-05T03:20:43.000Z" itemprop="datePublished">2025-06-05</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-人工智能定义"><a href="#1-人工智能定义" class="headerlink" title="1. 人工智能定义"></a>1. 人工智能定义</h2><ul>
+<li><strong>人是有理性的动物，会思考目标和行动</strong></li>
+<li><strong>人工智能公式化定义</strong>：<ul>
+<li>人工智能 = (类人 + 理性) × (行为 + 思考)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-类人行为：图灵测试"><a href="#1-1-类人行为：图灵测试" class="headerlink" title="1.1 类人行为：图灵测试"></a>1.1 类人行为：图灵测试</h3><ul>
+<li>计算机需要具备以下能力：<ul>
+<li>自然语言处理</li>
+<li>知识表示</li>
+<li>自动推理</li>
+<li>机器学习</li>
+<li>计算机视觉</li>
+<li>机器人学</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="1-2-类人思考：认知建模"><a href="#1-2-类人思考：认知建模" class="headerlink" title="1.2 类人思考：认知建模"></a>1.2 类人思考：认知建模</h3><ul>
+<li><strong>认知科学方法</strong>：<ul>
+<li>内省法</li>
+<li>心理实验</li>
+<li>大脑成像研究</li>
+</ul>
+</li>
+<li><strong>著名人物</strong>：<ul>
+<li>艾伦·纽厄尔 (Alan Newell)</li>
+<li>赫伯特·西蒙 (Herbert Simon)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-理性思考：思维法则建模"><a href="#1-3-理性思考：思维法则建模" class="headerlink" title="1.3 理性思考：思维法则建模"></a>1.3 理性思考：思维法则建模</h3><ul>
+<li><strong>逻辑主义</strong>：<ul>
+<li>用符号逻辑描述可解的问题，理论上可以编程解决。</li>
+</ul>
+</li>
+<li><strong>概率</strong>：<ul>
+<li>用概率弥补逻辑在不确定性中的不足。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-理性行为：理性智能体方法"><a href="#1-4-理性行为：理性智能体方法" class="headerlink" title="1.4 理性行为：理性智能体方法"></a>1.4 理性行为：理性智能体方法</h3><ul>
+<li><strong>定义</strong>：<ul>
+<li>能正确判断、做出正确行为并完成理性目标。</li>
+</ul>
+</li>
+<li><strong>人工智能的研究重点</strong>：<ul>
+<li>构建能做正确事情的智能体，这是通用的标准模型。</li>
+</ul>
+</li>
+<li><strong>缺陷</strong>：<ul>
+<li>人类并非总能给出正确目标。</li>
+<li>太聪明的智能体可能会因目标对人类造成伤害，因此需要价值对齐机制。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-人工智能基础"><a href="#2-人工智能基础" class="headerlink" title="2. 人工智能基础"></a>2. 人工智能基础</h2><h3 id="2-1-哲学"><a href="#2-1-哲学" class="headerlink" title="2.1 哲学"></a>2.1 哲学</h3><ul>
+<li><p><strong>思维：我是如何知道的？</strong></p>
+<ul>
+<li>理性主义：笛卡尔——“我思故我在”，思想源于自由意志。</li>
+<li>经验主义：思想被外在物理世界决定（自然主义、唯物主义）。</li>
+<li>整合：康德——《纯粹理性批判》，探讨“先天综合判断如何可能”。</li>
+</ul>
+</li>
+<li><p><strong>知识：我能知道什么？</strong></p>
+<ul>
+<li>演绎：<ul>
+<li>形式化演绎（亚里士多德，三段论）。</li>
+<li>形式逻辑演绎（罗素、维特根斯坦、鲁道夫·卡纳普）。</li>
+</ul>
+</li>
+<li>归纳：<ul>
+<li>经验主义（培根，《新工具》）。</li>
+</ul>
+</li>
+<li>类比（书中未提及）。</li>
+</ul>
+</li>
+<li><p><strong>行为：我能做什么？</strong></p>
+<ul>
+<li>功利主义：边沁、约翰·穆勒，基于效用最大化的理性决策。</li>
+<li>义务伦理学：康德的绝对律令。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-数学"><a href="#2-2-数学" class="headerlink" title="2.2 数学"></a>2.2 数学</h3><ul>
+<li>推理的形式化规则：<ul>
+<li>形式化逻辑：布尔逻辑。</li>
+<li>概率推导、统计学。</li>
+</ul>
+</li>
+<li><strong>可计算性</strong>：<ul>
+<li>“算法”一词源于 9 世纪数学家穆罕默德·本·穆萨·阿尔·花剌子模。</li>
+<li><strong>计算边界</strong>：<ul>
+<li>哥德尔不完全性定理：任何强形式化理论中都存在未被证明的真实陈述。</li>
+<li>图灵机：定义可计算函数的通用概念。</li>
+</ul>
+</li>
+<li><strong>易处理性</strong>：<ul>
+<li>P 问题：多项式时间内可解。</li>
+<li>NP 问题：多项式时间内可验证。</li>
+<li>NP 难问题：如停机问题、SAT 布尔可满足性问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-经济学"><a href="#2-3-经济学" class="headerlink" title="2.3 经济学"></a>2.3 经济学</h3><ul>
+<li>如何基于偏好决策：<ul>
+<li>博弈论与经济学（冯·诺伊曼与摩根斯特恩）。</li>
+</ul>
+</li>
+<li>如何在不确定性下决策：<ul>
+<li>决策论结合概率论与效用理论。</li>
+<li>多智能体系统。</li>
+</ul>
+</li>
+<li>如何平衡远期收益：<ul>
+<li>运筹学、马尔可夫决策过程，与强化学习相关。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-神经科学"><a href="#2-4-神经科学" class="headerlink" title="2.4 神经科学"></a>2.4 神经科学</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>神经网络</li>
+<li>脑机接口</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-心理学"><a href="#2-5-心理学" class="headerlink" title="2.5 心理学"></a>2.5 心理学</h3><ul>
+<li><strong>研究内容</strong>：<ul>
+<li>人类与动物如何思考和行动。</li>
+<li>视觉研究（赫尔曼·冯·赫尔姆霍茨）。</li>
+<li>行为心理学、认知心理学、人机交互（IA）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-6-计算机工程"><a href="#2-6-计算机工程" class="headerlink" title="2.6 计算机工程"></a>2.6 计算机工程</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>图灵机</li>
+<li>摩尔定律与芯片发展</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-控制理论"><a href="#2-7-控制理论" class="headerlink" title="2.7 控制理论"></a>2.7 控制理论</h3><ul>
+<li><strong>研究目标</strong>：<ul>
+<li>设计最优控制系统以最小化代价函数。</li>
+<li>与人工智能的区别：<ul>
+<li>控制理论强调连续变量和微积分。</li>
+<li>人工智能更注重逻辑推理和计算工具。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-8-语言学"><a href="#2-8-语言学" class="headerlink" title="2.8 语言学"></a>2.8 语言学</h3><ul>
+<li><strong>研究方向</strong>：<ul>
+<li>语言与思维的联系（乔姆斯基）。</li>
+<li>自然语言处理（NLP）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-人工智能的历史"><a href="#3-人工智能的历史" class="headerlink" title="3. 人工智能的历史"></a>3. 人工智能的历史</h2><h3 id="3-1-诞生（1943-1956，符号主义）"><a href="#3-1-诞生（1943-1956，符号主义）" class="headerlink" title="3.1 诞生（1943~1956，符号主义）"></a>3.1 诞生（1943~1956，符号主义）</h3><ul>
+<li>人工神经元模型（沃伦·麦卡洛克、沃尔特·皮茨）。</li>
+<li>修改神经元连接强度（唐纳德·赫布）。</li>
+<li>第一台神经网络计算机 SNARC（马文·明斯基、迪安·埃德蒙兹）。</li>
+<li>图灵测试、机器学习、遗传算法、强化学习（图灵，1947）。</li>
+<li>达特茅斯会议提出人工智能研究框架（1956）。</li>
+</ul>
+<h3 id="3-2-高涨（1952-1969）"><a href="#3-2-高涨（1952-1969）" class="headerlink" title="3.2 高涨（1952~1969）"></a>3.2 高涨（1952~1969）</h3><ul>
+<li>通用问题求解器（纽厄尔、西蒙）。</li>
+<li>Lisp 语言（约翰·麦卡锡）。</li>
+<li>积木世界（1970）。</li>
+</ul>
+<h3 id="3-3-寒冬（1966-1973）"><a href="#3-3-寒冬（1966-1973）" class="headerlink" title="3.3 寒冬（1966~1973）"></a>3.3 寒冬（1966~1973）</h3><ul>
+<li>过于乐观：高估了人工智能的短期能力。</li>
+<li>忽视任务含义与算法复杂度。</li>
+<li>线性感知机能力不足（明斯基，1969）。</li>
+</ul>
+<h3 id="3-4-专家系统（1969-1986）"><a href="#3-4-专家系统（1969-1986）" class="headerlink" title="3.4 专家系统（1969~1986）"></a>3.4 专家系统（1969~1986）</h3><ul>
+<li>医学诊断、分子结构推断。</li>
+<li>商用专家系统（杜邦公司）。</li>
+<li>日本政府的第五代计算机计划。</li>
+</ul>
+<h3 id="3-5-神经网络与深度学习（1986-至今）"><a href="#3-5-神经网络与深度学习（1986-至今）" class="headerlink" title="3.5 神经网络与深度学习（1986~至今）"></a>3.5 神经网络与深度学习（1986~至今）</h3><ul>
+<li><strong>关键技术</strong>：<ul>
+<li>概率推理、机器学习。</li>
+<li>贝叶斯网络与因果推理。</li>
+<li>强化学习与马尔可夫决策过程。</li>
+</ul>
+</li>
+<li><strong>深度学习（2011~至今）</strong>：<ul>
+<li>卷积神经网络（CNN）。</li>
+<li>序列神经网络（RNN）。</li>
+</ul>
+</li>
+<li><strong>应用领域</strong>：<ul>
+<li>自动驾驶（Waymo、Tesla）。</li>
+<li>机器人、机器翻译、语音识别、推荐系统。</li>
+<li>博弈（AlphaGo、Dota AI）。</li>
+<li>图像理解、医学诊断、气象科学。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/06/05/ai-reading-notes/" data-id="cmbitib4x0000u1fy55a9efbp" class="article-share-link">Share</a>
+      
+        <a href="http://example.com/2025/06/05/ai-reading-notes/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/artificial-intelligence/" rel="tag">artificial intelligence</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../../../2022/01/10/how-to-read-books/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">读书有哪些方法? 2021都读了哪些书</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recents</h3>
+    <div class="widget">
+      <ul id="recent-post" class="no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="" class="title">读《人工智能现代方法》--基础篇笔记</a></p>
+              <p class="item-date"><time datetime="2025-06-05T03:20:43.000Z" itemprop="datePublished">2025-06-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="../../../../2022/01/10/how-to-read-books/" class="title">读书有哪些方法? 2021都读了哪些书</a></p>
+              <p class="item-date"><time datetime="2022-01-10T03:46:14.000Z" itemprop="datePublished">2022-01-10</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="../../../../2021/12/23/dynamic-programming-summary/" class="title">Dynamic Programming Summary</a></p>
+              <p class="item-date"><time datetime="2021-12-23T03:11:31.000Z" itemprop="datePublished">2021-12-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="../../../../2020/12/27/an-introduction-to-bayesian-networks/" class="title">An Introduction to Bayesian Networks</a></p>
+              <p class="item-date"><time datetime="2020-12-27T10:54:04.000Z" itemprop="datePublished">2020-12-27</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="../../../../2020/12/25/structure-learning-algorithm-notears/" class="title">Structure Learning Algorithm NOTEARS</a></p>
+              <p class="item-date"><time datetime="2020-12-25T14:01:59.000Z" itemprop="datePublished">2020-12-25</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/algorithm/">Algorithm</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/">Distributed System</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/distributed-system/life/">Life</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/">Hadoop</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hbase/">HBase</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/hadoop/hive/">Hive</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/javascript/">JavaScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/life/">Life</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/network/">Network</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/nodejs/">Nodejs</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../../../categories/system-analysis-and-design/">System Analysis and Design</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="../../../../tags/agile/" style="font-size: 10px;">Agile</a> <a href="../../../../tags/akka/" style="font-size: 10px;">Akka</a> <a href="../../../../tags/akka-scala/" style="font-size: 10px;">Akka, Scala</a> <a href="../../../../tags/algorithm/" style="font-size: 15px;">Algorithm</a> <a href="../../../../tags/big-data/" style="font-size: 13.33px;">Big Data</a> <a href="../../../../tags/causal-inference-ai/" style="font-size: 11.67px;">Causal Inference, AI</a> <a href="../../../../tags/design/" style="font-size: 15px;">Design</a> <a href="../../../../tags/dynamic-programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="../../../../tags/hbase/" style="font-size: 16.67px;">HBase</a> <a href="../../../../tags/hadoop/" style="font-size: 18.33px;">Hadoop</a> <a href="../../../../tags/hive/" style="font-size: 10px;">Hive</a> <a href="../../../../tags/javascript/" style="font-size: 10px;">JavaScript</a> <a href="../../../../tags/language/" style="font-size: 10px;">Language</a> <a href="../../../../tags/learn/" style="font-size: 10px;">Learn</a> <a href="../../../../tags/learning/" style="font-size: 20px;">Learning</a> <a href="../../../../tags/linux/" style="font-size: 11.67px;">Linux</a> <a href="../../../../tags/machine-learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="../../../../tags/mapreduce/" style="font-size: 10px;">MapReduce</a> <a href="../../../../tags/methodology/" style="font-size: 10px;">Methodology</a> <a href="../../../../tags/network/" style="font-size: 10px;">Network</a> <a href="../../../../tags/node-js/" style="font-size: 10px;">Node.js</a> <a href="../../../../tags/research/" style="font-size: 16.67px;">Research</a> <a href="../../../../tags/resource/" style="font-size: 10px;">Resource</a> <a href="../../../../tags/scala/" style="font-size: 15px;">Scala</a> <a href="../../../../tags/spark/" style="font-size: 10px;">Spark</a> <a href="../../../../tags/systemanalysis/" style="font-size: 15px;">SystemAnalysis</a> <a href="../../../../tags/vps/" style="font-size: 11.67px;">VPS</a> <a href="../../../../tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="../../../../tags/apache-storm/" style="font-size: 10px;">apache storm</a> <a href="../../../../tags/artificial-intelligence/" style="font-size: 10px;">artificial intelligence</a> <a href="../../../../tags/java-performance/" style="font-size: 10px;">java performance</a> <a href="../../../../tags/learning/" style="font-size: 11.67px;">learning</a> <a href="../../../../tags/life/" style="font-size: 10px;">life</a> <a href="../../../../tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="../../../../tags/math/" style="font-size: 10px;">math</a> <a href="../../../../tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="../../../../tags/sort/" style="font-size: 11.67px;">sort</a> <a href="../../../../tags/spark/" style="font-size: 10px;">spark</a> <a href="../../../../tags/spark-streaming/" style="font-size: 10px;">spark streaming</a>
+    </div>
+  </div>
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Cyanny Liang
+    </div>
+  </div>
+</footer>
+    
+
+<script>
+  var disqus_shortname = 'lgrcyanny';
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+
+  
+<script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+  </div>
+</body>
+</html>
