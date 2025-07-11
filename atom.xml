@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-06-05T03:32:39.248Z</updated>
+  <updated>2025-07-11T01:57:22.179Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>技术的哲学</title>
+    <link href="http://example.com/2025/07/11/tech-philosophy/"/>
+    <id>http://example.com/2025/07/11/tech-philosophy/</id>
+    <published>2025-07-11T01:55:45.000Z</published>
+    <updated>2025-07-11T01:57:22.179Z</updated>
+    
+    <content type="html"><![CDATA[<p>技术工作多年，感受过很多“朝为断肠人，夕为东流水”，信息类工作变化很快，各种成功学，管理学里喜欢说拥抱变化，变化就是永恒的不变已为老生常谈。而不变性存在么，一位哲人曾说“聪明人坚持计划，智慧的人坚守原则”。本文将从语言，系统和算法三个方面探讨。</p>
+<a id="more"></a>
+
+<h1 id="1-语言的范式存在么"><a href="#1-语言的范式存在么" class="headerlink" title="1.语言的范式存在么"></a>1.语言的范式存在么</h1><p>第一次接触编程，学习变量，赋值，条件，循环，还有面向对象的继承，封装，多态。很庆幸当时看的是《Head first Java》, 如果淹没在C++的指针的海洋里，估计很早弃坑。多年之后，扩展了Python，Scala，C++，Golang，从语法上殊途同归，在一阶逻辑方面，如果表达一般算法流程，语言的区分并不大。<br>当年编译原理选修，我更喜欢做应用，就没有选择听听编译原理，实属遗憾。当下的教育环境，实用主义导向，工程技术犹如搭积木，对存在和本质的思考太少，当然没有生存何谈存在。一位大学教授被职称和成果压力，很难给出有深度的选题，一位学生着急工作挣钱，一心只想学习工业界的技术，也不会潜心研究。面试时，我曾问一位同学，你学过scala么？那函数式编程到底是什么？他说我就知道那是函数式编程，在写spark，大数据里用用，跟java没有区别吧。他或许已经感受到语言的范式，但说不清楚。<br>范式是一种普遍的原则，面向对象重在对复杂业务逻辑的模块化和抽象，其目标是分离和控制，相关逻辑放一起，不相关的不要耦合，让软件的生命力更长久。函数式编程，更多出现在大数据环境里，因为数据量大，就要分布式，函数式编程从原则上避免副作用，解决分布式里竞态关系的一大问题。<br>有很多著作探讨语言范式的哲学，这是一个有趣的话题，待有钱有闲可以好好研究哈哈</p>
+<h1 id="2-系统的迷思"><a href="#2-系统的迷思" class="headerlink" title="2.系统的迷思"></a>2.系统的迷思</h1><p>系统是一系列功能的组合，为了完成某种理性的目标，一个系统通常是五个部分，输入，输出，控制，计算和反馈调节。刚开始工作时，总是只关心了输入，输出，控制和计算逻辑，很容易忽略反馈调节部分，因为反馈不在狭义的编程环境内。可能来自人：例如用户反馈，产品迭代需求，老板拍个脑袋，也可能来自对系统进行监控和观察。<br>围绕反馈的工作，是长尾的，消耗精力的，特别在一些数据挖掘系统中，算法上线要评估，要排查case，要找到系统问题出现在哪儿。以效果为关注点的管理层并不会关心这些评估工具的效率，只在出现阻碍时才随便下个命令让士兵们开发，而如果能有一些预见性，提早规划系统的反馈阶段的事情，后期的运维便会事半功倍。<br>系统是逐步长大的，从0到1的初创期，很快乐，使命感和成就感很足，就如一种蜜月期，仿佛划破天际的闪亮流星；然而，这颗流星能不能有汇聚效果，变成一个真正的行星或者太阳呢？<br>接下来便是，发展期，这是考验系统稳定性和扩展性设计是否良好的阶段。通常由于未来的不确定性，很难最开始就设计好，于是，系统的重构和迁移就开始了，通常是少数精英架构师做好设计和框架开发，画一个改进版本的架构图，写一些框架代码，接下来的体力活和很多琐碎的对接和适配工作，下面的士兵承担，并要给出排期和节奏，在什么时候完成，还要兼容老系统的问题。架构师会喜欢给出一个激进的预期，不然老板会觉得你重构咋要这么就，然后士兵们苦不堪言，delay and delay，终于延期1~2个月上线了，架构师去汇报，老板板着脸说符合预期吧，你的新功能做了么？这不刚重构完麻，第二期已经计划中。哈哈，这就是发展时候的拉锯战。<br>终于，到了成熟期，架构师由于各种会战中挂上了一枚枚勋章，终于军大衣太重穿不上，换上了一身笔挺的西服，加入了精英政治家的行列，去做纵横捭阖的工作。如果这个系统还在，那谁来浇水施肥呢？一些不思进取的老兵们，会根据业务需求，微调系统的功能，做集群迁移，做报警监控，做成本治理，待到边际收益基本为0，边际成本也下降的不能再降，这已饱经风霜的老兵可退休转业，去别的战场继续挖坑。</p>
+<h1 id="3-算法的荣耀"><a href="#3-算法的荣耀" class="headerlink" title="3.算法的荣耀"></a>3.算法的荣耀</h1><p>算法可分两类，不可微分编程和可微分编程。不可微，就是传统意义上的一阶逻辑，所处理的实体是序列，集合和图，实体间的关系可通过顺序，分支，循环表达，其运行结果是可复现的，确定的，可观测的，底层基础架构，上层信息类应用，喜欢用离散的状态去抽象表达，整体是不可微的，不连续的函数，这样的编程是一种艺术，有艺术就有高手，比如各种竞赛top coder，ACM。当年有幸见到一位业界知名top coder就如看到武林高手一般激动。<br>早年的计算机系统，靠近底层，对系统的性能，稳定性，可扩展性要求很高，通常在很小的内存或CPU里，要处理很复杂的任务，对抽象能力要求很高，有挑战的地方，就有聪明的大脑。而至今计算机已经发展70多年，互联网也已经快20年，对信息的CRUD，或者说分布式大规模数据处理，都有了标准化的工具和流程。已经很少有人从头去研究分布式算法，一阶逻辑的算法变成是面试里的一种标准思维考察，编程能力的考试。<br>算法的世界的注意力已经转向可微分编程，也就是以机器学习，深度学习，强化学习为代表的各种技术，他们要解决的是图像，自然语言处理，复杂智能体的感知，推理，规划问题，要创建人工智能。可微分的那个结构，就是神经网络，层峦叠嶂的权重矩阵，人脑已无法理解，但人可以编程如何生成这样的矩阵，借助反向传播，梯度下降算法，这里复杂的点是不确定性和不可观测性。如果只从经验中学习，经验是无法完全覆盖未来的，于是长尾的优化犹如那奥林匹斯山上的西西弗斯。<br>武林的世界，技术的世界，按技术的复杂度，影响力的价值度，财富累积的效应程度等，是分等级和分圈子的，对高等级金羊毛的追求，不知是福还是祸。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;技术工作多年，感受过很多“朝为断肠人，夕为东流水”，信息类工作变化很快，各种成功学，管理学里喜欢说拥抱变化，变化就是永恒的不变已为老生常谈。而不变性存在么，一位哲人曾说“聪明人坚持计划，智慧的人坚守原则”。本文将从语言，系统和算法三个方面探讨。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="philosophy" scheme="http://example.com/tags/philosophy/"/>
+    
+  </entry>
   
   <entry>
     <title>读《人工智能现代方法》--基础篇笔记</title>
@@ -1996,62 +2022,6 @@
       <category term="Algorithm" scheme="http://example.com/tags/algorithm/"/>
     
       <category term="Scala" scheme="http://example.com/tags/scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Machine Learning Neural Networks</title>
-    <link href="http://example.com/2016/04/17/machine-learning-neural-networks/"/>
-    <id>http://example.com/2016/04/17/machine-learning-neural-networks/</id>
-    <published>2016-04-17T13:29:20.000Z</published>
-    <updated>2017-08-28T14:30:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>This week is about the mysterious Neural Networks. The courses in this week just explain the basics about Neural Networks.</p>
-<h2 id="What-is-Neural-Networks"><a href="#What-is-Neural-Networks" class="headerlink" title="What is Neural Networks"></a>What is Neural Networks</h2><p>It’s a technique to train our data based on how human brains works. A simple Neural Network has:</p>
-<ul>
-<li>input layer</li>
-<li>hidden layer</li>
-<li>output layer</li>
-</ul>
-<p>We use Neural NetWorks to make classification and regression.<br>We use sigmoid function the map data from input layer to hidden layer then the output layer, the function is called activation function.</p>
-<a id="more"></a>
-<p><img src="http://ww3.sinaimg.cn/mw690/761b7938jw1f3019b35a2j21380kcn1d.jpg" alt="Neural Network"></p>
-<p>In Neural Network, we add bias unit, x0, a1 to do calculate.<br>With Neural Network, we build more complex hypothesis function.<br><img src="http://ww4.sinaimg.cn/mw690/761b7938jw1f301cv572fj214o0m2teg.jpg" alt="Neural Network"></p>
-<p>To play with neural network, you can try google’s open source <a href="http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.28657&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification">tensorflow</a></p>
-<h2 id="Handwritten-Digital-Classification"><a href="#Handwritten-Digital-Classification" class="headerlink" title="Handwritten Digital Classification"></a>Handwritten Digital Classification</h2><p>This week’s assignment is to do multi classification on handwritten recognize.</p>
-<p><strong>Do multi classification with one-vs-all logistic regression</strong><br>For handwritens in 10 lables: 0~9, we do 10 regression regression to calculate 10 group of theta. And then make 10 predications base on these 10 group of theta, choose the lable with max hypothesis value（probaility value）</p>
-<p><strong>1. Cost function</strong></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[J, grad]</span> = <span class="title">lrCostFunction</span><span class="params">(theta, X, y, lambda)</span></span></span><br><span class="line">reg_theta = [<span class="number">0</span>;theta(<span class="number">2</span>:<span class="keyword">end</span>)];</span><br><span class="line">predictions = sigmoid(X * theta);</span><br><span class="line">J = (<span class="number">-1</span> / m) * sum((y .* <span class="built_in">log</span>(predictions) + (<span class="number">1</span> - y) .* <span class="built_in">log</span>(<span class="number">1</span> - predictions))) + (lambda / (<span class="number">2</span> * m)) * sum(reg_theta .^ <span class="number">2</span>);</span><br><span class="line">grad = (<span class="number">1</span> / m) * (X&#x27; * (predictions - y)) + (lambda / m) * reg_theta;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><strong>2. OneVsAll</strong><br>make 10 classifications</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[all_theta]</span> = <span class="title">oneVsAll</span><span class="params">(X, y, num_labels, lambda)</span></span></span><br><span class="line"><span class="comment">% Some useful variables</span></span><br><span class="line">m = <span class="built_in">size</span>(X, <span class="number">1</span>);</span><br><span class="line">n = <span class="built_in">size</span>(X, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% You need to return the following variables correctly</span></span><br><span class="line">all_theta = <span class="built_in">zeros</span>(num_labels, n + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Add ones to the X data matrix</span></span><br><span class="line">X = [<span class="built_in">ones</span>(m, <span class="number">1</span>) X];</span><br><span class="line"></span><br><span class="line"><span class="comment">% Note: For this assignment, we recommend using fmincg to optimize the cost</span></span><br><span class="line"><span class="comment">%       function. It is okay to use a for-loop (for c = 1:num_labels) to</span></span><br><span class="line"><span class="comment">%       loop over the different classes.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%       fmincg works similarly to fminunc, but is more efficient when we</span></span><br><span class="line"><span class="comment">%       are dealing with large number of parameters.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:num_labels</span><br><span class="line">    initial_theta = <span class="built_in">zeros</span>(n + <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    options = optimset(<span class="string">&#x27;GradObj&#x27;</span>, <span class="string">&#x27;on&#x27;</span>, <span class="string">&#x27;MaxIter&#x27;</span>, <span class="number">50</span>);</span><br><span class="line">    <span class="comment">% theta is a column vector</span></span><br><span class="line">    <span class="comment">% Run fmincg to obtain the optimal theta</span></span><br><span class="line">    [theta] = fmincg(@(t)(lrCostFunction(t, X, (y == <span class="built_in">i</span>), lambda)), ...</span><br><span class="line">                    initial_theta, options);</span><br><span class="line">    all_theta(<span class="built_in">i</span>, :) = theta&#x27;;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>3. PredictOneVsAll</strong></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span> = <span class="title">predictOneVsAll</span><span class="params">(all_theta, X)</span></span></span><br><span class="line">m = <span class="built_in">size</span>(X, <span class="number">1</span>);</span><br><span class="line">num_labels = <span class="built_in">size</span>(all_theta, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% You need to return the following variables correctly</span></span><br><span class="line">p = <span class="built_in">zeros</span>(<span class="built_in">size</span>(X, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% Add ones to the X data matrix</span></span><br><span class="line">X = [<span class="built_in">ones</span>(m, <span class="number">1</span>) X];</span><br><span class="line">predictions = X * all_theta&#x27;;</span><br><span class="line"><span class="comment">% calculate max of each row</span></span><br><span class="line">[max_predictions, p] = <span class="built_in">max</span>(predictions, [], <span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>The logistic has great accurracy, about 95% in this case, but neural network will have higher accuracy, about 97%.</p>
-<h2 id="Neural-Forward-Propagation-algorithm"><a href="#Neural-Forward-Propagation-algorithm" class="headerlink" title="Neural Forward Propagation algorithm"></a>Neural Forward Propagation algorithm</h2><p>In the assignment, it build hypothesis function with 3 layers neural network.<br>The predications implementation</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">p</span> = <span class="title">predict</span><span class="params">(Theta1, Theta2, X)</span></span></span><br><span class="line"><span class="comment">%PREDICT Predict the label of an input given a trained neural network</span></span><br><span class="line"><span class="comment">%   p = PREDICT(Theta1, Theta2, X) outputs the predicted label of X given the</span></span><br><span class="line"><span class="comment">%   trained weights of a neural network (Theta1, Theta2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Useful values</span></span><br><span class="line">m = <span class="built_in">size</span>(X, <span class="number">1</span>);</span><br><span class="line">num_labels = <span class="built_in">size</span>(Theta2, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% You need to return the following variables correctly </span></span><br><span class="line">p = <span class="built_in">zeros</span>(<span class="built_in">size</span>(X, <span class="number">1</span>), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% ====================== YOUR CODE HERE ======================</span></span><br><span class="line"><span class="comment">% Instructions: Complete the following code to make predictions using</span></span><br><span class="line"><span class="comment">%               your learned neural network. You should set p to a </span></span><br><span class="line"><span class="comment">%               vector containing labels between 1 to num_labels.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Hint: The max function might come in useful. In particular, the max</span></span><br><span class="line"><span class="comment">%       function can also return the index of the max element, for more</span></span><br><span class="line"><span class="comment">%       information see &#x27;help max&#x27;. If your examples are in rows, then, you</span></span><br><span class="line"><span class="comment">%       can use max(A, [], 2) to obtain the max for each row.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Theta1 is 25 * 401, X is 5000 * 401</span></span><br><span class="line">X = [<span class="built_in">ones</span>(m, <span class="number">1</span>) X];</span><br><span class="line"><span class="comment">% z2 is 5000 * 25</span></span><br><span class="line">z2 = X * Theta1&#x27;;</span><br><span class="line">a2 = sigmoid(z2);</span><br><span class="line"><span class="comment">% a2 with bias unit is 5000 * 26</span></span><br><span class="line">a2 = [<span class="built_in">ones</span>(m, <span class="number">1</span>) a2];</span><br><span class="line"></span><br><span class="line"><span class="comment">% Theta2 is 10 * 26</span></span><br><span class="line"><span class="comment">% z3 is 5000 * 10</span></span><br><span class="line">z3 = a2 * Theta2&#x27;;</span><br><span class="line">a3 = sigmoid(z3);</span><br><span class="line">[max_valid, p] = <span class="built_in">max</span>(a3, [], <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% =========================================================================</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>My question is:</p>
-<ul>
-<li>how to train the Theta1, Theta2</li>
-<li>how to decide how many units in hidden layer<br>In the later course, I think NG will explain it. Next week, I will learn backpropagation algorithm.</li>
-</ul>
-<h2 id="My-assignment"><a href="#My-assignment" class="headerlink" title="My assignment"></a>My assignment</h2><p><a href="https://github.com/lgrcyanny/MachineLearningCoursera/tree/master/assignments">Week Assignments</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;This week is about the mysterious Neural Networks. The courses in this week just explain the basics about Neural Networks.&lt;/p&gt;
-&lt;h2 id=&quot;What-is-Neural-Networks&quot;&gt;&lt;a href=&quot;#What-is-Neural-Networks&quot; class=&quot;headerlink&quot; title=&quot;What is Neural Networks&quot;&gt;&lt;/a&gt;What is Neural Networks&lt;/h2&gt;&lt;p&gt;It’s a technique to train our data based on how human brains works. A simple Neural Network has:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;input layer&lt;/li&gt;
-&lt;li&gt;hidden layer&lt;/li&gt;
-&lt;li&gt;output layer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We use Neural NetWorks to make classification and regression.&lt;br&gt;We use sigmoid function the map data from input layer to hidden layer then the output layer, the function is called activation function.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Machine Learning" scheme="http://example.com/tags/machine-learning/"/>
     
   </entry>
   
