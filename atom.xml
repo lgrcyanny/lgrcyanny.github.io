@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-07-11T02:00:50.795Z</updated>
+  <updated>2025-08-04T03:37:48.240Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读《架构整洁之道》</title>
+    <link href="http://example.com/2025/08/04/architecture-clean/"/>
+    <id>http://example.com/2025/08/04/architecture-clean/</id>
+    <published>2025-08-04T03:21:22.000Z</published>
+    <updated>2025-08-04T03:37:48.240Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="架构的终极目标：价值与选择"><a href="#架构的终极目标：价值与选择" class="headerlink" title="架构的终极目标：价值与选择"></a>架构的终极目标：价值与选择</h3><p>软件架构的终极目标非常明确：<strong>用最小的人力成本来满足构建和维护该系统的需求</strong>。这个目标包含两个价值维度：</p>
+<ul>
+<li><strong>行为价值</strong>：让系统满足当前的功能需求，这是系统的基础使命。</li>
+<li><strong>结构价值</strong>：让系统保持软件的“柔性”，使其在未来能够轻松被理解、修改、维护和部署。一个好的架构，其价值在于为未来保留尽可能多的选择权。</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="三大编程范式：架构的基石"><a href="#三大编程范式：架构的基石" class="headerlink" title="三大编程范式：架构的基石"></a>三大编程范式：架构的基石</h3><p>软件架构并非空中楼阁，它建立在编程范式之上。这三大范式从不同维度限制了我们的编码方式，共同构成了现代软件设计的基础。</p>
+<ol>
+<li><strong>结构化编程</strong>：它通过限制<code>goto</code>等直接控制权转移，确立了顺序、分支、循环为程序构建的基础，为我们编写可证伪、可理解的功能模块提供了理论依据。</li>
+<li><strong>面向对象编程</strong>：其核心是<strong>多态</strong>。通过多态实现依赖反转，限制了函数指针的滥用，使得高层策略与底层实现细节解耦，从而构建出灵活的“插件式”架构。</li>
+<li><strong>函数式编程</strong>：它通过限制“赋值”操作，强调数据的不可变性。这为我们提供了强大的数据管理武器，能有效隔离副作用，让系统状态更可控。</li>
+</ol>
+<p>这三者共同支撑起一个整洁的架构：结构化编程实现功能，面向对象划分组件边界，函数式编程管理数据状态。</p>
+<h3 id="SOLID原则：高内聚、低耦合的灵魂"><a href="#SOLID原则：高内聚、低耦合的灵魂" class="headerlink" title="SOLID原则：高内聚、低耦合的灵魂"></a>SOLID原则：高内聚、低耦合的灵魂</h3><p>SOLID 原则是模块设计的核心指导，它们是实现软件“柔性”的具体战术。</p>
+<ul>
+<li><strong>SRP(单一职责原则)</strong>: 任何一个模块，都应该只对某一类行为者负责，有且仅有一个被修改的原因。这是划分组件和架构边界的根本。</li>
+<li><strong>OCP(开闭原则)</strong>: 对扩展开放，对修改关闭。优秀的架构师会通过隔离变化，使得高阶组件不因低阶组件的修改而受影响。</li>
+<li><strong>LSP(里氏替换原则)</strong>: 子类型必须能够替换掉它们的基类型。这保证了抽象的可靠性，是多态得以实现的基础。</li>
+<li><strong>ISP(接口隔离原则)</strong>: 不应强迫用户依赖他们不需要的接口。这能避免不必要的依赖引入，保持组件的纯净。</li>
+<li><strong>DIP(依赖反转原则)</strong>: 源代码的依赖方向，永远与控制流的方向相反。高层策略不应依赖于底层细节，两者都应依赖于抽象。这是解耦最核心的原则。</li>
+</ul>
+<h3 id="组件构建：从代码到可部署单元"><a href="#组件构建：从代码到可部署单元" class="headerlink" title="组件构建：从代码到可部署单元"></a>组件构建：从代码到可部署单元</h3><p>当我们将模块组合成可独立部署的组件（如 JAR、DLL）时，需要遵循更宏观的原则。</p>
+<h4 id="组件聚合三原则"><a href="#组件聚合三原则" class="headerlink" title="组件聚合三原则"></a>组件聚合三原则</h4><ul>
+<li><strong>REP(复用/发布等同原则)</strong>: 软件复用的最小粒度应等同于其发布的最小粒度。</li>
+<li><strong>CCP(共同闭包原则)</strong>: 将那些会因为相同原因、在同一时间被修改的类放到一个组件中。这与 SRP 和 OCP 息息相关，强调可维护性。</li>
+<li><strong>CRP(共同复用原则)</strong>: 不要强迫一个组件的用户依赖他们不需要的东西。这与 ISP 相关，强调解耦。</li>
+</ul>
+<p>在实践中，项目早期我们可能更关注 <strong>CCP</strong> 以提高开发效率；随着项目发展，我们会转向 <strong>REP</strong> 以便复用；项目成熟后，<strong>CRP</strong> 则帮助我们拆分出更独立的组件。</p>
+<h4 id="组件耦合三原则"><a href="#组件耦合三原则" class="headerlink" title="组件耦合三原则"></a>组件耦合三原则</h4><p>这三个原则指导我们如何设计组件间的依赖关系。</p>
+<ul>
+<li><strong>无循环依赖原则</strong>: 组件依赖关系图中不能出现环。可以通过DIP或引入新的公共组件来打破循环。</li>
+<li><strong>稳定依赖原则(SDP)</strong>: 依赖关系必须指向更稳定的方向。一个易变的组件不应该被一个稳定的组件所依赖。</li>
+<li><strong>稳定抽象原则(SAP)</strong>: 一个组件的抽象化程度应该与其稳定性保持一致。稳定的组件应该是抽象的，不稳定的组件应该是具体的。</li>
+</ul>
+<h3 id="整洁架构的核心：边界与依赖"><a href="#整洁架构的核心：边界与依赖" class="headerlink" title="整洁架构的核心：边界与依赖"></a>整洁架构的核心：边界与依赖</h3><p><img src="https://www.cyanny.com/2025/08/04/architecture-clean/clean_arch.png" alt="Clean Architecture Diagram"></p>
+<p>这个同心圆模型清晰地展示了软件系统的分层结构：</p>
+<ol>
+<li><strong>业务实体 (Entities)</strong>: 代表企业核心业务逻辑，最独立、最稳定、最可复用。</li>
+<li><strong>用例 (Use Cases)</strong>: 封装和实现特定应用场景的业务规则，协调实体完成任务。</li>
+<li><strong>接口适配器(Interface Adapters)</strong>: 将用例层和实体层的数据，转换为适合外部机构（如UI、数据库）的格式，反之亦然。</li>
+<li><strong>框架和驱动(Frameworks &amp; Drivers)</strong>: 最外层，由数据库、Web框架、UI等所有外部细节组成。</li>
+</ol>
+<p><strong>整洁架构最关键的规则是：依赖关系只能由外向内。</strong></p>
+<p>这意味着，业务核心逻辑（实体、用例）完全不知道、也不关心外部的数据库、UI、网络是如何实现的。外部细节是“插件”，可以随时被替换，而不会影响到核心业务。</p>
+<h3 id="实践中的智慧"><a href="#实践中的智慧" class="headerlink" title="实践中的智慧"></a>实践中的智慧</h3><ul>
+<li><strong>尖叫的架构</strong>：一个好的架构，看到它的顶层目录结构就应该能“尖叫”出它的业务用途（例如这是一个电商系统），而不是“尖叫”出它用了什么框架（例如这是一个Spring系统）。</li>
+<li><strong>边界的划分</strong>：边界是系统变更的“断层线”。我们应该沿着变更轴划分边界，利用依赖反转将核心业务与IO等细节隔离开。</li>
+<li><strong>谦卑对象模式</strong>：这是一种强大的测试技巧。将系统中难以测试的部分（如UI渲染、数据库读写）抽离成极其简单的“谦卑对象”，而将所有复杂的逻辑都放在易于测试的模块（如Presenter）中。</li>
+<li><strong>数据库和框架都是实现细节</strong>：永远不要让你的核心业务逻辑与数据库或特定框架深度绑定。它们只是工具，是可替换的细节。</li>
+<li><strong>Main组件是最终的“插件”</strong>：<code>main</code>函数或类似的启动模块是整个系统的最外层，它负责创建所有对象、注入依赖，将整个系统“粘合”起来。它是一个“脏”组件，但它的存在将所有其他组件的“干净”衬托了出来。</li>
+<li><strong>服务化不是架构</strong>：微服务是一种部署策略，而非架构本身。一个由深度耦合的服务组成的系统，其维护成本可能比一个设计良好的单体应用更高。真正的架构在于服务内部是否遵循了整洁的原则。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;架构的终极目标：价值与选择&quot;&gt;&lt;a href=&quot;#架构的终极目标：价值与选择&quot; class=&quot;headerlink&quot; title=&quot;架构的终极目标：价值与选择&quot;&gt;&lt;/a&gt;架构的终极目标：价值与选择&lt;/h3&gt;&lt;p&gt;软件架构的终极目标非常明确：&lt;strong&gt;用最小的人力成本来满足构建和维护该系统的需求&lt;/strong&gt;。这个目标包含两个价值维度：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;行为价值&lt;/strong&gt;：让系统满足当前的功能需求，这是系统的基础使命。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结构价值&lt;/strong&gt;：让系统保持软件的“柔性”，使其在未来能够轻松被理解、修改、维护和部署。一个好的架构，其价值在于为未来保留尽可能多的选择权。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="架构设计" scheme="http://example.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>技术的哲学</title>
@@ -1979,47 +2056,6 @@
     
     </summary>
     
-    
-      <category term="Scala" scheme="http://example.com/tags/scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Eight Queens Problem in Scala</title>
-    <link href="http://example.com/2016/09/27/eight-queens-problem-in-scala/"/>
-    <id>http://example.com/2016/09/27/eight-queens-problem-in-scala/</id>
-    <published>2016-09-27T01:15:28.000Z</published>
-    <updated>2017-03-05T02:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>I have dedicated in <strong>Programming in Scala</strong> for about 4 months. My work is busy, but I can’t give up reading more books.<br>Scala is a fabulous language, both object oriented and functional.<br>Eight qeens problem can be expressed in scala easily and concise.</p>
-<a id="more"></a>
-
-<h2 id="Eight-Queens-Problem"><a href="#Eight-Queens-Problem" class="headerlink" title="Eight Queens Problem"></a>Eight Queens Problem</h2><p>Given a standard chess-board, place eight queens such that no queen is in check from any other (a queen can check another piece if they are on the same column, row, or diagonal)</p>
-<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><p>The problem in scala is recursively.</p>
-<ol>
-<li><p>First each solution is a List[(Row, Column)]</p>
-<pre><code> - Each element is a coordinated, the queen position in each row
- - The coordicate for row k comes first, followed by row `k-1`, `k-2`, ... 0</code></pre>
-</li>
-<li><p>Use a Set[List[Row, Column]], represent all solutions</p>
-</li>
-<li><p>To place next <code>k+1</code> qeen, we iterate all solutions, if match the condition, yield another list</p>
-</li>
-</ol>
-<h2 id="Lets-run-the-code"><a href="#Lets-run-the-code" class="headerlink" title="Lets run the code"></a>Lets run the code</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * the coordinates of the queen in row k comes first in each List[(ROW, Column)], followed</span></span><br><span class="line"><span class="comment">    * by k -1, k - 2, ..., 0 and so on</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * @param n</span></span><br><span class="line"><span class="comment">    * @return</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">queens</span></span>(n: <span class="type">Int</span>): <span class="type">Set</span>[<span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]] = &#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">placeQueen</span></span>(k: <span class="type">Int</span>): <span class="type">Set</span>[<span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]] = &#123;</span><br><span class="line">      <span class="keyword">if</span> (k &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">Set</span>(<span class="type">List</span>())</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">          queens &lt;- placeQueen(k - <span class="number">1</span>)</span><br><span class="line">          column &lt;- <span class="number">0</span> until n</span><br><span class="line">          queen = (k, column)</span><br><span class="line">          <span class="keyword">if</span> isSafe(queen, queens)</span><br><span class="line">        &#125; <span class="keyword">yield</span> queen :: queens</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSafe</span></span>(queen: (<span class="type">Row</span>, <span class="type">Column</span>), queens: <span class="type">List</span>[(<span class="type">Row</span>, <span class="type">Column</span>)]): <span class="type">Boolean</span> = &#123;</span><br><span class="line">      queens.forall &#123; placedQueen =&gt;</span><br><span class="line">        placedQueen._1 != queen._1 &amp;&amp;</span><br><span class="line">          placedQueen._2 != queen._2 &amp;&amp;</span><br><span class="line">          (<span class="type">Math</span>.abs(placedQueen._1 - queen._1) !=</span><br><span class="line">            <span class="type">Math</span>.abs(placedQueen._2 - queen._2))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    placeQueen(n - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Github-Link"><a href="#Github-Link" class="headerlink" title="Github Link"></a>Github Link</h2><p><a href="https://github.com/lgrcyanny/ScalaPractice/blob/master/ProgrammingInScala/src/main/scala/com/chapter23/EightQueens.scala">Eight Queens</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/lgrcyanny/ScalaPractice.git</span><br><span class="line"></span><br><span class="line">mvn clean package</span><br><span class="line"></span><br><span class="line">cd ProgrammingInScala</span><br><span class="line"></span><br><span class="line">scala -cp target/programming-in-scala-1.0-SNAPSHOT.jar com.chapter23.EightQueens</span><br></pre></td></tr></table></figure>
-
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;I have dedicated in &lt;strong&gt;Programming in Scala&lt;/strong&gt; for about 4 months. My work is busy, but I can’t give up reading more books.&lt;br&gt;Scala is a fabulous language, both object oriented and functional.&lt;br&gt;Eight qeens problem can be expressed in scala easily and concise.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Algorithm" scheme="http://example.com/tags/algorithm/"/>
     
       <category term="Scala" scheme="http://example.com/tags/scala/"/>
     

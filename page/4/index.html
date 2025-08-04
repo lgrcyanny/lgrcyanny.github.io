@@ -109,11 +109,11 @@ ga('send', 'pageview');
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        67
+        68
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        40
+        41
         <span>tags</span>
       </div>
     </div>
@@ -138,6 +138,60 @@ ga('send', 'pageview');
 </aside>
       
       <section id="main">
+      <article id="post-hbase-architecture-analysis-part-3-pros-cons" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2014/03/13/hbase-architecture-analysis-part-3-pros-cons/">HBase Architecture Analysis Part 3 Pros and Cons</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="../../2014/03/13/hbase-architecture-analysis-part-3-pros-cons/">
+    <time datetime="2014-03-13T14:13:20.000Z" itemprop="datePublished">2014-03-13</time>
+  </a>
+</div>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="../../categories/hadoop/">Hadoop</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="../../categories/hadoop/hbase/">HBase</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="5-HBase-Physical-Architecture"><a href="#5-HBase-Physical-Architecture" class="headerlink" title="5. HBase Physical Architecture"></a>5. HBase Physical Architecture</h2><p>Figure 5.1 shows the deployment view for HBase cluster:<br>HBase is the master-slave cluster on top of HDFS. The classic deployment is as follows:<br>➢** Master node:** one HMaster and one NameNode running on a machine as the master node.<br>➢ <strong>Slave node:</strong> Each node is running one HRegionServer and one DataNode. And each node report status to the master node and Zookeeper.<br>➢** Zookeeper:** HBase is shipped with ensemble Zookeeper, but for large clusters, using existing Zookeeper is better. Zookeeper is crucial, the HMaster and HRegionServers will register on Zookeeper.<br>➢ <strong>Client</strong>: There can be many clients to access HRegionServer, like Java Client, Shell Client, Thrift Client and Avro Client</p>
+        
+          <p class="article-more-link">
+            <a href="../../2014/03/13/hbase-architecture-analysis-part-3-pros-cons/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2014/03/13/hbase-architecture-analysis-part-3-pros-cons/" data-id="ckjqqhvax0018s8wr9m9q7ut8" class="article-share-link">Share</a>
+      
+        <a href="http://example.com/2014/03/13/hbase-architecture-analysis-part-3-pros-cons/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/big-data/" rel="tag">Big Data</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/hbase/" rel="tag">HBase</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/hadoop/" rel="tag">Hadoop</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-hbase-architecture-analysis-part2-process-architecture" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -732,111 +786,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-hadoop-mapreduce-1-framework" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2013/12/05/hadoop-mapreduce-1-framework/">Hadoop MapReduce 1 Framework</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="../../2013/12/05/hadoop-mapreduce-1-framework/">
-    <time datetime="2013-12-05T08:11:12.000Z" itemprop="datePublished">2013-12-05</time>
-  </a>
-</div>
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="../../categories/hadoop/">Hadoop</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>For MapReduce programming, a developer can run a MapReduce job by simply calling submit() or waitForCompletion() on a job object. This method abstracts the job processing details away from developer. But there is a great of job processing behind the scene that we will consider in this section.<br>Hadoop 2.x has released new MapReduce framework implementation called YARN or MapReduce 2, for traditional MapReduce is the classic framework which is also called MapReduce 1. YARN is compatible with MapReduce 1. [more…]</p>
-<h3 id="MapReduce-1-high-level-overview"><a href="#MapReduce-1-high-level-overview" class="headerlink" title="MapReduce 1 high level overview"></a>MapReduce 1 high level overview</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd6.2.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd6.2.png" alt="hd6.2">Figure1 Classic MapReduce Framework</a><br>As shown in Figure 1, there are four independent entities in the framework:</p>
-<ul>
-<li> Client, which submits the MapReduce Job</li>
-<li> JobTracker, which coordinates and controls the job run. It is a Java class called JobTracker.</li>
-<li> TaskerTrackers, which run the task that is split job, control the specific map or reduce task, and make reports to JobTracker. They are Java class as well.</li>
-<li> HDFS, which provides distributed data storage and is used to share job files between other entities.</li>
-</ul>
-<p>As the Figure 1 show, a MapReduce processing including 10 steps, and in short, that is:</p>
-<ul>
-<li> The clients submit MapReduce jobs to the JobTracker. </li>
-<li> The JobTracker assigns Map and Reduce tasks to other nodes in the cluser</li>
-<li> These nodes each run a software daemon TaskTracker on separate JVM.</li>
-<li> Each TaskTracker actually initiates the Map or Reduce tasks and reports progress back to the JobTracker</li>
-</ul>
-<h3 id="Job-Submission"><a href="#Job-Submission" class="headerlink" title="Job Submission"></a>Job Submission</h3><p>When the client call submit() on job object. An internal JobSubmmitter Java Object is initiated and submitJobInternal() is called. If the clients calls the waiForCompletion(), the job progresss will begin and it will response to the client with process results to clients until the job completion.<br>JobSubmmiter do the following work:</p>
-<ul>
-<li> Ask the JobTracker for a new job ID.</li>
-<li> Checks the output specification of the job.</li>
-<li> Computes the input splits for the job.</li>
-<li> Copy the resources needed to run the job. Resources include the job jar file, the configuration file and the computed input splits. These resources will be copied to HDFS in a directory named after the job id. The job jar will be copied more than 3 times across the cluster so that TaskTrackers can access it quickly.</li>
-<li> Tell the JobTracker that the job is ready for execution by calling submitJob() on JobTracker.</li>
-</ul>
-<h3 id="Job-Initialization"><a href="#Job-Initialization" class="headerlink" title="Job Initialization"></a>Job Initialization</h3><p>When the JobTracker receives the call submitJob(), it will put the call into an internal queue from where the job scheduler will pick it up and initialize it. The initialization is done as follow:</p>
-<ul>
-<li> An job object is created to represent the job being run. It encapsulates its tasks and bookkeeping information so as to keep track the task progress and status.</li>
-<li> Retrieves the input splits from HDFS and create the list of tasks, each of which has task ID. JobTracker creates one map task for each split, and the number of reduce tasks according to configuration.</li>
-<li> JobTracker will create the setup task and cleanup task. Setup task is to create the final output directory for the job and the temporary working space for the task output. Cleanup task is to delete the temporary working space for the task ouput.</li>
-<li> JobTracker will assign tasks to free TaskTrackers</li>
-</ul>
-<h3 id="Task-Assignment"><a href="#Task-Assignment" class="headerlink" title="Task Assignment"></a>Task Assignment</h3><p>TaskTrackers send heartbeat periodically to JobTracker Node to tell it if it is alive or ready to get a new task. The JobTracker will allocate a new task to the ready TaskTracker. Task assignment is as follows:</p>
-<ul>
-<li> The JobTracker will choose a job to select the task from according to scheduling algorithm, a simple way is chosen on a priority list of job. After chose the job, the JobTracker will choose a task from the job.</li>
-<li> TaskTrackers has a fixed number of slots for map tasks and for reduces tasks which are set independently, the scheduler will fits the empty map task slots before reduce task slots.</li>
-<li> To choose a reduce task, the JobTracker simply takes next in its list of yet-to-be-run reduce task, because there is no data locality consideration. But map task chosen depends on the data locality and TaskTracker’s network location.</li>
-</ul>
-<h3 id="Task-Execution"><a href="#Task-Execution" class="headerlink" title="Task Execution"></a>Task Execution</h3><p>When the TaskTracker has been assigned a task. The task execution will be run as follows:</p>
-<ul>
-<li> Copy jar file from HDFS, copy needed files from the distributed cache on the local disk.</li>
-<li> Creates a local working directory for the task and ‘un-jars’ the jar file contents to the direcoty</li>
-<li> Creates a TaskRunner to run the task. The TaskRunner will lauch a new JVM to run each task.. TaskRunner fails by bugs will not affect TaskTracker. And multiple tasks on the node can reuse the JVM created by TaskRunner.</li>
-<li> Each task on the same JVM created by TaskRunner will run setup task and cleanup task.</li>
-<li> The child process created by TaskRunner will informs the parent process of the task’s progress every few seconds until the task is complete.</li>
-</ul>
-<h3 id="Progress-and-Status-Updates"><a href="#Progress-and-Status-Updates" class="headerlink" title="Progress and Status Updates"></a>Progress and Status Updates</h3><p><a target="_blank" rel="noopener" href="http://cyanny/myblog/wp-content/uploads/2013/11/hd6.3.png"><img src="http://cyanny/myblog/wp-content/uploads/2013/11/hd6.3.png" alt="hd6.3">Figure 2 Classic MapReduce Framework Progress and Status Updates</a><br>After clients submit a job. The MapReduce job is a long time batching job. Hence the job progress report is important. What consists of the Hadoop task progress is as follows:</p>
-<ul>
-<li> Reading an input record in a mapper or reducer</li>
-<li> Writing an output record in a mapper or a reducer</li>
-<li> Setting the status description on a reporter, using the Reporter’s setStatus() method</li>
-<li> Incrementing a counter</li>
-<li> Calling Reporter’s progress()</li>
-</ul>
-<p><strong>As shown in Figure 2, when a task is running, the TaskTracker will notify the JobTracker its task progress by heartbeat every 5 seconds.</strong></p>
-<p>And mapper and reducer on the child JVM will report to TaskTracker with it’s progress status every few seconds. The mapper or reducers will set a flag to indicate the status change that should be sent to the TaskTracker. The flag is checked in a separated thread every 3 seconds. If the flag sets, it will notify the TaskTracker of current task status.<br>The JobTracker combines all of the updates to produce a global view, and the Client can use getStatus() to get the job progress status.</p>
-<h3 id="Job-Completion"><a href="#Job-Completion" class="headerlink" title="Job Completion"></a>Job Completion</h3><p>When the JobTracker receives a report that the last task for a job is complete, it will change its status to successful. Then the JobTracker will send a HTTP notification to the client which calls the waitForCompletion(). The job statistics and the counter information will be printed to the client console. Finally the JobTracker and the TaskTracker will do clean up action for the job.</p>
-<p>Resources:<br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-overview/" title="Hadoop Overview">Part 0 Hadoop Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-review/" title="Hadoop HDFS Review">Part 1 Hadoop HDFS Review</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-federation/" title="Hadoop HDFS Federation">Part 2 Hadoop HDFS Federation</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-hdfs-high-availability/" title="Hadoop HDFS High Availability(HA)">Part 3 Hadoop HDFS High Availability(HA)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-overview/" title="Hadoop MapReduce Overview">Part 4 Hadoop MapReduce Overview</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-1-framework/" title="Hadoop MapReduce 1 Framework">Part 5 Hadoop MapReduce 1 Framework</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-mapreduce-2-yarn/" title="Hadoop MapReduce 2 (YARN)">Part 6 Hadoop MapReduce 2 (YARN)</a><br><a target="_blank" rel="noopener" href="http://cyanny/myblog/2013/12/05/hadoop-isnt-silver-bullet/" title="Hadoop isn’t Silver Bullet">Part 7 Hadoop isn’t Silver Bullet</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2013/12/05/hadoop-mapreduce-1-framework/" data-id="ckjqqhvat0014s8wr64zu80qf" class="article-share-link">Share</a>
-      
-        <a href="http://example.com/2013/12/05/hadoop-mapreduce-1-framework/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/learning/" rel="tag">Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/research/" rel="tag">Research</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="../3/">&amp;laquo; Prev</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><a class="page-number" href="../3/">3</a><span class="page-number current">4</span><a class="page-number" href="../5/">5</a><a class="page-number" href="../6/">6</a><a class="page-number" href="../7/">7</a><a class="extend next" rel="next" href="../5/">Next &amp;raquo;</a>
       </nav>
@@ -849,6 +798,15 @@ ga('send', 'pageview');
     <h3 class="widget-title">recents</h3>
     <div class="widget">
       <ul id="recent-post" class="no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="../../2025/08/04/architecture-clean/" class="title">读《架构整洁之道》</a></p>
+              <p class="item-date"><time datetime="2025-08-04T03:21:22.000Z" itemprop="datePublished">2025-08-04</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -886,15 +844,6 @@ ga('send', 'pageview');
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="../../2020/12/27/an-introduction-to-bayesian-networks/" class="title">An Introduction to Bayesian Networks</a></p>
-              <p class="item-date"><time datetime="2020-12-27T10:54:04.000Z" itemprop="datePublished">2020-12-27</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -913,7 +862,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="../../tags/agile/" style="font-size: 10px;">Agile</a> <a href="../../tags/akka/" style="font-size: 10px;">Akka</a> <a href="../../tags/akka-scala/" style="font-size: 10px;">Akka, Scala</a> <a href="../../tags/algorithm/" style="font-size: 15px;">Algorithm</a> <a href="../../tags/big-data/" style="font-size: 13.33px;">Big Data</a> <a href="../../tags/causal-inference-ai/" style="font-size: 11.67px;">Causal Inference, AI</a> <a href="../../tags/design/" style="font-size: 15px;">Design</a> <a href="../../tags/dynamic-programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="../../tags/hbase/" style="font-size: 16.67px;">HBase</a> <a href="../../tags/hadoop/" style="font-size: 18.33px;">Hadoop</a> <a href="../../tags/hive/" style="font-size: 10px;">Hive</a> <a href="../../tags/javascript/" style="font-size: 10px;">JavaScript</a> <a href="../../tags/language/" style="font-size: 10px;">Language</a> <a href="../../tags/learn/" style="font-size: 10px;">Learn</a> <a href="../../tags/learning/" style="font-size: 20px;">Learning</a> <a href="../../tags/linux/" style="font-size: 11.67px;">Linux</a> <a href="../../tags/machine-learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="../../tags/mapreduce/" style="font-size: 10px;">MapReduce</a> <a href="../../tags/methodology/" style="font-size: 10px;">Methodology</a> <a href="../../tags/network/" style="font-size: 10px;">Network</a> <a href="../../tags/node-js/" style="font-size: 10px;">Node.js</a> <a href="../../tags/research/" style="font-size: 16.67px;">Research</a> <a href="../../tags/resource/" style="font-size: 10px;">Resource</a> <a href="../../tags/scala/" style="font-size: 15px;">Scala</a> <a href="../../tags/spark/" style="font-size: 10px;">Spark</a> <a href="../../tags/systemanalysis/" style="font-size: 15px;">SystemAnalysis</a> <a href="../../tags/vps/" style="font-size: 11.67px;">VPS</a> <a href="../../tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="../../tags/apache-storm/" style="font-size: 10px;">apache storm</a> <a href="../../tags/artificial-intelligence/" style="font-size: 10px;">artificial intelligence</a> <a href="../../tags/java-performance/" style="font-size: 10px;">java performance</a> <a href="../../tags/learning/" style="font-size: 11.67px;">learning</a> <a href="../../tags/life/" style="font-size: 10px;">life</a> <a href="../../tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="../../tags/math/" style="font-size: 10px;">math</a> <a href="../../tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="../../tags/philosophy/" style="font-size: 10px;">philosophy</a> <a href="../../tags/sort/" style="font-size: 11.67px;">sort</a> <a href="../../tags/spark/" style="font-size: 10px;">spark</a> <a href="../../tags/spark-streaming/" style="font-size: 10px;">spark streaming</a>
+      <a href="../../tags/agile/" style="font-size: 10px;">Agile</a> <a href="../../tags/akka/" style="font-size: 10px;">Akka</a> <a href="../../tags/akka-scala/" style="font-size: 10px;">Akka, Scala</a> <a href="../../tags/algorithm/" style="font-size: 15px;">Algorithm</a> <a href="../../tags/big-data/" style="font-size: 13.33px;">Big Data</a> <a href="../../tags/causal-inference-ai/" style="font-size: 11.67px;">Causal Inference, AI</a> <a href="../../tags/design/" style="font-size: 15px;">Design</a> <a href="../../tags/dynamic-programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="../../tags/hbase/" style="font-size: 16.67px;">HBase</a> <a href="../../tags/hadoop/" style="font-size: 18.33px;">Hadoop</a> <a href="../../tags/hive/" style="font-size: 10px;">Hive</a> <a href="../../tags/javascript/" style="font-size: 10px;">JavaScript</a> <a href="../../tags/language/" style="font-size: 10px;">Language</a> <a href="../../tags/learn/" style="font-size: 10px;">Learn</a> <a href="../../tags/learning/" style="font-size: 20px;">Learning</a> <a href="../../tags/linux/" style="font-size: 11.67px;">Linux</a> <a href="../../tags/machine-learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="../../tags/mapreduce/" style="font-size: 10px;">MapReduce</a> <a href="../../tags/methodology/" style="font-size: 10px;">Methodology</a> <a href="../../tags/network/" style="font-size: 10px;">Network</a> <a href="../../tags/node-js/" style="font-size: 10px;">Node.js</a> <a href="../../tags/research/" style="font-size: 16.67px;">Research</a> <a href="../../tags/resource/" style="font-size: 10px;">Resource</a> <a href="../../tags/scala/" style="font-size: 15px;">Scala</a> <a href="../../tags/spark/" style="font-size: 10px;">Spark</a> <a href="../../tags/systemanalysis/" style="font-size: 15px;">SystemAnalysis</a> <a href="../../tags/vps/" style="font-size: 11.67px;">VPS</a> <a href="../../tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="../../tags/apache-storm/" style="font-size: 10px;">apache storm</a> <a href="../../tags/artificial-intelligence/" style="font-size: 10px;">artificial intelligence</a> <a href="../../tags/java-performance/" style="font-size: 10px;">java performance</a> <a href="../../tags/learning/" style="font-size: 11.67px;">learning</a> <a href="../../tags/life/" style="font-size: 10px;">life</a> <a href="../../tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="../../tags/math/" style="font-size: 10px;">math</a> <a href="../../tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="../../tags/philosophy/" style="font-size: 10px;">philosophy</a> <a href="../../tags/sort/" style="font-size: 11.67px;">sort</a> <a href="../../tags/spark/" style="font-size: 10px;">spark</a> <a href="../../tags/spark-streaming/" style="font-size: 10px;">spark streaming</a> <a href="../../tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a>
     </div>
   </div>
 
