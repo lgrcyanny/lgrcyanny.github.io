@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-08-04T03:37:48.240Z</updated>
+  <updated>2026-06-30T10:42:35.622Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,287 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的</title>
+    <link href="http://example.com/2026/03/10/openclaw-principle-and-practice/"/>
+    <id>http://example.com/2026/03/10/openclaw-principle-and-practice/</id>
+    <published>2026-03-10T00:00:00.000Z</published>
+    <updated>2026-06-30T10:42:35.622Z</updated>
+    
+    <content type="html"><![CDATA[<p>2026 年 1 月，一个名为 OpenClaw 的项目在 GitHub 上更名并开源。短短两个月内，它的 Star 数突破 25 万，增速超越 React 和 Linux，国内云厂商争相上门合作。它凭什么？</p>
+<p>定位很简单：<strong>本地数字管家 / Agent OS</strong>——发条消息就能让 AI 替你在本地干活。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="一、OpenClaw-是什么"><a href="#一、OpenClaw-是什么" class="headerlink" title="一、OpenClaw 是什么"></a>一、OpenClaw 是什么</h2><p>OpenClaw 是一个开源的本地 AI 网关，核心价值主张：</p>
+<table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>本地运行</strong></td>
+<td align="left">运行在个人硬件上，数据不出本地，更多权限、更多能力</td>
+</tr>
+<tr>
+<td align="left"><strong>多通道</strong></td>
+<td align="left">连接 WhatsApp、Telegram、飞书、Slack 等即时通讯工具作为控制终端</td>
+</tr>
+<tr>
+<td align="left"><strong>Agent 原生</strong></td>
+<td align="left">集成编码 Agent（Pi Agent），支持工具调用、会话管理、跨会话持久记忆</td>
+</tr>
+<tr>
+<td align="left"><strong>开源社区</strong></td>
+<td align="left">Peter Steinberger（后加入 OpenAI）主导，社区驱动敏捷迭代</td>
+</tr>
+</tbody></table>
+<p>目标用户很精准：想拥有个人 AI 助手、重视数据隐私、不愿放弃控制权的技术爱好者。</p>
+<hr>
+<h2 id="二、为什么两个月就爆了"><a href="#二、为什么两个月就爆了" class="headerlink" title="二、为什么两个月就爆了"></a>二、为什么两个月就爆了</h2><p>三个维度合力引爆：</p>
+<table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>时机到位</strong></td>
+<td align="left">大模型的推理、工具调用、长上下文能力趋于成熟；个人办公市场（十万亿级）远大于代码助手（千亿级）</td>
+</tr>
+<tr>
+<td align="left"><strong>产品形态精准</strong></td>
+<td align="left">发消息就让 AI 干活，用户延时容忍度高；本地执行保护隐私；浏览器、邮件、日历、笔记全平台打通</td>
+</tr>
+<tr>
+<td align="left"><strong>环境助推</strong></td>
+<td align="left">创始人的社区影响力 + 敏捷迭代节奏 + 媒体与云厂商合力宣传</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、架构：Channel-→-Gateway-→-Persistence"><a href="#三、架构：Channel-→-Gateway-→-Persistence" class="headerlink" title="三、架构：Channel → Gateway → Persistence"></a>三、架构：Channel → Gateway → Persistence</h2><p>三层架构，各司其职：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────┐</span><br><span class="line">│  Channels  │  WhatsApp · TG · 飞书 · Slack    │</span><br><span class="line">├──────────────────────────────────────────────┤</span><br><span class="line">│  Gateway   │  路由 · Agent运行时 · 工具调用    │</span><br><span class="line">├──────────────────────────────────────────────┤</span><br><span class="line">│ Persistence│  Local-First · JSON&#x2F;SQLite       │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-通信层（Channels）"><a href="#3-1-通信层（Channels）" class="headerlink" title="3.1 通信层（Channels）"></a>3.1 通信层（Channels）</h3><p>可组合、可扩展的能力组件：安全认证 → 消息解析 → 访问控制 → 输出格式化。支持 WebSocket、RPC+JSON、流式输出。</p>
+<h3 id="3-2-网关（Gateway）—-最核心的部分"><a href="#3-2-网关（Gateway）—-最核心的部分" class="headerlink" title="3.2 网关（Gateway）— 最核心的部分"></a>3.2 网关（Gateway）— 最核心的部分</h3><h4 id="Agent-运行时：Pi-Agent-四阶段-ReAct-Loop"><a href="#Agent-运行时：Pi-Agent-四阶段-ReAct-Loop" class="headerlink" title="Agent 运行时：Pi Agent 四阶段 ReAct Loop"></a>Agent 运行时：Pi Agent 四阶段 ReAct Loop</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化 ──→ 推理 ──→ 行动 ──→ 反馈 ──→ 循环</span><br><span class="line">Prompt     LLM调用   工具执行   结果回传</span><br><span class="line">Builder    产生决策   本地运行   下一轮</span><br></pre></td></tr></table></figure>
+<h4 id="Session-管理"><a href="#Session-管理" class="headerlink" title="Session 管理"></a>Session 管理</h4><p>消息按 ID 和频道独立隔离，支持跨平台身份映射。内置每日/闲置/多维度自动重置机制，实时修剪 + 压缩刷新内存，关键信息持久化。</p>
+<h4 id="工具调用"><a href="#工具调用" class="headerlink" title="工具调用"></a>工具调用</h4><p>标准化声明协议，动态渐进式加载。网关统一编排和路由，权限审计保证安全。</p>
+<h3 id="3-3-持久化层：多级记忆体系"><a href="#3-3-持久化层：多级记忆体系" class="headerlink" title="3.3 持久化层：多级记忆体系"></a>3.3 持久化层：多级记忆体系</h3><table>
+<thead>
+<tr>
+<th align="left">层级</th>
+<th align="left">存储形式</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>短期记忆</strong></td>
+<td align="left">会话转录 JSON</td>
+<td align="left">当前对话事实，定期压缩刷新</td>
+</tr>
+<tr>
+<td align="left"><strong>长期记忆</strong></td>
+<td align="left">Markdown 向量检索 (RAG)</td>
+<td align="left">语义记忆，跨会话复用</td>
+</tr>
+<tr>
+<td align="left"><strong>MEMORY.md</strong></td>
+<td align="left">动态学习文件</td>
+<td align="left">用户偏好、任务进度</td>
+</tr>
+<tr>
+<td align="left"><strong>SOUL.md</strong></td>
+<td align="left">Agent 人格文件</td>
+<td align="left">性格、价值观、长期目标</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、安全机制"><a href="#四、安全机制" class="headerlink" title="四、安全机制"></a>四、安全机制</h2><table>
+<thead>
+<tr>
+<th align="left">机制</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">网关权限审计</td>
+<td align="left">工具调用权限准入控制</td>
+</tr>
+<tr>
+<td align="left">安全 DM 模式</td>
+<td align="left">会话隔离，防止跨会话泄露</td>
+</tr>
+<tr>
+<td align="left">工具执行沙箱</td>
+<td align="left">隔离执行环境</td>
+</tr>
+<tr>
+<td align="left">Human-in-the-loop</td>
+<td align="left">Skill Vetter 审核 + 最小权限原则</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 使用建议：不要无脑安装 Skills，禁止访问敏感路径，做好模型调用限额——Token 消耗巨大。</p>
+</blockquote>
+<hr>
+<h2 id="五、实战：快速安装"><a href="#五、实战：快速安装" class="headerlink" title="五、实战：快速安装"></a>五、实战：快速安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 确保安装了 Node.js</span></span><br><span class="line"><span class="comment"># 2. 一键安装</span></span><br><span class="line">curl -fsSL https://openclaw.ai/install.sh | bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Quickstart 模式启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 配置模型（如阿里云百炼）</span></span><br><span class="line"><span class="comment"># 5. 配置 Channel（飞书 / WhatsApp / Telegram）</span></span><br></pre></td></tr></table></figure>
+<p>安装完成后，发一条消息给绑定的 IM 账号，AI 就会开始干活。</p>
+<hr>
+<h2 id="六、应用场景与商业案例"><a href="#六、应用场景与商业案例" class="headerlink" title="六、应用场景与商业案例"></a>六、应用场景与商业案例</h2><h3 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h3><ul>
+<li><strong>定时任务</strong>：天气预报、每日新闻摘要</li>
+<li><strong>自动化办公</strong>：调研并生成 PPT、文档</li>
+<li><strong>金融投研</strong>：自动抓取 PDF 研报 → 解析逻辑 → 拉行情 → 生成回测报告</li>
+<li><strong>Vibe-Coding</strong>：个人脚本快速开发</li>
+<li><strong>个人知识库</strong>：笔记管理、RSS 订阅、网页抓取</li>
+</ul>
+<h3 id="真实商业案例"><a href="#真实商业案例" class="headerlink" title="真实商业案例"></a>真实商业案例</h3><table>
+<thead>
+<tr>
+<th align="left">案例</th>
+<th align="left">效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">“零人类 CEO”公司</td>
+<td align="left">Agent CEO 调度多 Agent，成本 1500 元，营收 20 万</td>
+</tr>
+<tr>
+<td align="left">全自动保险律师</td>
+<td align="left">Agent 全自动处理保险法律事务</td>
+</tr>
+<tr>
+<td align="left">社媒运营</td>
+<td align="left">14 天养成 8 个 Agent，自动化涨粉</td>
+</tr>
+<tr>
+<td align="left">量化投研</td>
+<td align="left">AlphaClaw 项目，Agent 驱动全流程</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、Skill-生态"><a href="#七、Skill-生态" class="headerlink" title="七、Skill 生态"></a>七、Skill 生态</h2><p>OpenClaw 的 Skill 市场（clawhub.ai）覆盖从基础设施到生产应用的全链路：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类别</th>
+<th align="left">代表性 Skill</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>基础设施</strong></td>
+<td align="left">Skill Vetter（安全审计）、Tavily Search（LLM 搜索）、Mcporter（MCP 管理）、Self-Improving Agent</td>
+</tr>
+<tr>
+<td align="left"><strong>开发</strong></td>
+<td align="left">GitHub Skill、Coding Agent</td>
+</tr>
+<tr>
+<td align="left"><strong>知识管理</strong></td>
+<td align="left">Obsidian、Notion、Google Workspace</td>
+</tr>
+<tr>
+<td align="left"><strong>信息获取</strong></td>
+<td align="left">RSS Reader、Firecrawl（网页抓取）、PDF</td>
+</tr>
+<tr>
+<td align="left"><strong>浏览器</strong></td>
+<td align="left">Agent Browser</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、同类工具对比"><a href="#八、同类工具对比" class="headerlink" title="八、同类工具对比"></a>八、同类工具对比</h2><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">OpenClaw</th>
+<th align="left">NanoClaw</th>
+<th align="left">Claude Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">定位</td>
+<td align="left">全能数字管家</td>
+<td align="left">安全轻量助理</td>
+<td align="left">专业编程专家</td>
+</tr>
+<tr>
+<td align="left">代码量</td>
+<td align="left">~40w 行</td>
+<td align="left">~5k 行</td>
+<td align="left">闭源</td>
+</tr>
+<tr>
+<td align="left">安全</td>
+<td align="left">应用级权限</td>
+<td align="left">OS 级隔离</td>
+<td align="left">官方沙箱</td>
+</tr>
+<tr>
+<td align="left">交互</td>
+<td align="left">IM 聊天</td>
+<td align="left">IM 聊天</td>
+<td align="left">终端 CLI</td>
+</tr>
+<tr>
+<td align="left">记忆</td>
+<td align="left">强大跨会话</td>
+<td align="left">群组/文件级</td>
+<td align="left">Session 级</td>
+</tr>
+<tr>
+<td align="left">适合</td>
+<td align="left">生活/商务全自动</td>
+<td align="left">个人安全自动化</td>
+<td align="left">深度代码工作</td>
+</tr>
+</tbody></table>
+<p><strong>选型建议</strong>：全自动化生活 → OpenClaw；安全优先 + 小团队 → NanoClaw；专注代码 → Claude Code。</p>
+<hr>
+<h2 id="九、实践心得"><a href="#九、实践心得" class="headerlink" title="九、实践心得"></a>九、实践心得</h2><h3 id="买龙虾易，养龙虾难"><a href="#买龙虾易，养龙虾难" class="headerlink" title="买龙虾易，养龙虾难"></a>买龙虾易，养龙虾难</h3><p>OpenClaw 功能强大但配置繁琐，类似安装一台个人操作系统。每条 Channel 的配置都可能踩坑，耗时远超预期。</p>
+<h3 id="Token-像喝水"><a href="#Token-像喝水" class="headerlink" title="Token 像喝水"></a>Token 像喝水</h3><p>长时间运行的 Agent 会话，token 持续膨胀。建议每 5-8 轮重启会话，用 MEMORY.md 保存跨会话状态，训练日志不全量贴入上下文。</p>
+<h3 id="安全不能偷懒"><a href="#安全不能偷懒" class="headerlink" title="安全不能偷懒"></a>安全不能偷懒</h3><p>遵循最小权限原则，安装 Skill Vetter 审核每个 Skill，不要为了省事跳过安全检查。</p>
+<hr>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>优势</strong></td>
+<td align="left">瑞士军刀级能力、7×24 跨端在线、Skill 生态丰富</td>
+</tr>
+<tr>
+<td align="left"><strong>劣势</strong></td>
+<td align="left">40w 行代码臃肿、配置困难、应用级权限安全风险、架构仍在频繁更新</td>
+</tr>
+</tbody></table>
+<p>未来方向：更轻量安全、更低部署门槛、Agent 自主进化、多 Agent 协作——Agentic AI 的时代才刚刚开始。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2026 年 1 月，一个名为 OpenClaw 的项目在 GitHub 上更名并开源。短短两个月内，它的 Star 数突破 25 万，增速超越 React 和 Linux，国内云厂商争相上门合作。它凭什么？&lt;/p&gt;
+&lt;p&gt;定位很简单：&lt;strong&gt;本地数字管家 / Agent OS&lt;/strong&gt;——发条消息就能让 AI 替你在本地干活。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="OpenClaw" scheme="http://example.com/tags/openclaw/"/>
+    
+      <category term="AI Agent" scheme="http://example.com/tags/ai-agent/"/>
+    
+      <category term="Agent OS" scheme="http://example.com/tags/agent-os/"/>
+    
+      <category term="数字管家" scheme="http://example.com/tags/%E6%95%B0%E5%AD%97%E7%AE%A1%E5%AE%B6/"/>
+    
+      <category term="开源" scheme="http://example.com/tags/%E5%BC%80%E6%BA%90/"/>
+    
+  </entry>
   
   <entry>
     <title>读《架构整洁之道》</title>
@@ -1899,165 +2180,6 @@
     
     
       <category term="Learning" scheme="http://example.com/tags/learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala Collections</title>
-    <link href="http://example.com/2016/11/07/scala-collections/"/>
-    <id>http://example.com/2016/11/07/scala-collections/</id>
-    <published>2016-11-07T02:09:10.000Z</published>
-    <updated>2017-03-05T02:28:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>In scala there are many fancy collections with great utilities. Here are some key notes for scala collections which did a great help to me.</p>
-<a id="more"></a>
-
-<h1 id="Collections-Hierarchy"><a href="#Collections-Hierarchy" class="headerlink" title="Collections Hierarchy"></a>Collections Hierarchy</h1><p><img src="http://ww1.sinaimg.cn/mw1024/761b7938jw1f9jbrdeugkj20ku0q041j.jpg" alt="collection hierarchy"></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>Collections have two kinds:</p>
-<pre><code>- mutable collections
-- immutable collections</code></pre>
-<h2 id="Immutable-Collections"><a href="#Immutable-Collections" class="headerlink" title="Immutable Collections"></a>Immutable Collections</h2><ul>
-<li><p>Lists are finite immutable sequences. They provide constant-time access to their first element as well as the rest of the list</p>
-</li>
-<li><p>A stream is like a list except that its elements are computed lazily. Because of this, a stream can be infinitely long. for example:</p>
-</li>
-</ul>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s = <span class="number">1</span> #:: <span class="number">2</span> #:: <span class="number">3</span> #:: <span class="type">Stream</span>.empty</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span></span>(m: <span class="type">Int</span>, n: <span class="type">Int</span>): <span class="type">Stream</span>[<span class="type">Int</span>] = m #:: fib(n, m + n)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Vectors are a new collection type in Scala 2.8 that give efficient access to elements beyond the head.</p>
-<ul>
-<li>Access to any elements of a vector take only “effectively constant time,” as defined below.</li>
-<li>shallow trees</li>
-<li>when only one level, store 32 elements in an array</li>
-<li>if lager than 32, grow to 2 levels, each node in level 2 has 32 elements, and level 1 store 32 pointers, now level 2 has 2^10 elements</li>
-<li>level 3 has 2^ 15 elements</li>
-<li>to access an element, the complexity is log32(N)</li>
-<li>Vector have very decent random access performance</li>
-<li>The default implementation to immutable IndexedSeq</li>
-</ul>
-</li>
-<li><p>Stack</p>
-<ul>
-<li>first-in-last-out</li>
-<li>you can use ArrayBuffer to implement a Stack<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> emtpyStack = <span class="type">Stack</span>.empty</span><br><span class="line"><span class="keyword">val</span> hasOne = emptyStack.push(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>Immutable queues</p>
-</li>
-<li><p>Ranges</p>
-  <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> range = <span class="number">1</span> to <span class="number">10</span></span><br></pre></td></tr></table></figure></li>
-<li><p>Hash Tries</p>
-<ul>
-<li>Hash tries4 are a standard way to implement immutable sets and maps efficiently.</li>
-</ul>
-</li>
-<li><p>RedBlackTrees</p>
-<ul>
-<li>Red-black trees are a form of balanced binary trees where some nodes are designated “red” and others “black.”</li>
-<li>TreeSet</li>
-<li>TreeMap</li>
-<li>default implementation for SortedSet</li>
-</ul>
-</li>
-<li><p>Immutable bit sets<br><img src="http://ww2.sinaimg.cn/mw690/761b7938jw1f9jc4ydow0j20r208276p.jpg" alt="bit set example"></p>
-<ul>
-<li>Operations on bit sets are very fast. Testing for inclusion takes constant time. Adding an item to the set takes time proportional to the number of Longs in the bit set’s array, which is typically a small number.</li>
-</ul>
-</li>
-<li><p>ListMap</p>
-<ul>
-<li> The only possible difference is if the map is for some reason constructed in such a way that the first elements in the list are selected much more often than the other elements.</li>
-</ul>
-</li>
-</ul>
-<h2 id="Mutable-Collections"><a href="#Mutable-Collections" class="headerlink" title="Mutable Collections"></a>Mutable Collections</h2><ul>
-<li><p>Array buffer: operations simply access and modify the underlying array.</p>
-</li>
-<li><p>List Buffer: A list buffer is like an array buffer except that it uses a linked list internally instead of an array.</p>
-<ul>
-<li>you plan to convert the buffer to a list once it is built up, use a list buffer instead of an array buffer.</li>
-</ul>
-</li>
-<li><p>StringBuilder:  a string builder is useful for building strings</p>
-</li>
-<li><p>LinkedList: Linked lists are mutable sequences that consist of nodes that are linked with next pointer</p>
-<ul>
-<li>use  LinkedList.empty.isEmpty for empty list</li>
-<li>linked lists are best operated on sequen- tially. In addition, linked lists make it easy to insert an element or linked list into another linked list.</li>
-</ul>
-</li>
-<li><p>Double Linked List: The main benefit of that additional link is that it makes element removal very fast</p>
-</li>
-<li><p>Mutable List:</p>
-<ul>
-<li>A MutableList consists of a single linked list together with a pointer that refers to the terminal empty node of that list.</li>
-<li>The default implementation for LinearSeq</li>
-</ul>
-</li>
-<li><p>Queue</p>
-<ul>
-<li>the dequeue method will just remove the head element from the queue and return it</li>
-</ul>
-</li>
-<li><p>Array Sequences</p>
-<ul>
-<li>A class for polymorphic arrays of elements that’s represented internally by an array of objects</li>
-<li>Array sequences are mutable sequences of fixed size that store their elements internally in an Array[AnyRef]</li>
-</ul>
-</li>
-<li><p>Stack</p>
-<ul>
-<li>It works exactly the same as the immutable version except that modifications happen in place</li>
-</ul>
-</li>
-<li><p>ArrayStack</p>
-<ul>
-<li>ArrayStack is an alternative implementation of a mutable stack, which is backed by an Array that gets resized as needed</li>
-<li>It provides fast indexing and is generally slightly more efficient for most operations than a normal mutable stack.</li>
-</ul>
-</li>
-<li><p>HashTable</p>
-<ul>
-<li>A hash table stores its elements in an underlying array, placing each item at a position in the array determined by the hash code of that item.</li>
-<li>As a result, the default mutable map and set types in Scala are based on hash tables.</li>
-<li>HashMap, HashSet implements with hash tables in array</li>
-<li>Iteration over a hash table is not guaranteed to occur in any particular order.<ul>
-<li>To get a guaranteed iteration order, use a linked hash map or set instead of a regular one.</li>
-<li>Iteration over such a collection is always in the same order that the elements were initially added.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Weak Hash Maps</p>
-<ul>
-<li>A weak hash map is a special kind of hash map in which the garbage collector does not follow links from the map to the keys stored in it</li>
-<li>This means that a key and its associated value will disappear from the map if there is no other reference to that key</li>
-<li>Weak hash maps are useful for tasks such as caching, where you want to re-use an expensive function’s result if the function is called again on the same key</li>
-<li>Weak hash maps in Scala are implemented as a wrapper of an underlying Java implementation, java.util.WeakHashMap.</li>
-</ul>
-</li>
-<li><p>Concurrent Maps</p>
-<ul>
-<li>A concurrent map can be accessed by several threads at once.</li>
-<li> Currently, its only implementation is Java’s java.util.concurrent.ConcurrentMap</li>
-</ul>
-</li>
-<li><p>BitSet</p>
-<ul>
-<li>Mutable bit sets are slightly more efficient at updating than immutable ones, because they don’t have to copy around Longs that haven’t changed.</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;In scala there are many fancy collections with great utilities. Here are some key notes for scala collections which did a great help to me.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Scala" scheme="http://example.com/tags/scala/"/>
     
   </entry>
   
