@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2026-06-30T10:42:35.622Z</updated>
+  <updated>2026-06-30T10:50:32.835Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -14,6 +14,475 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hermes Agent 技术分享 — 200K Star 的自我进化型 AI Agent 深度解析</title>
+    <link href="http://example.com/2026/06/25/hermes-agent-tech-share/"/>
+    <id>http://example.com/2026/06/25/hermes-agent-tech-share/</id>
+    <published>2026-06-25T00:00:00.000Z</published>
+    <updated>2026-06-30T10:50:32.835Z</updated>
+    
+    <content type="html"><![CDATA[<p>Hermes Agent 是由 Nous Research 开发的开源 AI Agent 框架，核心理念是 **”The agent that grows with you”**——不是一次性工具，而是越用越聪明的长期伙伴。从 2026 年 3 月公测至今，4 个月斩获 20 万 GitHub Star，与 NVIDIA 达成官方合作。本文深度解析其技术架构、记忆体系、Skill 自进化机制，以及 Agent 自我进化的未来趋势。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="第一部分：Hermes-技术原理"><a href="#第一部分：Hermes-技术原理" class="headerlink" title="第一部分：Hermes 技术原理"></a>第一部分：Hermes 技术原理</h2><h3 id="1-1-Hermes-是什么"><a href="#1-1-Hermes-是什么" class="headerlink" title="1.1 Hermes 是什么"></a>1.1 Hermes 是什么</h3><p><a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>（MIT 协议）与 Claude Code、Codex、OpenClaw 同属自主编码与任务执行 Agent 类别。</p>
+<p><strong>与同类产品的本质区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">能力</th>
+<th align="center">Hermes</th>
+<th align="center">Claude Code</th>
+<th align="center">Codex</th>
+<th align="center">OpenClaw</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">开源（MIT）</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅ (Apache)</td>
+</tr>
+<tr>
+<td align="left">Skill 自进化体系</td>
+<td align="center">✅ <strong>独有</strong></td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="left">多平台 Gateway</td>
+<td align="center">24+</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">20+</td>
+</tr>
+<tr>
+<td align="left">Provider 无关</td>
+<td align="center">20+ 提供商</td>
+<td align="center">仅 Anthropic</td>
+<td align="center">仅 OpenAI</td>
+<td align="center">有限</td>
+</tr>
+<tr>
+<td align="left">持久跨会话记忆</td>
+<td align="center">✅</td>
+<td align="center">仅 CLAUDE.md</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td align="left">原生桌面 App</td>
+<td align="center">✅ (v0.16)</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-社区背景"><a href="#1-2-社区背景" class="headerlink" title="1.2 社区背景"></a>1.2 社区背景</h3><table>
+<thead>
+<tr>
+<th align="left">指标</th>
+<th align="left">数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>GitHub Stars</strong></td>
+<td align="left"><strong>202,000</strong>（4 个月从 0 到 200K）</td>
+</tr>
+<tr>
+<td align="left">Forks</td>
+<td align="left">36,200</td>
+</tr>
+<tr>
+<td align="left">总贡献者</td>
+<td align="left">1,400+</td>
+</tr>
+<tr>
+<td align="left">最新版本</td>
+<td align="left">v0.17.0 “The Reach”（6月19日）</td>
+</tr>
+<tr>
+<td align="left">发布节奏</td>
+<td align="left"><strong>周均 1 版</strong>（3.5 个月 17 个大版本）</td>
+</tr>
+<tr>
+<td align="left">合作伙伴</td>
+<td align="left">NVIDIA（RTX + DGX Spark 官方 AI Agent 参考实现）</td>
+</tr>
+</tbody></table>
+<p><strong>发布里程碑</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3月12日  v0.2.0   公开发布</span><br><span class="line">4月13日  v0.9.0   每 4 天一版的冲刺期</span><br><span class="line">5月7日   v0.13.0  The Tenacity — 持久 Agent 系统</span><br><span class="line">5月16日  v0.14.0  The Foundation — pip install 开箱即用</span><br><span class="line">5月28日  v0.15.0  The Velocity — 核心重构 16K→3.8K 行</span><br><span class="line">6月5日   v0.16.0  The Surface — 原生桌面 App 发布</span><br><span class="line">6月19日  v0.17.0  The Reach — 24 平台 + 后台 Subagent</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-核心功能"><a href="#1-3-核心功能" class="headerlink" title="1.3 核心功能"></a>1.3 核心功能</h3><p><strong>多平台 Gateway（24 个平台）</strong>：同一 Agent 可同时在 Telegram、Discord、Slack、WhatsApp、Signal、Matrix、Email、SMS、飞书、企业微信、iMessage、API Server、Webhooks 等平台运行。</p>
+<p><strong>Provider 无关</strong>：支持 20+ LLM 提供商（OpenRouter、Anthropic、OpenAI、DeepSeek、MiniMax、Kimi、GLM、xAI Grok 等），随时切换模型不影响任务。</p>
+<p><strong>Skill 体系（核心差异化能力）</strong>：Skill 是 Hermes 的程序性记忆——将成功的工作流、踩坑经验、领域知识保存为可复用的技能文件，在后续对话中自动加载。<strong>这是 Hermes 最独特的能力</strong>。</p>
+<p><strong>其他核心能力</strong>：</p>
+<ul>
+<li><strong>持久记忆</strong>：跨会话记住用户偏好、环境事实、项目约定</li>
+<li><strong>子任务委派</strong> (delegate_task)：并行分配工作给子 Agent</li>
+<li><strong>Cron 调度</strong>：定时任务自动化</li>
+<li><strong>MCP 服务器</strong>：接入第三方记忆系统</li>
+<li><strong>Profiles</strong>：同一台机器运行多个独立 Agent 实例</li>
+<li><strong>上下文压缩</strong>：自动压缩长对话，控制 Token 成本</li>
+<li><strong>原生桌面 App</strong> (v0.16+)：macOS/Windows/Linux</li>
+</ul>
+<h3 id="1-4-技术架构"><a href="#1-4-技术架构" class="headerlink" title="1.4 技术架构"></a>1.4 技术架构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────────────┐</span><br><span class="line">│              AIAgent.run_conversation()               │</span><br><span class="line">│                                                      │</span><br><span class="line">│  while iterations &lt; max_iterations:                  │</span><br><span class="line">│    ① Build System Prompt (注入 Memory + Skills)       │</span><br><span class="line">│    ② Call LLM (OpenAI-format messages + tool schemas)│</span><br><span class="line">│    ③ if tool_calls → dispatch → append results       │</span><br><span class="line">│    ④ if text → return response                       │</span><br><span class="line">│    ⑤ Context compression (接近 token 上限时触发)      │</span><br><span class="line">└──────────────────────────────────────────────────────┘</span><br><span class="line">         │                    │</span><br><span class="line">         ▼                    ▼</span><br><span class="line">   ┌──────────┐        ┌──────────┐</span><br><span class="line">   │  Tools    │        │ Gateway  │</span><br><span class="line">   │  20+ 工具  │        │ 24 平台   │</span><br><span class="line">   │  skill &#x2F;  │        │ 消息路由  │</span><br><span class="line">   │  memory &#x2F; │        │ 命令审批  │</span><br><span class="line">   │  terminal │        │ 会话管理  │</span><br><span class="line">   └──────────┘        └──────────┘</span><br></pre></td></tr></table></figure>
+<h3 id="1-5-记忆体系（三层架构）"><a href="#1-5-记忆体系（三层架构）" class="headerlink" title="1.5 记忆体系（三层架构）"></a>1.5 记忆体系（三层架构）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────────────┐</span><br><span class="line">│              系统提示注入层（会话开始注入）              │</span><br><span class="line">│  ┌─────────────┐  ┌─────────────┐  ┌──────────────┐ │</span><br><span class="line">│  │  MEMORY.md  │  │   USER.md   │  │   Skills     │ │</span><br><span class="line">│  │  代理记忆    │  │  用户画像    │  │  程序性记忆   │ │</span><br><span class="line">│  │  环境&#x2F;项目   │  │  偏好&#x2F;习惯   │  │  工作流&#x2F;命令  │ │</span><br><span class="line">│  └─────────────┘  └─────────────┘  └──────────────┘ │</span><br><span class="line">└──────────────────────────────────────────────────────┘</span><br><span class="line">                         │</span><br><span class="line">                         ▼</span><br><span class="line">┌──────────────────────────────────────────────────────┐</span><br><span class="line">│              跨会话检索层（按需查询）                   │</span><br><span class="line">│       session_search: FTS5 全文搜索 + LLM 摘要        │</span><br><span class="line">│      搜索所有历史对话 → 匹配相关会话 → 注入上下文       │</span><br><span class="line">└──────────────────────────────────────────────────────┘</span><br><span class="line">                         │</span><br><span class="line">                         ▼</span><br><span class="line">┌──────────────────────────────────────────────────────┐</span><br><span class="line">│              运行时洞察层（实时统计）                   │</span><br><span class="line">│       InsightsEngine: Token消耗 · 成本 · 工具模式     │</span><br><span class="line">└──────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>关键设计</strong>：</p>
+<ul>
+<li><strong>冻结快照</strong>：会话启动时注入记忆快照，会话期间不更新，保留 Prompt Cache</li>
+<li><strong>实时持久化</strong>：运行时写入立即落盘，<strong>下一会话</strong>生效</li>
+<li><strong>冷热分离</strong>：声明性记忆（低频更新）vs 程序性记忆（按需加载）vs 历史对话（主动检索）</li>
+</ul>
+<h3 id="1-6-自我进化机制"><a href="#1-6-自我进化机制" class="headerlink" title="1.6 自我进化机制"></a>1.6 自我进化机制</h3><p>这是 Hermes 区别于所有竞品的核心能力——<strong>闭环学习循环</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">用户交互</span><br><span class="line">  ↓</span><br><span class="line">Agent 推理 + 工具执行</span><br><span class="line">  ↓</span><br><span class="line">┌───────────────────────────────────┐</span><br><span class="line">│  成功路径  →  skill_manage create │  ← 新建 Skill</span><br><span class="line">│  错误修正  →  skill_manage patch  │  ← 修补 Skill</span><br><span class="line">│  用户纠正  →  memory add&#x2F;replace  │  ← 更新记忆</span><br><span class="line">│  知识发现  →  memory save         │  ← 沉淀洞察</span><br><span class="line">└───────────────────────────────────┘</span><br><span class="line">  ↓</span><br><span class="line">下一会话自动注入更新后的记忆 + Skills</span><br></pre></td></tr></table></figure>
+<p><strong>Skill 生命周期管理</strong>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">触发条件</th>
+<th align="left">效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>create</code></td>
+<td align="left">完成复杂任务（5+ tool calls）</td>
+<td align="left">创建 SKILL.md + 目录结构</td>
+</tr>
+<tr>
+<td align="left"><code>patch</code></td>
+<td align="left">发现 Skill 过时或错误</td>
+<td align="left">精确查找替换，即时修正</td>
+</tr>
+<tr>
+<td align="left"><code>edit</code></td>
+<td align="left">大范围重写</td>
+<td align="left">整体更新</td>
+</tr>
+<tr>
+<td align="left"><code>delete</code></td>
+<td align="left">不再需要</td>
+<td align="left">清理冗余</td>
+</tr>
+</tbody></table>
+<h3 id="1-7-快速安装"><a href="#1-7-快速安装" class="headerlink" title="1.7 快速安装"></a>1.7 快速安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键安装</span></span><br><span class="line">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式配置</span></span><br><span class="line">hermes setup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择模型</span></span><br><span class="line">hermes model</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始对话</span></span><br><span class="line">hermes</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="第二部分：LLM-Wiki-—-知识管理新范式"><a href="#第二部分：LLM-Wiki-—-知识管理新范式" class="headerlink" title="第二部分：LLM Wiki — 知识管理新范式"></a>第二部分：LLM Wiki — 知识管理新范式</h2><h3 id="2-1-设计理念"><a href="#2-1-设计理念" class="headerlink" title="2.1 设计理念"></a>2.1 设计理念</h3><p>Hermes 的 Skill 体系天然支持知识管理场景。采用 Karpathy 提出的 <strong>“编译优于检索”</strong> 模式：</p>
+<blockquote>
+<p>知识一旦摄入，就被编译成结构化 Markdown 页面。跨页面链接已建立，矛盾已被标记，综合已完成。每次问答不是重新发现知识，而是<strong>读取已编译的知识</strong>。</p>
+</blockquote>
+<h3 id="2-2-LLM-Wiki-vs-传统-RAG"><a href="#2-2-LLM-Wiki-vs-传统-RAG" class="headerlink" title="2.2 LLM Wiki vs 传统 RAG"></a>2.2 LLM Wiki vs 传统 RAG</h3><table>
+<thead>
+<tr>
+<th align="left">需求</th>
+<th align="left">RAG</th>
+<th align="left">LLM Wiki</th>
+<th align="left">优势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">频繁查询相同知识</td>
+<td align="left">每次检索全部文档</td>
+<td align="left">一次编译，多次读取</td>
+<td align="left">响应快、成本低</td>
+</tr>
+<tr>
+<td align="left">知识分散多源</td>
+<td align="left">每次多源检索合并</td>
+<td align="left">三级 fallback → 集中沉淀</td>
+<td align="left">链路短、体验统一</td>
+</tr>
+<tr>
+<td align="left">知识持续积累</td>
+<td align="left">需重新索引</td>
+<td align="left">增量补充，自动去重</td>
+<td align="left">不重复、持续增长</td>
+</tr>
+<tr>
+<td align="left">跨文档综合</td>
+<td align="left">碎片化检索</td>
+<td align="left">页面级综合 + 交叉引用</td>
+<td align="left">链路全景清晰</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-Skill-自进化的实践闭环"><a href="#2-3-Skill-自进化的实践闭环" class="headerlink" title="2.3 Skill 自进化的实践闭环"></a>2.3 Skill 自进化的实践闭环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">┌─ 知识摄入 ──────────────────────────────────┐</span><br><span class="line">│  新文档 → Agent 按 Skill 流程读取             │</span><br><span class="line">│  → 检查已有 Wiki 页面 → 增量补充 &#x2F; 创建新页面  │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br><span class="line">                    ↓</span><br><span class="line">┌─ 日常问答 ──────────────────────────────────┐</span><br><span class="line">│  提问 → 三级 fallback → 返回答案             │</span><br><span class="line">│  → 判断是否为新知识 → 沉淀到 Wiki            │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br><span class="line">                    ↓</span><br><span class="line">┌─ 持续改进 ──────────────────────────────────┐</span><br><span class="line">│  内容变更 → skill_manage patch 即时更新      │</span><br><span class="line">│  发现错误 → 即时修正，错误不重复发生          │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+<p><strong>核心价值</strong>：一个人的改进，全团队受益。Skill 文件可共享、可审计、可版本控制。</p>
+<hr>
+<h2 id="第三部分：Hermes-vs-同类竞品"><a href="#第三部分：Hermes-vs-同类竞品" class="headerlink" title="第三部分：Hermes vs 同类竞品"></a>第三部分：Hermes vs 同类竞品</h2><h3 id="3-1-三者定位：三个不同的哲学"><a href="#3-1-三者定位：三个不同的哲学" class="headerlink" title="3.1 三者定位：三个不同的哲学"></a>3.1 三者定位：三个不同的哲学</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Hermes ☤  &quot;越用越聪明&quot; — 学习型 Agent</span><br><span class="line">    │   Skill 闭环学习循环，从对话中自我进化</span><br><span class="line">    │   开发者优先，终端&#x2F;服务器优先</span><br><span class="line">    │   目标：成为最懂你的长期伙伴</span><br><span class="line">    │</span><br><span class="line">OpenClaw 🦞  &quot;连接一切&quot; — 覆盖型 Agent</span><br><span class="line">    │   20+ 平台 Gateway 之王，覆盖面无人能及</span><br><span class="line">    │   Microsoft Scout 背书的工具调用能力</span><br><span class="line">    │   目标：成为所有平台上的 AI 中枢</span><br><span class="line">    │</span><br><span class="line">OpenHuman 🧑  &quot;打开就会用&quot; — 体验型 Agent</span><br><span class="line">    桌面原生 Tauri App，开机即用</span><br><span class="line">    118+ OAuth 一键授权 + 后台持续思考</span><br><span class="line">    目标：成为消费者的 AI 桌面伙伴</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-核心能力对比"><a href="#3-2-核心能力对比" class="headerlink" title="3.2 核心能力对比"></a>3.2 核心能力对比</h3><table>
+<thead>
+<tr>
+<th align="left">能力</th>
+<th align="center">Hermes</th>
+<th align="center">OpenClaw</th>
+<th align="center">OpenHuman</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>自我进化 / Skill 闭环</strong></td>
+<td align="center">✅ <strong>独有</strong></td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="left"><strong>多平台 Gateway</strong></td>
+<td align="center">24 平台</td>
+<td align="center">20+ 平台</td>
+<td align="center">⚠️ 有限</td>
+</tr>
+<tr>
+<td align="left"><strong>桌面体验</strong></td>
+<td align="center">⚠️ v0.16 新</td>
+<td align="center">❌ 仅 CLI</td>
+<td align="center">✅ 成熟 Tauri</td>
+</tr>
+<tr>
+<td align="left"><strong>终端/服务器部署</strong></td>
+<td align="center">✅ 6 种后端</td>
+<td align="center">✅</td>
+<td align="center">❌ Desktop-only</td>
+</tr>
+<tr>
+<td align="left"><strong>NVIDIA 硬件生态</strong></td>
+<td align="center">✅ RTX + DGX</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="left"><strong>记忆系统</strong></td>
+<td align="center">Memory + Session</td>
+<td align="center">Memory</td>
+<td align="center">Memory Tree + Obsidian</td>
+</tr>
+<tr>
+<td align="left"><strong>Cron 调度</strong></td>
+<td align="center">✅ 内置</td>
+<td align="center">✅</td>
+<td align="center">✅ 内置</td>
+</tr>
+<tr>
+<td align="left"><strong>Sub-Agent 并行</strong></td>
+<td align="center">✅ delegate_task</td>
+<td align="center">✅</td>
+<td align="center">✅ agent coord.</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-各自致命短板"><a href="#3-3-各自致命短板" class="headerlink" title="3.3 各自致命短板"></a>3.3 各自致命短板</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Hermes</th>
+<th align="left">OpenClaw</th>
+<th align="left">OpenHuman</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>短板 1</strong></td>
+<td align="left">桌面体验刚起步</td>
+<td align="left">CVE-2026-25253 高危漏洞</td>
+<td align="left">GPL-3.0 — 商业使用硬伤</td>
+</tr>
+<tr>
+<td align="left"><strong>短板 2</strong></td>
+<td align="left">单人贡献过半</td>
+<td align="left">无 Skill 自进化能力</td>
+<td align="left">Desktop-only — 不能上服务器</td>
+</tr>
+<tr>
+<td align="left"><strong>短板 3</strong></td>
+<td align="left">Open Issues 积压严重</td>
+<td align="left">没有桌面 App</td>
+<td align="left">无自我进化 — 每次重新开始</td>
+</tr>
+</tbody></table>
+<h3 id="3-4-选型建议"><a href="#3-4-选型建议" class="headerlink" title="3.4 选型建议"></a>3.4 选型建议</h3><table>
+<thead>
+<tr>
+<th align="left">如果你的核心需求是…</th>
+<th align="left">选谁？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>持久积累业务知识，越用越聪明</strong></td>
+<td align="left"><strong>Hermes</strong> — Skill 闭环独此一家</td>
+</tr>
+<tr>
+<td align="left"><strong>24 小时无人值守跑在服务器上</strong></td>
+<td align="left"><strong>Hermes</strong> — 6 种后端 + Cron</td>
+</tr>
+<tr>
+<td align="left"><strong>NVIDIA 硬件本地运行</strong></td>
+<td align="left"><strong>Hermes</strong> — RTX + DGX Spark 官方合作</td>
+</tr>
+<tr>
+<td align="left"><strong>非技术人员 5 分钟上手</strong></td>
+<td align="left"><strong>OpenHuman</strong> — 桌面 Mascot + 118 OAuth</td>
+</tr>
+<tr>
+<td align="left"><strong>业务代码闭源，需 MIT 协议</strong></td>
+<td align="left"><strong>Hermes / OpenClaw</strong> — 避免 GPL 传染</td>
+</tr>
+<tr>
+<td align="left"><strong>最大社区 + 最多第三方集成历史</strong></td>
+<td align="left"><strong>OpenClaw</strong> — 377K Stars + 先发优势</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>本质差异</strong>：三者不是零和博弈。Hermes 赢在<strong>学习深度</strong>，OpenClaw 赢在<strong>连接广度</strong>，OpenHuman 赢在<strong>体验温度</strong>——在不同象限各自做深。</p>
+</blockquote>
+<hr>
+<h2 id="第四部分：未来展望-—-Agent-自我进化趋势"><a href="#第四部分：未来展望-—-Agent-自我进化趋势" class="headerlink" title="第四部分：未来展望 — Agent 自我进化趋势"></a>第四部分：未来展望 — Agent 自我进化趋势</h2><h3 id="4-1-当前-Hermes-进化范式的定位"><a href="#4-1-当前-Hermes-进化范式的定位" class="headerlink" title="4.1 当前 Hermes 进化范式的定位"></a>4.1 当前 Hermes 进化范式的定位</h3><p>Hermes 的 Skill 系统代表 <strong>“启发式自主管理”</strong> 范式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">优点：                              局限：</span><br><span class="line">✅ 生产可用，已在实际业务中稳定运行    ⚠️ 依赖 LLM 自主判断何时创建&#x2F;更新</span><br><span class="line">✅ 人机协同：Skill 文件人类可读可审    ⚠️ 缺乏量化的效果度量</span><br><span class="line">✅ 渐进式改进：每次交互都可能产生增量   ⚠️ 无自动错误分析流程</span><br><span class="line">✅ 低门槛：不需要额外训练基础设施      ⚠️ 每个实例独立学习，无法共享</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-业界三条演化路径"><a href="#4-2-业界三条演化路径" class="headerlink" title="4.2 业界三条演化路径"></a>4.2 业界三条演化路径</h3><h4 id="路径一：MUSE-Autoskill-—-全生命周期自动化"><a href="#路径一：MUSE-Autoskill-—-全生命周期自动化" class="headerlink" title="路径一：MUSE-Autoskill — 全生命周期自动化"></a>路径一：MUSE-Autoskill — 全生命周期自动化</h4><table>
+<thead>
+<tr>
+<th align="left">论文</th>
+<th align="left">MUSE-Autoskill (Arxiv 2605.27366)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心创新</strong></td>
+<td align="left">Agent 自主完成技能的<strong>创建→记忆→管理→评估</strong>全生命周期</td>
+</tr>
+<tr>
+<td align="left"><strong>与 Hermes 的差异</strong></td>
+<td align="left">Hermes 靠 LLM 判断何时创建 → MUSE 自动从任务中提取可复用模式；向量化存储 + 语义检索 vs Skill 名称匹配</td>
+</tr>
+<tr>
+<td align="left"><strong>关键能力</strong></td>
+<td align="left">自动模式提取 → 向量化记忆 → 相似任务检索 → 效果评估反馈闭环</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>启示</strong>：未来 Skill 不应依赖 Agent “想起来”才保存——应该<strong>自动检测可复用模式并持久化</strong>。</p>
+</blockquote>
+<h4 id="路径二：SkillOpt-—-文本空间梯度下降"><a href="#路径二：SkillOpt-—-文本空间梯度下降" class="headerlink" title="路径二：SkillOpt — 文本空间梯度下降"></a>路径二：SkillOpt — 文本空间梯度下降</h4><table>
+<thead>
+<tr>
+<th align="left">论文</th>
+<th align="left">SkillOpt (Arxiv 2605.23904, Microsoft + SJTU + 同济 + 复旦)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心创新</strong></td>
+<td align="left">将深度学习优化纪律（学习率/验证集/梯度裁剪/早停）<strong>系统性移植到文本空间</strong>的技能训练</td>
+</tr>
+<tr>
+<td align="left"><strong>架构</strong></td>
+<td align="left">Frozen Target Model → 独立 Optimizer Model（分析轨迹 → 产生编辑）→ Validation Gate（只有严格提升才接受）</td>
+</tr>
+<tr>
+<td align="left"><strong>关键结果</strong></td>
+<td align="left"><strong>52/52 评测单元最佳</strong>，GPT-5.5 平均提分 <strong>+23.5</strong>，跨模型/跨 Harness 可迁移</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>启示</strong>：LLM 自己改自己容易越改越差 → 需要独立优化器 + 验证门控。</p>
+</blockquote>
+<h4 id="路径三：Skill1-—-RL-驱动的技能联合进化"><a href="#路径三：Skill1-—-RL-驱动的技能联合进化" class="headerlink" title="路径三：Skill1 — RL 驱动的技能联合进化"></a>路径三：Skill1 — RL 驱动的技能联合进化</h4><table>
+<thead>
+<tr>
+<th align="left">论文</th>
+<th align="left">Skill1 (Arxiv 2605.06130, USTC + 美团 + NUS + 浙大 + 武大)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心创新</strong></td>
+<td align="left">用<strong>单一任务结果信号</strong>通过频域分解，同时演化技能选择/利用/蒸馏三大能力</td>
+</tr>
+<tr>
+<td align="left"><strong>频域信用分配</strong></td>
+<td align="left">低频趋势（移动平均）→ 评分选技能 · 高频波动（偏差）→ 评估蒸馏价值</td>
+</tr>
+<tr>
+<td align="left"><strong>关键结果</strong></td>
+<td align="left">ALFWorld **97.5%**（全面碾压所有基线）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>启示</strong>：技能选择、利用、蒸馏应该<strong>联合优化</strong>而不是分阶段独立改进。</p>
+</blockquote>
+<h3 id="4-3-三条路径的对比"><a href="#4-3-三条路径的对比" class="headerlink" title="4.3 三条路径的对比"></a>4.3 三条路径的对比</h3><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="center">Hermes 当前</th>
+<th align="center">MUSE-Autoskill</th>
+<th align="center">SkillOpt</th>
+<th align="center">Skill1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">创建触发</td>
+<td align="center">LLM 判断</td>
+<td align="center"><strong>自动检测</strong></td>
+<td align="center">训练驱动</td>
+<td align="center">RL 奖励</td>
+</tr>
+<tr>
+<td align="left">优化方式</td>
+<td align="center">无梯度</td>
+<td align="center">向量+反馈</td>
+<td align="center"><strong>文本梯度下降</strong></td>
+<td align="center">RL 频域分配</td>
+</tr>
+<tr>
+<td align="left">验证机制</td>
+<td align="center">无</td>
+<td align="center">效果评估</td>
+<td align="center"><strong>held-out 验证集</strong></td>
+<td align="center">任务成功/失败</td>
+</tr>
+<tr>
+<td align="left">当前成熟度</td>
+<td align="center">✅ 生产</td>
+<td align="center">🔬 学术</td>
+<td align="center">🔬 学术</td>
+<td align="center">🔬 学术</td>
+</tr>
+</tbody></table>
+<h3 id="4-4-演化路线图"><a href="#4-4-演化路线图" class="headerlink" title="4.4 演化路线图"></a>4.4 演化路线图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当前 (2026.06)         近期 (2026 H2)            远期 (2027+)</span><br><span class="line">─────────────────     ──────────────────       ──────────────</span><br><span class="line">Hermes 启发式          + 效果度量反馈闭环         + 文本空间梯度优化</span><br><span class="line">LLM 判断创建           + 自动模式提取            + 独立验证门控</span><br><span class="line">.md 文件持久化          + 向量化语义检索           + RL 联合进化</span><br><span class="line">                       + A&#x2F;B 技能效果对比         + 跨实例知识共享</span><br></pre></td></tr></table></figure>
+<p><strong>近期可落地</strong>（基于 Hermes 现有基础设施）：</p>
+<ol>
+<li><strong>Skill 效果度量</strong>：每个 Skill 携带成功率、平均耗时、Token 消耗等指标</li>
+<li><strong>A/B 验证</strong>：新 Skill 先在验证集上跑，通过才推广</li>
+<li><strong>自动淘汰</strong>：低频 + 低效 Skill 自动标记、建议清理</li>
+</ol>
+<p><strong>中期探索</strong>（需要工程投入）：<br>4. <strong>SkillOpt 风格优化器</strong>：独立 LLM 分析 Skill 使用轨迹，产生建议性 patch<br>5. <strong>向量化 Skill 检索</strong>：从名称匹配升级为语义相似度检索<br>6. <strong>跨实例 Skill 共享</strong>：团队内共享 Skill 仓库，一次改进全员受益</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://github.com/NousResearch/hermes-agent">Hermes Agent GitHub</a> · 202K ⭐</li>
+<li><a href="https://hermes-agent.nousresearch.com/docs/">官方文档</a></li>
+<li><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy’s LLM Wiki</a></li>
+<li>MUSE-Autoskill: <a href="https://arxiv.org/abs/2605.27366">Arxiv 2605.27366</a></li>
+<li>Skill1: <a href="https://arxiv.org/abs/2605.06130">Arxiv 2605.06130</a></li>
+<li>SkillOpt: <a href="https://arxiv.org/abs/2605.23904">Arxiv 2605.23904</a></li>
+</ul>
+<hr>
+<p><em>报告完成: 2026-06-25</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Hermes Agent 是由 Nous Research 开发的开源 AI Agent 框架，核心理念是 **”The agent that grows with you”**——不是一次性工具，而是越用越聪明的长期伙伴。从 2026 年 3 月公测至今，4 个月斩获 20 万 GitHub Star，与 NVIDIA 达成官方合作。本文深度解析其技术架构、记忆体系、Skill 自进化机制，以及 Agent 自我进化的未来趋势。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="AI Agent" scheme="http://example.com/tags/ai-agent/"/>
+    
+      <category term="开源" scheme="http://example.com/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="Hermes" scheme="http://example.com/tags/hermes/"/>
+    
+      <category term="Skill Evolution" scheme="http://example.com/tags/skill-evolution/"/>
+    
+      <category term="LLM Wiki" scheme="http://example.com/tags/llm-wiki/"/>
+    
+  </entry>
   
   <entry>
     <title>OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的</title>
@@ -2104,82 +2573,6 @@
     
     
       <category term="Algorithm" scheme="http://example.com/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>My Booklist and Reservations for 2017</title>
-    <link href="http://example.com/2017/01/22/booklist-for-2017/"/>
-    <id>http://example.com/2017/01/22/booklist-for-2017/</id>
-    <published>2017-01-22T02:18:09.000Z</published>
-    <updated>2017-03-05T02:29:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>一直没有写关于2016的回顾，有很多方面吧。2016年发生很多事儿的一年，对于技术上的发展也有了新的思考，搞技术不再是死磕某种工具、算法或bug，其实本质上是为了解决问题或者做更好的产品。虽然我做的不是具体的产品而是底层的工具和平台，但这些工具的出口也是依赖”pillar application”, 多想想也是好处的。</p>
-<p>2016工作忙，读的书没有很多，但想想扎克伯克比我们还忙一年能挑战23本书确实很牛，其实自己的时间管理是不太到位的，大部分周末都懒散睡觉或者出去逛街了，回归2016年，读的书们：<a id="more"></a></p>
-<ul>
-<li><strong>“Programming in scala, 2nd”</strong></li>
-</ul>
-<p>第一次啃一本大部头英文书883页，我都没有勇气打印出来，看的电子版，目前2017年初，走到第703页，成功在望。看完这个书，对scala的理解和应用，已经超过我的C++和Java技能了</p>
-<ul>
-<li><strong>Spark源码解析, 许鹏著</strong></li>
-</ul>
-<p>如果你问我学spark该看哪本书，我不会给你推荐这个的。不是说它不好，而是应该好好看官方doc. 不过这个书对我理解spark还是带来了很大帮助，但是spark1.0系列的，只能对着spark1.6和spark2.0的源码看，然后看看当年的大神们怎么设计的。许鹏的书里贴了一些关键代码，虽然贴代码占页数有点不厚道，但书叫源码解析所以也就忍了</p>
-<ul>
-<li><strong>Python Tutorial</strong></li>
-</ul>
-<p>我想学python很久了，这个Tutorial我看了好多遍，其实真正到实际应用中，我才真正学会了python</p>
-<ul>
-<li><strong>深入理解Java虚拟机</strong></li>
-</ul>
-<p>JVM的虚拟机调优部分看了，还有很多没看完，用到再查</p>
-<ul>
-<li><strong>spark的各种论文，PPT等</strong></li>
-</ul>
-<p>论文比较分散，有spark sql, spark rdd, spark streaming等，各种PPT也比较分散</p>
-<ul>
-<li><strong>人间词话</strong></li>
-</ul>
-<p>有时候看看诗，心里很开心。比如年终遇到一些事儿的时候喜欢一句诗：”天长水阔知何处”，心里那个纠结</p>
-<ul>
-<li><strong>Dunes: 沙丘，英文版</strong></li>
-</ul>
-<p>科幻大神的书，挑战了英文文学，虽然磕磕绊绊看完了，但现在我可以自信的看完大部头的英文原版文学书啦。之前看过英文的哈利波特，安德游戏，觉得比较幼稚没看下去。沙丘是比较对我胃口的一本</p>
-<ul>
-<li><strong>倚天屠龙记</strong></li>
-</ul>
-<p>我童年在教科书和教辅中度过，这么好的书这么大了才看，真心停不下来</p>
-<ul>
-<li><strong>百万富翁，Mark Twain, 英文版</strong></li>
-</ul>
-<p>喜欢反转的剧情，喜欢Mark Twain的文笔</p>
-<ul>
-<li><strong>各种博客，news</strong></li>
-</ul>
-<p>我手机里有将近30个news app，我是多爱看news，喜欢的包括Business Insider, Hack News, QZ.com, 36氪，钛媒体，推酷等，一般好的news分析我放到pocket里。当然还喜欢听喜马拉雅的段子。再觉得其实看news没有看书好，多看书好</p>
-<p>2017年啦，上面还有programming in scala, 人间词话还没看完，新的书又来啦，虽然写打算我不一定看，但列一下我的打算吧：</p>
-<ul>
-<li>机器学习Coursera课程</li>
-</ul>
-<p>机器学习，AI这么火，我2017年要把这个课程学完</p>
-<ul>
-<li>Creativity, Inc. Overcoming the Unseen Forces That Stand in the Way of True Inspiration</li>
-<li>从0到1</li>
-<li>make users awesome</li>
-<li>platform revolution</li>
-<li>奇点系列：<a href="https://book.douban.com/series/27014">https://book.douban.com/series/27014</a></li>
-<li>各种科幻和悬疑发现中</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一直没有写关于2016的回顾，有很多方面吧。2016年发生很多事儿的一年，对于技术上的发展也有了新的思考，搞技术不再是死磕某种工具、算法或bug，其实本质上是为了解决问题或者做更好的产品。虽然我做的不是具体的产品而是底层的工具和平台，但这些工具的出口也是依赖”pillar application”, 多想想也是好处的。&lt;/p&gt;
-&lt;p&gt;2016工作忙，读的书没有很多，但想想扎克伯克比我们还忙一年能挑战23本书确实很牛，其实自己的时间管理是不太到位的，大部分周末都懒散睡觉或者出去逛街了，回归2016年，读的书们：&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Learning" scheme="http://example.com/tags/learning/"/>
     
   </entry>
   
