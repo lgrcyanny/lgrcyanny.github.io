@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的 | CyannyLive</title>
+  <title>OpenClaw 原理与实践 | CyannyLive</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2026 年 1 月，一个名为 OpenClaw 的项目在 GitHub 上更名并开源。短短两个月内，它的 Star 数突破 25 万，增速超越 React 和 Linux，国内云厂商争相上门合作。它凭什么？ 定位很简单：本地数字管家 &#x2F; Agent OS——发条消息就能让 AI 替你在本地干活。">
+  <meta name="description" content="OpenClaw 是一个开源本地 AI Agent 框架，Apache 协议。2026 年 1 月开源后两个月涨到 25 万 Star。基本思路是用 IM 做控制终端——发消息给 WhatsApp、Telegram、飞书，AI 就在本地帮你跑任务。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的">
+<meta property="og:title" content="OpenClaw 原理与实践">
 <meta property="og:url" content="http://example.com/2026/03/10/openclaw-principle-and-practice/index.html">
 <meta property="og:site_name" content="CyannyLive">
-<meta property="og:description" content="2026 年 1 月，一个名为 OpenClaw 的项目在 GitHub 上更名并开源。短短两个月内，它的 Star 数突破 25 万，增速超越 React 和 Linux，国内云厂商争相上门合作。它凭什么？ 定位很简单：本地数字管家 &#x2F; Agent OS——发条消息就能让 AI 替你在本地干活。">
+<meta property="og:description" content="OpenClaw 是一个开源本地 AI Agent 框架，Apache 协议。2026 年 1 月开源后两个月涨到 25 万 Star。基本思路是用 IM 做控制终端——发消息给 WhatsApp、Telegram、飞书，AI 就在本地帮你跑任务。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-10T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-30T10:42:35.622Z">
+<meta property="article:modified_time" content="2026-07-01T01:23:20.861Z">
 <meta property="article:author" content="Cyanny Liang">
 <meta property="article:tag" content="OpenClaw">
 <meta property="article:tag" content="AI Agent">
 <meta property="article:tag" content="Agent OS">
-<meta property="article:tag" content="数字管家">
 <meta property="article:tag" content="开源">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@lgrcyanny">
@@ -120,7 +119,7 @@ ga('send', 'pageview');
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        49
+        48
         <span>tags</span>
       </div>
     </div>
@@ -153,7 +152,7 @@ ga('send', 'pageview');
         
   
     <h1 class="article-title" itemprop="name">
-      OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的
+      OpenClaw 原理与实践
     </h1>
   
 
@@ -170,258 +169,38 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>2026 年 1 月，一个名为 OpenClaw 的项目在 GitHub 上更名并开源。短短两个月内，它的 Star 数突破 25 万，增速超越 React 和 Linux，国内云厂商争相上门合作。它凭什么？</p>
-<p>定位很简单：<strong>本地数字管家 / Agent OS</strong>——发条消息就能让 AI 替你在本地干活。</p>
+        <p>OpenClaw 是一个开源本地 AI Agent 框架，Apache 协议。2026 年 1 月开源后两个月涨到 25 万 Star。基本思路是用 IM 做控制终端——发消息给 WhatsApp、Telegram、飞书，AI 就在本地帮你跑任务。</p>
 <a id="more"></a>
 
-<hr>
-<h2 id="一、OpenClaw-是什么"><a href="#一、OpenClaw-是什么" class="headerlink" title="一、OpenClaw 是什么"></a>一、OpenClaw 是什么</h2><p>OpenClaw 是一个开源的本地 AI 网关，核心价值主张：</p>
-<table>
-<thead>
-<tr>
-<th align="left">特性</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>本地运行</strong></td>
-<td align="left">运行在个人硬件上，数据不出本地，更多权限、更多能力</td>
-</tr>
-<tr>
-<td align="left"><strong>多通道</strong></td>
-<td align="left">连接 WhatsApp、Telegram、飞书、Slack 等即时通讯工具作为控制终端</td>
-</tr>
-<tr>
-<td align="left"><strong>Agent 原生</strong></td>
-<td align="left">集成编码 Agent（Pi Agent），支持工具调用、会话管理、跨会话持久记忆</td>
-</tr>
-<tr>
-<td align="left"><strong>开源社区</strong></td>
-<td align="left">Peter Steinberger（后加入 OpenAI）主导，社区驱动敏捷迭代</td>
-</tr>
-</tbody></table>
-<p>目标用户很精准：想拥有个人 AI 助手、重视数据隐私、不愿放弃控制权的技术爱好者。</p>
-<hr>
-<h2 id="二、为什么两个月就爆了"><a href="#二、为什么两个月就爆了" class="headerlink" title="二、为什么两个月就爆了"></a>二、为什么两个月就爆了</h2><p>三个维度合力引爆：</p>
-<table>
-<thead>
-<tr>
-<th align="left">维度</th>
-<th align="left">分析</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>时机到位</strong></td>
-<td align="left">大模型的推理、工具调用、长上下文能力趋于成熟；个人办公市场（十万亿级）远大于代码助手（千亿级）</td>
-</tr>
-<tr>
-<td align="left"><strong>产品形态精准</strong></td>
-<td align="left">发消息就让 AI 干活，用户延时容忍度高；本地执行保护隐私；浏览器、邮件、日历、笔记全平台打通</td>
-</tr>
-<tr>
-<td align="left"><strong>环境助推</strong></td>
-<td align="left">创始人的社区影响力 + 敏捷迭代节奏 + 媒体与云厂商合力宣传</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="三、架构：Channel-→-Gateway-→-Persistence"><a href="#三、架构：Channel-→-Gateway-→-Persistence" class="headerlink" title="三、架构：Channel → Gateway → Persistence"></a>三、架构：Channel → Gateway → Persistence</h2><p>三层架构，各司其职：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────┐</span><br><span class="line">│  Channels  │  WhatsApp · TG · 飞书 · Slack    │</span><br><span class="line">├──────────────────────────────────────────────┤</span><br><span class="line">│  Gateway   │  路由 · Agent运行时 · 工具调用    │</span><br><span class="line">├──────────────────────────────────────────────┤</span><br><span class="line">│ Persistence│  Local-First · JSON&#x2F;SQLite       │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
-<h3 id="3-1-通信层（Channels）"><a href="#3-1-通信层（Channels）" class="headerlink" title="3.1 通信层（Channels）"></a>3.1 通信层（Channels）</h3><p>可组合、可扩展的能力组件：安全认证 → 消息解析 → 访问控制 → 输出格式化。支持 WebSocket、RPC+JSON、流式输出。</p>
-<h3 id="3-2-网关（Gateway）—-最核心的部分"><a href="#3-2-网关（Gateway）—-最核心的部分" class="headerlink" title="3.2 网关（Gateway）— 最核心的部分"></a>3.2 网关（Gateway）— 最核心的部分</h3><h4 id="Agent-运行时：Pi-Agent-四阶段-ReAct-Loop"><a href="#Agent-运行时：Pi-Agent-四阶段-ReAct-Loop" class="headerlink" title="Agent 运行时：Pi Agent 四阶段 ReAct Loop"></a>Agent 运行时：Pi Agent 四阶段 ReAct Loop</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始化 ──→ 推理 ──→ 行动 ──→ 反馈 ──→ 循环</span><br><span class="line">Prompt     LLM调用   工具执行   结果回传</span><br><span class="line">Builder    产生决策   本地运行   下一轮</span><br></pre></td></tr></table></figure>
-<h4 id="Session-管理"><a href="#Session-管理" class="headerlink" title="Session 管理"></a>Session 管理</h4><p>消息按 ID 和频道独立隔离，支持跨平台身份映射。内置每日/闲置/多维度自动重置机制，实时修剪 + 压缩刷新内存，关键信息持久化。</p>
-<h4 id="工具调用"><a href="#工具调用" class="headerlink" title="工具调用"></a>工具调用</h4><p>标准化声明协议，动态渐进式加载。网关统一编排和路由，权限审计保证安全。</p>
-<h3 id="3-3-持久化层：多级记忆体系"><a href="#3-3-持久化层：多级记忆体系" class="headerlink" title="3.3 持久化层：多级记忆体系"></a>3.3 持久化层：多级记忆体系</h3><table>
-<thead>
-<tr>
-<th align="left">层级</th>
-<th align="left">存储形式</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>短期记忆</strong></td>
-<td align="left">会话转录 JSON</td>
-<td align="left">当前对话事实，定期压缩刷新</td>
-</tr>
-<tr>
-<td align="left"><strong>长期记忆</strong></td>
-<td align="left">Markdown 向量检索 (RAG)</td>
-<td align="left">语义记忆，跨会话复用</td>
-</tr>
-<tr>
-<td align="left"><strong>MEMORY.md</strong></td>
-<td align="left">动态学习文件</td>
-<td align="left">用户偏好、任务进度</td>
-</tr>
-<tr>
-<td align="left"><strong>SOUL.md</strong></td>
-<td align="left">Agent 人格文件</td>
-<td align="left">性格、价值观、长期目标</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="四、安全机制"><a href="#四、安全机制" class="headerlink" title="四、安全机制"></a>四、安全机制</h2><table>
-<thead>
-<tr>
-<th align="left">机制</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">网关权限审计</td>
-<td align="left">工具调用权限准入控制</td>
-</tr>
-<tr>
-<td align="left">安全 DM 模式</td>
-<td align="left">会话隔离，防止跨会话泄露</td>
-</tr>
-<tr>
-<td align="left">工具执行沙箱</td>
-<td align="left">隔离执行环境</td>
-</tr>
-<tr>
-<td align="left">Human-in-the-loop</td>
-<td align="left">Skill Vetter 审核 + 最小权限原则</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>⚠️ 使用建议：不要无脑安装 Skills，禁止访问敏感路径，做好模型调用限额——Token 消耗巨大。</p>
-</blockquote>
-<hr>
-<h2 id="五、实战：快速安装"><a href="#五、实战：快速安装" class="headerlink" title="五、实战：快速安装"></a>五、实战：快速安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 确保安装了 Node.js</span></span><br><span class="line"><span class="comment"># 2. 一键安装</span></span><br><span class="line">curl -fsSL https://openclaw.ai/install.sh | bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Quickstart 模式启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 配置模型（如阿里云百炼）</span></span><br><span class="line"><span class="comment"># 5. 配置 Channel（飞书 / WhatsApp / Telegram）</span></span><br></pre></td></tr></table></figure>
-<p>安装完成后，发一条消息给绑定的 IM 账号，AI 就会开始干活。</p>
-<hr>
-<h2 id="六、应用场景与商业案例"><a href="#六、应用场景与商业案例" class="headerlink" title="六、应用场景与商业案例"></a>六、应用场景与商业案例</h2><h3 id="典型场景"><a href="#典型场景" class="headerlink" title="典型场景"></a>典型场景</h3><ul>
-<li><strong>定时任务</strong>：天气预报、每日新闻摘要</li>
-<li><strong>自动化办公</strong>：调研并生成 PPT、文档</li>
-<li><strong>金融投研</strong>：自动抓取 PDF 研报 → 解析逻辑 → 拉行情 → 生成回测报告</li>
-<li><strong>Vibe-Coding</strong>：个人脚本快速开发</li>
-<li><strong>个人知识库</strong>：笔记管理、RSS 订阅、网页抓取</li>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p>一句话：发消息就让 AI 干活。数据在本地，不经过云端。目标用户是需要个人 AI 助手、在乎数据隐私的技术人员。</p>
+<h2 id="为什么涨这么快"><a href="#为什么涨这么快" class="headerlink" title="为什么涨这么快"></a>为什么涨这么快</h2><p>三个因素合力：</p>
+<p><strong>时机刚好。</strong> 大模型的推理、工具调用、长上下文能力 2026 年初趋于成熟。个人办公市场规模远超代码助手。</p>
+<p><strong>产品形态对路。</strong> 用 IM 发消息就有反馈，用户对延时不敏感。本地执行保护隐私，浏览器、邮件、日历、笔记全打通。</p>
+<p><strong>社区推力。</strong> 创始人 Peter Steinberger（后来去了 OpenAI）的社区影响力，加上媒体和云厂商一起推。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Channels（IM 接入）→ Gateway（路由 + Agent 运行时）→ Persistence（本地存储）</span><br></pre></td></tr></table></figure>
+<p>Gateway 是核心，里面的 Pi Agent 跑 ReAct 循环：拼提示词 → 调 LLM → 执行工具 → 结果回传 → 接着推理。会话按频道隔离，有自动重置和压缩机制。</p>
+<p>工具调用走标准化协议，网关统一编排。持久化层用 JSON 和 SQLite，本地优先。</p>
+<h2 id="记忆"><a href="#记忆" class="headerlink" title="记忆"></a>记忆</h2><p>四层：</p>
+<ul>
+<li>短期：当前会话 JSON 转录，定期压缩</li>
+<li>长期：Markdown 向量检索，跨会话复用</li>
+<li>MEMORY.md：学到的用户偏好、任务进度</li>
+<li>SOUL.md：Agent 人格定义</li>
 </ul>
-<h3 id="真实商业案例"><a href="#真实商业案例" class="headerlink" title="真实商业案例"></a>真实商业案例</h3><table>
-<thead>
-<tr>
-<th align="left">案例</th>
-<th align="left">效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">“零人类 CEO”公司</td>
-<td align="left">Agent CEO 调度多 Agent，成本 1500 元，营收 20 万</td>
-</tr>
-<tr>
-<td align="left">全自动保险律师</td>
-<td align="left">Agent 全自动处理保险法律事务</td>
-</tr>
-<tr>
-<td align="left">社媒运营</td>
-<td align="left">14 天养成 8 个 Agent，自动化涨粉</td>
-</tr>
-<tr>
-<td align="left">量化投研</td>
-<td align="left">AlphaClaw 项目，Agent 驱动全流程</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="七、Skill-生态"><a href="#七、Skill-生态" class="headerlink" title="七、Skill 生态"></a>七、Skill 生态</h2><p>OpenClaw 的 Skill 市场（clawhub.ai）覆盖从基础设施到生产应用的全链路：</p>
-<table>
-<thead>
-<tr>
-<th align="left">类别</th>
-<th align="left">代表性 Skill</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>基础设施</strong></td>
-<td align="left">Skill Vetter（安全审计）、Tavily Search（LLM 搜索）、Mcporter（MCP 管理）、Self-Improving Agent</td>
-</tr>
-<tr>
-<td align="left"><strong>开发</strong></td>
-<td align="left">GitHub Skill、Coding Agent</td>
-</tr>
-<tr>
-<td align="left"><strong>知识管理</strong></td>
-<td align="left">Obsidian、Notion、Google Workspace</td>
-</tr>
-<tr>
-<td align="left"><strong>信息获取</strong></td>
-<td align="left">RSS Reader、Firecrawl（网页抓取）、PDF</td>
-</tr>
-<tr>
-<td align="left"><strong>浏览器</strong></td>
-<td align="left">Agent Browser</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="八、同类工具对比"><a href="#八、同类工具对比" class="headerlink" title="八、同类工具对比"></a>八、同类工具对比</h2><table>
-<thead>
-<tr>
-<th align="left">维度</th>
-<th align="left">OpenClaw</th>
-<th align="left">NanoClaw</th>
-<th align="left">Claude Code</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">定位</td>
-<td align="left">全能数字管家</td>
-<td align="left">安全轻量助理</td>
-<td align="left">专业编程专家</td>
-</tr>
-<tr>
-<td align="left">代码量</td>
-<td align="left">~40w 行</td>
-<td align="left">~5k 行</td>
-<td align="left">闭源</td>
-</tr>
-<tr>
-<td align="left">安全</td>
-<td align="left">应用级权限</td>
-<td align="left">OS 级隔离</td>
-<td align="left">官方沙箱</td>
-</tr>
-<tr>
-<td align="left">交互</td>
-<td align="left">IM 聊天</td>
-<td align="left">IM 聊天</td>
-<td align="left">终端 CLI</td>
-</tr>
-<tr>
-<td align="left">记忆</td>
-<td align="left">强大跨会话</td>
-<td align="left">群组/文件级</td>
-<td align="left">Session 级</td>
-</tr>
-<tr>
-<td align="left">适合</td>
-<td align="left">生活/商务全自动</td>
-<td align="left">个人安全自动化</td>
-<td align="left">深度代码工作</td>
-</tr>
-</tbody></table>
-<p><strong>选型建议</strong>：全自动化生活 → OpenClaw；安全优先 + 小团队 → NanoClaw；专注代码 → Claude Code。</p>
-<hr>
-<h2 id="九、实践心得"><a href="#九、实践心得" class="headerlink" title="九、实践心得"></a>九、实践心得</h2><h3 id="买龙虾易，养龙虾难"><a href="#买龙虾易，养龙虾难" class="headerlink" title="买龙虾易，养龙虾难"></a>买龙虾易，养龙虾难</h3><p>OpenClaw 功能强大但配置繁琐，类似安装一台个人操作系统。每条 Channel 的配置都可能踩坑，耗时远超预期。</p>
-<h3 id="Token-像喝水"><a href="#Token-像喝水" class="headerlink" title="Token 像喝水"></a>Token 像喝水</h3><p>长时间运行的 Agent 会话，token 持续膨胀。建议每 5-8 轮重启会话，用 MEMORY.md 保存跨会话状态，训练日志不全量贴入上下文。</p>
-<h3 id="安全不能偷懒"><a href="#安全不能偷懒" class="headerlink" title="安全不能偷懒"></a>安全不能偷懒</h3><p>遵循最小权限原则，安装 Skill Vetter 审核每个 Skill，不要为了省事跳过安全检查。</p>
-<hr>
-<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>优势</strong></td>
-<td align="left">瑞士军刀级能力、7×24 跨端在线、Skill 生态丰富</td>
-</tr>
-<tr>
-<td align="left"><strong>劣势</strong></td>
-<td align="left">40w 行代码臃肿、配置困难、应用级权限安全风险、架构仍在频繁更新</td>
-</tr>
-</tbody></table>
-<p>未来方向：更轻量安全、更低部署门槛、Agent 自主进化、多 Agent 协作——Agentic AI 的时代才刚刚开始。</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>网关做权限审计，工具调用的准入控制。会话隔离防泄露。有 Skill Vetter 审核技能。</p>
+<p>几点建议：别无脑装 Skill；别给敏感路径访问权限；做好 Token 限额——长时间跑消耗很大。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://openclaw.ai/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>配好模型和 Channel，发消息就能用。</p>
+<h2 id="能做什么"><a href="#能做什么" class="headerlink" title="能做什么"></a>能做什么</h2><p>定时天气预报、每日新闻摘要、调研生成 PPT、金融研报分析（PDF → 解析 → 行情 → 回测）、快速写脚本、笔记管理、RSS 订阅。</p>
+<p>有些有趣的案例：有人用 Agent CEO 调度多 Agent 运营公司，成本 1500 块营收 20 万；有人全自动处理保险法律事务；有人 14 天养成 8 个 Agent 做社媒。</p>
+<h2 id="Skill-市场"><a href="#Skill-市场" class="headerlink" title="Skill 市场"></a>Skill 市场</h2><p>clawhub.ai 上有基础设施类（Skill Vetter 安全审计、Tavily 搜索）、开发类（GitHub）、知识管理类（Obsidian、Notion）、信息获取类（RSS、网页抓取、PDF）等。</p>
+<h2 id="跟同类对比"><a href="#跟同类对比" class="headerlink" title="跟同类对比"></a>跟同类对比</h2><p>OpenClaw 功能全面、社区大，但代码量大（~40 万行），配置复杂。NanoClaw 只有 5k 行，OS 级隔离更安全，功能少。Claude Code 专注代码，闭源。</p>
+<p>全自动化选 OpenClaw；安全优先选 NanoClaw；专注写代码选 Claude Code。</p>
+<h2 id="实践心得"><a href="#实践心得" class="headerlink" title="实践心得"></a>实践心得</h2><p><strong>配置折腾。</strong> 功能多意味着每条 Channel 都可能踩坑。做好花时间折腾的准备。</p>
+<p><strong>Token 像喝水。</strong> 长时间会话 token 持续涨。建议每 5-8 轮重启会话，用 MEMORY.md 保存关键状态，别把训练日志全贴进上下文。</p>
+<p><strong>安全别省事。</strong> 最小权限，装 Skill Vetter 审核每个 Skill。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>优势：功能全、7×24 在线、Skill 生态不错。劣势：代码臃肿、配置复杂、架构还在频繁更新。</p>
+<p>方向上，更轻量、更低部署门槛、Agent 自主进化、多 Agent 协作是趋势。</p>
 
       
     </div>
@@ -431,7 +210,7 @@ ga('send', 'pageview');
         <a href="http://example.com/2026/03/10/openclaw-principle-and-practice/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ai-agent/" rel="tag">AI Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/agent-os/" rel="tag">Agent OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/openclaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E6%95%B0%E5%AD%97%E7%AE%A1%E5%AE%B6/" rel="tag">数字管家</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ai-agent/" rel="tag">AI Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/agent-os/" rel="tag">Agent OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/openclaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li></ul>
 
     </footer>
   </div>
@@ -443,7 +222,7 @@ ga('send', 'pageview');
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hermes Agent 技术分享 — 200K Star 的自我进化型 AI Agent 深度解析
+          Hermes 技术架构解析
         
       </div>
     </a>
@@ -479,7 +258,7 @@ ga('send', 'pageview');
             
             <div class="item-inner">
               <p class="item-category"></p>
-              <p class="item-title"><a href="../../../06/25/hermes-agent-tech-share/" class="title">Hermes Agent 技术分享 — 200K Star 的自我进化型 AI Agent 深度解析</a></p>
+              <p class="item-title"><a href="../../../06/25/hermes-agent-tech-share/" class="title">Hermes 技术架构解析</a></p>
               <p class="item-date"><time datetime="2026-06-25T00:00:00.000Z" itemprop="datePublished">2026-06-25</time></p>
             </div>
           </li>
@@ -488,7 +267,7 @@ ga('send', 'pageview');
             
             <div class="item-inner">
               <p class="item-category"></p>
-              <p class="item-title"><a href="" class="title">OpenClaw 原理与实践 — 两个月 25 万 Star 的 Agent OS 是如何炼成的</a></p>
+              <p class="item-title"><a href="" class="title">OpenClaw 原理与实践</a></p>
               <p class="item-date"><time datetime="2026-03-10T00:00:00.000Z" itemprop="datePublished">2026-03-10</time></p>
             </div>
           </li>
@@ -538,7 +317,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="../../../../tags/ai-agent/" style="font-size: 11.67px;">AI Agent</a> <a href="../../../../tags/agent-os/" style="font-size: 10px;">Agent OS</a> <a href="../../../../tags/agile/" style="font-size: 10px;">Agile</a> <a href="../../../../tags/akka/" style="font-size: 10px;">Akka</a> <a href="../../../../tags/akka-scala/" style="font-size: 10px;">Akka, Scala</a> <a href="../../../../tags/algorithm/" style="font-size: 15px;">Algorithm</a> <a href="../../../../tags/big-data/" style="font-size: 13.33px;">Big Data</a> <a href="../../../../tags/causal-inference-ai/" style="font-size: 11.67px;">Causal Inference, AI</a> <a href="../../../../tags/design/" style="font-size: 15px;">Design</a> <a href="../../../../tags/dynamic-programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="../../../../tags/hbase/" style="font-size: 16.67px;">HBase</a> <a href="../../../../tags/hadoop/" style="font-size: 18.33px;">Hadoop</a> <a href="../../../../tags/hermes/" style="font-size: 10px;">Hermes</a> <a href="../../../../tags/hive/" style="font-size: 10px;">Hive</a> <a href="../../../../tags/javascript/" style="font-size: 10px;">JavaScript</a> <a href="../../../../tags/llm-wiki/" style="font-size: 10px;">LLM Wiki</a> <a href="../../../../tags/language/" style="font-size: 10px;">Language</a> <a href="../../../../tags/learn/" style="font-size: 10px;">Learn</a> <a href="../../../../tags/learning/" style="font-size: 20px;">Learning</a> <a href="../../../../tags/linux/" style="font-size: 11.67px;">Linux</a> <a href="../../../../tags/machine-learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="../../../../tags/mapreduce/" style="font-size: 10px;">MapReduce</a> <a href="../../../../tags/methodology/" style="font-size: 10px;">Methodology</a> <a href="../../../../tags/network/" style="font-size: 10px;">Network</a> <a href="../../../../tags/node-js/" style="font-size: 10px;">Node.js</a> <a href="../../../../tags/openclaw/" style="font-size: 10px;">OpenClaw</a> <a href="../../../../tags/research/" style="font-size: 16.67px;">Research</a> <a href="../../../../tags/resource/" style="font-size: 10px;">Resource</a> <a href="../../../../tags/scala/" style="font-size: 15px;">Scala</a> <a href="../../../../tags/skill-evolution/" style="font-size: 10px;">Skill Evolution</a> <a href="../../../../tags/spark/" style="font-size: 10px;">Spark</a> <a href="../../../../tags/systemanalysis/" style="font-size: 15px;">SystemAnalysis</a> <a href="../../../../tags/vps/" style="font-size: 11.67px;">VPS</a> <a href="../../../../tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="../../../../tags/apache-storm/" style="font-size: 10px;">apache storm</a> <a href="../../../../tags/artificial-intelligence/" style="font-size: 10px;">artificial intelligence</a> <a href="../../../../tags/java-performance/" style="font-size: 10px;">java performance</a> <a href="../../../../tags/learning/" style="font-size: 11.67px;">learning</a> <a href="../../../../tags/life/" style="font-size: 10px;">life</a> <a href="../../../../tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="../../../../tags/math/" style="font-size: 10px;">math</a> <a href="../../../../tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="../../../../tags/philosophy/" style="font-size: 10px;">philosophy</a> <a href="../../../../tags/sort/" style="font-size: 11.67px;">sort</a> <a href="../../../../tags/spark/" style="font-size: 10px;">spark</a> <a href="../../../../tags/spark-streaming/" style="font-size: 10px;">spark streaming</a> <a href="../../../../tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.67px;">开源</a> <a href="../../../../tags/%E6%95%B0%E5%AD%97%E7%AE%A1%E5%AE%B6/" style="font-size: 10px;">数字管家</a> <a href="../../../../tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a>
+      <a href="../../../../tags/ai-agent/" style="font-size: 11.67px;">AI Agent</a> <a href="../../../../tags/agent-os/" style="font-size: 10px;">Agent OS</a> <a href="../../../../tags/agile/" style="font-size: 10px;">Agile</a> <a href="../../../../tags/akka/" style="font-size: 10px;">Akka</a> <a href="../../../../tags/akka-scala/" style="font-size: 10px;">Akka, Scala</a> <a href="../../../../tags/algorithm/" style="font-size: 15px;">Algorithm</a> <a href="../../../../tags/big-data/" style="font-size: 13.33px;">Big Data</a> <a href="../../../../tags/causal-inference-ai/" style="font-size: 11.67px;">Causal Inference, AI</a> <a href="../../../../tags/design/" style="font-size: 15px;">Design</a> <a href="../../../../tags/dynamic-programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="../../../../tags/hbase/" style="font-size: 16.67px;">HBase</a> <a href="../../../../tags/hadoop/" style="font-size: 18.33px;">Hadoop</a> <a href="../../../../tags/hermes/" style="font-size: 10px;">Hermes</a> <a href="../../../../tags/hive/" style="font-size: 10px;">Hive</a> <a href="../../../../tags/javascript/" style="font-size: 10px;">JavaScript</a> <a href="../../../../tags/llm-wiki/" style="font-size: 10px;">LLM Wiki</a> <a href="../../../../tags/language/" style="font-size: 10px;">Language</a> <a href="../../../../tags/learn/" style="font-size: 10px;">Learn</a> <a href="../../../../tags/learning/" style="font-size: 20px;">Learning</a> <a href="../../../../tags/linux/" style="font-size: 11.67px;">Linux</a> <a href="../../../../tags/machine-learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="../../../../tags/mapreduce/" style="font-size: 10px;">MapReduce</a> <a href="../../../../tags/methodology/" style="font-size: 10px;">Methodology</a> <a href="../../../../tags/network/" style="font-size: 10px;">Network</a> <a href="../../../../tags/node-js/" style="font-size: 10px;">Node.js</a> <a href="../../../../tags/openclaw/" style="font-size: 10px;">OpenClaw</a> <a href="../../../../tags/research/" style="font-size: 16.67px;">Research</a> <a href="../../../../tags/resource/" style="font-size: 10px;">Resource</a> <a href="../../../../tags/scala/" style="font-size: 15px;">Scala</a> <a href="../../../../tags/skill/" style="font-size: 10px;">Skill</a> <a href="../../../../tags/spark/" style="font-size: 10px;">Spark</a> <a href="../../../../tags/systemanalysis/" style="font-size: 15px;">SystemAnalysis</a> <a href="../../../../tags/vps/" style="font-size: 11.67px;">VPS</a> <a href="../../../../tags/algorithm/" style="font-size: 16.67px;">algorithm</a> <a href="../../../../tags/apache-storm/" style="font-size: 10px;">apache storm</a> <a href="../../../../tags/artificial-intelligence/" style="font-size: 10px;">artificial intelligence</a> <a href="../../../../tags/java-performance/" style="font-size: 10px;">java performance</a> <a href="../../../../tags/learning/" style="font-size: 11.67px;">learning</a> <a href="../../../../tags/life/" style="font-size: 10px;">life</a> <a href="../../../../tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="../../../../tags/math/" style="font-size: 10px;">math</a> <a href="../../../../tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="../../../../tags/philosophy/" style="font-size: 10px;">philosophy</a> <a href="../../../../tags/sort/" style="font-size: 11.67px;">sort</a> <a href="../../../../tags/spark/" style="font-size: 10px;">spark</a> <a href="../../../../tags/spark-streaming/" style="font-size: 10px;">spark streaming</a> <a href="../../../../tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.67px;">开源</a> <a href="../../../../tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a>
     </div>
   </div>
 
